@@ -2,15 +2,6 @@
 @tailwind components;
 @tailwind utilities;
 
-:root {
-  --accent-color: #612D53;
-}
-
-body {
-  background-color: black;
-  color: white;
-}
-
 @keyframes marquee {
   0% { transform: translateX(0); }
   100% { transform: translateX(-50%); }
@@ -22,6 +13,8 @@ body {
   animation: marquee 30s linear infinite;
 }
 
-html {
-  scroll-behavior: smooth;
+body {
+  margin: 0;
+  background-color: black !important;
+  color: white;
 }
