@@ -2,11 +2,6 @@
 @tailwind components;
 @tailwind utilities;
 
-:root {
-  --accent-color: #612D53;
-  background-color: black;
-}
-
 @keyframes marquee {
   0% { transform: translateX(0); }
   100% { transform: translateX(-50%); }
@@ -15,13 +10,12 @@
 .animate-marquee {
   display: flex;
   width: max-content;
-  animation: marquee 30s linear infinite;
+  animation: marquee 25s linear infinite;
 }
 
-/* Forzar que el resaltado de texto use tu color */
-::selection {
-  background-color: var(--accent-color);
-  color: white;
+:root {
+  background-color: black;
+  color-scheme: dark;
 }
 
 html {
