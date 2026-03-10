@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 
 export default function Home() {
   const [hours, setHours] = useState(20);
@@ -12,43 +12,57 @@ export default function Home() {
   const marqueeWords = ["AI VOICE AGENTS", "PROCESS AUTOMATION", "N8N ARCHITECTURE", "ROI DRIVEN", "SCALABLE SYSTEMS", "24/7 OPERATIONS"];
 
   return (
-    <main className="min-h-screen bg-black text-white font-sans selection:bg-[#612D53]">
+    <main style={{ backgroundColor: 'black', color: 'white', minHeight: '100vh', fontFamily: 'sans-serif', margin: 0, padding: 0, overflowX: 'hidden' }}>
       
-      {/* NAV REFORZADA */}
-      <nav className="fixed top-0 w-full z-[100] p-6 flex justify-between items-center bg-black/95 border-b border-white/10">
-        <span className="font-black text-xl italic tracking-tighter">JOHNNYCELIS</span>
-        <div className="hidden md:flex space-x-8 items-center text-[10px] font-bold uppercase tracking-widest">
-          <a href="#servicios" className="hover:text-[#612D53] transition-colors">Services</a>
-          <a href="#roi" className="hover:text-[#612D53] transition-colors">ROI Calculator</a>
-          <a href="#agendar" className="bg-[#612D53] text-white px-6 py-2 hover:bg-white hover:text-black transition-all">Book a Call</a>
+      {/* CSS INYECTADO PARA EL MOVIMIENTO */}
+      <style jsx global>{`
+        @keyframes marquee {
+          0% { transform: translateX(0); }
+          100% { transform: translateX(-50%); }
+        }
+        .animate-marquee {
+          display: flex;
+          width: max-content;
+          animation: marquee 30s linear infinite;
+        }
+        html, body { background: black; margin: 0; padding: 0; }
+        * { box-sizing: border-box; }
+      `}</style>
+
+      {/* NAV */}
+      <nav style={{ position: 'fixed', top: 0, width: '100%', zIndex: 1000, padding: '20px 40px', display: 'flex', justifyContent: 'space-between', alignItems: 'center', backgroundColor: 'rgba(0,0,0,0.9)', borderBottom: '1px solid rgba(255,255,255,0.1)' }}>
+        <span style={{ fontWeight: 900, fontSize: '20px', letterSpacing: '-1px', fontStyle: 'italic' }}>JOHNNYCELIS</span>
+        <div style={{ display: 'flex', gap: '30px', fontSize: '10px', fontWeight: 'bold', letterSpacing: '2px', textTransform: 'uppercase' }}>
+          <a href="#roi" style={{ color: 'white', textDecoration: 'none' }}>ROI Calculator</a>
+          <a href="#agendar" style={{ backgroundColor: '#612D53', color: 'white', padding: '10px 20px', textDecoration: 'none' }}>Book a Call</a>
         </div>
       </nav>
 
-      {/* HERO - ESPACIADO CORREGIDO */}
-      <section className="relative flex flex-col items-center justify-center px-6 pt-52 pb-32 text-center min-h-screen">
-        <h1 className="text-[12vw] md:text-[9vw] leading-[0.85] font-black uppercase tracking-tighter mb-12 italic">
+      {/* HERO SECTION */}
+      <section style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', minHeight: '100vh', textAlign: 'center', padding: '150px 20px 100px 20px' }}>
+        <h1 style={{ fontSize: '10vw', lineHeight: '0.85', fontWeight: 900, textTransform: 'uppercase', letterSpacing: '-5px', margin: '0 0 40px 0', fontStyle: 'italic' }}>
           Scale Faster<br />
-          <span className="text-transparent bg-clip-text bg-gradient-to-b from-white to-gray-600 not-italic">With AI Agents</span>
+          <span style={{ color: '#444', fontStyle: 'normal' }}>With AI Agents</span>
         </h1>
-        <p className="max-w-xl text-gray-400 text-lg md:text-xl font-light mb-16">
+        <p style={{ maxWidth: '600px', color: '#888', fontSize: '18px', fontWeight: 300, marginBottom: '50px', lineHeight: '1.6' }}>
           Stop hiring for tasks that code can handle. We build custom AI Voice and Process Agents that work 24/7.
         </p>
-        <a href="#agendar" 
-           className="inline-block bg-[#612D53] text-white px-12 py-5 font-black uppercase tracking-widest hover:scale-105 transition-all"
-           style={{ boxShadow: '0 0 30px rgba(97,45,83,0.5)' }}>
-          Book an Intro Call
-        </a>
+        <div style={{ display: 'flex', gap: '20px' }}>
+          <a href="#agendar" style={{ backgroundColor: '#612D53', color: 'white', padding: '20px 40px', fontWeight: 900, textTransform: 'uppercase', textDecoration: 'none', letterSpacing: '2px', boxShadow: '0 0 30px rgba(97,45,83,0.4)' }}>
+            Book Intro Call
+          </a>
+        </div>
       </section>
 
-      {/* CARRUSEL - MARQUEE */}
-      <div className="py-12 border-y border-white/10 bg-white/[0.02] overflow-hidden whitespace-nowrap">
-        <div className="animate-marquee flex">
+      {/* MARQUEE */}
+      <div style={{ padding: '40px 0', borderTop: '1px solid rgba(255,255,255,0.1)', borderBottom: '1px solid rgba(255,255,255,0.1)', background: 'rgba(255,255,255,0.02)', overflow: 'hidden' }}>
+        <div className="animate-marquee">
           {[1, 2, 3, 4].map((group) => (
-            <div key={group} className="flex items-center">
+            <div key={group} style={{ display: 'flex', alignItems: 'center' }}>
               {marqueeWords.map((word, idx) => (
-                <div key={idx} className="mx-12 flex items-center gap-6">
-                  <span className="text-3xl md:text-5xl font-black uppercase opacity-20 italic hover:text-[#612D53] hover:opacity-100 transition-all">{word}</span>
-                  <div className="w-3 h-3 bg-[#612D53] rotate-45" />
+                <div key={idx} style={{ margin: '0 50px', display: 'flex', alignItems: 'center', gap: '20px' }}>
+                  <span style={{ fontSize: '40px', fontWeight: 900, opacity: 0.2, fontStyle: 'italic', textTransform: 'uppercase' }}>{word}</span>
+                  <div style={{ width: '12px', height: '12px', backgroundColor: '#612D53', transform: 'rotate(45deg)' }} />
                 </div>
               ))}
             </div>
@@ -56,63 +70,45 @@ export default function Home() {
         </div>
       </div>
 
-      {/* SERVICIOS */}
-      <section id="servicios" className="py-32 px-6 max-w-7xl mx-auto">
-        <h2 className="text-6xl font-black uppercase tracking-tighter mb-20 italic">Our Services</h2>
-        <div className="grid md:grid-cols-3 gap-8">
-          {[
-            { t: "Inbound Voice", d: "Human-like AI receptionists handling customer calls instantly." },
-            { t: "Outbound Growth", d: "Automated follow-ups and lead qualification with AI voice." },
-            { t: "Custom Systems", d: "Tailored n8n workflows connecting your entire CRM stack." }
-          ].map((s, i) => (
-            <div key={i} className="p-10 bg-[#111] border border-white/5 hover:border-[#612D53] transition-all">
-              <h3 className="text-2xl font-black uppercase mb-6">{s.t}</h3>
-              <p className="text-gray-500 font-light leading-relaxed">{s.d}</p>
-            </div>
-          ))}
-        </div>
-      </section>
-
-      {/* CALCULADORA ROI - $20/H */}
-      <section id="roi" className="py-40 px-6 max-w-7xl mx-auto">
-        <div className="grid lg:grid-cols-2 gap-24 items-center">
+      {/* ROI CALCULATOR */}
+      <section id="roi" style={{ padding: '150px 20px', maxWidth: '1200px', margin: '0 auto' }}>
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '80px', alignItems: 'center' }}>
           <div>
-            <h2 className="text-7xl font-black uppercase leading-[0.85] tracking-tighter mb-10 italic">
-              Calculate<br />Your <span className="text-[#612D53] not-italic italic">ROI</span>
+            <h2 style={{ fontSize: '70px', fontWeight: 900, textTransform: 'uppercase', lineHeight: '0.85', margin: '0 0 40px 0', fontStyle: 'italic' }}>
+              Calculate<br /><span style={{ color: '#612D53', fontStyle: 'normal' }}>Your ROI</span>
             </h2>
-            <div className="space-y-10 max-w-md">
-              <div className="flex justify-between font-bold text-[10px] uppercase tracking-widest">
+            <div style={{ marginBottom: '40px' }}>
+              <div style={{ display: 'flex', justifyContent: 'space-between', fontWeight: 'bold', fontSize: '12px', marginBottom: '20px' }}>
                 <span>Weekly Task Hours: {hours}h</span>
-                <span className="text-[#612D53]">$20/HR RATE</span>
+                <span style={{ color: '#612D53' }}>$20/HR RATE</span>
               </div>
               <input 
                 type="range" min="5" max="100" value={hours} 
                 onChange={(e) => setHours(parseInt(e.target.value))}
-                className="w-full h-1 bg-gray-800 appearance-none cursor-pointer accent-[#612D53]"
+                style={{ width: '100%', accentColor: '#612D53' }}
               />
             </div>
           </div>
-          <div className="bg-white text-black p-12 md:p-20 shadow-2xl">
-            <span className="text-[10px] font-bold uppercase tracking-[0.4em] text-gray-400 block mb-4 italic">Potential Monthly Savings</span>
-            <div className="text-7xl md:text-8xl font-black italic tracking-tighter leading-none mb-10 border-b-8 border-black pb-4 uppercase">
+          <div style={{ backgroundColor: 'white', color: 'black', padding: '60px', textAlign: 'center' }}>
+            <span style={{ fontSize: '10px', fontWeight: 'bold', color: '#888', textTransform: 'uppercase', letterSpacing: '4px' }}>Monthly Potential Savings</span>
+            <div style={{ fontSize: '80px', fontWeight: 900, fontStyle: 'italic', margin: '20px 0', borderBottom: '8px solid black', paddingBottom: '10px' }}>
               ${savings.toLocaleString()}
             </div>
-            <a href="#agendar" className="block text-center w-full bg-[#612D53] text-white py-6 font-black uppercase hover:bg-black transition-all">
+            <a href="#agendar" style={{ display: 'block', backgroundColor: '#612D53', color: 'white', padding: '20px', fontWeight: 900, textDecoration: 'none', textTransform: 'uppercase' }}>
               Claim Your ROI
             </a>
           </div>
         </div>
       </section>
 
-      {/* FOOTER & CTA */}
-      <footer id="agendar" className="py-32 border-t border-white/10 text-center px-6 bg-black">
-        <h2 className="text-5xl font-black uppercase mb-12 italic tracking-tighter">Ready to Scale?</h2>
-        <a href="https://calendly.com/tu-link" target="_blank" className="inline-block bg-[#612D53] text-white px-16 py-6 font-black uppercase tracking-widest hover:scale-110 transition-all mb-20">
+      {/* FOOTER */}
+      <footer id="agendar" style={{ padding: '100px 20px', textAlign: 'center', borderTop: '1px solid rgba(255,255,255,0.1)' }}>
+        <h2 style={{ fontSize: '40px', fontWeight: 900, textTransform: 'uppercase', marginBottom: '40px' }}>Ready to Scale?</h2>
+        <a href="https://calendly.com/tu-link" style={{ display: 'inline-block', backgroundColor: '#612D53', color: 'white', padding: '20px 60px', fontWeight: 900, textDecoration: 'none' }}>
           Book Intro Call
         </a>
-        <div className="flex justify-between items-center text-[10px] uppercase tracking-[0.5em] text-gray-700">
-          <span>Antioquia // Colombia</span>
-          <span>©2026 Johnny Celis - Stratt-On Agency</span>
+        <div style={{ marginTop: '80px', fontSize: '10px', color: '#444', letterSpacing: '5px', textTransform: 'uppercase' }}>
+          ©2026 Johnny Celis - Stratt-On Agency
         </div>
       </footer>
     </main>
