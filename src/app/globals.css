@@ -2,21 +2,6 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Configuración de colores y fondo base */
-:root {
-  background-color: black;
-  color-scheme: dark;
-}
-
-body {
-  margin: 0;
-  padding: 0;
-  background-color: black !important;
-  color: white;
-  overflow-x: hidden;
-}
-
-/* Animación del Carrusel Infinito (Marquee) */
 @keyframes marquee {
   0% { transform: translateX(0); }
   100% { transform: translateX(-50%); }
@@ -25,27 +10,14 @@ body {
 .animate-marquee {
   display: flex;
   width: max-content;
-  animation: marquee 30s linear infinite;
+  animation: marquee 25s linear infinite;
 }
 
-/* Pausar carrusel al pasar el mouse (opcional) */
-.animate-marquee:hover {
-  animation-play-state: paused;
+:root {
+  background-color: black;
+  color-scheme: dark;
 }
 
-/* Suavizado de scroll para los enlaces del menú */
 html {
   scroll-behavior: smooth;
-}
-
-/* Personalización de la barra de desplazamiento (opcional, estilo noir) */
-::-webkit-scrollbar {
-  width: 8px;
-}
-::-webkit-scrollbar-track {
-  background: #000;
-}
-::-webkit-scrollbar-thumb {
-  background: #612D53;
-  border-radius: 10px;
 }
