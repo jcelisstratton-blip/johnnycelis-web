@@ -1,13 +1,18 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+import './globals.css'
 
-:root {
-  background: black;
+export const metadata = {
+  title: 'Stratt-On | Expertos en Agentes de IA y Automatización',
+  description: 'Optimizamos tu operativa con arquitectura de procesos y agentes de voz inteligentes.',
 }
 
-body {
-  margin: 0;
-  background-color: black;
-  color: white;
+export default function RootLayout({
+  children,
+}: {
+  children: React.ReactNode
+}) {
+  return (
+    <html lang="es" style={{ scrollBehavior: 'smooth' }}>
+      <body>{children}</body>
+    </html>
+  )
 }
