@@ -2,22 +2,12 @@
 @tailwind components;
 @tailwind utilities;
 
-@keyframes marquee {
-  0% { transform: translateX(0); }
-  100% { transform: translateX(-50%); }
-}
-
-.animate-marquee {
-  display: flex;
-  width: max-content;
-  animation: marquee 25s linear infinite;
-}
-
 :root {
-  background-color: black;
-  color-scheme: dark;
+  background: black;
 }
 
-html {
-  scroll-behavior: smooth;
+body {
+  margin: 0;
+  background-color: black;
+  color: white;
 }
