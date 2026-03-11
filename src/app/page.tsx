@@ -6,68 +6,63 @@ export default function Home() {
   const [hours, setHours] = useState(20);
   const costPerHour = 20; 
   const monthlyCost = hours * costPerHour * 4;
-  const aiCost = (monthlyCost * 0.20); // 80% ahorro
+  const aiCost = (monthlyCost * 0.20); 
   const savings = monthlyCost - aiCost;
 
-  const words = ["AI VOICE AGENTS", "PROCESS AUTOMATION", "N8N ARCHITECTURE", "ROI DRIVEN", "SCALABLE SYSTEMS", "24/7 OPERATIONS"];
+  const marqueeWords = ["AI VOICE AGENTS", "PROCESS AUTOMATION", "N8N ARCHITECTURE", "ROI DRIVEN", "SCALABLE SYSTEMS", "24/7 OPERATIONS"];
 
   return (
-    <main className="min-h-screen bg-black text-white selection:bg-[#612D53] font-sans overflow-x-hidden">
+    <main style={{ backgroundColor: 'black', color: 'white', minHeight: '100vh', fontFamily: 'sans-serif', margin: 0, padding: 0, overflowX: 'hidden' }}>
       
-      {/* INYECCIÓN DE CSS DIRECTA (Para asegurar el movimiento) */}
+      {/* CSS DE EMERGENCIA PARA ANIMACIÓN Y RESET */}
       <style jsx global>{`
         @keyframes marquee {
           0% { transform: translateX(0); }
-          100% { transform: translateX(-33.33%); }
+          100% { transform: translateX(-50%); }
         }
         .animate-marquee-infinite {
           display: flex;
           width: max-content;
-          animation: marquee 20s linear infinite;
+          animation: marquee 25s linear infinite;
         }
-        .animate-marquee-infinite:hover {
-          animation-play-state: paused;
-        }
+        html, body { background-color: black !important; margin: 0; padding: 0; }
+        a { text-decoration: none; transition: 0.3s; }
+        .btn-hover:hover { background-color: white !important; color: black !important; }
       `}</style>
 
       {/* NAV */}
-      <nav className="fixed top-0 w-full z-[100] p-6 flex justify-between items-center bg-black/90 backdrop-blur-md border-b border-white/5 uppercase tracking-widest text-[10px]">
-        <span className="font-black text-xl italic tracking-tighter">JOHNNYCELIS</span>
-        <div className="hidden md:flex space-x-8 items-center font-bold">
-          <a href="#servicios" className="hover:text-[#612D53] transition-colors text-white no-underline">Services</a>
-          <a href="#testimonios" className="hover:text-[#612D53] transition-colors text-white no-underline">Testimonials</a>
-          <a href="#roi" className="hover:text-[#612D53] transition-colors text-white no-underline">ROI Calculator</a>
-          <a href="#agendar" className="bg-[#612D53] text-white px-6 py-2 hover:bg-white hover:text-black transition-all no-underline">Book a Call</a>
+      <nav style={{ position: 'fixed', top: 0, width: '100%', zIndex: 1000, padding: '25px 50px', display: 'flex', justifyContent: 'space-between', alignItems: 'center', backgroundColor: 'rgba(0,0,0,0.95)', borderBottom: '1px solid rgba(255,255,255,0.1)' }}>
+        <span style={{ fontWeight: 900, fontSize: '22px', fontStyle: 'italic', letterSpacing: '-1px' }}>JOHNNYCELIS</span>
+        <div style={{ display: 'flex', gap: '30px', fontSize: '10px', fontWeight: 'bold', letterSpacing: '2px', textTransform: 'uppercase' }}>
+          <a href="#servicios" style={{ color: 'white' }}>Services</a>
+          <a href="#roi" style={{ color: 'white' }}>ROI Calculator</a>
+          <a href="#agendar" style={{ backgroundColor: '#612D53', color: 'white', padding: '12px 24px', borderRadius: '2px' }} className="btn-hover">Book a Call</a>
         </div>
       </nav>
 
-      {/* HERO (Ajuste de espaciado estilo Inflate) */}
-      <section className="relative min-h-screen flex flex-col items-center justify-center px-6 pt-32 pb-20 text-center">
-        <h1 className="text-[13vw] md:text-[9vw] leading-[0.85] font-black uppercase tracking-tighter mb-10 italic">
+      {/* HERO SECTION - CORREGIDO EL ESPACIADO */}
+      <section style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', minHeight: '95vh', textAlign: 'center', padding: '180px 20px 100px 20px' }}>
+        <h1 style={{ fontSize: '10vw', lineHeight: '0.85', fontWeight: 900, textTransform: 'uppercase', letterSpacing: '-5px', margin: '0 0 40px 0', fontStyle: 'italic' }}>
           Automate<br />
-          <span className="text-transparent bg-clip-text bg-gradient-to-b from-white to-gray-700 not-italic">To Elevate</span>
+          <span style={{ color: '#555', fontStyle: 'normal' }}>To Elevate</span>
         </h1>
-        <p className="max-w-xl text-gray-400 text-lg md:text-xl font-light mb-16 leading-relaxed">
+        <p style={{ maxWidth: '650px', color: '#999', fontSize: '1.2rem', fontWeight: 300, marginBottom: '60px', lineHeight: '1.6' }}>
           Build human-like AI agents that handle your operations, sales, and support while you focus on high-level strategy.
         </p>
-        <div className="flex flex-col md:flex-row gap-6">
-          <a href="#agendar" className="bg-[#612D53] text-white px-12 py-5 font-black uppercase tracking-widest hover:scale-105 transition-all shadow-[0_0_40px_rgba(97,45,83,0.3)] no-underline">
-            Book an Introductory Call
-          </a>
-        </div>
+        <a href="#agendar" style={{ backgroundColor: '#612D53', color: 'white', padding: '22px 45px', fontWeight: 900, textTransform: 'uppercase', letterSpacing: '2px', boxShadow: '0 0 40px rgba(97,45,83,0.4)' }} className="btn-hover text-white">
+          Book Intro Call
+        </a>
       </section>
 
-      {/* CARRUSEL INFINITO (Marquee Reforzado) */}
-      <div className="py-12 border-y border-white/10 bg-white/[0.02] overflow-hidden whitespace-nowrap">
-        <div className="animate-marquee-infinite flex items-center">
+      {/* CARRUSEL EN MOVIMIENTO (MARQUEE) */}
+      <div style={{ padding: '50px 0', borderTop: '1px solid rgba(255,255,255,0.1)', borderBottom: '1px solid rgba(255,255,255,0.1)', background: 'rgba(255,255,255,0.02)', overflow: 'hidden' }}>
+        <div className="animate-marquee-infinite">
           {[1, 2, 3].map((group) => (
-            <div key={group} className="flex items-center">
-              {words.map((word, i) => (
-                <div key={i} className="mx-12 flex items-center gap-6">
-                  <span className="text-3xl md:text-5xl font-black uppercase opacity-20 tracking-tighter italic hover:opacity-100 hover:text-[#612D53] transition-all cursor-default">
-                    {word}
-                  </span>
-                  <div className="w-3 h-3 bg-[#612D53] rotate-45" />
+            <div key={group} style={{ display: 'flex', alignItems: 'center' }}>
+              {marqueeWords.map((word, idx) => (
+                <div key={idx} style={{ margin: '0 60px', display: 'flex', alignItems: 'center', gap: '25px' }}>
+                  <span style={{ fontSize: '45px', fontWeight: 900, opacity: 0.2, fontStyle: 'italic', textTransform: 'uppercase' }}>{word}</span>
+                  <div style={{ width: '15px', height: '15px', backgroundColor: '#612D53', transform: 'rotate(45deg)' }} />
                 </div>
               ))}
             </div>
@@ -75,89 +70,45 @@ export default function Home() {
         </div>
       </div>
 
-      {/* SERVICIOS (Grid tipo Inflate) */}
-      <section id="servicios" className="py-32 px-6 max-w-7xl mx-auto">
-        <span className="text-[#612D53] font-bold uppercase tracking-[0.4em] text-[10px] mb-4 block">Proven Systems</span>
-        <h2 className="text-6xl font-black uppercase tracking-tighter mb-20 italic">Our Services</h2>
-        <div className="grid md:grid-cols-3 gap-6">
-          {[
-            { t: "Inbound AI", d: "Receptionists that sound human, answer 24/7, and book directly into your CRM." },
-            { t: "Outbound AI", d: "Scalable cold outreach and lead qualification with native AI voice technology." },
-            { t: "Custom n8n", d: "Advanced backend architecture to connect all your business tools seamlessly." }
-          ].map((s, i) => (
-            <div key={i} className="p-12 bg-white/[0.03] border border-white/5 hover:border-[#612D53]/40 transition-all group">
-              <h3 className="text-2xl font-black uppercase mb-6 group-hover:text-[#612D53] transition-colors leading-tight tracking-tight text-white">{s.t}</h3>
-              <p className="text-gray-500 font-light leading-relaxed mb-10">{s.d}</p>
-              <span className="text-[10px] font-black uppercase tracking-widest border-b border-[#612D53] pb-1 cursor-pointer">Explore Service</span>
-            </div>
-          ))}
-        </div>
-      </section>
-
-      {/* TESTIMONIOS (Social Proof) */}
-      <section id="testimonios" className="py-32 bg-white/[0.02] border-y border-white/5 px-6 text-center">
-        <div className="max-w-7xl mx-auto">
-          <h2 className="text-5xl font-black uppercase mb-20 tracking-tighter italic text-white">Trusted Results</h2>
-          <div className="grid md:grid-cols-3 gap-8 text-left">
-            {[
-              { n: "The Luxe Week", m: "$400k+ Added", t: "The AI agents transformed our booking process entirely. Revenue is up and costs are down." },
-              { n: "Jili Properties", m: "90% Automated", t: "We no longer need a massive call center. The system handles everything perfectly." },
-              { n: "Northwest Physio", m: "95% Efficiency", t: "Scheduling is now 100% autonomous. Our staff is finally free from the phones." }
-            ].map((test, i) => (
-              <div key={i} className="p-10 border border-white/10 bg-black italic relative">
-                <div className="text-[#612D53] text-4xl mb-6">"</div>
-                <p className="text-gray-300 font-light mb-8 leading-relaxed italic">"{test.t}"</p>
-                <div className="border-t border-white/10 pt-6">
-                  <div className="font-black uppercase tracking-tighter text-xl text-white">{test.n}</div>
-                  <div className="text-[#612D53] text-[10px] font-bold uppercase tracking-widest mt-1">{test.m} Result</div>
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* CALCULADORA ROI ($20/H) */}
-      <section id="roi" className="py-40 px-6 max-w-7xl mx-auto">
-        <div className="grid lg:grid-cols-2 gap-20 items-center">
+      {/* ROI CALCULATOR ($20/H) */}
+      <section id="roi" style={{ padding: '150px 20px', maxWidth: '1200px', margin: '0 auto' }}>
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))', gap: '100px', alignItems: 'center' }}>
           <div>
-            <h2 className="text-7xl font-black uppercase leading-[0.85] tracking-tighter mb-10 italic">
-              Calculate<br />Your <span className="text-[#612D53] not-italic italic underline decoration-gray-800">Savings</span>
+            <h2 style={{ fontSize: '75px', fontWeight: 900, textTransform: 'uppercase', lineHeight: '0.85', margin: '0 0 40px 0', fontStyle: 'italic' }}>
+              Calculate<br /><span style={{ color: '#612D53', fontStyle: 'normal' }}>Your ROI</span>
             </h2>
-            <div className="space-y-10 max-w-md">
-              <div className="flex justify-between font-bold text-xs uppercase tracking-widest text-white">
+            <div style={{ marginBottom: '50px' }}>
+              <div style={{ display: 'flex', justifyContent: 'space-between', fontWeight: 'bold', fontSize: '13px', marginBottom: '25px', letterSpacing: '1px' }}>
                 <span>Weekly Task Hours: {hours}h</span>
-                <span className="text-[#612D53] italic">$20/HR RATE</span>
+                <span style={{ color: '#612D53' }}>$20/HR RATE</span>
               </div>
               <input 
                 type="range" min="5" max="120" value={hours} 
                 onChange={(e) => setHours(parseInt(e.target.value))}
-                className="w-full h-1 bg-gray-800 rounded-none appearance-none cursor-pointer accent-[#612D53]"
+                style={{ width: '100%', height: '2px', accentColor: '#612D53', cursor: 'pointer' }}
               />
             </div>
           </div>
-          <div className="bg-white text-black p-12 md:p-20 relative shadow-2xl">
-            <span className="text-[10px] font-bold uppercase tracking-[0.4em] text-gray-400 block mb-4 italic">Potential Monthly Savings</span>
-            <div className="text-7xl md:text-8xl font-black italic tracking-tighter leading-none mb-10 border-b-8 border-black pb-4 uppercase">
+          <div style={{ backgroundColor: 'white', color: 'black', padding: '70px', textAlign: 'center', boxShadow: '0 0 60px rgba(97,45,83,0.1)' }}>
+            <span style={{ fontSize: '11px', fontWeight: 'bold', color: '#aaa', textTransform: 'uppercase', letterSpacing: '5px' }}>Monthly Potential Savings</span>
+            <div style={{ fontSize: '90px', fontWeight: 900, fontStyle: 'italic', margin: '25px 0', borderBottom: '10px solid black', paddingBottom: '15px', display: 'inline-block' }}>
               ${savings.toLocaleString()}
             </div>
-            <a href="#agendar" className="block text-center w-full bg-[#612D53] text-white py-6 font-black uppercase tracking-widest hover:bg-black transition-all no-underline">
+            <a href="#agendar" style={{ display: 'block', backgroundColor: '#612D53', color: 'white', padding: '25px', fontWeight: 900, textDecoration: 'none', textTransform: 'uppercase', letterSpacing: '2px', marginTop: '30px' }} className="btn-hover text-white">
               Claim Your ROI
             </a>
           </div>
         </div>
       </section>
 
-      {/* FOOTER & FINAL CTA */}
-      <footer id="agendar" className="py-20 border-t border-white/5 text-center bg-black">
-        <div className="text-[10vw] font-black opacity-[0.03] leading-none mb-10 select-none tracking-[0.2em] uppercase">STRATT-ON</div>
-        <div className="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center text-[10px] uppercase tracking-[0.5em] text-gray-600 px-6">
-          <span>Antioquia // Colombia</span>
-          <div className="flex gap-8 text-white font-bold my-8 md:my-0 uppercase">
-            <a href="#" className="hover:text-[#612D53] no-underline">LinkedIn</a>
-            <a href="#" className="hover:text-[#612D53] no-underline">X</a>
-          </div>
-          <span>©2026 Johnny Celis</span>
+      {/* FOOTER */}
+      <footer id="agendar" style={{ padding: '120px 20px', textAlign: 'center', borderTop: '1px solid rgba(255,255,255,0.05)', backgroundColor: '#050505' }}>
+        <h2 style={{ fontSize: '45px', fontWeight: 900, textTransform: 'uppercase', marginBottom: '50px', letterSpacing: '-2px' }}>Ready to Scale?</h2>
+        <a href="https://calendly.com/tu-link" style={{ display: 'inline-block', backgroundColor: '#612D53', color: 'white', padding: '22px 65px', fontWeight: 900, textDecoration: 'none', letterSpacing: '2px' }} className="btn-hover text-white">
+          Schedule Now
+        </a>
+        <div style={{ marginTop: '100px', fontSize: '11px', color: '#333', letterSpacing: '6px', textTransform: 'uppercase', fontWeight: 'bold' }}>
+          STRATT-ON // ©2026 JOHNNY CELIS
         </div>
       </footer>
     </main>
