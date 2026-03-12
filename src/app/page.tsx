@@ -24,7 +24,7 @@ export default function Home() {
   ];
 
   return (
-    <main style={{ backgroundColor: '#000', color: '#fff', minHeight: '100vh', fontFamily: 'Inter, sans-serif', margin: 0, padding: 0, overflowX: 'hidden' }}>
+    <main style={{ backgroundColor: '#000', color: '#fff', minHeight: '100vh', fontFamily: 'Inter, system-ui, sans-serif', margin: 0, padding: 0, overflowX: 'hidden' }}>
       
       {/* CAPA DE ESTILOS DE ÉLITE (UX + RESPONSIVE BLINDADO) */}
       <style dangerouslySetInnerHTML={{ __html: `
@@ -35,6 +35,7 @@ export default function Home() {
         
         /* Efectos Cinematográficos */
         .hero-video-overlay { background: linear-gradient(to bottom, rgba(0,0,0,0.3) 0%, rgba(0,0,0,0.7) 60%, rgba(0,0,0,1) 100%); }
+        .text-stroke { -webkit-text-stroke: 1px #444; color: transparent; font-style: normal; }
         
         .btn-glow { background: ${electricPurple}; color: white; padding: 20px 40px; text-decoration: none; font-weight: 900; text-transform: uppercase; letter-spacing: 3px; font-size: 13px; transition: 0.5s cubic-bezier(0.2, 0.8, 0.2, 1); display: inline-block; border: none; cursor: pointer; text-align: center; }
         .btn-glow:hover { box-shadow: 0 0 50px rgba(157,0,255,0.7); transform: scale(1.05); background-color: white !important; color: black !important; }
@@ -56,9 +57,11 @@ export default function Home() {
         input[type="range"] { accent-color: ${electricPurple}; cursor: pointer; }
         
         /* Mobile Hamburger & Styling */
-        .mobile-menu { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100vh; background: rgba(0,0,0,0.98); backdrop-filter: blur(10px); z-index: 99; flex-direction: column; justify-content: center; items: center; gap: 40px; transform: translateX(100%); transition: 0.5s ease; }
+        .mobile-menu { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100vh; background: rgba(0,0,0,0.98); backdrop-filter: blur(10px); z-index: 99; flex-direction: column; justify-content: center; align-items: center; gap: 40px; transform: translateX(100%); transition: 0.5s ease; }
         .mobile-menu.open { transform: translateX(0); }
         .hamburger { display: none; background: none; border: none; cursor: pointer; color: white; font-size: 30px; z-index: 100; padding: 0; }
+
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
 
         @media (max-width: 1024px) {
           .desktop-links { display: none !important; }
@@ -100,9 +103,9 @@ export default function Home() {
         </video>
         <div className="hero-video-overlay" style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', zIndex: -1 }} />
 
-        <div className="mobile-hero-padding" style={{ opacity: 0, animation: 'fadeIn 1s ease-out forwards' }}>
+        <div className="mobile-hero-padding" style={{ animation: 'fadeIn 1s ease-out forwards' }}>
           <h1 style={{ fontSize: 'clamp(3.5rem, 14vw, 11rem)', fontWeight: 900, fontStyle: 'italic', textTransform: 'uppercase', lineHeight: 0.8, margin: '0 0 40px 0', letterSpacing: '-4px' }}>
-            Automate<br /><span style={{ color: 'transparent', webkitTextStroke: '1px #444', fontStyle: 'normal' }}>To Elevate</span>
+            Automate<br /><span className="text-stroke">To Elevate</span>
           </h1>
           <p style={{ maxWidth: '750px', margin: '0 auto 60px', color: '#bbb', fontSize: 'clamp(1.1rem, 3vw, 1.4rem)', lineHeight: 1.6, fontStyle: 'italic' }}>
             Construimos sistemas de <strong style={{ color: 'white' }}>Agentes de Voz e IA</strong> que transforman Stratt-On Agency en una maquinaria de ingresos autónoma.
@@ -137,7 +140,7 @@ export default function Home() {
           {[
             { t: "Inbound IA", d: "Atiende, califica y agenda citas con voces clonadas indestinguibles de un humano. Disponible 24/7 sin fatiga." },
             { t: "Growth Outbound", d: "Prospección masiva y calificación de leads sin intervención humana. Multiplica tus puntos de contacto." },
-            { t: "n8n Architecture", d: "Diseño de backend avanzada y automatización total de flujos de trabajo que conectan tu ecosistema digital." }
+            { t: "n8n Architecture", d: "Diseño de backend avanzado y automatización total de flujos de trabajo que conectan tu ecosistema digital." }
           ].map((s, i) => (
             <div key={i} className="glass-panel" style={{ display: 'flex', flexDirection: 'column', justifyContent: 'space-between', minHeight: '400px' }}>
               <div>
@@ -154,7 +157,7 @@ export default function Home() {
       </section>
 
       {/* --- COMPARATIVA (THE STRATT-ON DIFFERENCE) --- */}
-      <section style={{ padding: '120px 20px', background: '#050505', borderY: '1px solid rgba(255,255,255,0.05)' }}>
+      <section style={{ padding: '120px 20px', background: '#050505', borderTop: '1px solid rgba(255,255,255,0.05)', borderBottom: '1px solid rgba(255,255,255,0.05)' }}>
         <div style={{ maxWidth: '1100px', margin: '0 auto' }}>
           <h2 style={{ fontSize: 'clamp(2rem, 5vw, 3.5rem)', fontWeight: 900, textAlign: 'center', textTransform: 'uppercase', fontStyle: 'italic', marginBottom: '80px', margin: '0 0 80px 0' }}>The Stratt-On Difference</h2>
           <div className="grid-2" style={{ background: 'rgba(255,255,255,0.1)', padding: '1px' }}>
@@ -202,7 +205,7 @@ export default function Home() {
       <section id="roi" style={{ padding: '150px 20px', background: 'white', color: 'black' }}>
         <div className="grid-2" style={{ maxWidth: '1300px', margin: '0 auto', gap: '100px', alignItems: 'center' }}>
           <div>
-            <h2 style={{ fontSize: 'clamp(3.5rem, 10vw, 7rem)', fontWeight: 900, fontStyle: 'italic', leading: 0.85, textTransform: 'uppercase', margin: '0 0 60px 0' }}>Calcula tu<br /><span style={{ color: electricPurple }}>Libertad</span></h2>
+            <h2 style={{ fontSize: 'clamp(3.5rem, 10vw, 7rem)', fontWeight: 900, fontStyle: 'italic', lineHeight: 0.85, textTransform: 'uppercase', margin: '0 0 60px 0' }}>Calcula tu<br /><span style={{ color: electricPurple }}>Libertad</span></h2>
             <div style={{ display: 'flex', justifyContent: 'space-between', fontWeight: 900, fontSize: '14px', textTransform: 'uppercase', marginBottom: '25px' }}>
               <span>Horas operativas: {hours}H / Sem</span>
               <span style={{ color: electricPurple }}>Tarifa: $20/HR</span>
