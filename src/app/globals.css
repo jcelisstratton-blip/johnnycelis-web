@@ -3,7 +3,7 @@
 @tailwind utilities;
 
 :root {
-  --accent-purple: #9D00FF;
+  --accent-color: #9D00FF;
   background-color: black;
 }
 
@@ -23,7 +23,7 @@ body {
 .animate-marquee {
   display: flex;
   width: max-content;
-  animation: marquee 30s linear infinite;
+  animation: marquee 25s linear infinite;
 }
 
 html {
