@@ -1,6 +1,10 @@
 "use client";
 import React, { useState, useEffect } from 'react';
 
+// Forzamos a Next.js (Turbopack) a empaquetar el video en el build final.
+// IMPORTANTE: Asegúrate de que el archivo se llame exactamente 'bg-stratt.mp4' en tu carpeta public.
+const heroVideo = require('../../public/bg-stratt.mp4');
+
 export default function Home() {
   const [hours, setHours] = useState(20);
   const [scrolled, setScrolled] = useState(false);
@@ -99,7 +103,7 @@ export default function Home() {
       {/* --- HERO CINEMATOGRÁFICO --- */}
       <section style={{ position: 'relative', minHeight: '100vh', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', textAlign: 'center', padding: '120px 20px 50px', overflow: 'hidden' }}>
         <video autoPlay muted loop playsInline style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', objectFit: 'cover', zIndex: -2, opacity: 0.5 }}>
-          <source src="/bg-stratt.mp4" type="video/mp4" />
+          <source src={heroVideo.default || heroVideo} type="video/mp4" />
         </video>
         <div className="hero-video-overlay" style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', zIndex: -1 }} />
 
