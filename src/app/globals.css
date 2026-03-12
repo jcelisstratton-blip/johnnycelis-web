@@ -3,15 +3,16 @@
 @tailwind utilities;
 
 :root {
-  --accent-purple: #9D00FF;
+  --accent: #9D00FF;
 }
 
 body {
   margin: 0;
   padding: 0;
-  background-color: black !important;
-  color: white;
+  background-color: #000 !important;
+  color: #fff;
   overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
 }
 
 @keyframes marquee {
@@ -22,7 +23,7 @@ body {
 .animate-marquee {
   display: flex;
   width: max-content;
-  animation: marquee 30s linear infinite;
+  animation: marquee 35s linear infinite;
 }
 
 html {
