@@ -95,7 +95,7 @@ export default function Home() {
         <h2 style={{ fontSize: '4rem', fontWeight: 900, fontStyle: 'italic', marginBottom: '40px' }}>SCALE FASTER.</h2>
         <a href="#agendar" className="btn-glow">Agendar Llamada</a>
         <p style={{ marginTop: '100px', opacity: 0.2, fontSize: '10px', letterSpacing: '5px' }}>STRATT-ON AGENCY // 2026</p>
-        <div style={{ marginTop: '20px' }}>
+        <div style={{ marginTop: '20px', display: 'flex', gap: '25px', justifyContent: 'center' }}>
   <a href="/politicadeprivacidad" style={{ 
     color: '#444', 
     textDecoration: 'none', 
@@ -106,7 +106,20 @@ export default function Home() {
   }} 
   onMouseOver={(e) => e.currentTarget.style.color = '#9D00FF'}
   onMouseOut={(e) => e.currentTarget.style.color = '#444'}>
-    Política de Privacidad
+    Privacidad
+  </a>
+  <span style={{ color: '#222', fontSize: '10px' }}>|</span>
+  <a href="/terminosycondiciones" style={{ 
+    color: '#444', 
+    textDecoration: 'none', 
+    fontSize: '10px', 
+    textTransform: 'uppercase', 
+    letterSpacing: '2px',
+    transition: '0.3s'
+  }} 
+  onMouseOver={(e) => e.currentTarget.style.color = '#9D00FF'}
+  onMouseOut={(e) => e.currentTarget.style.color = '#444'}>
+    Términos
   </a>
 </div>
       </footer>
