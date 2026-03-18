@@ -75,7 +75,7 @@ export default function Home() {
       {/* Hero Section */}
       <section style={{ position: 'relative', height: '100vh', display: 'flex', alignItems: 'center', justifyContent: 'center', textAlign: 'center' }}>
         <video autoPlay muted loop playsInline style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', objectFit: 'cover', zIndex: -2 }}>
-          <source src="https://cdn.pixabay.com/video/2023/10/20/185795-876319803_large.mp4" type="video/mp4" />
+          <source src="https://firebasestorage.googleapis.com/v0/b/johnnycelis-ceaf7.firebasestorage.app/o/hero%20video.mp4?alt=media&token=8d04a350-1e28-4266-b61d-8aa7eeb0fd47" type="video/mp4" />
         </video>
         <div className="hero-video-overlay" />
         <div style={{ padding: '0 20px', zIndex: 1 }}>
@@ -128,7 +128,7 @@ export default function Home() {
       <section id="sistemas" style={{ padding: '120px 5%', background: '#000' }}>
         <div style={{ maxWidth: '1200px', margin: '0 auto' }}>
           <h2 style={{ fontSize: 'clamp(3rem, 6vw, 5rem)', fontWeight: 900, fontStyle: 'italic', textTransform: 'uppercase', marginBottom: '80px' }}>
-            Infraestructura <br /> de <span style={{ color: electricPurple }}>Ingresos</span>
+            Infraestructura <br /> de <span style={{ color: electricPurple }}>Soluciones</span>
           </h2>
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '30px' }}>
             {[
