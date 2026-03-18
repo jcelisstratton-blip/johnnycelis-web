@@ -56,7 +56,7 @@ export default function Home() {
           <p style={{ maxWidth: '650px', margin: '0 auto 40px', color: '#ccc', fontSize: '1.2rem' }}>
             Agentes de Voz e IA que transforman tu operación en una maquinaria autónoma.
           </p>
-          <a href="#agendar" className="btn-glow">Auditoría Estratégica</a>
+          <a href="https://wa.link/430g3p" className="btn-glow">Auditoría Estratégica</a>
         </div>
       </section>
 
@@ -93,7 +93,14 @@ export default function Home() {
 
       <footer id="agendar" style={{ padding: '100px 5%', textAlign: 'center', borderTop: '1px solid #222' }}>
         <h2 style={{ fontSize: '4rem', fontWeight: 900, fontStyle: 'italic', marginBottom: '40px' }}>SCALE FASTER.</h2>
-        <a href="#agendar" className="btn-glow">Agendar Llamada</a>
+        <a 
+  href="https://calendar.app.google/wCHwj3MuUxr4EUEp6" 
+  target="_blank" 
+  rel="noopener noreferrer" 
+  className="btn-glow"
+>
+  Agendar Llamada
+</a>
         <p style={{ marginTop: '100px', opacity: 0.2, fontSize: '10px', letterSpacing: '5px' }}>STRATT-ON AGENCY // 2026</p>
         <div style={{ marginTop: '20px', display: 'flex', gap: '25px', justifyContent: 'center' }}>
   <a href="/politicadeprivacidad" style={{ 
