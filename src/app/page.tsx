@@ -74,13 +74,40 @@ export default function Home() {
 
       <section id="sistemas" style={{ padding: '100px 5%', maxWidth: '1200px', margin: '0 auto' }}>
         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '30px' }}>
-          {["Inbound IA", "Outbound Growth", "n8n Architecture"].map((title, i) => (
-            <div key={i} className="glass-panel">
-              <h3 style={{ fontSize: '1.5rem', marginBottom: '20px' }}>{title}</h3>
-              <p style={{ color: '#888' }}>Sistemas autónomos diseñados para escalar ingresos sin intervención humana.</p>
-            </div>
-          ))}
-        </div>
+  {[
+    {
+      title: "Inbound IA",
+      desc: "Agentes de voz con latencia ultra-baja y empatía humana que atienden, califican y agendan citas 24/7 sin perder un solo lead."
+    },
+    {
+      title: "Growth Outbound",
+      desc: "Maquinaria de prospección multicanal que utiliza IA para hiper-personalizar contactos a escala en LinkedIn y Email, llenando tu embudo de ventas."
+    },
+    {
+      title: "n8n Architecture",
+      desc: "El sistema nervioso central de tu negocio. Conectamos APIs, CRMs y modelos de IA bajo arquitecturas lógicas que eliminan el trabajo manual."
+    }
+  ].map((service, i) => (
+    <div key={i} className="glass-panel">
+      <h3 style={{ 
+        fontSize: '1.5rem', 
+        marginBottom: '20px', 
+        fontWeight: '900', 
+        textTransform: 'uppercase', 
+        color: '#fff' 
+      }}>
+        {service.title}
+      </h3>
+      <p style={{ 
+        color: '#888', 
+        lineHeight: '1.6', 
+        fontSize: '0.95rem' 
+      }}>
+        {service.desc}
+      </p>
+    </div>
+  ))}
+</div>
       </section>
 
       <section id="roi" style={{ padding: '100px 5%', background: '#fff', color: '#000' }}>
@@ -98,7 +125,14 @@ export default function Home() {
   target="_blank" 
   rel="noopener noreferrer" 
   className="btn-glow"
+  style={{ display: 'inline-flex', alignItems: 'center', gap: '10px' }}
 >
+  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <path d="M19 4H5C3.89543 4 3 4.89543 3 6V20C3 21.1046 3.89543 22 5 22H19C20.1046 22 21 21.1046 21 20V6C21 4.89543 20.1046 4 19 4Z" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+    <path d="M16 2V6" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+    <path d="M8 2V6" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+    <path d="M3 10H21" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+  </svg>
   Agendar Llamada
 </a>
         <p style={{ marginTop: '100px', opacity: 0.2, fontSize: '10px', letterSpacing: '5px' }}>STRATT-ON AGENCY // 2026</p>
