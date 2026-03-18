@@ -50,7 +50,7 @@ export default function Home() {
     <main style={{ backgroundColor: '#000', color: '#fff', minHeight: '100vh', fontFamily: 'Inter, system-ui, sans-serif', margin: 0, padding: 0, overflowX: 'hidden' }}>
       
       <style dangerouslySetInnerHTML={{ __html: `
-        * { box-sizing: border-box; }
+        * { box-sizing: border-box; scroll-behavior: smooth; }
         body { margin: 0; padding: 0; background-color: #000 !important; }
         .hero-video-overlay { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5); z-index: -1; }
         .text-stroke { -webkit-text-stroke: 1px #444; color: transparent; }
@@ -67,11 +67,12 @@ export default function Home() {
         <div style={{ display: 'flex', gap: '40px', alignItems: 'center' }}>
           <a href="#sistemas" style={{ color: 'white', textDecoration: 'none', fontSize: '11px', fontWeight: 'bold', textTransform: 'uppercase' }}>Sistemas</a>
           <a href="#resultados" style={{ color: 'white', textDecoration: 'none', fontSize: '11px', fontWeight: 'bold', textTransform: 'uppercase' }}>Resultados</a>
+          <a href="#roi" style={{ color: 'white', textDecoration: 'none', fontSize: '11px', fontWeight: 'bold', textTransform: 'uppercase' }}>ROI</a>
           <a href="https://calendar.app.google/wCHwj3MuUxr4EUEp6" target="_blank" rel="noopener noreferrer" className="btn-glow" style={{ padding: '12px 25px', fontSize: '10px' }}>Book a Call</a>
         </div>
       </nav>
 
-      {/* Hero Section con Video Full de Fondo */}
+      {/* Hero Section */}
       <section style={{ position: 'relative', height: '100vh', display: 'flex', alignItems: 'center', justifyContent: 'center', textAlign: 'center' }}>
         <video autoPlay muted loop playsInline style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', objectFit: 'cover', zIndex: -2 }}>
           <source src="https://cdn.pixabay.com/video/2023/10/20/185795-876319803_large.mp4" type="video/mp4" />
@@ -101,24 +102,18 @@ export default function Home() {
         </div>
       </div>
 
-      {/* SECCIÓN RESULTADOS (Cuadros en una sola línea) */}
+      {/* SECCIÓN RESULTADOS */}
       <section id="resultados" style={{ padding: '120px 5%', background: '#fff', color: '#000', textAlign: 'center' }}>
         <div style={{ maxWidth: '1400px', margin: '0 auto' }}>
           <h2 style={{ fontSize: '2.5rem', fontWeight: 900, textTransform: 'uppercase', marginBottom: '80px' }}>Resultados que Impactan</h2>
-          <div style={{ 
-            display: 'flex', 
-            justifyContent: 'center', 
-            flexWrap: 'nowrap', // FUERZA UNA SOLA LÍNEA
-            gap: '20px',
-            overflowX: 'auto' // SCROLL EN MÓVILES PARA NO ROMPER DISEÑO
-          }}>
+          <div style={{ display: 'flex', justifyContent: 'center', flexWrap: 'wrap', gap: '20px' }}>
             {[
               { val: "- 80%", label: "Carga Operativa" },
               { val: "300%", label: "Aumento en Ventas" },
               { val: "60%", label: "Reducción Errores" },
               { val: "7s", label: "Tiempo Respuesta" }
             ].map((stat, i) => (
-              <div key={i} style={{ flex: '1', minWidth: '250px', background: '#fff', border: '1px solid rgba(0,0,0,0.05)', padding: '60px 20px', borderRadius: '10px', boxShadow: '0 10px 30px rgba(0,0,0,0.03)' }}>
+              <div key={i} style={{ flex: '1', minWidth: '280px', background: '#fff', border: '1px solid rgba(0,0,0,0.05)', padding: '60px 20px', borderRadius: '10px' }}>
                 <div style={{ fontSize: '4.5rem', fontWeight: 900, color: electricPurple, lineHeight: 1, marginBottom: '20px' }}>
                   <Counter end={stat.val} />
                 </div>
@@ -129,7 +124,7 @@ export default function Home() {
         </div>
       </section>
 
-      {/* SECCIÓN SISTEMAS (Hover localizado) */}
+      {/* SECCIÓN SISTEMAS */}
       <section id="sistemas" style={{ padding: '120px 5%', background: '#000' }}>
         <div style={{ maxWidth: '1200px', margin: '0 auto' }}>
           <h2 style={{ fontSize: 'clamp(3rem, 6vw, 5rem)', fontWeight: 900, fontStyle: 'italic', textTransform: 'uppercase', marginBottom: '80px' }}>
@@ -154,9 +149,49 @@ export default function Home() {
         </div>
       </section>
 
-      {/* El resto del código (ROI, Footer) se mantiene igual... */}
-      {/* (Omitido por brevedad pero inclúyelo en tu archivo) */}
+      {/* SECCIÓN ROI (Simulador de Ahorro) */}
+      <section id="roi" style={{ padding: '120px 5%', background: '#fff', color: '#000' }}>
+        <div style={{ maxWidth: '1000px', margin: '0 auto', textAlign: 'center' }}>
+          <h2 style={{ fontSize: '3rem', fontWeight: 900, marginBottom: '20px', textTransform: 'uppercase' }}>Calcula tu libertad</h2>
+          <p style={{ color: '#666', marginBottom: '60px' }}>Desliza para ver cuánto tiempo y dinero recuperas con automatización.</p>
+          <input 
+            type="range" min="10" max="200" value={hours} 
+            onChange={e => setHours(parseInt(e.target.value))} 
+            style={{ width: '100%', accentColor: electricPurple, height: '10px', cursor: 'pointer' }} 
+          />
+          <div style={{ marginTop: '40px' }}>
+            <span style={{ fontSize: '1.2rem', fontWeight: 'bold', color: '#666' }}>{hours} Horas ahorradas / mes</span>
+            <div style={{ fontSize: 'clamp(4rem, 10vw, 7rem)', fontWeight: 900, color: '#000', lineHeight: 1, marginTop: '20px' }}>
+              ${savings.toLocaleString()} <span style={{ fontSize: '1rem', color: '#9D00FF' }}>USD/MES</span>
+            </div>
+          </div>
+        </div>
+      </section>
 
+      {/* FOOTER COMPLETO */}
+      <footer id="agendar" style={{ padding: '120px 5%', textAlign: 'center', borderTop: '1px solid #111', background: '#000' }}>
+        <h2 style={{ fontSize: 'clamp(3rem, 8vw, 6rem)', fontWeight: 900, fontStyle: 'italic', marginBottom: '60px', textTransform: 'uppercase' }}>Scale Faster.</h2>
+        <a href="https://calendar.app.google/wCHwj3MuUxr4EUEp6" target="_blank" rel="noopener noreferrer" className="btn-glow">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M19 4H5C3.89543 4 3 4.89543 3 6V20C3 21.1046 3.89543 22 5 22H19C20.1046 22 21 21.1046 21 20V6C21 4.89543 20.1046 4 19 4Z" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+            <path d="M16 2V6" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+            <path d="M8 2V6" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+            <path d="M3 10H21" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+          </svg>
+          Agendar Llamada
+        </a>
+        
+        <div style={{ marginTop: '120px', paddingTop: '40px', borderTop: '1px solid #111' }}>
+          <p style={{ opacity: 0.3, fontSize: '10px', letterSpacing: '8px', textTransform: 'uppercase' }}>STRATT-ON AGENCY // 2026</p>
+          <div style={{ marginTop: '30px', display: 'flex', gap: '30px', justifyContent: 'center' }}>
+            <a href="/politicadeprivacidad" style={{ color: '#444', textDecoration: 'none', fontSize: '10px', textTransform: 'uppercase', letterSpacing: '2px', transition: '0.3s' }} 
+              onMouseOver={(e) => e.currentTarget.style.color = electricPurple} onMouseOut={(e) => e.currentTarget.style.color = '#444'}>Privacidad</a>
+            <span style={{ color: '#222' }}>|</span>
+            <a href="/terminosycondiciones" style={{ color: '#444', textDecoration: 'none', fontSize: '10px', textTransform: 'uppercase', letterSpacing: '2px', transition: '0.3s' }} 
+              onMouseOver={(e) => e.currentTarget.style.color = electricPurple} onMouseOut={(e) => e.currentTarget.style.color = '#444'}>Términos</a>
+          </div>
+        </div>
+      </footer>
     </main>
   );
 }
