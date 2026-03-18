@@ -1,20 +1,16 @@
 "use client";
 import React, { useState, useEffect, useRef } from 'react';
 
-// COMPONENTE DE CONTEO ANIMADO CON SENSOR DE SCROLL
+// COMPONENTE DE CONTEO ANIMADO
 const Counter = ({ end, duration = 2000 }: { end: string, duration?: number }) => {
   const [count, setCount] = useState(0);
   const [isVisible, setIsVisible] = useState(false);
   const countRef = useRef(null);
-
   const numericEnd = parseInt(end.replace(/[^0-9]/g, ''));
   const suffix = end.replace(/[0-9]/g, '');
 
   useEffect(() => {
-    const observer = new IntersectionObserver(
-      ([entry]) => { if (entry.isIntersecting) setIsVisible(true); },
-      { threshold: 0.5 }
-    );
+    const observer = new IntersectionObserver(([entry]) => { if (entry.isIntersecting) setIsVisible(true); }, { threshold: 0.5 });
     if (countRef.current) observer.observe(countRef.current);
     return () => observer.disconnect();
   }, []);
@@ -38,7 +34,9 @@ export default function Home() {
   const [hours, setHours] = useState(20);
   const [scrolled, setScrolled] = useState(false);
   const electricPurple = "#9D00FF";
-  const savings = hours * 20 * 4 * 0.80; 
+  
+  // AJUSTE: Valor de hora fijado en 20 USD
+  const savings = hours * 20; 
 
   useEffect(() => {
     const handleScroll = () => setScrolled(window.scrollY > 50);
@@ -51,145 +49,102 @@ export default function Home() {
       
       <style dangerouslySetInnerHTML={{ __html: `
         * { box-sizing: border-box; scroll-behavior: smooth; }
-        body { margin: 0; padding: 0; background-color: #000 !important; }
-        .hero-video-overlay { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5); z-index: -1; }
-        .text-stroke { -webkit-text-stroke: 1px #444; color: transparent; }
+        .hero-video-overlay { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.6); z-index: -1; }
         .btn-glow { background: ${electricPurple}; color: white; padding: 18px 35px; text-decoration: none; font-weight: 900; text-transform: uppercase; letter-spacing: 2px; transition: 0.4s; display: inline-flex; align-items: center; gap: 10px; border: none; cursor: pointer; }
         .btn-glow:hover { box-shadow: 0 0 30px ${electricPurple}; transform: scale(1.05); background: #fff !important; color: #000 !important; }
         .nav-blur { background: rgba(0,0,0,0.8); backdrop-filter: blur(15px); border-bottom: 1px solid rgba(157,0,255,0.2); }
+        .social-card { background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.1); padding: 20px; border-radius: 15px; display: flex; align-items: center; gap: 15px; text-decoration: none; color: #fff; transition: 0.3s; width: 100%; max-width: 400px; margin: 10px auto; }
+        .social-card:hover { transform: scale(1.02); background: rgba(255,255,255,0.07); border-color: ${electricPurple}; }
         @keyframes marquee { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
         .animate-marquee { display: flex; width: max-content; animation: marquee 30s linear infinite; }
       `}} />
 
-      {/* Navegación */}
       <nav className={scrolled ? 'nav-blur' : ''} style={{ position: 'fixed', top: 0, width: '100%', zIndex: 100, padding: '25px 5%', display: 'flex', justifyContent: 'space-between', alignItems: 'center', transition: '0.4s' }}>
         <span style={{ fontWeight: 900, fontStyle: 'italic', fontSize: '1.5rem' }}>STRATT-ON</span>
-        <div style={{ display: 'flex', gap: '40px', alignItems: 'center' }}>
-          <a href="#sistemas" style={{ color: 'white', textDecoration: 'none', fontSize: '11px', fontWeight: 'bold', textTransform: 'uppercase' }}>Sistemas</a>
-          <a href="#resultados" style={{ color: 'white', textDecoration: 'none', fontSize: '11px', fontWeight: 'bold', textTransform: 'uppercase' }}>Resultados</a>
-          <a href="#roi" style={{ color: 'white', textDecoration: 'none', fontSize: '11px', fontWeight: 'bold', textTransform: 'uppercase' }}>ROI</a>
-          <a href="https://calendar.app.google/wCHwj3MuUxr4EUEp6" target="_blank" rel="noopener noreferrer" className="btn-glow" style={{ padding: '12px 25px', fontSize: '10px' }}>Book a Call</a>
+        <div style={{ display: 'flex', gap: '30px', alignItems: 'center' }}>
+          <a href="#sistemas" style={{ color: 'white', textDecoration: 'none', fontSize: '11px', fontWeight: 'bold' }}>SISTEMAS</a>
+          <a href="#social" style={{ color: 'white', textDecoration: 'none', fontSize: '11px', fontWeight: 'bold' }}>REDES</a>
+          <a href="#roi" style={{ color: 'white', textDecoration: 'none', fontSize: '11px', fontWeight: 'bold' }}>ROI</a>
+          <a href="https://calendar.app.google/wCHwj3MuUxr4EUEp6" target="_blank" className="btn-glow" style={{ padding: '10px 20px', fontSize: '10px' }}>BOOK A CALL</a>
         </div>
       </nav>
 
-      {/* Hero Section */}
+      {/* Hero */}
       <section style={{ position: 'relative', height: '100vh', display: 'flex', alignItems: 'center', justifyContent: 'center', textAlign: 'center' }}>
-        <video autoPlay muted loop playsInline style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', objectFit: 'cover', zIndex: -2 }}>
+        <video 
+          autoPlay 
+          muted 
+          loop 
+          playsInline 
+          preload="auto"
+          style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', objectFit: 'cover', zIndex: -2 }}
+        >
           <source src="https://firebasestorage.googleapis.com/v0/b/johnnycelis-ceaf7.firebasestorage.app/o/hero%20video.mp4?alt=media&token=8d04a350-1e28-4266-b61d-8aa7eeb0fd47" type="video/mp4" />
         </video>
         <div className="hero-video-overlay" />
-        <div style={{ padding: '0 20px', zIndex: 1 }}>
-          <h1 style={{ fontSize: 'clamp(3rem, 10vw, 8rem)', fontWeight: 900, fontStyle: 'italic', textTransform: 'uppercase', lineHeight: 0.9, margin: '0 0 30px 0' }}>
-            Automate<br /><span className="text-stroke">To Elevate</span>
+        <div style={{ zIndex: 1, padding: '0 20px' }}>
+          <h1 style={{ fontSize: 'clamp(3rem, 10vw, 8rem)', fontWeight: 900, fontStyle: 'italic', textTransform: 'uppercase', lineHeight: 0.9 }}>
+            Automate<br /><span style={{ WebkitTextStroke: '1px #444', color: 'transparent' }}>To Elevate</span>
           </h1>
-          <p style={{ maxWidth: '650px', margin: '0 auto 40px', color: '#fff', fontSize: '1.4rem', fontWeight: 500 }}>
-            Agentes de Voz e IA que transforman tu operación en una maquinaria autónoma.
-          </p>
+          <p style={{ maxWidth: '600px', margin: '30px auto', fontSize: '1.2rem', opacity: 0.8 }}>Agentes de Voz e IA que transforman tu operación en una maquinaria autónoma.</p>
           <a href="https://wa.link/430g3p" className="btn-glow">Auditoría Estratégica</a>
         </div>
       </section>
 
-      {/* Marquee */}
-      <div style={{ background: '#030303', overflow: 'hidden', padding: '30px 0' }}>
-        <div className="animate-marquee">
-          {[1, 2].map(i => (
-            <div key={i} style={{ display: 'flex', alignItems: 'center', gap: '60px', paddingRight: '60px' }}>
-              {["AI VOICE AGENTS", "PROCESS AUTOMATION", "N8N ARCHITECTURE", "ROI DRIVEN"].map(word => (
-                <span key={word} style={{ fontSize: '1.5rem', fontWeight: 900, color: '#222' }}>{word}</span>
-              ))}
+      {/* SECCIÓN SOCIAL */}
+      <section id="social" style={{ padding: '100px 5%', background: '#050505', textAlign: 'center' }}>
+        <h2 style={{ fontSize: '2rem', fontWeight: 900, marginBottom: '50px' }}>CONECTA CON NOSOTROS</h2>
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '20px', maxWidth: '1200px', margin: '0 auto' }}>
+          {[
+            { name: "Instagram", user: "@JohnnyCelis.AI", color: "#E1306C", link: "https://www.instagram.com/johnnycelis.AI" },
+            { name: "LinkedIn", user: "Stratt-On Agency", color: "#0077B5", link: "https://www.linkedin.com/company/105200333" },
+            { name: "TikTok", user: "@stratt_on", color: "#00f2ea", link: "https://www.tiktok.com/@stratt_on" },
+            { name: "WhatsApp", user: "Soporte Directo", color: "#25D366", link: "https://wa.link/430g3p" },
+            { name: "Facebook", user: "JohnnyCelis.AI", color: "#1877F2", link: "https://www.facebook.com/Johnnycelis.ia" }
+          ].map((red, i) => (
+            <a key={i} href={red.link} target="_blank" className="social-card" style={{ borderLeft: `5px solid ${red.color}` }}>
+              <div style={{ background: red.color, width: '40px', height: '40px', borderRadius: '50%', display: 'flex', alignItems: 'center', justifyContent: 'center', fontWeight: 'bold' }}>{red.name[0]}</div>
+              <div style={{ textAlign: 'left' }}>
+                <div style={{ fontWeight: 'bold', fontSize: '1.1rem' }}>{red.name}</div>
+                <div style={{ fontSize: '0.8rem', opacity: 0.5 }}>{red.user}</div>
+              </div>
+            </a>
+          ))}
+        </div>
+      </section>
+
+      {/* SECCIÓN RESULTADOS */}
+      <section id="resultados" style={{ padding: '100px 5%', background: '#fff', color: '#000', textAlign: 'center' }}>
+        <div style={{ maxWidth: '1400px', margin: '0 auto', display: 'flex', flexWrap: 'wrap', gap: '20px', justifyContent: 'center' }}>
+          {[
+            { val: "- 80%", label: "Carga Operativa" },
+            { val: "300%", label: "Aumento en Ventas" },
+            { val: "60%", label: "Reducción Errores" },
+            { val: "7s", label: "Tiempo Respuesta" }
+          ].map((stat, i) => (
+            <div key={i} style={{ flex: '1', minWidth: '280px', padding: '50px 20px', border: '1px solid #eee', borderRadius: '15px' }}>
+              <div style={{ fontSize: '4.5rem', fontWeight: 900, color: electricPurple }}><Counter end={stat.val} /></div>
+              <p style={{ fontWeight: 'bold', color: '#666' }}>{stat.label}</p>
             </div>
           ))}
         </div>
-      </div>
-
-      {/* SECCIÓN RESULTADOS */}
-      <section id="resultados" style={{ padding: '120px 5%', background: '#fff', color: '#000', textAlign: 'center' }}>
-        <div style={{ maxWidth: '1400px', margin: '0 auto' }}>
-          <h2 style={{ fontSize: '2.5rem', fontWeight: 900, textTransform: 'uppercase', marginBottom: '80px' }}>Resultados que Impactan</h2>
-          <div style={{ display: 'flex', justifyContent: 'center', flexWrap: 'wrap', gap: '20px' }}>
-            {[
-              { val: "- 80%", label: "Carga Operativa" },
-              { val: "300%", label: "Aumento en Ventas" },
-              { val: "60%", label: "Reducción Errores" },
-              { val: "7s", label: "Tiempo Respuesta" }
-            ].map((stat, i) => (
-              <div key={i} style={{ flex: '1', minWidth: '280px', background: '#fff', border: '1px solid rgba(0,0,0,0.05)', padding: '60px 20px', borderRadius: '10px' }}>
-                <div style={{ fontSize: '4.5rem', fontWeight: 900, color: electricPurple, lineHeight: 1, marginBottom: '20px' }}>
-                  <Counter end={stat.val} />
-                </div>
-                <p style={{ color: '#666', textTransform: 'uppercase', letterSpacing: '2px', fontWeight: 'bold', fontSize: '0.8rem' }}>{stat.label}</p>
-              </div>
-            ))}
-          </div>
-        </div>
       </section>
 
-      {/* SECCIÓN SISTEMAS */}
-      <section id="sistemas" style={{ padding: '120px 5%', background: '#000' }}>
-        <div style={{ maxWidth: '1200px', margin: '0 auto' }}>
-          <h2 style={{ fontSize: 'clamp(3rem, 6vw, 5rem)', fontWeight: 900, fontStyle: 'italic', textTransform: 'uppercase', marginBottom: '80px' }}>
-            Infraestructura <br /> de <span style={{ color: electricPurple }}>Soluciones</span>
-          </h2>
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '30px' }}>
-            {[
-              { title: "Inbound IA", desc: "Agentes de voz con latencia ultra-baja y empatía humana que atienden, califican y agendan citas 24/7 sin perder un solo lead." },
-              { title: "Growth Outbound", desc: "Maquinaria de prospección multicanal que utiliza IA para hiper-personalizar contactos a escala en LinkedIn y Email, llenando tu embudo de ventas." },
-              { title: "n8n Architecture", desc: "El sistema nervioso central de tu negocio. Conectamos APIs, CRMs y modelos de IA bajo arquitecturas lógicas que eliminan el trabajo manual." }
-            ].map((service, i) => (
-              <div key={i} 
-                style={{ background: 'rgba(255,255,255,0.02)', border: '1px solid rgba(255,255,255,0.05)', padding: '50px 40px', transition: '0.5s', color: '#fff' }}
-                onMouseOver={(e) => { e.currentTarget.style.background = '#fff'; e.currentTarget.style.color = '#000'; }}
-                onMouseOut={(e) => { e.currentTarget.style.background = 'rgba(255,255,255,0.02)'; e.currentTarget.style.color = '#fff'; }}
-              >
-                <h3 style={{ fontSize: '1.5rem', marginBottom: '20px', fontWeight: '900', textTransform: 'uppercase', borderLeft: `4px solid ${electricPurple}`, paddingLeft: '15px' }}>{service.title}</h3>
-                <p style={{ lineHeight: '1.8', opacity: 0.8 }}>{service.desc}</p>
-              </div>
-            ))}
-          </div>
-        </div>
+      {/* ROI */}
+      <section id="roi" style={{ padding: '100px 5%', background: '#fff', color: '#000', textAlign: 'center' }}>
+        <h2 style={{ fontSize: '2.5rem', fontWeight: 900 }}>CALCULA TU LIBERTAD</h2>
+        <input type="range" min="10" max="200" value={hours} onChange={e => setHours(parseInt(e.target.value))} style={{ width: '80%', maxWidth: '600px', accentColor: electricPurple, margin: '40px 0' }} />
+        <div style={{ fontSize: '5rem', fontWeight: 900 }}>${savings.toLocaleString()} <span style={{ fontSize: '1rem', color: electricPurple }}>USD/MES</span></div>
+        <p style={{ color: '#666' }}>Basado en un costo operativo de $20 USD por hora.</p>
       </section>
 
-      {/* SECCIÓN ROI (Simulador de Ahorro) */}
-      <section id="roi" style={{ padding: '120px 5%', background: '#fff', color: '#000' }}>
-        <div style={{ maxWidth: '1000px', margin: '0 auto', textAlign: 'center' }}>
-          <h2 style={{ fontSize: '3rem', fontWeight: 900, marginBottom: '20px', textTransform: 'uppercase' }}>Calcula tu libertad</h2>
-          <p style={{ color: '#666', marginBottom: '60px' }}>Desliza para ver cuánto tiempo y dinero recuperas con automatización.</p>
-          <input 
-            type="range" min="10" max="200" value={hours} 
-            onChange={e => setHours(parseInt(e.target.value))} 
-            style={{ width: '100%', accentColor: electricPurple, height: '10px', cursor: 'pointer' }} 
-          />
-          <div style={{ marginTop: '40px' }}>
-            <span style={{ fontSize: '1.2rem', fontWeight: 'bold', color: '#666' }}>{hours} Horas ahorradas / mes</span>
-            <div style={{ fontSize: 'clamp(4rem, 10vw, 7rem)', fontWeight: 900, color: '#000', lineHeight: 1, marginTop: '20px' }}>
-              ${savings.toLocaleString()} <span style={{ fontSize: '1rem', color: '#9D00FF' }}>USD/MES</span>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* FOOTER COMPLETO */}
-      <footer id="agendar" style={{ padding: '120px 5%', textAlign: 'center', borderTop: '1px solid #111', background: '#000' }}>
-        <h2 style={{ fontSize: 'clamp(3rem, 8vw, 6rem)', fontWeight: 900, fontStyle: 'italic', marginBottom: '60px', textTransform: 'uppercase' }}>Scale Faster.</h2>
-        <a href="https://calendar.app.google/wCHwj3MuUxr4EUEp6" target="_blank" rel="noopener noreferrer" className="btn-glow">
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <path d="M19 4H5C3.89543 4 3 4.89543 3 6V20C3 21.1046 3.89543 22 5 22H19C20.1046 22 21 21.1046 21 20V6C21 4.89543 20.1046 4 19 4Z" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-            <path d="M16 2V6" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-            <path d="M8 2V6" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-            <path d="M3 10H21" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-          </svg>
-          Agendar Llamada
-        </a>
-        
-        <div style={{ marginTop: '120px', paddingTop: '40px', borderTop: '1px solid #111' }}>
-          <p style={{ opacity: 0.3, fontSize: '10px', letterSpacing: '8px', textTransform: 'uppercase' }}>STRATT-ON AGENCY // 2026</p>
-          <div style={{ marginTop: '30px', display: 'flex', gap: '30px', justifyContent: 'center' }}>
-            <a href="/politicadeprivacidad" style={{ color: '#444', textDecoration: 'none', fontSize: '10px', textTransform: 'uppercase', letterSpacing: '2px', transition: '0.3s' }} 
-              onMouseOver={(e) => e.currentTarget.style.color = electricPurple} onMouseOut={(e) => e.currentTarget.style.color = '#444'}>Privacidad</a>
-            <span style={{ color: '#222' }}>|</span>
-            <a href="/terminosycondiciones" style={{ color: '#444', textDecoration: 'none', fontSize: '10px', textTransform: 'uppercase', letterSpacing: '2px', transition: '0.3s' }} 
-              onMouseOver={(e) => e.currentTarget.style.color = electricPurple} onMouseOut={(e) => e.currentTarget.style.color = '#444'}>Términos</a>
-          </div>
+      {/* Footer */}
+      <footer style={{ padding: '80px 5%', textAlign: 'center', borderTop: '1px solid #111' }}>
+        <h2 style={{ fontStyle: 'italic', fontWeight: 900, fontSize: '3rem', marginBottom: '40px' }}>SCALE FASTER.</h2>
+        <div style={{ display: 'flex', justifyContent: 'center', gap: '20px', opacity: 0.5, fontSize: '10px' }}>
+          <a href="/politicadeprivacidad" style={{ color: '#fff', textDecoration: 'none' }}>PRIVACIDAD</a>
+          <span>|</span>
+          <a href="/terminosycondiciones" style={{ color: '#fff', textDecoration: 'none' }}>TÉRMINOS</a>
         </div>
       </footer>
     </main>
