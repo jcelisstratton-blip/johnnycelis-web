@@ -1,7 +1,7 @@
 "use client";
 import React, { useState, useEffect, useRef } from 'react';
 
-// 1. COMPONENTE DE CONTEO ANIMADO (SENSOR DE SCROLL)
+// 1. COMPONENTE DE CONTEO ANIMADO
 const Counter = ({ end, duration = 2000 }: { end: string, duration?: number }) => {
   const [count, setCount] = useState(0);
   const [isVisible, setIsVisible] = useState(false);
@@ -73,14 +73,14 @@ export default function Home() {
         <div style={{ display: 'flex', gap: '30px', alignItems: 'center' }}>
           <a href="#soluciones" style={{ color: 'white', textDecoration: 'none', fontSize: '11px', fontWeight: 'bold' }}>SOLUCIONES</a>
           <a href="#roi" style={{ color: 'white', textDecoration: 'none', fontSize: '11px', fontWeight: 'bold' }}>ROI</a>
-          <a href="https://calendar.app.google/wCHwj3MuUxr4EUEp6" target="_blank" className="btn-glow" style={{ padding: '10px 20px', fontSize: '10px' }}>BOOK A CALL</a>
+          <a href="https://calendar.app.google/wCHwj3MuUxr4EUEp6" target="_blank" rel="noopener noreferrer" className="btn-glow" style={{ padding: '10px 20px', fontSize: '10px' }}>BOOK A CALL</a>
         </div>
       </nav>
 
-      {/* Hero: Video Blindado */}
+      {/* Hero */}
       <section style={{ position: 'relative', height: '100vh', display: 'flex', alignItems: 'center', justifyContent: 'center', textAlign: 'center', overflow: 'hidden' }}>
         <video 
-          key="hero-video-final"
+          key="hero-video-v3"
           autoPlay 
           muted 
           loop 
@@ -163,4 +163,51 @@ export default function Home() {
           onChange={e => setHours(parseInt(e.target.value))} 
           style={{ width: '80%', maxWidth: '600px', accentColor: electricPurple, height: '8px', cursor: 'pointer' }} 
         />
-        <div
+        <div style={{ fontSize: 'clamp(4rem, 12vw, 8rem)', fontWeight: 900, marginTop: '40px', lineHeight: 1 }}>
+          ${savings.toLocaleString()} <span style={{ fontSize: '1.2rem', color: electricPurple, verticalAlign: 'middle' }}>USD/MES</span>
+        </div>
+        <p style={{ marginTop: '20px', fontWeight: 'bold', color: '#555' }}>{hours} horas automatizadas al mes</p>
+      </section>
+
+      {/* FOOTER */}
+      <footer style={{ padding: '120px 5%', textAlign: 'center', background: '#000', borderTop: '1px solid #111' }}>
+        <h2 style={{ fontStyle: 'italic', fontWeight: 900, fontSize: 'clamp(2.5rem, 6vw, 5rem)', marginBottom: '60px', textTransform: 'uppercase' }}>Scale Faster.</h2>
+        
+        <div style={{ display: 'flex', justifyContent: 'center', flexWrap: 'wrap', gap: '20px', marginBottom: '80px' }}>
+          {socialLinks.map((social, i) => (
+            <a 
+              key={i} 
+              href={social.link} 
+              target="_blank" 
+              rel="noopener noreferrer"
+              className="social-icon" 
+              onMouseOver={(e) => {
+                e.currentTarget.style.borderColor = social.color;
+                e.currentTarget.style.color = social.color;
+                e.currentTarget.style.boxShadow = `0 0 25px ${social.color}44`;
+                e.currentTarget.style.transform = 'translateY(-8px)';
+              }}
+              onMouseOut={(e) => {
+                e.currentTarget.style.borderColor = 'rgba(255,255,255,0.1)';
+                e.currentTarget.style.color = 'rgba(255,255,255,0.4)';
+                e.currentTarget.style.boxShadow = 'none';
+                e.currentTarget.style.transform = 'translateY(0)';
+              }}
+            >
+              <svg viewBox="0 0 24 24"><path d={social.svg}/></svg>
+            </a>
+          ))}
+        </div>
+
+        <div style={{ display: 'flex', flexDirection: 'column', gap: '30px', alignItems: 'center' }}>
+          <div style={{ display: 'flex', gap: '30px', opacity: 0.4, fontSize: '11px', letterSpacing: '3px', fontWeight: 'bold' }}>
+            <a href="/politicadeprivacidad" style={{ color: '#fff', textDecoration: 'none' }}>PRIVACIDAD</a>
+            <span style={{ color: '#333' }}>|</span>
+            <a href="/terminosycondiciones" style={{ color: '#fff', textDecoration: 'none' }}>TÉRMINOS</a>
+          </div>
+          <p style={{ opacity: 0.15, fontSize: '10px', letterSpacing: '10px', textTransform: 'uppercase' }}>STRATT-ON AGENCY // 2026</p>
+        </div>
+      </footer>
+    </main>
+  );
+}
