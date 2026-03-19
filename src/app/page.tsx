@@ -46,7 +46,7 @@ export default function Home() {
   const [iaChatInput, setIaChatInput] = useState("");
   const [isTyping, setIsTyping] = useState(false);
   const [iaChatHistory, setIaChatHistory] = useState([
-    { sender: "bot", text: "Hola. Soy el agente de diagnóstico de Stratt-On Agency. Cuéntame, ¿cuál es el mayor cuello de botella operativo en tu empresa hoy?" }
+    { sender: "bot", text: "Hola. Soy el motor analítico de Stratt-On. Cuéntame, ¿qué área de tu empresa te consume más horas operativas a la semana?" }
   ]);
 
   const electricPurple = "#9D00FF";
@@ -77,16 +77,14 @@ export default function Home() {
     e.preventDefault();
     if(iaChatInput.trim() === "") return;
     
-    // Add user message
     const newHistory = [...iaChatHistory, { sender: "user", text: iaChatInput }];
     setIaChatHistory(newHistory);
     setIaChatInput("");
     setIsTyping(true);
 
-    // SIMULACIÓN DE RESPUESTA IA (Aquí conectas tu webhook más adelante)
     setTimeout(() => {
       setIsTyping(false);
-      setIaChatHistory(prev => [...prev, { sender: "bot", text: "Procesando tu solicitud en nuestro ecosistema inteligente. Nuestro equipo de ingenieros diseñará una arquitectura lógica sin costo para ti." }]);
+      setIaChatHistory(prev => [...prev, { sender: "bot", text: "Procesando la información en nuestro ecosistema. Pronto conectaremos tu solicitud para diseñar una arquitectura a medida." }]);
     }, 1500);
   };
 
@@ -95,22 +93,28 @@ export default function Home() {
     { name: "LinkedIn", link: "https://www.linkedin.com/company/105200333", color: "#0077B5", svg: "M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z" },
     { name: "TikTok", link: "https://www.tiktok.com/@stratt_on", color: "#fff", svg: "M12.525.02c1.31-.02 2.61-.01 3.91-.02.08 1.53.63 3.09 1.75 4.17 1.12 1.11 2.7 1.62 4.24 1.79v4.03c-1.44-.17-2.86-.6-4.12-1.31a6.44 6.44 0 0 1-1.87-1.43v7.33c.01 5.89-6.38 9.57-11.13 6.13-4.07-2.8-4.43-8.87-1.12-12.18 1.47-1.51 3.53-2.31 5.63-2.13v4.03c-1.41-.09-2.89.47-3.6 1.74-.83 1.52-.25 3.65 1.34 4.54 1.48.86 3.52.16 4.12-1.47.16-.4.24-.82.23-1.25V.02z" },
     { name: "WhatsApp", link: "https://wa.link/430g3p", color: "#25D366", svg: "M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487z" },
-    { name: "Facebook", link: "https://www.facebook.com/Johnnycelis.ia", color: "#1877F2", svg: "M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.469h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.469h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z" }
+    { name: "Whop Comunidad", link: "#", color: "#FF5C00", svg: "M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5" } // Icono estilo abstracto W/Capas
   ];
 
   const services = [
-    { title: "Voicebots Inbound IA", desc: "Agentes de voz con empatía humana y cero latencia. Atienden, califican y agendan leads entrantes 24/7." },
-    { title: "Growth Outbound AI", desc: "Maquinaria de prospección autónoma. Hiper-personalizamos el contacto B2B a escala en Email y LinkedIn." },
-    { title: "Orquestación Operativa", desc: "Automatización total. Conectamos tus CRMs, ERPs y flujos de trabajo en un ecosistema lógico que no requiere intervención humana." },
-    { title: "Chatbots de Conversión", desc: "Asistentes virtuales para WhatsApp y Web que no solo responden FAQs, sino que cierran ventas activamente." },
-    { title: "Integración CRM + IA", desc: "Organizamos tu data. Tu CRM se actualiza solo y califica a tus clientes según su probabilidad de cierre." },
-    { title: "Consultoría Estratégica", desc: "Auditoría profunda de tus procesos. Detectamos fugas de capital y diseñamos tu ruta hacia la automatización." }
+    { title: "Voicebots Inbound IA", desc: "Agentes de voz con empatía humana y cero latencia. Atienden, resuelven dudas y agendan reuniones operativas 24/7." },
+    { title: "Growth Outbound AI", desc: "Maquinaria de adquisición autónoma. Hiper-personalizamos el contacto corporativo a escala en Email y LinkedIn." },
+    { title: "Orquestación Operativa", desc: "Automatización total. Conectamos tus CRMs, ERPs y herramientas internas en un ecosistema lógico sin intervención humana." },
+    { title: "Chatbots de Resolución", desc: "Asistentes virtuales para WhatsApp y Web que no solo responden, sino que cierran procesos, ventas y tickets de soporte." },
+    { title: "Integración de Datos", desc: "Organizamos tu ecosistema. Tu data fluye de un departamento a otro actualizándose en tiempo real sin digitación manual." },
+    { title: "Consultoría Estratégica", desc: "Auditoría profunda de tus procesos. Detectamos fugas de capital y diseñamos tu ruta hacia la automatización empresarial." }
+  ];
+
+  const blogPosts = [
+    { tag: "Orquestación", title: "Cómo eliminar 40 horas de trabajo administrativo a la semana", desc: "Descubre el flujo exacto que implementamos para centralizar la operación B2B sin intervención humana." },
+    { tag: "Voicebots IA", title: "El fin del Call Center tradicional", desc: "Por qué los agentes de voz autónomos están reemplazando las líneas de soporte saturadas y triplicando el rendimiento." },
+    { tag: "Productividad", title: "La ilusión de contratar más personal", desc: "Por qué añadir más humanos a un proceso roto solo multiplica los errores operativos." }
   ];
 
   const reviews = [
-    { name: "Carlos M.", role: "CEO, E-commerce Retail", text: "Stratt-On Agency redujo nuestro tiempo de respuesta a segundos. Las ventas nocturnas aumentaron un 45% en el primer mes gracias al agente IA." },
-    { name: "Laura V.", role: "Directora Comercial B2B", text: "La orquestación de procesos nos ahorró el equivalente a 3 salarios operativos. Escalar ahora es solo cuestión de presupuesto publicitario, no de contratar más." },
-    { name: "David R.", role: "Founder, Inmobiliaria", text: "Nuestro agente de voz califica y agenda leads sin que nosotros movamos un dedo. Es indistinguible de un humano. Simplemente brutal." }
+    { name: "Carlos M.", role: "CEO, E-commerce Retail", text: "Nuestra operación nocturna solía ser un caos. Stratt-On unificó nuestros canales y ahora el negocio corre solo mientras dormimos." },
+    { name: "Laura V.", role: "Directora de Operaciones B2B", text: "La orquestación de procesos nos ahorró el equivalente a 3 salarios. Escalar ahora es solo cuestión de decisiones, no de micro-gestión." },
+    { name: "David R.", role: "Founder, Inmobiliaria", text: "Nuestro flujo de datos ahora es perfecto. Desde la captura del lead hasta la firma del documento, todo sucede en automático." }
   ];
 
   return (
@@ -126,19 +130,18 @@ export default function Home() {
         .btn-outline { background: transparent; color: white; border: 1px solid rgba(255,255,255,0.3); padding: 18px 40px; text-decoration: none; font-weight: 900; text-transform: uppercase; letter-spacing: 2px; transition: 0.4s; display: inline-flex; align-items: center; justify-content: center; border-radius: 4px; }
         .btn-outline:hover { background: rgba(255,255,255,0.1); border-color: #fff; }
         
-        /* BOTÓN VANGUARDIA PARA SERVICIOS */
-        .btn-vanguard { display: inline-flex; align-items: center; justify-content: center; gap: 15px; padding: 20px 50px; background: linear-gradient(90deg, rgba(157,0,255,0.05), rgba(157,0,255,0.15)); border: 1px solid ${electricPurple}; color: #fff; text-transform: uppercase; font-weight: 900; letter-spacing: 2px; border-radius: 50px; transition: 0.4s; position: relative; overflow: hidden; font-size: 1.1rem; box-shadow: 0 0 20px rgba(157,0,255,0.2); }
-        .btn-vanguard::before { content: ''; position: absolute; top: 0; left: -100%; width: 50%; height: 100%; background: linear-gradient(90deg, transparent, rgba(157,0,255,0.6), transparent); transform: skewX(-20deg); transition: 0.5s; }
-        .btn-vanguard:hover::before { left: 200%; transition: 0.8s; }
-        .btn-vanguard:hover { background: ${electricPurple}; box-shadow: 0 0 40px rgba(157,0,255,0.6); transform: scale(1.03); color: #fff; }
+        /* ENLACE EXPANSIVO (Reemplazo del botón recargado) */
+        .link-explore { display: inline-flex; align-items: center; gap: 10px; color: #fff; text-decoration: none; font-weight: 900; font-size: 1.1rem; text-transform: uppercase; letter-spacing: 2px; transition: 0.4s; padding-bottom: 5px; border-bottom: 1px solid transparent; }
+        .link-explore .arrow { transition: 0.4s; color: ${electricPurple}; }
+        .link-explore:hover { color: ${electricPurple}; border-bottom: 1px solid ${electricPurple}; gap: 20px; }
 
         .nav-blur { background: rgba(0,0,0,0.85); backdrop-filter: blur(20px); border-bottom: 1px solid rgba(157,0,255,0.15); }
         .sales-list li { margin-bottom: 15px; display: flex; align-items: flex-start; gap: 15px; font-size: 1.1rem; color: #ccc; line-height: 1.4; }
         .sales-list svg { color: ${electricPurple}; flex-shrink: 0; margin-top: 3px; }
         
-        /* GLOW EFECT EN TARJETAS DE SERVICIO (FIJO EN MÓVIL) */
+        /* GLOW EFECT EN TARJETAS */
         .service-link { text-decoration: none; color: inherit; display: block; outline: none; }
-        .glass-card { background: rgba(255,255,255,0.02); border: 1px solid rgba(255,255,255,0.05); border-radius: 16px; padding: 40px; transition: 0.4s ease; cursor: pointer; height: 100%; }
+        .glass-card { background: rgba(255,255,255,0.02); border: 1px solid rgba(255,255,255,0.05); border-radius: 16px; padding: 40px; transition: 0.4s ease; cursor: pointer; height: 100%; position: relative; overflow: hidden;}
         @media (min-width: 901px) {
           .glass-card:hover { border-color: ${electricPurple}; background: rgba(0,0,0,0.8); transform: translateY(-5px); box-shadow: 0 0 40px rgba(157,0,255,0.15); }
         }
@@ -150,34 +153,34 @@ export default function Home() {
         .marquee-text-filled { font-size: 1.5rem; font-weight: 900; color: #fff; text-shadow: 0 0 15px rgba(255,255,255,0.4); text-transform: uppercase; letter-spacing: 2px; }
         .marquee-text-stroke { font-size: 1.5rem; font-weight: 900; color: transparent; -webkit-text-stroke: 1px ${electricPurple}; text-transform: uppercase; letter-spacing: 2px; }
         
-        /* ICONOS REDES SOCIALES (RESPONSIVE) */
+        /* ICONOS REDES SOCIALES */
         .social-icon { width: 55px; height: 55px; border: 1px solid rgba(255,255,255,0.1); border-radius: 50%; display: flex; align-items: center; justify-content: center; text-decoration: none; color: rgba(255,255,255,0.4); transition: 0.4s; }
-        .social-icon svg { width: 22px; height: 22px; fill: currentColor; }
+        .social-icon svg { width: 22px; height: 22px; fill: currentColor; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
         @media (max-width: 600px) {
           .social-icon { width: 45px; height: 45px; }
           .social-icon svg { width: 18px; height: 18px; }
         }
         
-        /* CHAT WIDGET PREMIUM */
+        /* WIDGET WHATSAPP */
         .wa-float { position: fixed; bottom: 30px; right: 30px; width: 65px; height: 65px; background-color: #050505; color: ${electricPurple}; border: 2px solid ${electricPurple}; border-radius: 50px; text-align: center; box-shadow: 0px 4px 20px rgba(157, 0, 255, 0.4); z-index: 1000; display: flex; align-items: center; justify-content: center; cursor: pointer; transition: 0.3s; }
         .wa-float:hover { transform: scale(1.1); box-shadow: 0px 4px 35px rgba(157, 0, 255, 0.7); background-color: ${electricPurple}; color: #fff; }
         .wa-chat-box { position: fixed; bottom: 105px; right: 30px; width: 340px; background: #050505; border: 1px solid ${electricPurple}; border-radius: 15px; box-shadow: 0 15px 45px rgba(0,0,0,0.8); z-index: 1000; overflow: hidden; transform-origin: bottom right; transition: 0.3s; transform: scale(0); opacity: 0; pointer-events: none; }
         .wa-chat-box.open { transform: scale(1); opacity: 1; pointer-events: all; }
-        .wa-header { background: #000; color: #fff; padding: 20px; font-weight: 900; display: flex; justify-content: space-between; align-items: center; border-bottom: 2px solid ${electricPurple}; letter-spacing: 1px; text-transform: uppercase; }
+        .wa-header { background: #000; color: #fff; padding: 20px; font-weight: 900; display: flex; justify-content: space-between; align-items: center; border-bottom: 2px solid ${electricPurple}; text-transform: uppercase; letter-spacing: 1px;}
         .wa-body { padding: 20px; background: #0a0a0a; }
         .wa-msg-bot { background: rgba(157,0,255,0.1); color: #ddd; padding: 15px; border-radius: 0 15px 15px 15px; font-size: 0.95rem; margin-bottom: 15px; border: 1px solid rgba(157,0,255,0.2); }
-        .wa-input { width: 100%; background: #000; border: 1px solid #333; padding: 15px; border-radius: 10px; resize: none; outline: none; font-family: inherit; font-size: 0.95rem; margin-bottom: 15px; color: #fff; transition: 0.3s; }
+        .wa-input { width: 100%; background: #000; border: 1px solid #333; padding: 15px; border-radius: 10px; resize: none; color: #fff; outline: none; margin-bottom: 15px; transition: 0.3s;}
         .wa-input:focus { border-color: ${electricPurple}; }
-        .wa-send-btn { width: 100%; background: ${electricPurple}; color: #fff; border: none; padding: 15px; border-radius: 10px; font-weight: bold; cursor: pointer; transition: 0.3s; text-transform: uppercase; letter-spacing: 1px; }
+        .wa-send-btn { width: 100%; background: ${electricPurple}; color: #fff; border: none; padding: 15px; border-radius: 10px; font-weight: bold; cursor: pointer; transition: 0.3s; text-transform: uppercase; letter-spacing: 1px;}
         .wa-send-btn:hover { background: #fff; color: #000; box-shadow: 0 0 20px ${electricPurple}; }
 
-        /* MENU RESPONSIVE */
+        /* MENU MÓVIL */
         @media (max-width: 900px) {
           .desktop-links { display: none !important; }
           .hamburger { display: block !important; }
           .mobile-menu-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100vh; background: rgba(0,0,0,0.98); backdrop-filter: blur(15px); z-index: 99; display: flex; flex-direction: column; justify-content: center; align-items: center; gap: 40px; transform: translateY(-100%); transition: 0.4s ease-in-out; }
           .mobile-menu-overlay.open { transform: translateY(0); }
-          .mobile-link { color: #fff; text-decoration: none; font-size: 2rem; font-weight: 900; text-transform: uppercase; letter-spacing: 2px; }
+          .mobile-link { color: #fff; text-decoration: none; font-size: 2rem; font-weight: 900; text-transform: uppercase; letter-spacing: 2px;}
         }
         @media (min-width: 901px) {
           .hamburger { display: none !important; }
@@ -200,24 +203,24 @@ export default function Home() {
         .chat-input { flex: 1; background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.1); border-radius: 8px; color: #fff; padding: 12px 20px; font-size: 1rem; outline: none; transition: 0.3s; }
         .chat-input:focus { border-color: ${electricPurple}; box-shadow: 0 0 15px rgba(157,0,255,0.2); }
         .chat-typing { font-style: italic; opacity: 0.6; font-size: 0.85rem; padding-left: 10px; }
+        
+        /* WHOP COMMUNITY CARD */
+        .whop-card { background: linear-gradient(135deg, #FF5C00 0%, #D44D00 100%); color: #fff; border-radius: 20px; padding: 40px; position: relative; overflow: hidden; box-shadow: 0 20px 40px rgba(255, 92, 0, 0.2); display: flex; flex-direction: column; justify-content: center;}
+        .whop-card::before { content: 'W'; position: absolute; right: -20px; bottom: -40px; font-size: 15rem; font-weight: 900; opacity: 0.1; line-height: 1; font-style: italic; }
       `}} />
 
-      {/* NAVEGACIÓN Y MENÚ MÓVIL */}
+      {/* NAVEGACIÓN */}
       <nav className={scrolled ? 'nav-blur' : ''} style={{ position: 'fixed', top: 0, width: '100%', zIndex: 100, padding: '20px 5%', display: 'flex', justifyContent: 'space-between', alignItems: 'center', transition: '0.4s' }}>
         <span style={{ fontWeight: 900, fontStyle: 'italic', fontSize: '1.5rem', letterSpacing: '1px', position: 'relative', zIndex: 101 }}>STRATT-ON</span>
         
         <div className="desktop-links" style={{ display: 'flex', gap: '30px', alignItems: 'center' }}>
           <a href="#soluciones" style={{ color: 'white', textDecoration: 'none', fontSize: '11px', fontWeight: 'bold', letterSpacing: '1px', textTransform: 'uppercase' }}>Soluciones</a>
-          <a href="#asesoria" style={{ color: 'white', textDecoration: 'none', fontSize: '11px', fontWeight: 'bold', letterSpacing: '1px', textTransform: 'uppercase' }}>Asesoría IA</a>
-          <a href="#resultados" style={{ color: 'white', textDecoration: 'none', fontSize: '11px', fontWeight: 'bold', letterSpacing: '1px', textTransform: 'uppercase' }}>Resultados</a>
+          <a href="#asesoria" style={{ color: 'white', textDecoration: 'none', fontSize: '11px', fontWeight: 'bold', letterSpacing: '1px', textTransform: 'uppercase' }}>Asesoría</a>
+          <a href="#comunidad" style={{ color: 'white', textDecoration: 'none', fontSize: '11px', fontWeight: 'bold', letterSpacing: '1px', textTransform: 'uppercase' }}>Insights</a>
           <a href="https://calendar.app.google/wCHwj3MuUxr4EUEp6" target="_blank" rel="noopener noreferrer" className="btn-glow" style={{ padding: '12px 24px', fontSize: '11px' }}>AUDITORÍA IA</a>
         </div>
 
-        <button 
-          className="hamburger" 
-          onClick={() => setMenuOpen(!menuOpen)} 
-          style={{ background: 'transparent', border: 'none', color: '#fff', fontSize: '2rem', cursor: 'pointer', zIndex: 101, position: 'relative' }}
-        >
+        <button className="hamburger" onClick={() => setMenuOpen(!menuOpen)} style={{ background: 'transparent', border: 'none', color: '#fff', fontSize: '2rem', cursor: 'pointer', zIndex: 101, position: 'relative' }}>
           {menuOpen ? '✕' : '☰'}
         </button>
       </nav>
@@ -225,94 +228,54 @@ export default function Home() {
       <div className={`mobile-menu-overlay ${menuOpen ? 'open' : ''}`}>
         <a href="#soluciones" className="mobile-link" onClick={() => setMenuOpen(false)}>Soluciones</a>
         <a href="#asesoria" className="mobile-link" onClick={() => setMenuOpen(false)}>Asesoría IA</a>
-        <a href="#resultados" className="mobile-link" onClick={() => setMenuOpen(false)}>Resultados</a>
-        <a href="#roi" className="mobile-link" onClick={() => setMenuOpen(false)}>ROI</a>
+        <a href="#comunidad" className="mobile-link" onClick={() => setMenuOpen(false)}>Comunidad</a>
         <a href="https://calendar.app.google/wCHwj3MuUxr4EUEp6" target="_blank" rel="noopener noreferrer" className="btn-glow" style={{ marginTop: '20px' }} onClick={() => setMenuOpen(false)}>Auditoría IA</a>
       </div>
 
-      {/* CHAT WIDGET PREMIUM FLOTANTE */}
+      {/* WIDGET WHATSAPP */}
       <div className="wa-float" onClick={() => setChatOpen(!chatOpen)}>
-        <svg viewBox="0 0 24 24" width="30" height="30" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-          <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
-          <path d="M9 10h.01"></path>
-          <path d="M15 10h.01"></path>
-        </svg>
+        <svg viewBox="0 0 24 24" width="30" height="30" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path><path d="M9 10h.01"></path><path d="M15 10h.01"></path></svg>
       </div>
-      
       <div className={`wa-chat-box ${chatOpen ? 'open' : ''}`}>
-        <div className="wa-header">
-          <span>Stratt-On Chat</span>
-          <button onClick={() => setChatOpen(false)} style={{ background: 'transparent', border: 'none', color: '#fff', fontSize: '1.2rem', cursor: 'pointer' }}>✕</button>
-        </div>
+        <div className="wa-header"><span>Stratt-On Chat</span><button onClick={() => setChatOpen(false)} style={{ background: 'transparent', border: 'none', color: '#fff', fontSize: '1.2rem', cursor: 'pointer' }}>✕</button></div>
         <div className="wa-body">
-          <div className="wa-msg-bot">
-            <strong style={{color: electricPurple}}>Asistente Virtual:</strong><br/><br/>
-            Hola, soy la IA de Stratt-On. ¿En qué podemos ayudarte para escalar la operación de tu negocio hoy?
-          </div>
-          <textarea 
-            className="wa-input" 
-            rows={3} 
-            placeholder="Escribe tu mensaje aquí..." 
-            value={chatMessage}
-            onChange={(e) => setChatMessage(e.target.value)}
-          />
-          <button className="wa-send-btn" onClick={handleSendWhatsapp}>
-            Enviar a un Asesor
-          </button>
+          <div className="wa-msg-bot"><strong style={{color: electricPurple}}>Asistente Virtual:</strong><br/><br/>Hola, ¿En qué proceso operativo de tu empresa te podemos ayudar hoy?</div>
+          <textarea className="wa-input" rows={3} placeholder="Escribe tu mensaje aquí..." value={chatMessage} onChange={(e) => setChatMessage(e.target.value)} />
+          <button className="wa-send-btn" onClick={handleSendWhatsapp}>Enviar a un Asesor</button>
         </div>
       </div>
 
-      {/* HERO SECTION */}
-      <section style={{ 
-        position: 'relative', 
-        minHeight: '100vh', 
-        display: 'flex', 
-        alignItems: 'center', 
-        justifyContent: 'center', 
-        overflow: 'hidden', 
-        padding: '100px 0 50px',
-        backgroundImage: 'url("https://images.unsplash.com/photo-1451187580459-43490279c0fa?q=80&w=2000&auto=format&fit=crop")',
-        backgroundSize: 'cover',
-        backgroundPosition: 'center'
-      }}>
-        <video 
-          ref={videoRef}
-          playsInline 
-          autoPlay 
-          muted 
-          loop 
-          poster="https://images.unsplash.com/photo-1451187580459-43490279c0fa?q=80&w=2000&auto=format&fit=crop"
-          style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', objectFit: 'cover', zIndex: -2 }}
-        >
+      {/* HERO SECTION (NUEVO COPY B2B GLOBAL) */}
+      <section style={{ position: 'relative', minHeight: '100vh', display: 'flex', alignItems: 'center', justifyContent: 'center', overflow: 'hidden', padding: '100px 0 50px', backgroundImage: 'url("https://images.unsplash.com/photo-1451187580459-43490279c0fa?q=80&w=2000&auto=format&fit=crop")', backgroundSize: 'cover', backgroundPosition: 'center' }}>
+        <video ref={videoRef} playsInline autoPlay muted loop poster="https://images.unsplash.com/photo-1451187580459-43490279c0fa?q=80&w=2000&auto=format&fit=crop" style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', objectFit: 'cover', zIndex: -2 }}>
           <source src="https://firebasestorage.googleapis.com/v0/b/johnnycelis-ceaf7.firebasestorage.app/o/hero%20video.mp4?alt=media&token=8d04a350-1e28-4266-b61d-8aa7eeb0fd47" type="video/mp4" />
         </video>
         <div className="hero-overlay" />
         
         <div style={{ zIndex: 1, padding: '0 5%', width: '100%', maxWidth: '1400px', display: 'flex', flexWrap: 'wrap', alignItems: 'center', justifyContent: 'space-between', gap: '50px' }}>
-          
           <div style={{ flex: '1 1 500px' }}>
             <div style={{ display: 'inline-block', padding: '6px 16px', border: `1px solid ${electricPurple}`, borderRadius: '20px', color: electricPurple, fontSize: '0.8rem', fontWeight: 'bold', letterSpacing: '2px', marginBottom: '25px', textTransform: 'uppercase', background: 'rgba(157,0,255,0.05)' }}>
-              Agencia de Automatización B2B
+              Orquestación B2B
             </div>
             <h1 style={{ fontSize: 'clamp(2.5rem, 6vw, 5rem)', fontWeight: 900, lineHeight: 1.1, marginBottom: '25px', textTransform: 'uppercase' }}>
-              Tu embudo no duerme.<br />Tu equipo <span style={{ color: electricPurple }}>sí.</span>
+              Tu empresa no duerme.<br />Tu operación <span style={{ color: electricPurple }}>tampoco.</span>
             </h1>
             <p style={{ fontSize: '1.25rem', color: '#ddd', marginBottom: '40px', lineHeight: 1.6, maxWidth: '600px', fontWeight: 500 }}>
-              Implementamos Agentes de Inteligencia Artificial que atienden, califican y agendan llamadas 24/7. Escala tu empresa sin contratar más personal operativo.
+              Implementamos Ecosistemas de Inteligencia Artificial que orquestan tus ventas, atención al cliente y procesos internos 24/7. Escala tu rentabilidad sin colapsar a tu equipo.
             </p>
             <div style={{ display: 'flex', gap: '20px', flexWrap: 'wrap' }}>
-              <a href="https://calendar.app.google/wCHwj3MuUxr4EUEp6" target="_blank" rel="noopener noreferrer" className="btn-glow">Agendar Llamada</a>
-              <a href="#asesoria" className="btn-outline">Chatear con la IA</a>
+              <a href="https://calendar.app.google/wCHwj3MuUxr4EUEp6" target="_blank" rel="noopener noreferrer" className="btn-glow">Auditoría Gratuita</a>
+              <a href="#asesoria" className="btn-outline">Diagnóstico IA</a>
             </div>
           </div>
 
           <div style={{ flex: '1 1 400px', background: 'rgba(0,0,0,0.6)', backdropFilter: 'blur(15px)', padding: '45px', borderLeft: `3px solid ${electricPurple}`, borderRadius: '0 20px 20px 0', boxShadow: '20px 20px 50px rgba(0,0,0,0.5)' }}>
-            <h3 style={{ fontSize: '1.4rem', fontWeight: 900, marginBottom: '30px', textTransform: 'uppercase', letterSpacing: '1px' }}>Conversión en Piloto Automático</h3>
+            <h3 style={{ fontSize: '1.4rem', fontWeight: 900, marginBottom: '30px', textTransform: 'uppercase', letterSpacing: '1px' }}>Potencia Operativa</h3>
             <ul className="sales-list" style={{ listStyle: 'none', padding: 0, margin: 0 }}>
-              <li><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg><span>Respuesta inmediata en <strong>menos de 7 segundos</strong>.</span></li>
-              <li><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg><span>Calificación y agendamiento <strong>B2B 24/7</strong>.</span></li>
-              <li><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg><span>Reducción de costos operativos hasta un <strong>80%</strong>.</span></li>
-              <li><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg><span>Ecosistemas autónomos con <strong>eliminación total de errores</strong>.</span></li>
+              <li><svg width="24" height="24" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"></polyline></svg><span>Ejecución inmediata en procesos críticos empresariales.</span></li>
+              <li><svg width="24" height="24" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"></polyline></svg><span>Atención, soporte y agendamiento <strong>B2B 24/7</strong>.</span></li>
+              <li><svg width="24" height="24" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"></polyline></svg><span>Reducción de costos operativos hasta un <strong>80%</strong>.</span></li>
+              <li><svg width="24" height="24" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"></polyline></svg><span>Ecosistemas autónomos con <strong>cero margen de error</strong>.</span></li>
             </ul>
           </div>
         </div>
@@ -332,26 +295,15 @@ export default function Home() {
           ))}
         </div>
       </div>
-      <div style={{ background: '#080808', borderBottom: '1px solid #111', padding: '35px 0', overflow: 'hidden' }}>
-        <div style={{ display: 'flex', width: 'max-content', animation: 'scrollCarousel 35s linear infinite' }}>
-          {[1, 2, 3].map((group) => (
-            <div key={group} style={{ display: 'flex', alignItems: 'center', gap: '80px', paddingRight: '80px' }}>
-              {["E-COMMERCE PRO", "TECH LOGISTICS", "REAL ESTATE GROUP", "SAAS LATAM", "B2B ENTERPRISE"].map((logo, i) => (
-                <span key={i} style={{ fontSize: '1.4rem', fontWeight: 900, color: '#444', textTransform: 'uppercase', letterSpacing: '4px' }}>{logo}</span>
-              ))}
-            </div>
-          ))}
-        </div>
-      </div>
 
-      {/* SECCIÓN SOLUCIONES AMPLIADA (CON LINKS A /servicios) */}
+      {/* SECCIÓN SOLUCIONES (CERO MENCIONES DE HERRAMIENTAS + LINK MODERNO) */}
       <section id="soluciones" style={{ padding: '120px 5%', background: '#000' }}>
         <div style={{ maxWidth: '1200px', margin: '0 auto' }}>
           <div style={{ textAlign: 'center', marginBottom: '80px' }}>
             <h2 style={{ fontSize: 'clamp(2.5rem, 5vw, 4rem)', fontWeight: 900, textTransform: 'uppercase' }}>Infraestructura de <span style={{ color: electricPurple }}>Soluciones</span></h2>
-            <p style={{ color: '#888', fontSize: '1.2rem', maxWidth: '700px', margin: '20px auto 0' }}>Sistemas autónomos diseñados específicamente para escalar E-commerce y empresas B2B. Olvídate del trabajo manual.</p>
+            <p style={{ color: '#888', fontSize: '1.2rem', maxWidth: '700px', margin: '20px auto 0' }}>Sistemas autónomos diseñados específicamente para agilizar la operación de tu empresa. Olvídate del trabajo manual repetitivo.</p>
           </div>
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))', gap: '30px', marginBottom: '80px' }}>
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))', gap: '30px', marginBottom: '60px' }}>
             {services.map((s, i) => (
               <a href="/servicios" key={i} className="service-link">
                 <div className="glass-card">
@@ -361,19 +313,19 @@ export default function Home() {
               </a>
             ))}
           </div>
+          
+          {/* NUEVO ENLACE EXPANSIVO VANGUARDISTA */}
           <div style={{ textAlign: 'center' }}>
-            <a href="/servicios" className="btn-vanguard">
-              Descubrir todo nuestro ecosistema
-              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+            <a href="/servicios" className="link-explore">
+              Explorar Ecosistema Completo <span className="arrow">→</span>
             </a>
           </div>
         </div>
       </section>
 
-      {/* NUEVA SECCIÓN: ASESORÍA INTELIGENTE (DEEP UI) */}
+      {/* SECCIÓN ASESORÍA INTELIGENTE (DEEP UI) */}
       <section id="asesoria" style={{ padding: '120px 5%', background: '#050505', borderTop: '1px solid #111', borderBottom: '1px solid #111' }}>
         <div style={{ maxWidth: '1200px', margin: '0 auto', display: 'flex', flexWrap: 'wrap', gap: '60px', alignItems: 'center' }}>
-          
           <div style={{ flex: '1 1 400px' }}>
             <div style={{ display: 'inline-block', padding: '6px 16px', border: `1px solid ${electricPurple}`, borderRadius: '20px', color: electricPurple, fontSize: '0.8rem', fontWeight: 'bold', letterSpacing: '2px', marginBottom: '20px', textTransform: 'uppercase' }}>
               Diagnóstico Operativo
@@ -382,15 +334,14 @@ export default function Home() {
               Asesoría <br/><span style={{ color: electricPurple }}>Inteligente</span>
             </h2>
             <p style={{ color: '#aaa', fontSize: '1.15rem', lineHeight: 1.7, marginBottom: '30px' }}>
-              Chatea con nuestra Inteligencia Artificial y obtén un diagnóstico exacto. Descubre qué sistema necesitas implementar hoy para dejar de perder tiempo y dinero.
+              Chatea con nuestro motor analítico y obtén un diagnóstico exacto. Descubre qué proceso puedes optimizar hoy para escalar tu rendimiento.
             </p>
             <ul className="sales-list" style={{ listStyle: 'none', padding: 0, margin: 0 }}>
-              <li><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>Análisis de cuellos de botella en segundos.</li>
-              <li><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>Diseño de flujos y procesos automatizados.</li>
+              <li><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3"><polyline points="20 6 9 17 4 12"></polyline></svg>Análisis de cuellos de botella en segundos.</li>
+              <li><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3"><polyline points="20 6 9 17 4 12"></polyline></svg>Diseño de flujos y procesos automatizados.</li>
             </ul>
           </div>
 
-          {/* CHAT INTERFACE VANGUARD */}
           <div style={{ flex: '1 1 500px' }} className="chat-section-container">
             <div style={{ background: 'rgba(0,0,0,0.5)', padding: '20px', borderBottom: '1px solid rgba(157,0,255,0.3)', display: 'flex', alignItems: 'center', gap: '15px' }}>
               <div style={{ width: '12px', height: '12px', background: '#25D366', borderRadius: '50%', boxShadow: '0 0 15px #25D366' }}></div>
@@ -399,31 +350,60 @@ export default function Home() {
             
             <div className="chat-history">
               {iaChatHistory.map((msg, idx) => (
-                <div key={idx} className={`chat-bubble ${msg.sender}`}>
-                  {msg.text}
-                </div>
+                <div key={idx} className={`chat-bubble ${msg.sender}`}>{msg.text}</div>
               ))}
-              {isTyping && (
-                <div className="chat-bubble bot chat-typing">
-                  Analizando parámetros operativos...
-                </div>
-              )}
+              {isTyping && <div className="chat-bubble bot chat-typing">Analizando parámetros...</div>}
             </div>
 
             <form onSubmit={handleSendIaChat} className="chat-input-area">
-              <input 
-                type="text" 
-                className="chat-input"
-                placeholder="Ej: Pierdo mucho tiempo respondiendo correos..." 
-                value={iaChatInput}
-                onChange={(e) => setIaChatInput(e.target.value)}
-              />
-              <button type="submit" style={{ background: electricPurple, color: '#fff', border: 'none', borderRadius: '8px', padding: '0 25px', marginLeft: '15px', fontWeight: '900', cursor: 'pointer', textTransform: 'uppercase', letterSpacing: '1px' }}>
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><line x1="22" y1="2" x2="11" y2="13"></line><polygon points="22 2 15 22 11 13 2 9 22 2"></polygon></svg>
+              <input type="text" className="chat-input" placeholder="Ej: Pierdo mucho tiempo facturando..." value={iaChatInput} onChange={(e) => setIaChatInput(e.target.value)} />
+              <button type="submit" style={{ background: electricPurple, color: '#fff', border: 'none', borderRadius: '8px', padding: '0 25px', marginLeft: '15px', fontWeight: '900', cursor: 'pointer' }}>
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><line x1="22" y1="2" x2="11" y2="13"></line><polygon points="22 2 15 22 11 13 2 9 22 2"></polygon></svg>
               </button>
             </form>
           </div>
+        </div>
+      </section>
 
+      {/* NUEVA SECCIÓN: INSIGHTS & COMUNIDAD (BLOG + WHOP) */}
+      <section id="comunidad" style={{ padding: '120px 5%', background: '#000' }}>
+        <div style={{ maxWidth: '1400px', margin: '0 auto' }}>
+          <div style={{ textAlign: 'center', marginBottom: '80px' }}>
+            <h2 style={{ fontSize: 'clamp(2.5rem, 5vw, 3.5rem)', fontWeight: 900, textTransform: 'uppercase' }}>Insights & <span style={{ color: electricPurple }}>Comunidad</span></h2>
+            <p style={{ color: '#888', fontSize: '1.2rem', maxWidth: '600px', margin: '20px auto 0' }}>Conocimiento aplicado. Descubre los sistemas que están transformando la industria.</p>
+          </div>
+
+          <div style={{ display: 'flex', flexWrap: 'wrap', gap: '40px' }}>
+            {/* BLOG GRID */}
+            <div style={{ flex: '2 1 700px', display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '30px' }}>
+              {blogPosts.map((post, i) => (
+                <div key={i} className="glass-card" style={{ padding: '30px', display: 'flex', flexDirection: 'column', justifyContent: 'space-between' }}>
+                  <div>
+                    <span style={{ fontSize: '0.75rem', fontWeight: 'bold', color: electricPurple, textTransform: 'uppercase', letterSpacing: '1px' }}>{post.tag}</span>
+                    <h3 style={{ fontSize: '1.2rem', fontWeight: 900, margin: '15px 0', lineHeight: 1.4 }}>{post.title}</h3>
+                    <p style={{ color: '#888', fontSize: '0.95rem', lineHeight: 1.6, marginBottom: '20px' }}>{post.desc}</p>
+                  </div>
+                  <a href="#" className="link-explore" style={{ fontSize: '0.9rem' }}>Leer artículo <span className="arrow">→</span></a>
+                </div>
+              ))}
+            </div>
+
+            {/* WHOP COMMUNITY CARD */}
+            <div style={{ flex: '1 1 350px' }}>
+              <div className="whop-card" style={{ height: '100%' }}>
+                <span style={{ fontSize: '0.8rem', fontWeight: 900, textTransform: 'uppercase', letterSpacing: '2px', opacity: 0.8, marginBottom: '15px' }}>Acceso VIP</span>
+                <h3 style={{ fontSize: '2rem', fontWeight: 900, lineHeight: 1.1, marginBottom: '20px' }}>Comunidad Stratt-On</h3>
+                <p style={{ fontSize: '1rem', lineHeight: 1.6, opacity: 0.9, marginBottom: '30px' }}>
+                  Únete a nuestro círculo en Whop. Accede a plantillas de automatización, arquitecturas operativas y networking con directores B2B.
+                </p>
+                <div style={{ background: 'rgba(0,0,0,0.2)', padding: '15px', borderRadius: '10px', marginBottom: '30px', border: '1px solid rgba(255,255,255,0.2)' }}>
+                  <span style={{ fontSize: '0.75rem', textTransform: 'uppercase', fontWeight: 'bold', opacity: 0.8 }}>Último recurso añadido:</span>
+                  <p style={{ fontWeight: 'bold', margin: '5px 0 0 0', fontStyle: 'italic' }}>"Plantilla de Orquestación: Calificación B2B v2.0"</p>
+                </div>
+                <a href="#" style={{ background: '#fff', color: '#FF5C00', padding: '15px 30px', borderRadius: '8px', fontWeight: 900, textTransform: 'uppercase', letterSpacing: '1px', textDecoration: 'none', textAlign: 'center', transition: '0.3s', display: 'block' }}>Unirme en Whop</a>
+              </div>
+            </div>
+          </div>
         </div>
       </section>
 
@@ -439,9 +419,7 @@ export default function Home() {
               { val: "7s", label: "Tiempo Respuesta" }
             ].map((stat, i) => (
               <div key={i} style={{ flex: '1', minWidth: '250px', padding: '60px 20px', border: '1px solid #eaeaea', borderRadius: '20px', background: '#fff', boxShadow: '0 10px 30px rgba(0,0,0,0.02)' }}>
-                <div style={{ fontSize: '5rem', fontWeight: 900, color: electricPurple, lineHeight: 1, marginBottom: '15px' }}>
-                  <Counter end={stat.val} />
-                </div>
+                <div style={{ fontSize: '5rem', fontWeight: 900, color: electricPurple, lineHeight: 1, marginBottom: '15px' }}><Counter end={stat.val} /></div>
                 <p style={{ fontWeight: 800, color: '#555', textTransform: 'uppercase', letterSpacing: '2px', fontSize: '0.9rem' }}>{stat.label}</p>
               </div>
             ))}
@@ -472,18 +450,10 @@ export default function Home() {
       <section id="roi" style={{ padding: '120px 5%', background: '#111', color: '#fff', textAlign: 'center', borderTop: '1px solid #222' }}>
         <h2 style={{ fontSize: 'clamp(2.5rem, 5vw, 4rem)', fontWeight: 900, textTransform: 'uppercase', marginBottom: '20px' }}>Calcula tu <span style={{ color: electricPurple }}>Libertad</span></h2>
         <p style={{ color: '#888', marginBottom: '60px', fontSize: '1.2rem' }}>Descubre cuánto dinero recuperas al mes (Basado en $20 USD/hora operativa).</p>
-        
-        <input 
-          type="range" min="10" max="200" value={hours} 
-          onChange={e => setHours(parseInt(e.target.value))} 
-          style={{ width: '100%', maxWidth: '800px', accentColor: electricPurple, height: '8px', cursor: 'pointer', marginBottom: '60px' }} 
-        />
-        
+        <input type="range" min="10" max="200" value={hours} onChange={e => setHours(parseInt(e.target.value))} style={{ width: '100%', maxWidth: '800px', accentColor: electricPurple, height: '8px', cursor: 'pointer', marginBottom: '60px' }} />
         <div style={{ background: '#000', padding: '60px 40px', borderRadius: '24px', display: 'inline-block', border: `1px solid ${electricPurple}`, boxShadow: `0 0 60px rgba(157,0,255,0.15)`, minWidth: '300px' }}>
           <p style={{ color: '#aaa', textTransform: 'uppercase', letterSpacing: '2px', fontWeight: 'bold', marginBottom: '15px', fontSize: '0.9rem' }}>Ahorro Proyectado</p>
-          <div style={{ fontSize: 'clamp(4rem, 10vw, 7rem)', fontWeight: 900, lineHeight: 1 }}>
-            ${savings.toLocaleString()} <span style={{ fontSize: '1.5rem', color: electricPurple, verticalAlign: 'middle' }}>USD/MES</span>
-          </div>
+          <div style={{ fontSize: 'clamp(4rem, 10vw, 7rem)', fontWeight: 900, lineHeight: 1 }}>${savings.toLocaleString()} <span style={{ fontSize: '1.5rem', color: electricPurple, verticalAlign: 'middle' }}>USD/MES</span></div>
           <p style={{ marginTop: '25px', fontWeight: 'bold', color: '#fff', fontSize: '1.2rem' }}>{hours} horas automatizadas.</p>
         </div>
       </section>
@@ -491,33 +461,16 @@ export default function Home() {
       {/* FOOTER PREMIUM */}
       <footer style={{ padding: '100px 5% 50px', textAlign: 'center', background: '#000', borderTop: '1px solid #111' }}>
         <h2 style={{ fontStyle: 'italic', fontWeight: 900, fontSize: 'clamp(3rem, 8vw, 6rem)', marginBottom: '50px', textTransform: 'uppercase', letterSpacing: '2px' }}>Scale Faster.</h2>
-        
         <div style={{ display: 'flex', justifyContent: 'center', flexWrap: 'wrap', gap: '25px', marginBottom: '80px' }}>
           {socialLinks.map((social, i) => (
-            <a 
-              key={i} 
-              href={social.link} 
-              target="_blank" 
-              rel="noopener noreferrer"
-              className="social-icon" 
-              onMouseOver={(e) => {
-                e.currentTarget.style.borderColor = social.color;
-                e.currentTarget.style.color = social.color;
-                e.currentTarget.style.boxShadow = `0 0 25px ${social.color}44`;
-                e.currentTarget.style.transform = 'translateY(-5px)';
-              }}
-              onMouseOut={(e) => {
-                e.currentTarget.style.borderColor = 'rgba(255,255,255,0.1)';
-                e.currentTarget.style.color = 'rgba(255,255,255,0.4)';
-                e.currentTarget.style.boxShadow = 'none';
-                e.currentTarget.style.transform = 'translateY(0)';
-              }}
+            <a key={i} href={social.link} target="_blank" rel="noopener noreferrer" className="social-icon" 
+              onMouseOver={(e) => { e.currentTarget.style.borderColor = social.color; e.currentTarget.style.color = social.color; e.currentTarget.style.boxShadow = `0 0 25px ${social.color}44`; e.currentTarget.style.transform = 'translateY(-5px)'; }}
+              onMouseOut={(e) => { e.currentTarget.style.borderColor = 'rgba(255,255,255,0.1)'; e.currentTarget.style.color = 'rgba(255,255,255,0.4)'; e.currentTarget.style.boxShadow = 'none'; e.currentTarget.style.transform = 'translateY(0)'; }}
             >
               <svg viewBox="0 0 24 24"><path d={social.svg}/></svg>
             </a>
           ))}
         </div>
-
         <div style={{ display: 'flex', flexDirection: 'column', gap: '30px', alignItems: 'center' }}>
           <div style={{ display: 'flex', gap: '30px', opacity: 0.6, fontSize: '11px', letterSpacing: '3px', fontWeight: 'bold' }}>
             <a href="/politicadeprivacidad" style={{ color: '#fff', textDecoration: 'none', transition: '0.3s' }} onMouseOver={e=>e.currentTarget.style.color=electricPurple} onMouseOut={e=>e.currentTarget.style.color='#fff'}>PRIVACIDAD</a>
