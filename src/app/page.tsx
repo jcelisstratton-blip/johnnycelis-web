@@ -1,7 +1,6 @@
 "use client";
 import React, { useState, useEffect, useRef } from 'react';
 
-// COMPONENTE DE CONTEO ANIMADO
 const Counter = ({ end, duration = 2000 }: { end: string, duration?: number }) => {
   const [count, setCount] = useState(0);
   const [isVisible, setIsVisible] = useState(false);
@@ -37,26 +36,25 @@ export default function Home() {
   const [scrolled, setScrolled] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
   
-  // WIDGET WHATSAPP
   const [chatOpen, setChatOpen] = useState(false);
   const [chatMessage, setChatMessage] = useState("");
   const whatsappNumber = "573000000000"; // REEMPLAZA CON TU NÚMERO
 
-  // AI TERMINAL INTERFACE (UNIFICADA CON TYPEWRITER)
+  // AI TERMINAL INTERFACE
   const [iaInput, setIaInput] = useState("");
   const [isProcessing, setIsProcessing] = useState(false);
   const [typedText, setTypedText] = useState("");
   const [isTypingFinished, setIsTypingFinished] = useState(false);
-  const fullTypewriterText = "Auditoría Inteligente, ingresa el proceso operativo... para que a través del motor analítico podamos darte un diagnóstico";
+  const fullTypewriterText = "Indica el proceso operativo a mejorar para generar tu diagnóstico en línea.";
 
   const [iaLog, setIaLog] = useState([
     { role: "system", text: "SISTEMA INICIADO. Motor Analítico Stratt-On en línea." },
   ]);
 
-  // MODAL DE ARTÍCULOS
   const [activePost, setActivePost] = useState<{tag: string, title: string, desc: string, content: string} | null>(null);
 
   const electricPurple = "#9D00FF";
+  const whopOrange = "#FF5C00";
   const savings = hours * 20; 
 
   const videoRef = useRef<HTMLVideoElement>(null);
@@ -71,7 +69,6 @@ export default function Home() {
     const handleScroll = () => setScrolled(window.scrollY > 50);
     window.addEventListener("scroll", handleScroll);
     
-    // Observer para iniciar el typewriter cuando se ve la sección
     const asesoriaObserver = new IntersectionObserver(([entry]) => {
         if (entry.isIntersecting) {
             startTypewriterAnimation();
@@ -93,10 +90,9 @@ export default function Home() {
         charIndex++;
         if (charIndex === fullTypewriterText.length) {
             clearInterval(interval);
-            setIaLog(prev => [...prev, { role: "ai", text: typedText }]);
             setIsTypingFinished(true);
         }
-    }, 45); // Velocidad de tipeo
+    }, 45); 
   };
 
   const handleSendWhatsapp = () => {
@@ -107,12 +103,26 @@ export default function Home() {
     setChatMessage("");
   };
 
+  const handleRunAiPrompt = (e: React.FormEvent) => {
+    e.preventDefault();
+    if(iaInput.trim() === "") return;
+    
+    setIaLog(prev => [...prev, { role: "user", text: `> ${iaInput}` }]);
+    setIaInput("");
+    setIsProcessing(true);
+
+    setTimeout(() => {
+      setIsProcessing(false);
+      setIaLog(prev => [...prev, { role: "ai", text: "Analizando cuellos de botella... Transfiriendo variables al equipo de ingeniería. Nos pondremos en contacto con la arquitectura operativa propuesta." }]);
+    }, 1800);
+  };
+
+  // ICONOS CON COLOR NARANJA WHOP (#FF5C00) APLICADO
   const socialLinks = [
-    { name: "Instagram", link: "https://www.instagram.com/johnnycelis.AI", color: "#E1306C", svg: "M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z" },
-    { name: "LinkedIn", link: "https://www.linkedin.com/company/105200333", color: "#0077B5", svg: "M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z" },
-    { name: "TikTok", link: "https://www.tiktok.com/@stratt_on", color: "#fff", svg: "M12.525.02c1.31-.02 2.61-.01 3.91-.02.08 1.53.63 3.09 1.75 4.17 1.12 1.11 2.7 1.62 4.24 1.79v4.03c-1.44-.17-2.86-.6-4.12-1.31a6.44 6.44 0 0 1-1.87-1.43v7.33c.01 5.89-6.38 9.57-11.13 6.13-4.07-2.8-4.43-8.87-1.12-12.18 1.47-1.51 3.53-2.31 5.63-2.13v4.03c-1.41-.09-2.89.47-3.6 1.74-.83 1.52-.25 3.65 1.34 4.54 1.48.86 3.52.16 4.12-1.47.16-.4.24-.82.23-1.25V.02z" },
-    { name: "WhatsApp", link: "https://wa.link/430g3p", color: "#25D366", svg: "M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487z" },
-    { name: "Whop", link: "https://whop.com/joined/biz_fNslGhWeZdy2WR/?tab=home", color: "#FF5C00", svg: "M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5" }
+    { name: "Email", link: "mailto:jcelis.stratton@gmail.com", color: whopOrange, svg: "<path d='M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/><polyline points='22,6 12,13 2,6' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/>" },
+    { name: "Instagram", link: "https://www.instagram.com/johnnycelis.AI", color: whopOrange, svg: "<path d='M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z' fill='currentColor' stroke='none'/>" },
+    { name: "LinkedIn", link: "https://www.linkedin.com/company/105200333", color: whopOrange, svg: "<path d='M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z' fill='currentColor' stroke='none'/>" },
+    { name: "Whop", link: "https://whop.com/joined/biz_fNslGhWeZdy2WR/?tab=home", color: whopOrange, svg: "<path d='M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/>" }
   ];
 
   const services = [
@@ -127,7 +137,7 @@ export default function Home() {
   const blogPosts = [
     { tag: "Orquestación", title: "Cómo eliminar 40 horas de trabajo administrativo a la semana", desc: "Descubre el flujo exacto que implementamos para centralizar la operación B2B sin intervención humana.", content: "El trabajo administrativo repetitivo es la mayor fuga de capital de las empresas modernas. A través de la orquestación operativa, hemos logrado consolidar tareas de facturación, actualización de CRMs y envío de reportes en flujos de datos autónomos. En lugar de tener a tres personas digitando datos en Excel, un sistema centralizado procesa la información en milisegundos, garantizando cero errores y disponibilidad 24/7." },
     { tag: "Voicebots IA", title: "El fin del Call Center tradicional", desc: "Por qué los agentes de voz autónomos están reemplazando las líneas de soporte saturadas y triplicando el rendimiento.", content: "Los tiempos de espera superiores a un minuto son inaceptables para el cliente corporativo actual. Los Voicebots IA de latencia ultra-baja no solo responden de inmediato, sino que entienden contexto, pausas e intenciones. Capaces de consultar bases de datos en tiempo real, estos agentes resuelven el 80% de las incidencias de Nivel 1 sin necesidad de escalar a un humano, reduciendo costos operativos drásticamente." },
-    { tag: "Productividad", title: "La ilusión de contratar más personal", desc: "Por qué añadir más humanos a un proceso roto solo multiplica los errores operativos.", content: "Existe un mito en el mundo empresarial: 'Si no damos abasto, contratemos a más personas'. Escalar sobre un sistema ineficiente solo escala la ineficiencia. Antes de aumentar la nómina, es imperativo auditar la operación. La implementación de ecosistemas autónomos permite que la empresa crezca en ingresos sin que los costos de personal crezcan en la misma proporción." }
+    { tag: "Productividad", title: "La ilusión de contratar más personal", desc: "Por qué añadir más humanos a un proceso roto solo multiplica los errores operativos.", content: "Existe un mito en el mundo empresarial: 'Si no damos abasto, contratemos a más personas'. Escalar sobre un sistema ineficiente solo escala la ineficiencia. Antes de aumentar la nómina, es imperativo auditar la operación. La implementación de ecosistemas autónomos permite que la empresa crezca en ingresos sin que los costos de personal crezcan en la misma proporción." },
   ];
 
   const reviews = [
@@ -135,20 +145,6 @@ export default function Home() {
     { name: "Laura V.", role: "Directora de Operaciones B2B", text: "La orquestación de procesos nos ahorró el equivalente a 3 salarios. Escalar ahora es solo cuestión de decisiones, no de micro-gestión." },
     { name: "David R.", role: "Founder, Inmobiliaria", text: "Nuestro flujo de datos ahora es perfecto. Desde la captura del lead hasta la firma del documento, todo sucede en automático." }
   ];
-
-  const handleRunAiPrompt = (e: React.FormEvent) => {
-    e.preventDefault();
-    if(iaInput.trim() === "") return;
-    
-    setIaLog(prev => [...prev, { role: "user", text: `> ${iaInput}` }]);
-    setIaInput("");
-    setIsProcessing(true);
-
-    setTimeout(() => {
-      setIsProcessing(false);
-      setIaLog(prev => [...prev, { role: "ai", text: "Procesando variables operativas... Transfiriendo requerimiento al equipo de ingeniería para diseño de ecosistema. Nuestro equipo te contactará con la arquitectura." }]);
-    }, 1800);
-  };
 
   return (
     <main style={{ backgroundColor: '#000', color: '#fff', minHeight: '100vh', fontFamily: 'Inter, system-ui, sans-serif', margin: 0, padding: 0, overflowX: 'hidden' }}>
@@ -159,14 +155,12 @@ export default function Home() {
         
         .hero-overlay { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: linear-gradient(180deg, rgba(0,0,0,0.5) 0%, rgba(0,0,0,0.95) 100%); z-index: -1; }
         
-        /* BOTONES GLOBALES */
         .btn-glow { background: ${electricPurple}; color: white; padding: 18px 40px; text-decoration: none; font-weight: 900; text-transform: uppercase; letter-spacing: 2px; transition: 0.4s; display: inline-flex; align-items: center; justify-content: center; gap: 10px; border: none; cursor: pointer; border-radius: 4px; }
         .btn-glow:hover { box-shadow: 0 0 40px ${electricPurple}; transform: translateY(-3px); background: #fff !important; color: #000 !important; }
         .btn-outline { background: transparent; color: white; border: 1px solid rgba(255,255,255,0.3); padding: 18px 40px; text-decoration: none; font-weight: 900; text-transform: uppercase; letter-spacing: 2px; transition: 0.4s; display: inline-flex; align-items: center; justify-content: center; border-radius: 4px; }
         .btn-outline:hover { background: rgba(255,255,255,0.1); border-color: #fff; }
         
-        /* ENLACE EXPANSIVO */
-        .link-explore { display: inline-flex; align-items: center; gap: 10px; color: #fff; text-decoration: none; font-weight: 900; font-size: clamp(1rem, 2vw, 1.1rem); text-transform: uppercase; letter-spacing: 2px; transition: 0.4s; padding-bottom: 5px; border-bottom: 1px solid transparent; cursor: pointer; }
+        .link-explore { display: inline-flex; align-items: center; gap: 10px; color: #fff; text-decoration: none; font-weight: 900; font-size: clamp(0.9rem, 2vw, 1rem); text-transform: uppercase; letter-spacing: 2px; transition: 0.4s; padding-bottom: 5px; border-bottom: 1px solid transparent; cursor: pointer; }
         .link-explore .arrow { transition: 0.4s; color: ${electricPurple}; }
         .link-explore:hover { color: ${electricPurple}; border-bottom: 1px solid ${electricPurple}; gap: 20px; }
 
@@ -174,35 +168,39 @@ export default function Home() {
         .sales-list li { margin-bottom: 15px; display: flex; align-items: flex-start; gap: 15px; font-size: 1.1rem; color: #ccc; line-height: 1.4; }
         .sales-list svg { color: ${electricPurple}; flex-shrink: 0; margin-top: 3px; }
         
-        /* GLOW EFECT EN TARJETAS */
         .service-link { text-decoration: none; color: inherit; display: block; outline: none; }
-        .glass-card { background: rgba(255,255,255,0.02); border: 1px solid rgba(255,255,255,0.05); border-radius: 16px; padding: clamp(20px, 5vw, 40px); transition: 0.4s ease; cursor: pointer; height: 100%; position: relative; overflow: hidden;}
+        .glass-card { background: rgba(255,255,255,0.02); border: 1px solid rgba(255,255,255,0.05); border-radius: 16px; padding: clamp(20px, 5vw, 40px); transition: 0.4s ease; cursor: pointer; height: 100%; position: relative; overflow: hidden; display: flex; flex-direction: column; justify-content: space-between;}
         @media (min-width: 901px) {
           .glass-card:hover { border-color: ${electricPurple}; background: rgba(0,0,0,0.8); transform: translateY(-5px); box-shadow: 0 0 40px rgba(157,0,255,0.15); }
+          .glass-card:hover .link-explore { color: ${electricPurple}; gap: 20px; }
         }
         @media (max-width: 900px) {
           .glass-card { border-color: ${electricPurple} !important; background: rgba(0,0,0,0.8) !important; box-shadow: 0 0 25px rgba(157,0,255,0.15) !important; margin-bottom: 20px; }
         }
 
-        /* HIGH PERFORMANCE MARQUEE 3D */
+        /* HIGH PERFORMANCE MARQUEE 1 (PURPLE) */
         @keyframes marqueeLeft { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
-        @keyframes marqueeRight { 0% { transform: translateX(-50%); } 100% { transform: translateX(0); } }
-        .marquee-container { position: relative; width: 105vw; margin-left: -2.5vw; transform: rotate(-2deg) scale(1.05); background: #030303; border-top: 1px solid rgba(157,0,255,0.2); border-bottom: 1px solid rgba(157,0,255,0.2); padding: clamp(20px, 4vw, 40px) 0; overflow: hidden; box-shadow: 0 20px 50px rgba(0,0,0,0.8); z-index: 10;}
-        .marquee-container:hover .marquee-track { animation-play-state: paused; }
-        .marquee-track { display: flex; width: max-content; }
-        .marquee-track.left { animation: marqueeLeft 35s linear infinite; margin-bottom: 15px; }
-        .marquee-track.right { animation: marqueeRight 35s linear infinite; }
-        .marquee-item { font-size: clamp(1.5rem, 4vw, 2.5rem); font-weight: 900; text-transform: uppercase; letter-spacing: 3px; padding-right: 60px; transition: 0.3s; cursor: crosshair; }
-        .marquee-item.filled { color: #222; }
-        .marquee-item.stroke { color: transparent; -webkit-text-stroke: 1px #444; }
-        .marquee-item:hover { color: #fff; text-shadow: 0 0 20px ${electricPurple}; -webkit-text-stroke: 0px; transform: scale(1.05); }
+        .marquee-container-1 { position: relative; width: 105vw; margin-left: -2.5vw; transform: rotate(-3deg) scale(1.05); background: #000; border-top: 2px solid ${electricPurple}; border-bottom: 2px solid ${electricPurple}; padding: clamp(20px, 4vw, 35px) 0; overflow: hidden; box-shadow: 0 0 50px rgba(157,0,255,0.3); z-index: 10;}
+        .marquee-track-1 { display: flex; width: max-content; animation: marqueeLeft 30s linear infinite; }
+        .marquee-container-1:hover .marquee-track-1 { animation-play-state: paused; }
+        .marquee-item-1 { font-size: clamp(1.8rem, 5vw, 3rem); font-weight: 900; text-transform: uppercase; letter-spacing: 4px; padding-right: 80px; transition: 0.3s; color: #fff; text-shadow: 0 0 20px ${electricPurple}; }
+        .marquee-item-1.stroke { color: transparent; -webkit-text-stroke: 2px ${electricPurple}; text-shadow: none;}
 
-        /* ICONOS REDES SOCIALES */
-        .social-icon { width: 55px; height: 55px; border: 1px solid rgba(255,255,255,0.1); border-radius: 50%; display: flex; align-items: center; justify-content: center; text-decoration: none; color: rgba(255,255,255,0.4); transition: 0.4s; }
-        .social-icon svg { width: 22px; height: 22px; fill: currentColor; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+        /* HIGH PERFORMANCE MARQUEE 2 (ORANGE) */
+        @keyframes marqueeRight { 0% { transform: translateX(-50%); } 100% { transform: translateX(0); } }
+        .marquee-container-2 { position: relative; width: 105vw; margin-left: -2.5vw; transform: rotate(3deg) scale(1.05); background: #000; border-top: 2px solid ${whopOrange}; border-bottom: 2px solid ${whopOrange}; padding: clamp(20px, 4vw, 35px) 0; overflow: hidden; box-shadow: 0 0 50px rgba(255,92,0,0.2); z-index: 10; margin-top: 50px;}
+        .marquee-track-2 { display: flex; width: max-content; animation: marqueeRight 35s linear infinite; }
+        .marquee-container-2:hover .marquee-track-2 { animation-play-state: paused; }
+        .marquee-item-2 { font-size: clamp(1.8rem, 5vw, 3rem); font-weight: 900; text-transform: uppercase; letter-spacing: 4px; padding-right: 80px; transition: 0.3s; color: #fff; text-shadow: 0 0 20px ${whopOrange}; }
+        .marquee-item-2.stroke { color: transparent; -webkit-text-stroke: 2px ${whopOrange}; text-shadow: none;}
+
+        /* ICONOS REDES SOCIALES DESTACADOS */
+        .social-container { display: flex; justify-content: center; flex-wrap: wrap; gap: clamp(15px, 3vw, 25px); margin-bottom: clamp(40px, 8vw, 80px); }
+        .social-icon { width: 60px; height: 60px; border-radius: 50%; display: flex; align-items: center; justify-content: center; text-decoration: none; transition: 0.4s; }
+        .social-icon svg { width: 24px; height: 24px; }
         @media (max-width: 600px) {
-          .social-icon { width: 45px; height: 45px; }
-          .social-icon svg { width: 18px; height: 18px; }
+          .social-icon { width: 50px; height: 50px; }
+          .social-icon svg { width: 20px; height: 20px; }
         }
         
         /* WIDGET WHATSAPP */
@@ -230,28 +228,32 @@ export default function Home() {
           .mobile-menu-overlay { display: none !important; }
         }
 
-        /* AI TERMINAL UI (UNIFICADO) */
-        .ai-unified-container { background: linear-gradient(180deg, #0f0f0f 0%, #050505 100%); border: 2px solid ${electricPurple}; border-radius: 24px; overflow: hidden; box-shadow: 0 0 60px rgba(157,0,255,0.25), inset 0 0 30px rgba(157,0,255,0.1); }
+        /* AI TERMINAL UI (PULIDO Y FOCALIZADO) */
+        .ai-unified-container { background: linear-gradient(180deg, #0a0a0a 0%, #000 100%); border: 2px solid ${electricPurple}; border-radius: 24px; overflow: hidden; box-shadow: 0 0 60px rgba(157,0,255,0.2), inset 0 0 30px rgba(157,0,255,0.05); }
         .ai-header-controls { background: #000; padding: 15px 25px; border-bottom: 1px solid rgba(157,0,255,0.2); display: flex; justify-content: space-between; align-items: center; }
-        .ai-terminal { font-family: monospace; display: flex; flex-direction: column; height: 350px; background: #000; border-top: 1px solid #111; position: relative; }
-        .ai-log { flex: 1; padding: 25px; overflow-y: auto; display: flex; flex-direction: column; gap: 15px; color: #bbb; font-size: 0.95rem; }
+        .ai-terminal { font-family: monospace; display: flex; flex-direction: column; min-height: 400px; position: relative; }
+        .ai-log { flex: 1; padding: clamp(20px, 4vw, 40px); overflow-y: auto; display: flex; flex-direction: column; gap: 15px; color: #bbb; font-size: 1rem; }
         .log-entry.system { color: ${electricPurple}; font-weight: bold; }
         .log-entry.user { color: #fff; opacity: 0.8; }
         .log-entry.ai { color: #ddd; border-left: 2px solid ${electricPurple}; padding-left: 15px; }
         
-        /* Cursor Typewriter */
-        .ai-typewriter { position: relative; color: #ddd; line-height: 1.6; }
-        .ai-cursor { display: inline-block; width: 10px; height: 1.1em; background: ${electricPurple}; vertical-align: bottom; animation: blink 0.8s infinite; margin-left: 5px; }
+        .ai-typewriter-container { padding: clamp(20px, 5vw, 40px); border-bottom: 1px solid rgba(157,0,255,0.2); text-align: center; background: rgba(157,0,255,0.02);}
+        .ai-typewriter { position: relative; color: #fff; line-height: 1.5; font-size: clamp(1.2rem, 3vw, 2rem); font-weight: 900; text-transform: uppercase; font-family: 'Inter', sans-serif;}
+        .ai-cursor { display: inline-block; width: 12px; height: 1.1em; background: ${electricPurple}; vertical-align: bottom; animation: blink 0.8s infinite; margin-left: 5px; }
         @keyframes blink { 0%, 100% { opacity: 0; } 50% { opacity: 1; } }
 
-        /* Input de Terminal Real */
-        .ai-prompt { display: flex; padding: 20px; background: #050505; border-top: 1px solid rgba(157,0,255,0.2); align-items: center; position: relative; transition: 0.3s; opacity: 0; pointer-events: none; }
-        .ai-prompt.finished { opacity: 1; pointer-events: all; }
-        .ai-input { flex: 1; background: transparent; border: none; color: #fff; font-family: inherit; font-size: 1rem; outline: none; }
+        /* Animación Neón de Atención al Input */
+        @keyframes pulse-input-attention {
+            0% { box-shadow: 0 0 0 0 rgba(157,0,255,0.6); border-color: rgba(157,0,255,0.8); }
+            70% { box-shadow: 0 0 20px 10px rgba(157,0,255,0); border-color: rgba(157,0,255,0.3); }
+            100% { box-shadow: 0 0 0 0 rgba(157,0,255,0); border-color: rgba(157,0,255,0.8); }
+        }
+        .ai-prompt { display: flex; padding: 20px; background: #050505; align-items: center; position: relative; transition: 0.3s; opacity: 0; pointer-events: none; margin: 20px; border-radius: 12px; border: 1px solid rgba(157,0,255,0.2); }
+        .ai-prompt.finished { opacity: 1; pointer-events: all; animation: pulse-input-attention 2s infinite; }
+        .ai-input { flex: 1; background: transparent; border: none; color: #fff; font-family: inherit; font-size: 1.1rem; outline: none; }
         .ai-submit { background: transparent; color: ${electricPurple}; border: none; font-weight: bold; cursor: pointer; text-transform: uppercase; font-family: inherit; font-size: 1rem; transition: 0.2s;}
         .ai-submit:hover { color: #fff; text-shadow: 0 0 10px ${electricPurple}; }
 
-        /* Cursor Titilando al final del input */
         .ai-input-wrapper { display: flex; flex: 1; align-items: center; position: relative; }
         .ai-input-cursor { width: 10px; height: 1.1em; background: ${electricPurple}; animation: blink 0.8s infinite; display: none;}
         .ai-input:focus + .ai-input-cursor { display: block; }
@@ -273,12 +275,12 @@ export default function Home() {
 
       {/* NAVEGACIÓN */}
       <nav className={scrolled ? 'nav-blur' : ''} style={{ position: 'fixed', top: 0, width: '100%', zIndex: 100, padding: '20px 5%', display: 'flex', justifyContent: 'space-between', alignItems: 'center', transition: '0.4s' }}>
-        <span style={{ fontWeight: 900, fontStyle: 'italic', fontSize: '1.5rem', letterSpacing: '1px', position: 'relative', zIndex: 101 }}>STRATT-ON</span>
+        <a href="/" style={{ fontWeight: 900, fontStyle: 'italic', fontSize: '1.5rem', letterSpacing: '1px', position: 'relative', zIndex: 101, color: '#fff', textDecoration: 'none' }}>STRATT-ON</a>
         
         <div className="desktop-links" style={{ display: 'flex', gap: '30px', alignItems: 'center' }}>
           <a href="#soluciones" style={{ color: 'white', textDecoration: 'none', fontSize: '11px', fontWeight: 'bold', letterSpacing: '1px', textTransform: 'uppercase' }}>Soluciones</a>
           <a href="#asesoria" style={{ color: 'white', textDecoration: 'none', fontSize: '11px', fontWeight: 'bold', letterSpacing: '1px', textTransform: 'uppercase' }}>Motor Analítico</a>
-          <a href="#comunidad" style={{ color: 'white', textDecoration: 'none', fontSize: '11px', fontWeight: 'bold', letterSpacing: '1px', textTransform: 'uppercase' }}>Insights</a>
+          <a href="/insights" style={{ color: 'white', textDecoration: 'none', fontSize: '11px', fontWeight: 'bold', letterSpacing: '1px', textTransform: 'uppercase' }}>Insights</a>
           <a href="https://calendar.app.google/wCHwj3MuUxr4EUEp6" target="_blank" rel="noopener noreferrer" className="btn-glow" style={{ padding: '12px 24px', fontSize: '11px' }}>AUDITORÍA IA</a>
         </div>
 
@@ -290,7 +292,7 @@ export default function Home() {
       <div className={`mobile-menu-overlay ${menuOpen ? 'open' : ''}`}>
         <a href="#soluciones" className="mobile-link" onClick={() => setMenuOpen(false)}>Soluciones</a>
         <a href="#asesoria" className="mobile-link" onClick={() => setMenuOpen(false)}>Motor Analítico</a>
-        <a href="#comunidad" className="mobile-link" onClick={() => setMenuOpen(false)}>Comunidad</a>
+        <a href="/insights" className="mobile-link" onClick={() => setMenuOpen(false)}>Insights</a>
         <a href="https://calendar.app.google/wCHwj3MuUxr4EUEp6" target="_blank" rel="noopener noreferrer" className="btn-glow" style={{ marginTop: '20px' }} onClick={() => setMenuOpen(false)}>Auditoría IA</a>
       </div>
 
@@ -319,8 +321,9 @@ export default function Home() {
               <div style={{ borderTop: '1px solid rgba(255,255,255,0.1)', paddingTop: '30px', color: '#eee', fontSize: '1.05rem', lineHeight: 1.8 }}>
                 {activePost.content}
               </div>
-              <div style={{ marginTop: '50px', textAlign: 'center' }}>
-                <a href="https://calendar.app.google/wCHwj3MuUxr4EUEp6" target="_blank" rel="noopener noreferrer" className="btn-glow">Analizar mi caso operativo</a>
+              <div style={{ marginTop: '50px', textAlign: 'center', display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '20px' }}>
+                <a href="https://calendar.app.google/wCHwj3MuUxr4EUEp6" target="_blank" rel="noopener noreferrer" className="btn-glow">Agendar reunión consultiva</a>
+                <a href="/insights" style={{ color: electricPurple, fontWeight: 'bold', textDecoration: 'underline', fontSize: '0.95rem' }}>Ver más artículos →</a>
               </div>
             </>
           )}
@@ -363,36 +366,23 @@ export default function Home() {
         </div>
       </section>
 
-      {/* MARQUEE 3D ALTO RENDIMIENTO */}
-      <div style={{ position: 'relative', height: '200px', overflow: 'hidden' }}>
-        <div className="marquee-container">
-          <div className="marquee-track left">
-            {[1, 2, 3].map(i => (
-              <React.Fragment key={`left-${i}`}>
-                <span className="marquee-item filled">VOICEBOTS IA</span>
-                <span className="marquee-item stroke">ORQUESTACIÓN OPERATIVA</span>
-                <span className="marquee-item filled">SISTEMAS AUTÓNOMOS</span>
-                <span className="marquee-item stroke">ROI DRIVEN</span>
-                <span className="marquee-item filled">SMART CHATBOTS</span>
-              </React.Fragment>
-            ))}
-          </div>
-          <div className="marquee-track right">
-            {[1, 2, 3].map(i => (
-              <React.Fragment key={`right-${i}`}>
-                <span className="marquee-item stroke">E-COMMERCE PRO</span>
-                <span className="marquee-item filled">TECH LOGISTICS</span>
-                <span className="marquee-item stroke">REAL ESTATE GROUP</span>
-                <span className="marquee-item filled">SAAS LATAM</span>
-                <span className="marquee-item stroke">B2B ENTERPRISE</span>
-              </React.Fragment>
-            ))}
-          </div>
+      {/* MARQUEE 1: TECNOLOGÍAS (MORADO INTENSO) */}
+      <div className="marquee-container-1">
+        <div className="marquee-track-1">
+          {[1, 2, 3].map(i => (
+            <React.Fragment key={`left-${i}`}>
+              <span className="marquee-item-1">VOICEBOTS IA</span>
+              <span className="marquee-item-1 stroke">ORQUESTACIÓN OPERATIVA</span>
+              <span className="marquee-item-1">SISTEMAS AUTÓNOMOS</span>
+              <span className="marquee-item-1 stroke">ROI DRIVEN</span>
+              <span className="marquee-item-1">SMART CHATBOTS</span>
+            </React.Fragment>
+          ))}
         </div>
       </div>
 
       {/* SECCIÓN SOLUCIONES */}
-      <section id="soluciones" style={{ padding: 'clamp(60px, 10vw, 120px) 5%', background: '#000' }}>
+      <section id="soluciones" style={{ padding: 'clamp(80px, 10vw, 120px) 5%', background: '#000' }}>
         <div style={{ maxWidth: '1200px', margin: '0 auto' }}>
           <div style={{ textAlign: 'center', marginBottom: 'clamp(40px, 8vw, 80px)' }}>
             <h2 style={{ fontSize: 'clamp(2.5rem, 5vw, 4rem)', fontWeight: 900, textTransform: 'uppercase' }}>Infraestructura de <span style={{ color: electricPurple }}>Soluciones</span></h2>
@@ -408,18 +398,30 @@ export default function Home() {
               </a>
             ))}
           </div>
-          
           <div style={{ textAlign: 'center' }}>
-            <a href="/servicios" className="link-explore">
-              Explorar Ecosistema Completo <span className="arrow">→</span>
-            </a>
+            <a href="/servicios" className="link-explore">Explorar Ecosistema Completo <span className="arrow">→</span></a>
           </div>
         </div>
       </section>
 
-      {/* SECCIÓN ASESORÍA INTELIGENTE (MOTOR ANALÍTICO UNIFICADO INMERSIVO) */}
-      <section ref={asesoriaRef} id="asesoria" style={{ padding: 'clamp(60px, 10vw, 120px) 5%', background: '#000', position: 'relative' }}>
-        <div style={{ maxWidth: '1000px', margin: '0 auto' }}>
+      {/* MARQUEE 2: SECTORES B2B (NARANJA WHOP) REUBICADO */}
+      <div className="marquee-container-2">
+        <div className="marquee-track-2">
+          {[1, 2, 3].map(i => (
+            <React.Fragment key={`right-${i}`}>
+              <span className="marquee-item-2 stroke">E-COMMERCE PRO</span>
+              <span className="marquee-item-2">TECH LOGISTICS</span>
+              <span className="marquee-item-2 stroke">REAL ESTATE GROUP</span>
+              <span className="marquee-item-2">SAAS LATAM</span>
+              <span className="marquee-item-2 stroke">B2B ENTERPRISE</span>
+            </React.Fragment>
+          ))}
+        </div>
+      </div>
+
+      {/* SECCIÓN ASESORÍA INTELIGENTE (LIMPIA Y CON ANIMACIÓN FOCAL) */}
+      <section ref={asesoriaRef} id="asesoria" style={{ padding: 'clamp(80px, 10vw, 120px) 5%', background: '#050505', borderTop: '1px solid #111', borderBottom: '1px solid #111' }}>
+        <div style={{ maxWidth: '900px', margin: '0 auto' }}>
           
           <div className="ai-unified-container">
             {/* Header del Dashboard */}
@@ -435,21 +437,14 @@ export default function Home() {
               </div>
             </div>
 
-            {/* Cuerpo del Dashboard */}
-            <div style={{ padding: 'clamp(30px, 5vw, 50px)', textAlign: 'center' }}>
-              <div style={{ display: 'inline-block', padding: '6px 16px', border: `1px solid ${electricPurple}`, borderRadius: '20px', color: electricPurple, fontSize: '0.8rem', fontWeight: 'bold', letterSpacing: '2px', marginBottom: '20px', textTransform: 'uppercase' }}>
-                Diagnóstico Operativo
-              </div>
-              <h2 style={{ fontSize: 'clamp(2rem, 5vw, 3.5rem)', fontWeight: 900, textTransform: 'uppercase', lineHeight: 1.1, marginBottom: '20px' }}>
-                Auditoría <span style={{ color: electricPurple }}>Inteligente</span>
-              </h2>
-              {/* Texto Typewriter Inmersivo */}
-              <div className="ai-typewriter" style={{ fontSize: '1.1rem', maxWidth: '650px', margin: '0 auto 40px' }}>
+            {/* Panel de Typewriter Céntrico */}
+            <div className="ai-typewriter-container">
+              <div className="ai-typewriter">
                 {typedText}<span className="ai-cursor"></span>
               </div>
             </div>
 
-            {/* Terminal de comandos real unificado */}
+            {/* Terminal de Comandos */}
             <div className="ai-terminal">
               <div className="ai-log">
                 {iaLog.map((msg, idx) => (
@@ -458,14 +453,14 @@ export default function Home() {
                 {isProcessing && <div className="log-entry ai" style={{ opacity: 0.7 }}>Analizando vectores operativos...</div>}
               </div>
 
-              {/* Input Real de Terminal (sólo aparece al final del tipeo) */}
+              {/* Input con Animación de Pulso Neón para llamar la atención */}
               <form onSubmit={handleRunAiPrompt} className={`ai-prompt ${isTypingFinished ? 'finished' : ''}`}>
                 <span style={{ color: electricPurple, marginRight: '15px', fontWeight: 'bold', fontSize: '1.2rem' }}>$</span>
                 <div className="ai-input-wrapper">
                     <input 
                       type="text" 
                       className="ai-input" 
-                      placeholder="Ej: Mi equipo pierde 10 horas copiando datos del CRM a Excel..." 
+                      placeholder="Ej: Mi equipo pierde horas copiando datos de correos a un Excel..." 
                       value={iaInput} 
                       onChange={(e) => setIaInput(e.target.value)}
                       disabled={isProcessing}
@@ -480,7 +475,7 @@ export default function Home() {
         </div>
       </section>
 
-      {/* SECCIÓN INSIGHTS Y COMUNIDAD */}
+      {/* SECCIÓN INSIGHTS Y COMUNIDAD CLICKABLES */}
       <section id="comunidad" style={{ padding: 'clamp(60px, 10vw, 120px) 5%', background: '#000' }}>
         <div style={{ maxWidth: '1400px', margin: '0 auto' }}>
           <div style={{ textAlign: 'center', marginBottom: 'clamp(40px, 8vw, 80px)' }}>
@@ -491,13 +486,13 @@ export default function Home() {
           <div style={{ display: 'flex', flexWrap: 'wrap', gap: '40px' }}>
             <div style={{ flex: '2 1 600px', display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: '30px' }}>
               {blogPosts.map((post, i) => (
-                <div key={i} className="glass-card" style={{ padding: '30px', display: 'flex', flexDirection: 'column', justifyContent: 'space-between' }} onClick={() => setActivePost(post)}>
+                <div key={i} className="glass-card" onClick={() => setActivePost(post)}>
                   <div>
                     <span style={{ fontSize: '0.75rem', fontWeight: 'bold', color: electricPurple, textTransform: 'uppercase', letterSpacing: '1px' }}>{post.tag}</span>
                     <h3 style={{ fontSize: '1.2rem', fontWeight: 900, margin: '15px 0', lineHeight: 1.4 }}>{post.title}</h3>
                     <p style={{ color: '#888', fontSize: '0.95rem', lineHeight: 1.6, marginBottom: '20px' }}>{post.desc}</p>
                   </div>
-                  <div className="link-explore" style={{ fontSize: '0.9rem', marginTop: 'auto' }}>Leer artículo <span className="arrow">→</span></div>
+                  <div className="link-explore" style={{ fontSize: '0.9rem', marginTop: 'auto', alignSelf: 'flex-start' }}>Leer artículo <span className="arrow">→</span></div>
                 </div>
               ))}
             </div>
@@ -513,7 +508,7 @@ export default function Home() {
                   <span style={{ fontSize: '0.75rem', textTransform: 'uppercase', fontWeight: 'bold', opacity: 0.8 }}>Último recurso añadido:</span>
                   <p style={{ fontWeight: 'bold', margin: '5px 0 0 0', fontStyle: 'italic' }}>"Plantilla de Orquestación: Calificación B2B v2.0"</p>
                 </div>
-                <a href="https://whop.com/joined/biz_fNslGhWeZdy2WR/?tab=home" target="_blank" rel="noopener noreferrer" style={{ background: '#fff', color: '#FF5C00', padding: '15px 30px', borderRadius: '8px', fontWeight: 900, textTransform: 'uppercase', letterSpacing: '1px', textDecoration: 'none', textAlign: 'center', transition: '0.3s', display: 'block', position: 'relative', zIndex: 2 }}>Unirme en Whop</a>
+                <a href="https://whop.com/joined/biz_fNslGhWeZdy2WR/?tab=home" target="_blank" rel="noopener noreferrer" style={{ background: '#fff', color: whopOrange, padding: '15px 30px', borderRadius: '8px', fontWeight: 900, textTransform: 'uppercase', letterSpacing: '1px', textDecoration: 'none', textAlign: 'center', transition: '0.3s', display: 'block', position: 'relative', zIndex: 2 }}>Unirme en Whop</a>
               </div>
             </div>
           </div>
@@ -571,16 +566,22 @@ export default function Home() {
         </div>
       </section>
 
-      {/* FOOTER PREMIUM */}
+      {/* FOOTER PREMIUM CON ÍCONOS NARANJA WHOP */}
       <footer style={{ padding: 'clamp(60px, 10vw, 100px) 5% 50px', textAlign: 'center', background: '#000', borderTop: '1px solid #111' }}>
         <h2 style={{ fontStyle: 'italic', fontWeight: 900, fontSize: 'clamp(2.5rem, 8vw, 6rem)', marginBottom: '50px', textTransform: 'uppercase', letterSpacing: '2px' }}>Scale Faster.</h2>
-        <div style={{ display: 'flex', justifyContent: 'center', flexWrap: 'wrap', gap: 'clamp(15px, 3vw, 25px)', marginBottom: 'clamp(40px, 8vw, 80px)' }}>
+        <div className="social-container">
           {socialLinks.map((social, i) => (
-            <a key={i} href={social.link} target="_blank" rel="noopener noreferrer" className="social-icon" 
-              onMouseOver={(e) => { e.currentTarget.style.borderColor = social.color; e.currentTarget.style.color = social.color; e.currentTarget.style.boxShadow = `0 0 25px ${social.color}44`; e.currentTarget.style.transform = 'translateY(-5px)'; }}
-              onMouseOut={(e) => { e.currentTarget.style.borderColor = 'rgba(255,255,255,0.1)'; e.currentTarget.style.color = 'rgba(255,255,255,0.4)'; e.currentTarget.style.boxShadow = 'none'; e.currentTarget.style.transform = 'translateY(0)'; }}
+            <a key={i} href={social.link} target="_blank" rel="noopener noreferrer" className="social-icon" title={social.name}
+              style={{
+                borderColor: social.color,
+                color: social.color,
+                boxShadow: `0 0 15px ${social.color}44`,
+                border: `2px solid ${social.color}`
+              }}
+              onMouseOver={(e) => { e.currentTarget.style.boxShadow = `0 0 35px ${social.color}`; e.currentTarget.style.transform = 'translateY(-5px) scale(1.1)'; e.currentTarget.style.background = `${social.color}11`; }}
+              onMouseOut={(e) => { e.currentTarget.style.boxShadow = `0 0 15px ${social.color}44`; e.currentTarget.style.transform = 'translateY(0) scale(1)'; e.currentTarget.style.background = 'transparent'; }}
             >
-              <svg viewBox="0 0 24 24"><path d={social.svg}/></svg>
+              <div dangerouslySetInnerHTML={{ __html: `<svg viewBox="0 0 24 24">${social.svg}</svg>` }} />
             </a>
           ))}
         </div>
