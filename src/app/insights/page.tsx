@@ -18,7 +18,7 @@ export default function InsightsPage() {
   useEffect(() => {
     const handleScroll = () => setScrolled(window.scrollY > 50);
     window.addEventListener("scroll", handleScroll);
-    window.scrollTo(0, 0);
+    window.scrollTo(0, 0); // Empieza arriba al cargar
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
@@ -43,7 +43,8 @@ export default function InsightsPage() {
     { tag: "Voicebots IA", title: "El fin del Call Center tradicional", desc: "Por qué los agentes de voz autónomos están reemplazando las líneas de soporte saturadas y triplicando el rendimiento.", content: "Los tiempos de espera superiores a un minuto son inaceptables para el cliente corporativo actual. Los Voicebots IA de latencia ultra-baja no solo responden de inmediato, sino que entienden contexto, pausas e intenciones. Capaces de consultar bases de datos en tiempo real, estos agentes resuelven el 80% de las incidencias de Nivel 1 sin necesidad de escalar a un humano, reduciendo costos operativos drásticamente." },
     { tag: "Productividad", title: "La ilusión de contratar más personal", desc: "Por qué añadir más humanos a un proceso roto solo multiplica los errores operativos.", content: "Existe un mito en el mundo empresarial: 'Si no damos abasto, contratemos a más personas'. Escalar sobre un sistema ineficiente solo escala la ineficiencia. Antes de aumentar la nómina, es imperativo auditar la operación. La implementación de ecosistemas autónomos permite que la empresa crezca en ingresos sin que los costos de personal crezcan en la misma proporción." },
     { tag: "Growth Outbound", title: "Personalización a escala masiva en LinkedIn", desc: "La diferencia entre spam y prospección inteligente.", content: "El Cold Email genérico ya no funciona. Utilizando herramientas de inteligencia artificial para enriquecer bases de datos, podemos leer el perfil de un prospecto, identificar sus retos recientes y redactar un correo de introducción que parece escrito por su mejor amigo. Esto eleva las tasas de respuesta del 2% tradicional a más de un 25% en campañas corporativas." },
-    { tag: "Integración CRM", title: "Scoring de leads autónomo", desc: "Cómo saber quién está listo para comprar antes de que llame.", content: "Un CRM no debería ser solo una libreta de contactos cara. Al conectar tu sitio web, correos y CRM bajo un ecosistema inteligente, el sistema puede otorgar 'puntos' a un prospecto cada vez que abre un correo o visita la página de precios. Cuando cruzan el umbral de interés, el sistema alerta directamente al vendedor. Cero fricción, máximas ventas." }
+    { tag: "Integración CRM", title: "Scoring de leads autónomo", desc: "Cómo saber quién está listo para comprar antes de que llame.", content: "Un CRM no debería ser solo una libreta de contactos cara. Al conectar tu sitio web, correos y CRM bajo un ecosistema inteligente, el sistema puede otorgar 'puntos' a un prospecto cada vez que abre un correo o visita la página de precios. Cuando cruzan el umbral de interés, el sistema alerta directamente al vendedor. Cero fricción, máximas ventas." },
+    { tag: "Automatización Web", title: "Chatbots transaccionales", desc: "La evolución de las FAQs a vendedores virtuales 24/7.", content: "Los visitantes de tu sitio web tienen intenciones de compra fugaces. Un chatbot transaccional no se limita a responder preguntas frecuentes; califica al visitante, comprende objeciones basándose en la base de conocimientos de la empresa y cierra reservas o procesos de pago directamente desde el chat, capturando oportunidades que antes se perdían en la navegación." }
   ];
 
   return (
@@ -59,7 +60,7 @@ export default function InsightsPage() {
         .btn-glow { background: ${electricPurple}; color: white; padding: 18px 40px; text-decoration: none; font-weight: 900; text-transform: uppercase; letter-spacing: 2px; transition: 0.4s; display: inline-flex; align-items: center; justify-content: center; gap: 10px; border: none; cursor: pointer; border-radius: 4px; }
         .btn-glow:hover { box-shadow: 0 0 40px ${electricPurple}; transform: translateY(-3px); background: #fff !important; color: #000 !important; }
         
-        .link-explore { display: inline-flex; align-items: center; gap: 10px; color: #fff; text-decoration: none; font-weight: 900; font-size: clamp(1rem, 2vw, 1.1rem); text-transform: uppercase; letter-spacing: 2px; transition: 0.4s; padding-bottom: 5px; border-bottom: 1px solid transparent; cursor: pointer; }
+        .link-explore { display: inline-flex; align-items: center; gap: 10px; color: #fff; text-decoration: none; font-weight: 900; font-size: clamp(0.9rem, 2vw, 1rem); text-transform: uppercase; letter-spacing: 2px; transition: 0.4s; padding-bottom: 5px; border-bottom: 1px solid transparent; cursor: pointer; }
         .link-explore .arrow { transition: 0.4s; color: ${electricPurple}; }
         .link-explore:hover { color: ${electricPurple}; border-bottom: 1px solid ${electricPurple}; gap: 20px; }
 
@@ -75,7 +76,15 @@ export default function InsightsPage() {
           .glass-card { border-color: ${electricPurple} !important; background: rgba(0,0,0,0.8) !important; box-shadow: 0 0 25px rgba(157,0,255,0.15) !important; margin-bottom: 20px; }
         }
 
-        /* WIDGET WHATSAPP Y MENU MÓVIL */
+        /* ICONOS REDES SOCIALES */
+        .social-icon { width: 55px; height: 55px; border: 1px solid rgba(255,255,255,0.1); border-radius: 50%; display: flex; align-items: center; justify-content: center; text-decoration: none; color: rgba(255,255,255,0.4); transition: 0.4s; }
+        .social-icon svg { width: 22px; height: 22px; fill: currentColor; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+        @media (max-width: 600px) {
+          .social-icon { width: 45px; height: 45px; }
+          .social-icon svg { width: 18px; height: 18px; }
+        }
+        
+        /* WIDGET WHATSAPP */
         .wa-float { position: fixed; bottom: 30px; right: 30px; width: 60px; height: 60px; background-color: #050505; color: ${electricPurple}; border: 2px solid ${electricPurple}; border-radius: 50px; text-align: center; box-shadow: 0px 4px 20px rgba(157, 0, 255, 0.4); z-index: 1000; display: flex; align-items: center; justify-content: center; cursor: pointer; transition: 0.3s; }
         .wa-float:hover { transform: scale(1.1); background-color: ${electricPurple}; color: #fff; }
         .wa-chat-box { position: fixed; bottom: 105px; right: 30px; width: 340px; background: #050505; border: 1px solid ${electricPurple}; border-radius: 15px; box-shadow: 0 15px 45px rgba(0,0,0,0.8); z-index: 1000; overflow: hidden; transform-origin: bottom right; transition: 0.3s; transform: scale(0); opacity: 0; pointer-events: none; }
@@ -87,6 +96,7 @@ export default function InsightsPage() {
         .wa-input:focus { border-color: ${electricPurple}; }
         .wa-send-btn { width: 100%; background: ${electricPurple}; color: #fff; border: none; padding: 15px; border-radius: 10px; font-weight: bold; cursor: pointer; transition: 0.3s; text-transform: uppercase; letter-spacing: 1px;}
 
+        /* MENU MÓVIL */
         @media (max-width: 900px) {
           .desktop-links { display: none !important; }
           .hamburger { display: block !important; }
@@ -97,13 +107,6 @@ export default function InsightsPage() {
         @media (min-width: 901px) {
           .hamburger { display: none !important; }
           .mobile-menu-overlay { display: none !important; }
-        }
-        
-        .social-icon { width: 55px; height: 55px; border: 1px solid rgba(255,255,255,0.1); border-radius: 50%; display: flex; align-items: center; justify-content: center; text-decoration: none; color: rgba(255,255,255,0.4); transition: 0.4s; }
-        .social-icon svg { width: 22px; height: 22px; fill: currentColor; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
-        @media (max-width: 600px) {
-          .social-icon { width: 45px; height: 45px; }
-          .social-icon svg { width: 18px; height: 18px; }
         }
 
         /* MODAL DE LECTURA (INSIGHTS) */
@@ -197,6 +200,15 @@ export default function InsightsPage() {
               <div className="link-explore" style={{ fontSize: '0.9rem', marginTop: 'auto', alignSelf: 'flex-start' }}>Leer artículo <span className="arrow">→</span></div>
             </div>
           ))}
+        </div>
+      </section>
+
+      {/* CTA FINAL */}
+      <section style={{ padding: '100px 5%', background: '#050505', textAlign: 'center', borderTop: '1px solid #111' }}>
+        <div style={{ maxWidth: '800px', margin: '0 auto' }}>
+          <h2 style={{ fontSize: 'clamp(2rem, 5vw, 3.5rem)', fontWeight: 900, textTransform: 'uppercase', marginBottom: '30px' }}>¿Listo para dar el siguiente <span style={{ color: electricPurple }}>paso?</span></h2>
+          <p style={{ color: '#888', fontSize: '1.2rem', marginBottom: '50px' }}>Deja de perder horas en tareas repetitivas. Agenda una auditoría gratuita con nuestro equipo y descubre el impacto de la IA en tu empresa.</p>
+          <a href="https://calendar.app.google/wCHwj3MuUxr4EUEp6" target="_blank" rel="noopener noreferrer" className="btn-glow" style={{ padding: '20px 60px', fontSize: '1.2rem' }}>AGENDAR AUDITORÍA IA</a>
         </div>
       </section>
 
