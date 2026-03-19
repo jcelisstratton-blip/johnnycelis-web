@@ -40,7 +40,7 @@ export default function Home() {
   // ESTADOS DEL CHAT 
   const [chatOpen, setChatOpen] = useState(false);
   const [chatMessage, setChatMessage] = useState("");
-  const whatsappNumber = "573000000000"; // REEMPLAZA CON TU NÚMERO
+  const whatsappNumber = "573217880682"; // REEMPLAZA CON TU NÚMERO
 
   const electricPurple = "#9D00FF";
   const savings = hours * 20; 
