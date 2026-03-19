@@ -36,6 +36,7 @@ export default function Home() {
   const [scrolled, setScrolled] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
   
+  // WIDGET WHATSAPP TERMINAL
   const [chatOpen, setChatOpen] = useState(false);
   const [chatMessage, setChatMessage] = useState("");
   const whatsappNumber = "573000000000"; // REEMPLAZA CON TU NÚMERO
@@ -95,7 +96,8 @@ export default function Home() {
     }, 45); 
   };
 
-  const handleSendWhatsapp = () => {
+  const handleSendWhatsapp = (e: React.FormEvent) => {
+    e.preventDefault();
     if(chatMessage.trim() === "") return;
     const url = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(chatMessage)}`;
     window.open(url, '_blank');
@@ -117,12 +119,12 @@ export default function Home() {
     }, 1800);
   };
 
-  // ICONOS CON COLOR NARANJA WHOP (#FF5C00) APLICADO
+  // VECTORES CORREGIDOS Y ESTANDARIZADOS
   const socialLinks = [
-    { name: "Email", link: "mailto:jcelis.stratton@gmail.com", color: whopOrange, svg: "<path d='M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/><polyline points='22,6 12,13 2,6' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/>" },
-    { name: "Instagram", link: "https://www.instagram.com/johnnycelis.AI", color: whopOrange, svg: "<path d='M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z' fill='currentColor' stroke='none'/>" },
-    { name: "LinkedIn", link: "https://www.linkedin.com/company/105200333", color: whopOrange, svg: "<path d='M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z' fill='currentColor' stroke='none'/>" },
-    { name: "Whop", link: "https://whop.com/joined/biz_fNslGhWeZdy2WR/?tab=home", color: whopOrange, svg: "<path d='M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/>" }
+    { name: "Email", link: "mailto:jcelis.stratton@gmail.com", color: whopOrange, fill: "none", stroke: "currentColor", strokeWidth: "2", svg: "<path d='M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z'></path><polyline points='22,6 12,13 2,6'></polyline>" },
+    { name: "Instagram", link: "https://www.instagram.com/johnnycelis.AI", color: whopOrange, fill: "currentColor", stroke: "none", strokeWidth: "0", svg: "<path d='M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z'/>" },
+    { name: "LinkedIn", link: "https://www.linkedin.com/company/105200333", color: whopOrange, fill: "currentColor", stroke: "none", strokeWidth: "0", svg: "<path d='M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z'/>" },
+    { name: "Whop", link: "https://whop.com/joined/biz_fNslGhWeZdy2WR/?tab=home", color: whopOrange, fill: "none", stroke: "currentColor", strokeWidth: "2", svg: "<path d='M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5'/>" }
   ];
 
   const services = [
@@ -168,7 +170,6 @@ export default function Home() {
         .sales-list li { margin-bottom: 15px; display: flex; align-items: flex-start; gap: 15px; font-size: 1.1rem; color: #ccc; line-height: 1.4; }
         .sales-list svg { color: ${electricPurple}; flex-shrink: 0; margin-top: 3px; }
         
-        .service-link { text-decoration: none; color: inherit; display: block; outline: none; }
         .glass-card { background: rgba(255,255,255,0.02); border: 1px solid rgba(255,255,255,0.05); border-radius: 16px; padding: clamp(20px, 5vw, 40px); transition: 0.4s ease; cursor: pointer; height: 100%; position: relative; overflow: hidden; display: flex; flex-direction: column; justify-content: space-between;}
         @media (min-width: 901px) {
           .glass-card:hover { border-color: ${electricPurple}; background: rgba(0,0,0,0.8); transform: translateY(-5px); box-shadow: 0 0 40px rgba(157,0,255,0.15); }
@@ -178,7 +179,7 @@ export default function Home() {
           .glass-card { border-color: ${electricPurple} !important; background: rgba(0,0,0,0.8) !important; box-shadow: 0 0 25px rgba(157,0,255,0.15) !important; margin-bottom: 20px; }
         }
 
-        /* HIGH PERFORMANCE MARQUEE 1 (PURPLE) */
+        /* HIGH PERFORMANCE MARQUEE 1 */
         @keyframes marqueeLeft { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
         .marquee-container-1 { position: relative; width: 105vw; margin-left: -2.5vw; transform: rotate(-3deg) scale(1.05); background: #000; border-top: 2px solid ${electricPurple}; border-bottom: 2px solid ${electricPurple}; padding: clamp(20px, 4vw, 35px) 0; overflow: hidden; box-shadow: 0 0 50px rgba(157,0,255,0.3); z-index: 10;}
         .marquee-track-1 { display: flex; width: max-content; animation: marqueeLeft 30s linear infinite; }
@@ -202,18 +203,43 @@ export default function Home() {
           .social-icon { width: 50px; height: 50px; }
           .social-icon svg { width: 20px; height: 20px; }
         }
+
+        /* AI TERMINAL UI (UNIFICADO PARA SECCIÓN Y WIDGET) */
+        .ai-unified-container { background: linear-gradient(180deg, #0a0a0a 0%, #000 100%); border: 2px solid ${electricPurple}; border-radius: 24px; overflow: hidden; box-shadow: 0 0 60px rgba(157,0,255,0.2), inset 0 0 30px rgba(157,0,255,0.05); }
+        .ai-header-controls { background: #000; padding: 15px 25px; border-bottom: 1px solid rgba(157,0,255,0.2); display: flex; justify-content: space-between; align-items: center; }
+        .ai-terminal { font-family: monospace; display: flex; flex-direction: column; min-height: 300px; position: relative; background: #000;}
+        .ai-log { flex: 1; padding: clamp(20px, 4vw, 40px); overflow-y: auto; display: flex; flex-direction: column; gap: 15px; color: #bbb; font-size: 1rem; }
+        .log-entry.system { color: ${electricPurple}; font-weight: bold; }
+        .log-entry.user { color: #fff; opacity: 0.8; }
+        .log-entry.ai { color: #ddd; border-left: 2px solid ${electricPurple}; padding-left: 15px; }
         
-        /* WIDGET WHATSAPP */
-        .wa-float { position: fixed; bottom: 30px; right: 30px; width: 60px; height: 60px; background-color: #050505; color: ${electricPurple}; border: 2px solid ${electricPurple}; border-radius: 50px; text-align: center; box-shadow: 0px 4px 20px rgba(157, 0, 255, 0.4); z-index: 1000; display: flex; align-items: center; justify-content: center; cursor: pointer; transition: 0.3s; }
-        .wa-float:hover { transform: scale(1.1); background-color: ${electricPurple}; color: #fff; }
-        .wa-chat-box { position: fixed; bottom: 105px; right: 30px; width: 340px; background: #050505; border: 1px solid ${electricPurple}; border-radius: 15px; box-shadow: 0 15px 45px rgba(0,0,0,0.8); z-index: 1000; overflow: hidden; transform-origin: bottom right; transition: 0.3s; transform: scale(0); opacity: 0; pointer-events: none; }
+        .ai-typewriter-container { padding: clamp(20px, 5vw, 40px); border-bottom: 1px solid rgba(157,0,255,0.2); text-align: center; background: rgba(157,0,255,0.02);}
+        .ai-typewriter { position: relative; color: #fff; line-height: 1.5; font-size: clamp(1.2rem, 3vw, 2rem); font-weight: 900; text-transform: uppercase; font-family: 'Inter', sans-serif;}
+        .ai-cursor { display: inline-block; width: 12px; height: 1.1em; background: ${electricPurple}; vertical-align: bottom; animation: blink 0.8s infinite; margin-left: 5px; }
+        @keyframes blink { 0%, 100% { opacity: 0; } 50% { opacity: 1; } }
+
+        @keyframes pulse-input-attention {
+            0% { box-shadow: 0 0 0 0 rgba(157,0,255,0.6); border-color: rgba(157,0,255,0.8); }
+            70% { box-shadow: 0 0 20px 10px rgba(157,0,255,0); border-color: rgba(157,0,255,0.3); }
+            100% { box-shadow: 0 0 0 0 rgba(157,0,255,0); border-color: rgba(157,0,255,0.8); }
+        }
+        .ai-prompt { display: flex; padding: 15px 20px; background: #050505; align-items: center; position: relative; transition: 0.3s; margin: 20px; border-radius: 12px; border: 1px solid rgba(157,0,255,0.2); }
+        .ai-prompt.focus-pulse { animation: pulse-input-attention 2s infinite; }
+        .ai-input { flex: 1; background: transparent; border: none; color: #fff; font-family: inherit; font-size: 1rem; outline: none; }
+        .ai-submit { background: transparent; color: ${electricPurple}; border: none; font-weight: bold; cursor: pointer; text-transform: uppercase; font-family: inherit; font-size: 0.9rem; transition: 0.2s;}
+        .ai-submit:hover { color: #fff; text-shadow: 0 0 10px ${electricPurple}; }
+
+        .ai-input-wrapper { display: flex; flex: 1; align-items: center; position: relative; }
+        .ai-input-cursor { width: 10px; height: 1.1em; background: ${electricPurple}; animation: blink 0.8s infinite; display: none;}
+        .ai-input:focus + .ai-input-cursor { display: block; }
+        .ai-input:not(:focus) + .ai-input-cursor { display: none !important; }
+        .ai-input:empty:focus + .ai-input-cursor { display: block; position: absolute; left: 0px;}
+
+        /* WIDGET WHATSAPP (ESTILO TERMINAL) */
+        .wa-float { position: fixed; bottom: 30px; right: 30px; width: 60px; height: 60px; background-color: #050505; color: #25D366; border: 2px solid #25D366; border-radius: 50px; text-align: center; box-shadow: 0px 4px 20px rgba(37, 211, 102, 0.4); z-index: 1000; display: flex; align-items: center; justify-content: center; cursor: pointer; transition: 0.3s; }
+        .wa-float:hover { transform: scale(1.1); background-color: #25D366; color: #fff; }
+        .wa-chat-box { position: fixed; bottom: 105px; right: 30px; width: 340px; background: #050505; border: 1px solid #25D366; border-radius: 15px; box-shadow: 0 15px 45px rgba(0,0,0,0.9); z-index: 1000; overflow: hidden; transform-origin: bottom right; transition: 0.3s; transform: scale(0); opacity: 0; pointer-events: none; display: flex; flex-direction: column;}
         .wa-chat-box.open { transform: scale(1); opacity: 1; pointer-events: all; }
-        .wa-header { background: #000; color: #fff; padding: 20px; font-weight: 900; display: flex; justify-content: space-between; align-items: center; border-bottom: 2px solid ${electricPurple}; text-transform: uppercase; letter-spacing: 1px;}
-        .wa-body { padding: 20px; background: #0a0a0a; }
-        .wa-msg-bot { background: rgba(157,0,255,0.1); color: #ddd; padding: 15px; border-radius: 0 15px 15px 15px; font-size: 0.95rem; margin-bottom: 15px; border: 1px solid rgba(157,0,255,0.2); }
-        .wa-input { width: 100%; background: #000; border: 1px solid #333; padding: 15px; border-radius: 10px; resize: none; color: #fff; outline: none; margin-bottom: 15px; transition: 0.3s;}
-        .wa-input:focus { border-color: ${electricPurple}; }
-        .wa-send-btn { width: 100%; background: ${electricPurple}; color: #fff; border: none; padding: 15px; border-radius: 10px; font-weight: bold; cursor: pointer; transition: 0.3s; text-transform: uppercase; letter-spacing: 1px;}
 
         /* MENU MÓVIL */
         @media (max-width: 900px) {
@@ -227,38 +253,6 @@ export default function Home() {
           .hamburger { display: none !important; }
           .mobile-menu-overlay { display: none !important; }
         }
-
-        /* AI TERMINAL UI (PULIDO Y FOCALIZADO) */
-        .ai-unified-container { background: linear-gradient(180deg, #0a0a0a 0%, #000 100%); border: 2px solid ${electricPurple}; border-radius: 24px; overflow: hidden; box-shadow: 0 0 60px rgba(157,0,255,0.2), inset 0 0 30px rgba(157,0,255,0.05); }
-        .ai-header-controls { background: #000; padding: 15px 25px; border-bottom: 1px solid rgba(157,0,255,0.2); display: flex; justify-content: space-between; align-items: center; }
-        .ai-terminal { font-family: monospace; display: flex; flex-direction: column; min-height: 400px; position: relative; }
-        .ai-log { flex: 1; padding: clamp(20px, 4vw, 40px); overflow-y: auto; display: flex; flex-direction: column; gap: 15px; color: #bbb; font-size: 1rem; }
-        .log-entry.system { color: ${electricPurple}; font-weight: bold; }
-        .log-entry.user { color: #fff; opacity: 0.8; }
-        .log-entry.ai { color: #ddd; border-left: 2px solid ${electricPurple}; padding-left: 15px; }
-        
-        .ai-typewriter-container { padding: clamp(20px, 5vw, 40px); border-bottom: 1px solid rgba(157,0,255,0.2); text-align: center; background: rgba(157,0,255,0.02);}
-        .ai-typewriter { position: relative; color: #fff; line-height: 1.5; font-size: clamp(1.2rem, 3vw, 2rem); font-weight: 900; text-transform: uppercase; font-family: 'Inter', sans-serif;}
-        .ai-cursor { display: inline-block; width: 12px; height: 1.1em; background: ${electricPurple}; vertical-align: bottom; animation: blink 0.8s infinite; margin-left: 5px; }
-        @keyframes blink { 0%, 100% { opacity: 0; } 50% { opacity: 1; } }
-
-        /* Animación Neón de Atención al Input */
-        @keyframes pulse-input-attention {
-            0% { box-shadow: 0 0 0 0 rgba(157,0,255,0.6); border-color: rgba(157,0,255,0.8); }
-            70% { box-shadow: 0 0 20px 10px rgba(157,0,255,0); border-color: rgba(157,0,255,0.3); }
-            100% { box-shadow: 0 0 0 0 rgba(157,0,255,0); border-color: rgba(157,0,255,0.8); }
-        }
-        .ai-prompt { display: flex; padding: 20px; background: #050505; align-items: center; position: relative; transition: 0.3s; opacity: 0; pointer-events: none; margin: 20px; border-radius: 12px; border: 1px solid rgba(157,0,255,0.2); }
-        .ai-prompt.finished { opacity: 1; pointer-events: all; animation: pulse-input-attention 2s infinite; }
-        .ai-input { flex: 1; background: transparent; border: none; color: #fff; font-family: inherit; font-size: 1.1rem; outline: none; }
-        .ai-submit { background: transparent; color: ${electricPurple}; border: none; font-weight: bold; cursor: pointer; text-transform: uppercase; font-family: inherit; font-size: 1rem; transition: 0.2s;}
-        .ai-submit:hover { color: #fff; text-shadow: 0 0 10px ${electricPurple}; }
-
-        .ai-input-wrapper { display: flex; flex: 1; align-items: center; position: relative; }
-        .ai-input-cursor { width: 10px; height: 1.1em; background: ${electricPurple}; animation: blink 0.8s infinite; display: none;}
-        .ai-input:focus + .ai-input-cursor { display: block; }
-        .ai-input:not(:focus) + .ai-input-cursor { display: none !important; }
-        .ai-input:empty:focus + .ai-input-cursor { display: block; position: absolute; left: 0px;}
 
         /* WHOP COMMUNITY CARD */
         .whop-card { background: linear-gradient(135deg, #FF5C00 0%, #D44D00 100%); color: #fff; border-radius: 20px; padding: clamp(20px, 5vw, 40px); position: relative; overflow: hidden; box-shadow: 0 20px 40px rgba(255, 92, 0, 0.2); display: flex; flex-direction: column; justify-content: center;}
@@ -296,16 +290,39 @@ export default function Home() {
         <a href="https://calendar.app.google/wCHwj3MuUxr4EUEp6" target="_blank" rel="noopener noreferrer" className="btn-glow" style={{ marginTop: '20px' }} onClick={() => setMenuOpen(false)}>Auditoría IA</a>
       </div>
 
-      {/* WIDGET WHATSAPP */}
+      {/* WIDGET WHATSAPP (NUEVO ESTILO TERMINAL DE COMANDOS) */}
       <div className="wa-float" onClick={() => setChatOpen(!chatOpen)}>
         <svg viewBox="0 0 24 24" width="30" height="30" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path><path d="M9 10h.01"></path><path d="M15 10h.01"></path></svg>
       </div>
       <div className={`wa-chat-box ${chatOpen ? 'open' : ''}`}>
-        <div className="wa-header"><span>Stratt-On Chat</span><button onClick={() => setChatOpen(false)} style={{ background: 'transparent', border: 'none', color: '#fff', fontSize: '1.2rem', cursor: 'pointer' }}>✕</button></div>
-        <div className="wa-body">
-          <div className="wa-msg-bot"><strong style={{color: electricPurple}}>Asistente Virtual:</strong><br/><br/>Hola, ¿En qué proceso operativo de tu empresa te podemos ayudar hoy?</div>
-          <textarea className="wa-input" rows={3} placeholder="Escribe tu mensaje aquí..." value={chatMessage} onChange={(e) => setChatMessage(e.target.value)} />
-          <button className="wa-send-btn" onClick={handleSendWhatsapp}>Enviar a un Asesor</button>
+        <div className="ai-header-controls" style={{ borderBottom: '1px solid #25D366' }}>
+          <div style={{ display: 'flex', gap: '6px' }}>
+            <div style={{ width: '10px', height: '10px', borderRadius: '50%', background: '#FF5F56' }}/>
+            <div style={{ width: '10px', height: '10px', borderRadius: '50%', background: '#FFBD2E' }}/>
+            <div style={{ width: '10px', height: '10px', borderRadius: '50%', background: '#25D366' }}/>
+          </div>
+          <div style={{ fontSize: '0.75rem', letterSpacing: '1px', opacity: 0.8, fontWeight: 900, color: '#fff' }}>SOPORTE_OPERATIVO</div>
+          <button onClick={() => setChatOpen(false)} style={{ background: 'transparent', border: 'none', color: '#fff', fontSize: '1rem', cursor: 'pointer' }}>✕</button>
+        </div>
+        <div className="ai-terminal" style={{ minHeight: '250px' }}>
+          <div className="ai-log" style={{ padding: '20px' }}>
+            <div className="log-entry system" style={{ color: '#25D366' }}>SISTEMA INICIADO.</div>
+            <div className="log-entry ai" style={{ borderLeftColor: '#25D366' }}>Hola. Describe tu requerimiento operativo y te conectaremos inmediatamente con un humano especializado vía WhatsApp.</div>
+          </div>
+          <form onSubmit={handleSendWhatsapp} className="ai-prompt" style={{ border: '1px solid rgba(37, 211, 102, 0.4)', borderRadius: '8px', margin: '15px' }}>
+            <span style={{ color: '#25D366', marginRight: '10px', fontWeight: 'bold' }}>$</span>
+            <div className="ai-input-wrapper">
+              <input 
+                type="text" 
+                className="ai-input" 
+                placeholder="Escribe tu mensaje..." 
+                value={chatMessage} 
+                onChange={(e) => setChatMessage(e.target.value)}
+              />
+              <span className="ai-input-cursor" style={{ background: '#25D366' }}></span>
+            </div>
+            <button type="submit" className="ai-submit" style={{ color: '#25D366' }}>ENVIAR_</button>
+          </form>
         </div>
       </div>
 
@@ -323,7 +340,7 @@ export default function Home() {
               </div>
               <div style={{ marginTop: '50px', textAlign: 'center', display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '20px' }}>
                 <a href="https://calendar.app.google/wCHwj3MuUxr4EUEp6" target="_blank" rel="noopener noreferrer" className="btn-glow">Agendar reunión consultiva</a>
-                <a href="/insights" style={{ color: electricPurple, fontWeight: 'bold', textDecoration: 'underline', fontSize: '0.95rem' }}>Ver más artículos →</a>
+                <a href="/insights" style={{ color: electricPurple, fontWeight: 'bold', textDecoration: 'underline', fontSize: '0.95rem' }}>Leer más artículos →</a>
               </div>
             </>
           )}
@@ -419,12 +436,11 @@ export default function Home() {
         </div>
       </div>
 
-      {/* SECCIÓN ASESORÍA INTELIGENTE (LIMPIA Y CON ANIMACIÓN FOCAL) */}
+      {/* SECCIÓN MOTOR ANALÍTICO UNIFICADO (LIMPIO Y FOCALIZADO) */}
       <section ref={asesoriaRef} id="asesoria" style={{ padding: 'clamp(80px, 10vw, 120px) 5%', background: '#050505', borderTop: '1px solid #111', borderBottom: '1px solid #111' }}>
         <div style={{ maxWidth: '900px', margin: '0 auto' }}>
           
           <div className="ai-unified-container">
-            {/* Header del Dashboard */}
             <div className="ai-header-controls">
               <div style={{ display: 'flex', gap: '8px' }}>
                 <div style={{ width: '12px', height: '12px', borderRadius: '50%', background: '#FF5F56' }}/>
@@ -437,14 +453,12 @@ export default function Home() {
               </div>
             </div>
 
-            {/* Panel de Typewriter Céntrico */}
             <div className="ai-typewriter-container">
               <div className="ai-typewriter">
                 {typedText}<span className="ai-cursor"></span>
               </div>
             </div>
 
-            {/* Terminal de Comandos */}
             <div className="ai-terminal">
               <div className="ai-log">
                 {iaLog.map((msg, idx) => (
@@ -453,8 +467,7 @@ export default function Home() {
                 {isProcessing && <div className="log-entry ai" style={{ opacity: 0.7 }}>Analizando vectores operativos...</div>}
               </div>
 
-              {/* Input con Animación de Pulso Neón para llamar la atención */}
-              <form onSubmit={handleRunAiPrompt} className={`ai-prompt ${isTypingFinished ? 'finished' : ''}`}>
+              <form onSubmit={handleRunAiPrompt} className={`ai-prompt ${isTypingFinished ? 'focus-pulse' : ''}`} style={{ opacity: isTypingFinished ? 1 : 0, pointerEvents: isTypingFinished ? 'all' : 'none' }}>
                 <span style={{ color: electricPurple, marginRight: '15px', fontWeight: 'bold', fontSize: '1.2rem' }}>$</span>
                 <div className="ai-input-wrapper">
                     <input 
@@ -511,6 +524,9 @@ export default function Home() {
                 <a href="https://whop.com/joined/biz_fNslGhWeZdy2WR/?tab=home" target="_blank" rel="noopener noreferrer" style={{ background: '#fff', color: whopOrange, padding: '15px 30px', borderRadius: '8px', fontWeight: 900, textTransform: 'uppercase', letterSpacing: '1px', textDecoration: 'none', textAlign: 'center', transition: '0.3s', display: 'block', position: 'relative', zIndex: 2 }}>Unirme en Whop</a>
               </div>
             </div>
+          </div>
+          <div style={{ textAlign: 'center', marginTop: '40px' }}>
+            <a href="/insights" className="link-explore">Ver Todos los Artículos <span className="arrow">→</span></a>
           </div>
         </div>
       </section>
@@ -581,7 +597,7 @@ export default function Home() {
               onMouseOver={(e) => { e.currentTarget.style.boxShadow = `0 0 35px ${social.color}`; e.currentTarget.style.transform = 'translateY(-5px) scale(1.1)'; e.currentTarget.style.background = `${social.color}11`; }}
               onMouseOut={(e) => { e.currentTarget.style.boxShadow = `0 0 15px ${social.color}44`; e.currentTarget.style.transform = 'translateY(0) scale(1)'; e.currentTarget.style.background = 'transparent'; }}
             >
-              <div dangerouslySetInnerHTML={{ __html: `<svg viewBox="0 0 24 24">${social.svg}</svg>` }} />
+              <div dangerouslySetInnerHTML={{ __html: `<svg viewBox="0 0 24 24" fill="${social.fill}" stroke="${social.stroke}" stroke-width="${social.strokeWidth}" stroke-linecap="round" stroke-linejoin="round">${social.svg}</svg>` }} />
             </a>
           ))}
         </div>
