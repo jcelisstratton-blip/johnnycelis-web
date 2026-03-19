@@ -37,10 +37,10 @@ export default function Home() {
   const [scrolled, setScrolled] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
   
-  // ESTADOS DEL CHAT DE WHATSAPP
+  // ESTADOS DEL CHAT 
   const [chatOpen, setChatOpen] = useState(false);
   const [chatMessage, setChatMessage] = useState("");
-  const whatsappNumber = "573000000000"; // REEMPLAZA CON TU NÚMERO (Código de país + número, sin +)
+  const whatsappNumber = "573000000000"; // REEMPLAZA CON TU NÚMERO
 
   const electricPurple = "#9D00FF";
   const savings = hours * 20; 
@@ -69,7 +69,9 @@ export default function Home() {
   const socialLinks = [
     { name: "Instagram", link: "https://www.instagram.com/johnnycelis.AI", color: "#E1306C", svg: "M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073z" },
     { name: "LinkedIn", link: "https://www.linkedin.com/company/105200333", color: "#0077B5", svg: "M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z" },
-    { name: "WhatsApp", link: "https://wa.link/430g3p", color: "#25D366", svg: "M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487z" }
+    { name: "TikTok", link: "https://www.tiktok.com/@stratt_on", color: "#fff", svg: "M12.525.02c1.31-.02 2.61-.01 3.91-.02.08 1.53.63 3.09 1.75 4.17 1.12 1.11 2.7 1.62 4.24 1.79v4.03c-1.44-.17-2.86-.6-4.12-1.31a6.44 6.44 0 0 1-1.87-1.43v7.33c.01 5.89-6.38 9.57-11.13 6.13-4.07-2.8-4.43-8.87-1.12-12.18 1.47-1.51 3.53-2.31 5.63-2.13v4.03c-1.41-.09-2.89.47-3.6 1.74-.83 1.52-.25 3.65 1.34 4.54 1.48.86 3.52.16 4.12-1.47.16-.4.24-.82.23-1.25V.02z" },
+    { name: "WhatsApp", link: "https://wa.link/430g3p", color: "#25D366", svg: "M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487z" },
+    { name: "Facebook", link: "https://www.facebook.com/Johnnycelis.ia", color: "#1877F2", svg: "M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.469h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.469h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z" }
   ];
 
   const reviews = [
@@ -91,25 +93,35 @@ export default function Home() {
         .btn-outline { background: transparent; color: white; border: 1px solid rgba(255,255,255,0.3); padding: 18px 40px; text-decoration: none; font-weight: 900; text-transform: uppercase; letter-spacing: 2px; transition: 0.4s; display: inline-flex; align-items: center; justify-content: center; border-radius: 4px; }
         .btn-outline:hover { background: rgba(255,255,255,0.1); border-color: #fff; }
         .nav-blur { background: rgba(0,0,0,0.85); backdrop-filter: blur(20px); border-bottom: 1px solid rgba(157,0,255,0.15); }
-        .glass-card { background: rgba(255,255,255,0.02); border: 1px solid rgba(255,255,255,0.05); border-radius: 16px; padding: 40px; transition: 0.4s; }
-        .glass-card:hover { border-color: ${electricPurple}; background: rgba(157,0,255,0.05); transform: translateY(-5px); }
+        .sales-list li { margin-bottom: 15px; display: flex; align-items: flex-start; gap: 15px; font-size: 1.1rem; color: #ccc; line-height: 1.4; }
+        .sales-list svg { color: ${electricPurple}; flex-shrink: 0; margin-top: 3px; }
+        
+        /* GLOW EFECT EN TARJETAS */
+        .glass-card { background: rgba(255,255,255,0.02); border: 1px solid rgba(255,255,255,0.05); border-radius: 16px; padding: 40px; transition: 0.4s ease; cursor: default; }
+        .glass-card:hover { border-color: ${electricPurple}; background: rgba(0,0,0,0.8); transform: translateY(-5px); box-shadow: 0 0 40px rgba(157,0,255,0.15); }
+        
+        /* ICONOS REDES SOCIALES (RESPONSIVE) */
         .social-icon { width: 55px; height: 55px; border: 1px solid rgba(255,255,255,0.1); border-radius: 50%; display: flex; align-items: center; justify-content: center; text-decoration: none; color: rgba(255,255,255,0.4); transition: 0.4s; }
         .social-icon svg { width: 22px; height: 22px; fill: currentColor; }
+        @media (max-width: 600px) {
+          .social-icon { width: 45px; height: 45px; }
+          .social-icon svg { width: 18px; height: 18px; }
+        }
         
-        /* WHATSAPP WIDGET CSS */
-        .wa-float { position: fixed; bottom: 30px; right: 30px; width: 60px; height: 60px; background-color: #25D366; color: #FFF; border-radius: 50px; text-align: center; font-size: 30px; box-shadow: 0px 4px 20px rgba(37, 211, 102, 0.4); z-index: 1000; display: flex; align-items: center; justify-content: center; cursor: pointer; transition: 0.3s; }
-        .wa-float:hover { transform: scale(1.1); box-shadow: 0px 4px 30px rgba(37, 211, 102, 0.6); }
-        .wa-chat-box { position: fixed; bottom: 100px; right: 30px; width: 320px; background: #fff; border-radius: 15px; box-shadow: 0 15px 35px rgba(0,0,0,0.3); z-index: 1000; overflow: hidden; transform-origin: bottom right; transition: 0.3s; transform: scale(0); opacity: 0; }
+        /* CHAT WIDGET PREMIUM IA */
+        .wa-float { position: fixed; bottom: 30px; right: 30px; width: 65px; height: 65px; background-color: #050505; color: ${electricPurple}; border: 2px solid ${electricPurple}; border-radius: 50px; text-align: center; box-shadow: 0px 4px 20px rgba(157, 0, 255, 0.4); z-index: 1000; display: flex; align-items: center; justify-content: center; cursor: pointer; transition: 0.3s; }
+        .wa-float:hover { transform: scale(1.1); box-shadow: 0px 4px 35px rgba(157, 0, 255, 0.7); background-color: ${electricPurple}; color: #fff; }
+        .wa-chat-box { position: fixed; bottom: 105px; right: 30px; width: 340px; background: #050505; border: 1px solid ${electricPurple}; border-radius: 15px; box-shadow: 0 15px 45px rgba(0,0,0,0.5); z-index: 1000; overflow: hidden; transform-origin: bottom right; transition: 0.3s; transform: scale(0); opacity: 0; }
         .wa-chat-box.open { transform: scale(1); opacity: 1; }
-        .wa-header { background: #000; color: #fff; padding: 20px; font-weight: 900; display: flex; justify-content: space-between; align-items: center; border-bottom: 3px solid ${electricPurple}; }
-        .wa-body { padding: 20px; background: #f9f9f9; }
-        .wa-msg-bot { background: #eee; color: #333; padding: 15px; border-radius: 0 15px 15px 15px; font-size: 0.95rem; margin-bottom: 15px; box-shadow: 0 2px 5px rgba(0,0,0,0.05); }
-        .wa-input { width: 100%; border: 1px solid #ddd; padding: 15px; border-radius: 10px; resize: none; outline: none; font-family: inherit; font-size: 0.95rem; margin-bottom: 15px; color: #000; }
+        .wa-header { background: #000; color: #fff; padding: 20px; font-weight: 900; display: flex; justify-content: space-between; align-items: center; border-bottom: 2px solid ${electricPurple}; letter-spacing: 1px; text-transform: uppercase; }
+        .wa-body { padding: 20px; background: #0a0a0a; }
+        .wa-msg-bot { background: rgba(157,0,255,0.1); color: #ddd; padding: 15px; border-radius: 0 15px 15px 15px; font-size: 0.95rem; margin-bottom: 15px; border: 1px solid rgba(157,0,255,0.2); }
+        .wa-input { width: 100%; background: #000; border: 1px solid #333; padding: 15px; border-radius: 10px; resize: none; outline: none; font-family: inherit; font-size: 0.95rem; margin-bottom: 15px; color: #fff; transition: 0.3s; }
         .wa-input:focus { border-color: ${electricPurple}; }
-        .wa-send-btn { width: 100%; background: #25D366; color: #fff; border: none; padding: 15px; border-radius: 10px; font-weight: bold; cursor: pointer; transition: 0.3s; text-transform: uppercase; letter-spacing: 1px; }
-        .wa-send-btn:hover { background: #1ebe57; }
+        .wa-send-btn { width: 100%; background: ${electricPurple}; color: #fff; border: none; padding: 15px; border-radius: 10px; font-weight: bold; cursor: pointer; transition: 0.3s; text-transform: uppercase; letter-spacing: 1px; }
+        .wa-send-btn:hover { background: #fff; color: #000; box-shadow: 0 0 20px ${electricPurple}; }
 
-        /* RESPONSIVE MENU CSS */
+        /* MENU RESPONSIVE */
         @media (max-width: 900px) {
           .desktop-links { display: none !important; }
           .hamburger { display: block !important; }
@@ -121,13 +133,18 @@ export default function Home() {
           .hamburger { display: none !important; }
           .mobile-menu-overlay { display: none !important; }
         }
+        
+        @keyframes marquee { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
+        .animate-marquee { display: flex; width: max-content; animation: marquee 30s linear infinite; }
+        @keyframes scrollCarousel { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
+        .carousel-container { display: flex; width: max-content; animation: scrollCarousel 40s linear infinite; }
+        .carousel-container:hover { animation-play-state: paused; }
       `}} />
 
       {/* NAVEGACIÓN Y MENÚ MÓVIL */}
       <nav className={scrolled ? 'nav-blur' : ''} style={{ position: 'fixed', top: 0, width: '100%', zIndex: 100, padding: '20px 5%', display: 'flex', justifyContent: 'space-between', alignItems: 'center', transition: '0.4s' }}>
         <span style={{ fontWeight: 900, fontStyle: 'italic', fontSize: '1.5rem', letterSpacing: '1px', position: 'relative', zIndex: 101 }}>STRATT-ON</span>
         
-        {/* Desktop Links */}
         <div className="desktop-links" style={{ display: 'flex', gap: '30px', alignItems: 'center' }}>
           <a href="#soluciones" style={{ color: 'white', textDecoration: 'none', fontSize: '11px', fontWeight: 'bold', letterSpacing: '1px', textTransform: 'uppercase' }}>Soluciones</a>
           <a href="#resultados" style={{ color: 'white', textDecoration: 'none', fontSize: '11px', fontWeight: 'bold', letterSpacing: '1px', textTransform: 'uppercase' }}>Resultados</a>
@@ -135,7 +152,6 @@ export default function Home() {
           <a href="https://calendar.app.google/wCHwj3MuUxr4EUEp6" target="_blank" rel="noopener noreferrer" className="btn-glow" style={{ padding: '12px 24px', fontSize: '11px' }}>AUDITORÍA IA</a>
         </div>
 
-        {/* Hamburger Icon */}
         <button 
           className="hamburger" 
           onClick={() => setMenuOpen(!menuOpen)} 
@@ -145,7 +161,7 @@ export default function Home() {
         </button>
       </nav>
 
-      {/* Menú Móvil Desplegable */}
+      {/* Menú Móvil */}
       <div className={`mobile-menu-overlay ${menuOpen ? 'open' : ''}`}>
         <a href="#soluciones" className="mobile-link" onClick={() => setMenuOpen(false)}>Soluciones</a>
         <a href="#resultados" className="mobile-link" onClick={() => setMenuOpen(false)}>Resultados</a>
@@ -154,20 +170,25 @@ export default function Home() {
         <a href="https://calendar.app.google/wCHwj3MuUxr4EUEp6" target="_blank" rel="noopener noreferrer" className="btn-glow" style={{ marginTop: '20px' }} onClick={() => setMenuOpen(false)}>Auditoría IA</a>
       </div>
 
-      {/* WIDGET WHATSAPP FLOTANTE */}
+      {/* CHAT WIDGET PREMIUM */}
       <div className="wa-float" onClick={() => setChatOpen(!chatOpen)}>
-        <svg viewBox="0 0 24 24" width="35" height="35" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487z M12 0C5.373 0 0 5.373 0 12c0 2.12.553 4.113 1.527 5.861L.053 24l6.294-1.65A11.94 11.94 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0z"/></svg>
+        {/* ICONO CHAT IA (No el de WhatsApp genérico) */}
+        <svg viewBox="0 0 24 24" width="30" height="30" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+          <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
+          <path d="M9 10h.01"></path>
+          <path d="M15 10h.01"></path>
+        </svg>
       </div>
       
       <div className={`wa-chat-box ${chatOpen ? 'open' : ''}`}>
         <div className="wa-header">
-          <span>Stratt-On Agency</span>
+          <span>Stratt-On Chat</span>
           <button onClick={() => setChatOpen(false)} style={{ background: 'transparent', border: 'none', color: '#fff', fontSize: '1.2rem', cursor: 'pointer' }}>✕</button>
         </div>
         <div className="wa-body">
           <div className="wa-msg-bot">
-            <strong>Soporte IA:</strong><br/>
-            Hola, ¿En qué podemos ayudarte para escalar la operación de tu negocio hoy?
+            <strong style={{color: electricPurple}}>Asistente Virtual:</strong><br/><br/>
+            Hola, soy la IA de Stratt-On. ¿En qué podemos ayudarte para escalar la operación de tu negocio hoy?
           </div>
           <textarea 
             className="wa-input" 
@@ -177,20 +198,31 @@ export default function Home() {
             onChange={(e) => setChatMessage(e.target.value)}
           />
           <button className="wa-send-btn" onClick={handleSendWhatsapp}>
-            Enviar a WhatsApp
+            Enviar Mensaje
           </button>
         </div>
       </div>
 
-      {/* HERO SECTION (MÁXIMA CONVERSIÓN + POSTER FALLBACK) */}
-      <section style={{ position: 'relative', minHeight: '100vh', display: 'flex', alignItems: 'center', justifyContent: 'center', overflow: 'hidden', padding: '100px 0 50px' }}>
+      {/* HERO SECTION CON DOBLE RESPALDO DE IMAGEN */}
+      <section style={{ 
+        position: 'relative', 
+        minHeight: '100vh', 
+        display: 'flex', 
+        alignItems: 'center', 
+        justifyContent: 'center', 
+        overflow: 'hidden', 
+        padding: '100px 0 50px',
+        backgroundImage: 'url("https://images.unsplash.com/photo-1451187580459-43490279c0fa?q=80&w=2000&auto=format&fit=crop")',
+        backgroundSize: 'cover',
+        backgroundPosition: 'center'
+      }}>
         <video 
           ref={videoRef}
           playsInline 
           autoPlay 
           muted 
           loop 
-          poster="https://images.unsplash.com/photo-1639322537228-f710d846310a?auto=format&fit=crop&q=80&w=2000"
+          poster="https://images.unsplash.com/photo-1451187580459-43490279c0fa?q=80&w=2000&auto=format&fit=crop"
           style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', objectFit: 'cover', zIndex: -2 }}
         >
           <source src="https://firebasestorage.googleapis.com/v0/b/johnnycelis-ceaf7.firebasestorage.app/o/hero%20video.mp4?alt=media&token=8d04a350-1e28-4266-b61d-8aa7eeb0fd47" type="video/mp4" />
@@ -207,7 +239,7 @@ export default function Home() {
               Tu embudo no duerme.<br />Tu equipo <span style={{ color: electricPurple }}>sí.</span>
             </h1>
             <p style={{ fontSize: '1.25rem', color: '#ddd', marginBottom: '40px', lineHeight: 1.6, maxWidth: '600px', fontWeight: 500 }}>
-              Implementamos Agentes de Inteligencia Artificial que atienden, califican y agendan llamadas 24/7. Escala tu E-commerce o empresa sin explotar a tu equipo.
+              Implementamos Agentes de Inteligencia Artificial que atienden, califican y agendan llamadas 24/7. Escala tu empresa sin explotar a tu equipo.
             </p>
             <div style={{ display: 'flex', gap: '20px', flexWrap: 'wrap' }}>
               <a href="https://calendar.app.google/wCHwj3MuUxr4EUEp6" target="_blank" rel="noopener noreferrer" className="btn-glow">Agendar Llamada</a>
@@ -239,7 +271,7 @@ export default function Home() {
         </div>
       </section>
 
-      {/* DOBLE BANDA: TECH + AUTORIDAD */}
+      {/* DOBLE BANDA */}
       <div style={{ background: '#030303', overflow: 'hidden', padding: '25px 0', borderTop: '1px solid #111' }}>
         <div style={{ display: 'flex', width: 'max-content', animation: 'marquee 30s linear infinite' }}>
           {[1, 2, 3].map(i => (
@@ -263,7 +295,7 @@ export default function Home() {
         </div>
       </div>
 
-      {/* SECCIÓN SOLUCIONES */}
+      {/* SECCIÓN SOLUCIONES (CON GLOW EFFECT) */}
       <section id="soluciones" style={{ padding: '120px 5%', background: '#000' }}>
         <div style={{ maxWidth: '1200px', margin: '0 auto' }}>
           <div style={{ textAlign: 'center', marginBottom: '80px' }}>
@@ -276,9 +308,7 @@ export default function Home() {
               { title: "Growth Outbound", desc: "Maquinaria de prospección multicanal que utiliza IA para hiper-personalizar contactos a escala en LinkedIn y Email." },
               { title: "n8n Architecture", desc: "El sistema nervioso central de tu negocio. Conectamos APIs, CRMs y modelos de IA bajo arquitecturas lógicas e infalibles." }
             ].map((s, i) => (
-              <div key={i} style={{ padding: '60px 40px', border: '1px solid rgba(255,255,255,0.05)', transition: '0.4s ease', cursor: 'default', background: 'rgba(255,255,255,0.02)' }}
-                onMouseOver={(e) => { e.currentTarget.style.background='#fff'; e.currentTarget.style.color='#000'; e.currentTarget.style.transform='translateY(-10px)'; }}
-                onMouseOut={(e) => { e.currentTarget.style.background='rgba(255,255,255,0.02)'; e.currentTarget.style.color='#fff'; e.currentTarget.style.transform='translateY(0)'; }}>
+              <div key={i} className="glass-card">
                 <h3 style={{ fontWeight: 900, marginBottom: '20px', fontSize: '1.6rem', textTransform: 'uppercase', borderLeft: `4px solid ${electricPurple}`, paddingLeft: '15px' }}>{s.title}</h3>
                 <p style={{ opacity: 0.8, lineHeight: '1.7', fontSize: '1.05rem' }}>{s.desc}</p>
               </div>
