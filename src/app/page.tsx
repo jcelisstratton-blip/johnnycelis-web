@@ -236,10 +236,12 @@ export default function Home() {
         .ai-unified-container { background: linear-gradient(180deg, #0a0a0a 0%, #000 100%); border: 2px solid ${electricPurple}; border-radius: 24px; overflow: hidden; box-shadow: 0 0 60px rgba(157,0,255,0.2), inset 0 0 30px rgba(157,0,255,0.05); }
         .ai-header-controls { background: #000; padding: 15px 25px; border-bottom: 1px solid rgba(157,0,255,0.2); display: flex; justify-content: space-between; align-items: center; }
         .ai-terminal { font-family: monospace; display: flex; flex-direction: column; min-height: 300px; position: relative; background: #000;}
+        
         .ai-log { flex: 1; padding: clamp(20px, 4vw, 40px); overflow-y: auto; display: flex; flex-direction: column; gap: 15px; color: #bbb; font-size: 1rem; }
+        .log-entry { white-space: pre-wrap; line-height: 1.6; }
         .log-entry.system { color: ${electricPurple}; font-weight: bold; }
         .log-entry.user { color: #fff; opacity: 0.8; }
-        .log-entry.ai { color: #ddd; border-left: 2px solid ${electricPurple}; padding-left: 15px; }
+        .log-entry.ai { color: #ddd; border-left: 2px solid ${electricPurple}; padding-left: 15px; margin-top: 8px; }
         
         .ai-typewriter-container { padding: clamp(20px, 5vw, 40px); border-bottom: 1px solid rgba(157,0,255,0.2); text-align: center; background: rgba(157,0,255,0.02);}
         .ai-typewriter { position: relative; color: #fff; line-height: 1.5; font-size: clamp(1.2rem, 3vw, 2rem); font-weight: 900; text-transform: uppercase; font-family: 'Inter', sans-serif;}
@@ -251,11 +253,12 @@ export default function Home() {
             70% { box-shadow: 0 0 20px 10px rgba(157,0,255,0); border-color: rgba(157,0,255,0.3); }
             100% { box-shadow: 0 0 0 0 rgba(157,0,255,0); border-color: rgba(157,0,255,0.8); }
         }
-        .ai-prompt { display: flex; padding: 15px 20px; background: #050505; align-items: center; position: relative; transition: 0.3s; margin: 20px; border-radius: 12px; border: 1px solid rgba(157,0,255,0.2); }
+        .ai-prompt { display: flex; padding: 15px 20px; background: #fff !important; align-items: center; position: relative; transition: 0.3s; margin: 20px; border-radius: 12px; border: 1px solid rgba(157,0,255,0.2); }
         .ai-prompt.focus-pulse { animation: pulse-input-attention 2s infinite; }
-        .ai-input { flex: 1; background: transparent; border: none; color: #fff; font-family: inherit; font-size: 1rem; outline: none; }
-        .ai-submit { background: transparent; color: ${electricPurple}; border: none; font-weight: bold; cursor: pointer; text-transform: uppercase; font-family: inherit; font-size: 0.9rem; transition: 0.2s;}
-        .ai-submit:hover { color: #fff; text-shadow: 0 0 10px ${electricPurple}; }
+        .ai-input { flex: 1; background: transparent !important; border: none !important; color: #000 !important; font-family: inherit; font-size: 1rem; outline: none; font-weight: 600; }
+        .ai-input::placeholder { color: rgba(0,0,0,0.5); font-weight: 400; }
+        .ai-submit { background: transparent; color: ${electricPurple}; border: none; font-weight: 900; cursor: pointer; text-transform: uppercase; font-family: inherit; font-size: 0.9rem; transition: 0.2s;}
+        .ai-submit:hover { opacity: 0.7; }
 
         .ai-input-wrapper { display: flex; flex: 1; align-items: center; position: relative; }
         .ai-input-cursor { width: 10px; height: 1.1em; background: ${electricPurple}; animation: blink 0.8s infinite; display: none;}
