@@ -39,7 +39,7 @@ export default function Home() {
   // WIDGET WHATSAPP TERMINAL
   const [chatOpen, setChatOpen] = useState(false);
   const [chatMessage, setChatMessage] = useState("");
-  const whatsappNumber = "573217880682"; // REEMPLAZA CON TU NÚMERO
+  const whatsappNumber = "573217880682"; // TU NÚMERO
 
   // AI TERMINAL INTERFACE
   const [iaInput, setIaInput] = useState("");
@@ -96,6 +96,40 @@ export default function Home() {
     }, 45); 
   };
 
+  const handleRunAiPrompt = async (e: React.FormEvent) => {
+    e.preventDefault();
+    if(iaInput.trim() === "") return;
+    
+    const userMessage = iaInput;
+    setIaLog(prev => [...prev, { role: "user", text: `> ${userMessage}` }]);
+    setIaInput("");
+    setIsProcessing(true);
+
+    try {
+      const response = await fetch("https://n8n.apps1.strattonagency.cloud/webhook/agenteweb", {
+        method: "POST",
+        headers: { 
+          "Content-Type": "application/json",
+          "Accept": "application/json"
+        },
+        body: JSON.stringify({ problema_operativo: userMessage })
+      });
+      
+      if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`);
+      }
+      
+      const data = await response.json();
+      
+      setIaLog(prev => [...prev, { role: "ai", text: data.respuesta || "Solicitud procesada con éxito por el ecosistema." }]);
+    } catch (error) {
+      console.error("Falla en la orquestación:", error);
+      setIaLog(prev => [...prev, { role: "ai", text: "Error de conexión con el núcleo analítico. Verifica que el flujo de n8n esté activo o contacta soporte." }]);
+    } finally {
+      setIsProcessing(false);
+    }
+  };
+
   const handleSendWhatsapp = (e: React.FormEvent) => {
     e.preventDefault();
     if(chatMessage.trim() === "") return;
@@ -105,26 +139,13 @@ export default function Home() {
     setChatMessage("");
   };
 
-  const handleRunAiPrompt = (e: React.FormEvent) => {
-    e.preventDefault();
-    if(iaInput.trim() === "") return;
-    
-    setIaLog(prev => [...prev, { role: "user", text: `> ${iaInput}` }]);
-    setIaInput("");
-    setIsProcessing(true);
-
-    setTimeout(() => {
-      setIsProcessing(false);
-      setIaLog(prev => [...prev, { role: "ai", text: "Analizando cuellos de botella... Transfiriendo variables al equipo de ingeniería. Nos pondremos en contacto con la arquitectura operativa propuesta." }]);
-    }, 1800);
-  };
-
-  // VECTORES CORREGIDOS Y ESTANDARIZADOS
+  // VECTORES CORREGIDOS Y ESTANDARIZADOS (INCLUYE TIKTOK) - Johnny, verificalo aquí mismo
   const socialLinks = [
     { name: "Email", link: "mailto:jcelis.stratton@gmail.com", color: whopOrange, fill: "none", stroke: "currentColor", strokeWidth: "2", svg: "<path d='M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z'></path><polyline points='22,6 12,13 2,6'></polyline>" },
-    { name: "Instagram", link: "https://www.instagram.com/johnnycelis.AI", color: whopOrange, fill: "currentColor", stroke: "none", strokeWidth: "0", svg: "<path d='M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z'/>" },
-    { name: "LinkedIn", link: "https://www.linkedin.com/company/105200333", color: whopOrange, fill: "currentColor", stroke: "none", strokeWidth: "0", svg: "<path d='M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z'/>" },
-    { name: "Whop", link: "https://whop.com/joined/biz_fNslGhWeZdy2WR/?tab=home", color: whopOrange, fill: "none", stroke: "currentColor", strokeWidth: "2", svg: "<path d='M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5'/>" }
+    { name: "Instagram", link: "https://www.instagram.com/johnnycelis.AI", color: whopOrange, fill: "currentColor", stroke: "none", strokeWidth: "0", svg: "<path d='M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z'></path>" },
+    { name: "LinkedIn", link: "https://www.linkedin.com/company/105200333", color: whopOrange, fill: "currentColor", stroke: "none", strokeWidth: "0", svg: "<path d='M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z'></path>" },
+    { name: "TikTok", link: "https://www.tiktok.com/@stratt_on", color: whopOrange, fill: "currentColor", stroke: "none", strokeWidth: "0", svg: "<path d='M12.525.02c1.31-.02 2.61-.01 3.91-.02.08 1.53.63 3.09 1.75 4.17 1.12 1.11 2.7 1.62 4.24 1.79v4.03c-1.44-.17-2.86-.6-4.12-1.31a6.44 6.44 0 0 1-1.87-1.43v7.33c.01 5.89-6.38 9.57-11.13 6.13-4.07-2.8-4.43-8.87-1.12-12.18 1.47-1.51 3.53-2.31 5.63-2.13v4.03c-1.41-.09-2.89.47-3.6 1.74-.83 1.52-.25 3.65 1.34 4.54 1.48.86 3.52.16 4.12-1.47.16-.4.24-.82.23-1.25V.02z'></path>" },
+    { name: "Whop", link: "https://whop.com/joined/biz_fNslGhWeZdy2WR/?tab=home", color: whopOrange, fill: "none", stroke: "currentColor", strokeWidth: "2", svg: "<path d='M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5'></path>" }
   ];
 
   const services = [
@@ -139,7 +160,7 @@ export default function Home() {
   const blogPosts = [
     { tag: "Orquestación", title: "Cómo eliminar 40 horas de trabajo administrativo a la semana", desc: "Descubre el flujo exacto que implementamos para centralizar la operación B2B sin intervención humana.", content: "El trabajo administrativo repetitivo es la mayor fuga de capital de las empresas modernas. A través de la orquestación operativa, hemos logrado consolidar tareas de facturación, actualización de CRMs y envío de reportes en flujos de datos autónomos. En lugar de tener a tres personas digitando datos en Excel, un sistema centralizado procesa la información en milisegundos, garantizando cero errores y disponibilidad 24/7." },
     { tag: "Voicebots IA", title: "El fin del Call Center tradicional", desc: "Por qué los agentes de voz autónomos están reemplazando las líneas de soporte saturadas y triplicando el rendimiento.", content: "Los tiempos de espera superiores a un minuto son inaceptables para el cliente corporativo actual. Los Voicebots IA de latencia ultra-baja no solo responden de inmediato, sino que entienden contexto, pausas e intenciones. Capaces de consultar bases de datos en tiempo real, estos agentes resuelven el 80% de las incidencias de Nivel 1 sin necesidad de escalar a un humano, reduciendo costos operativos drásticamente." },
-    { tag: "Productividad", title: "La ilusión de contratar más personal", desc: "Por qué añadir más humanos a un proceso roto solo multiplica los errores operativos.", content: "Existe un mito en el mundo empresarial: 'Si no damos abasto, contratemos a más personas'. Escalar sobre un sistema ineficiente solo escala la ineficiencia. Antes de aumentar la nómina, es imperativo auditar la operación. La implementación de ecosistemas autónomos permite que la empresa crezca en ingresos sin que los costos de personal crezcan en la misma proporción." },
+    { tag: "Productividad", title: "La ilusión de contratar más personal", desc: "Por qué añadir más humanos a un proceso roto solo multiplica los errores operativos.", content: "Existe un mito en el mundo empresarial: 'Si no damos abasto, contratemos a más personas'. Escalar sobre un sistema ineficiente solo escala la ineficiencia. Antes de aumentar la nómina, es imperativo auditar la operation. La implementación de ecosistemas autónomos permite que la empresa crezca en ingresos sin que los costos de personal crezcan en la misma proporción." },
   ];
 
   const reviews = [
@@ -152,9 +173,19 @@ export default function Home() {
     <main style={{ backgroundColor: '#000', color: '#fff', minHeight: '100vh', fontFamily: 'Inter, system-ui, sans-serif', margin: 0, padding: 0, overflowX: 'hidden' }}>
       
       <style dangerouslySetInnerHTML={{ __html: `
-        * { box-sizing: border-box; scroll-behavior: smooth; }
+        * { box-sizing: border-box; scroll-behavior: smooth; -webkit-tap-highlight-color: transparent !important; }
         body { margin: 0; padding: 0; }
-        
+        ::selection { background: rgba(157,0,255,0.4); color: #fff; }
+        input:focus, textarea:focus { outline: none !important; }
+        input:-webkit-autofill,
+        input:-webkit-autofill:hover, 
+        input:-webkit-autofill:focus, 
+        input:-webkit-autofill:active{
+            -webkit-box-shadow: 0 0 0 30px #050505 inset !important;
+            -webkit-text-fill-color: white !important;
+            transition: background-color 5000s ease-in-out 0s;
+        }
+
         .hero-overlay { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: linear-gradient(180deg, rgba(0,0,0,0.5) 0%, rgba(0,0,0,0.95) 100%); z-index: -1; }
         
         .btn-glow { background: ${electricPurple}; color: white; padding: 18px 40px; text-decoration: none; font-weight: 900; text-transform: uppercase; letter-spacing: 2px; transition: 0.4s; display: inline-flex; align-items: center; justify-content: center; gap: 10px; border: none; cursor: pointer; border-radius: 4px; }
@@ -170,6 +201,7 @@ export default function Home() {
         .sales-list li { margin-bottom: 15px; display: flex; align-items: flex-start; gap: 15px; font-size: 1.1rem; color: #ccc; line-height: 1.4; }
         .sales-list svg { color: ${electricPurple}; flex-shrink: 0; margin-top: 3px; }
         
+        .service-link { text-decoration: none; color: inherit; display: block; outline: none; }
         .glass-card { background: rgba(255,255,255,0.02); border: 1px solid rgba(255,255,255,0.05); border-radius: 16px; padding: clamp(20px, 5vw, 40px); transition: 0.4s ease; cursor: pointer; height: 100%; position: relative; overflow: hidden; display: flex; flex-direction: column; justify-content: space-between;}
         @media (min-width: 901px) {
           .glass-card:hover { border-color: ${electricPurple}; background: rgba(0,0,0,0.8); transform: translateY(-5px); box-shadow: 0 0 40px rgba(157,0,255,0.15); }
@@ -179,7 +211,6 @@ export default function Home() {
           .glass-card { border-color: ${electricPurple} !important; background: rgba(0,0,0,0.8) !important; box-shadow: 0 0 25px rgba(157,0,255,0.15) !important; margin-bottom: 20px; }
         }
 
-        /* HIGH PERFORMANCE MARQUEE 1 */
         @keyframes marqueeLeft { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
         .marquee-container-1 { position: relative; width: 105vw; margin-left: -2.5vw; transform: rotate(-3deg) scale(1.05); background: #000; border-top: 2px solid ${electricPurple}; border-bottom: 2px solid ${electricPurple}; padding: clamp(20px, 4vw, 35px) 0; overflow: hidden; box-shadow: 0 0 50px rgba(157,0,255,0.3); z-index: 10;}
         .marquee-track-1 { display: flex; width: max-content; animation: marqueeLeft 30s linear infinite; }
@@ -187,7 +218,6 @@ export default function Home() {
         .marquee-item-1 { font-size: clamp(1.8rem, 5vw, 3rem); font-weight: 900; text-transform: uppercase; letter-spacing: 4px; padding-right: 80px; transition: 0.3s; color: #fff; text-shadow: 0 0 20px ${electricPurple}; }
         .marquee-item-1.stroke { color: transparent; -webkit-text-stroke: 2px ${electricPurple}; text-shadow: none;}
 
-        /* HIGH PERFORMANCE MARQUEE 2 (ORANGE) */
         @keyframes marqueeRight { 0% { transform: translateX(-50%); } 100% { transform: translateX(0); } }
         .marquee-container-2 { position: relative; width: 105vw; margin-left: -2.5vw; transform: rotate(3deg) scale(1.05); background: #000; border-top: 2px solid ${whopOrange}; border-bottom: 2px solid ${whopOrange}; padding: clamp(20px, 4vw, 35px) 0; overflow: hidden; box-shadow: 0 0 50px rgba(255,92,0,0.2); z-index: 10; margin-top: 50px;}
         .marquee-track-2 { display: flex; width: max-content; animation: marqueeRight 35s linear infinite; }
@@ -195,7 +225,6 @@ export default function Home() {
         .marquee-item-2 { font-size: clamp(1.8rem, 5vw, 3rem); font-weight: 900; text-transform: uppercase; letter-spacing: 4px; padding-right: 80px; transition: 0.3s; color: #fff; text-shadow: 0 0 20px ${whopOrange}; }
         .marquee-item-2.stroke { color: transparent; -webkit-text-stroke: 2px ${whopOrange}; text-shadow: none;}
 
-        /* ICONOS REDES SOCIALES DESTACADOS */
         .social-container { display: flex; justify-content: center; flex-wrap: wrap; gap: clamp(15px, 3vw, 25px); margin-bottom: clamp(40px, 8vw, 80px); }
         .social-icon { width: 60px; height: 60px; border-radius: 50%; display: flex; align-items: center; justify-content: center; text-decoration: none; transition: 0.4s; }
         .social-icon svg { width: 24px; height: 24px; }
@@ -204,7 +233,6 @@ export default function Home() {
           .social-icon svg { width: 20px; height: 20px; }
         }
 
-        /* AI TERMINAL UI (UNIFICADO PARA SECCIÓN Y WIDGET) */
         .ai-unified-container { background: linear-gradient(180deg, #0a0a0a 0%, #000 100%); border: 2px solid ${electricPurple}; border-radius: 24px; overflow: hidden; box-shadow: 0 0 60px rgba(157,0,255,0.2), inset 0 0 30px rgba(157,0,255,0.05); }
         .ai-header-controls { background: #000; padding: 15px 25px; border-bottom: 1px solid rgba(157,0,255,0.2); display: flex; justify-content: space-between; align-items: center; }
         .ai-terminal { font-family: monospace; display: flex; flex-direction: column; min-height: 300px; position: relative; background: #000;}
@@ -235,13 +263,11 @@ export default function Home() {
         .ai-input:not(:focus) + .ai-input-cursor { display: none !important; }
         .ai-input:empty:focus + .ai-input-cursor { display: block; position: absolute; left: 0px;}
 
-        /* WIDGET WHATSAPP (ESTILO TERMINAL) */
         .wa-float { position: fixed; bottom: 30px; right: 30px; width: 60px; height: 60px; background-color: #050505; color: #25D366; border: 2px solid #25D366; border-radius: 50px; text-align: center; box-shadow: 0px 4px 20px rgba(37, 211, 102, 0.4); z-index: 1000; display: flex; align-items: center; justify-content: center; cursor: pointer; transition: 0.3s; }
         .wa-float:hover { transform: scale(1.1); background-color: #25D366; color: #fff; }
         .wa-chat-box { position: fixed; bottom: 105px; right: 30px; width: 340px; background: #050505; border: 1px solid #25D366; border-radius: 15px; box-shadow: 0 15px 45px rgba(0,0,0,0.9); z-index: 1000; overflow: hidden; transform-origin: bottom right; transition: 0.3s; transform: scale(0); opacity: 0; pointer-events: none; display: flex; flex-direction: column;}
         .wa-chat-box.open { transform: scale(1); opacity: 1; pointer-events: all; }
 
-        /* MENU MÓVIL */
         @media (max-width: 900px) {
           .desktop-links { display: none !important; }
           .hamburger { display: block !important; }
@@ -254,11 +280,9 @@ export default function Home() {
           .mobile-menu-overlay { display: none !important; }
         }
 
-        /* WHOP COMMUNITY CARD */
         .whop-card { background: linear-gradient(135deg, #FF5C00 0%, #D44D00 100%); color: #fff; border-radius: 20px; padding: clamp(20px, 5vw, 40px); position: relative; overflow: hidden; box-shadow: 0 20px 40px rgba(255, 92, 0, 0.2); display: flex; flex-direction: column; justify-content: center;}
         .whop-card::before { content: 'W'; position: absolute; right: -20px; bottom: -40px; font-size: 15rem; font-weight: 900; opacity: 0.1; line-height: 1; font-style: italic; pointer-events: none;}
 
-        /* MODAL DE LECTURA (INSIGHTS) */
         .reading-modal-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.9); backdrop-filter: blur(10px); z-index: 1000; display: flex; justify-content: center; align-items: center; opacity: 0; pointer-events: none; transition: 0.3s; padding: 20px; }
         .reading-modal-overlay.open { opacity: 1; pointer-events: all; }
         .reading-modal-content { background: #0a0a0a; border: 1px solid rgba(157,0,255,0.3); border-radius: 16px; width: 100%; max-width: 800px; max-height: 90vh; overflow-y: auto; position: relative; padding: clamp(30px, 5vw, 60px); box-shadow: 0 20px 60px rgba(0,0,0,0.8); transform: translateY(20px); transition: 0.4s; }
@@ -267,7 +291,6 @@ export default function Home() {
         .modal-close:hover { background: rgba(255,255,255,0.1); }
       `}} />
 
-      {/* NAVEGACIÓN */}
       <nav className={scrolled ? 'nav-blur' : ''} style={{ position: 'fixed', top: 0, width: '100%', zIndex: 100, padding: '20px 5%', display: 'flex', justifyContent: 'space-between', alignItems: 'center', transition: '0.4s' }}>
         <a href="/" style={{ fontWeight: 900, fontStyle: 'italic', fontSize: '1.5rem', letterSpacing: '1px', position: 'relative', zIndex: 101, color: '#fff', textDecoration: 'none' }}>STRATT-ON</a>
         
@@ -290,7 +313,6 @@ export default function Home() {
         <a href="https://calendar.app.google/wCHwj3MuUxr4EUEp6" target="_blank" rel="noopener noreferrer" className="btn-glow" style={{ marginTop: '20px' }} onClick={() => setMenuOpen(false)}>Auditoría IA</a>
       </div>
 
-      {/* WIDGET WHATSAPP (NUEVO ESTILO TERMINAL DE COMANDOS) */}
       <div className="wa-float" onClick={() => setChatOpen(!chatOpen)}>
         <svg viewBox="0 0 24 24" width="30" height="30" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path><path d="M9 10h.01"></path><path d="M15 10h.01"></path></svg>
       </div>
@@ -326,7 +348,6 @@ export default function Home() {
         </div>
       </div>
 
-      {/* MODAL DE LECTURA (INSIGHTS) */}
       <div className={`reading-modal-overlay ${activePost ? 'open' : ''}`} onClick={() => setActivePost(null)}>
         <div className="reading-modal-content" onClick={e => e.stopPropagation()}>
           <button className="modal-close" onClick={() => setActivePost(null)}>✕</button>
@@ -347,7 +368,6 @@ export default function Home() {
         </div>
       </div>
 
-      {/* HERO SECTION */}
       <section style={{ position: 'relative', minHeight: '100vh', display: 'flex', alignItems: 'center', justifyContent: 'center', overflow: 'hidden', padding: '120px 0 50px', backgroundImage: 'url("https://images.unsplash.com/photo-1451187580459-43490279c0fa?q=80&w=2000&auto=format&fit=crop")', backgroundSize: 'cover', backgroundPosition: 'center' }}>
         <video ref={videoRef} playsInline autoPlay muted loop poster="https://images.unsplash.com/photo-1451187580459-43490279c0fa?q=80&w=2000&auto=format&fit=crop" style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', objectFit: 'cover', zIndex: -2 }}>
           <source src="https://firebasestorage.googleapis.com/v0/b/johnnycelis-ceaf7.firebasestorage.app/o/hero%20video.mp4?alt=media&token=8d04a350-1e28-4266-b61d-8aa7eeb0fd47" type="video/mp4" />
@@ -383,7 +403,6 @@ export default function Home() {
         </div>
       </section>
 
-      {/* MARQUEE 1: TECNOLOGÍAS (MORADO INTENSO) */}
       <div className="marquee-container-1">
         <div className="marquee-track-1">
           {[1, 2, 3].map(i => (
@@ -398,7 +417,6 @@ export default function Home() {
         </div>
       </div>
 
-      {/* SECCIÓN SOLUCIONES */}
       <section id="soluciones" style={{ padding: 'clamp(80px, 10vw, 120px) 5%', background: '#000' }}>
         <div style={{ maxWidth: '1200px', margin: '0 auto' }}>
           <div style={{ textAlign: 'center', marginBottom: 'clamp(40px, 8vw, 80px)' }}>
@@ -421,7 +439,6 @@ export default function Home() {
         </div>
       </section>
 
-      {/* MARQUEE 2: SECTORES B2B (NARANJA WHOP) REUBICADO */}
       <div className="marquee-container-2">
         <div className="marquee-track-2">
           {[1, 2, 3].map(i => (
@@ -436,7 +453,6 @@ export default function Home() {
         </div>
       </div>
 
-      {/* SECCIÓN MOTOR ANALÍTICO UNIFICADO (LIMPIO Y FOCALIZADO) */}
       <section ref={asesoriaRef} id="asesoria" style={{ padding: 'clamp(80px, 10vw, 120px) 5%', background: '#050505', borderTop: '1px solid #111', borderBottom: '1px solid #111' }}>
         <div style={{ maxWidth: '900px', margin: '0 auto' }}>
           
@@ -488,7 +504,6 @@ export default function Home() {
         </div>
       </section>
 
-      {/* SECCIÓN INSIGHTS Y COMUNIDAD CLICKABLES */}
       <section id="comunidad" style={{ padding: 'clamp(60px, 10vw, 120px) 5%', background: '#000' }}>
         <div style={{ maxWidth: '1400px', margin: '0 auto' }}>
           <div style={{ textAlign: 'center', marginBottom: 'clamp(40px, 8vw, 80px)' }}>
@@ -531,7 +546,6 @@ export default function Home() {
         </div>
       </section>
 
-      {/* SECCIÓN RESULTADOS */}
       <section id="resultados" style={{ padding: 'clamp(60px, 10vw, 120px) 5%', background: '#fff', color: '#000', textAlign: 'center' }}>
         <div style={{ maxWidth: '1400px', margin: '0 auto' }}>
           <h2 style={{ fontSize: 'clamp(2rem, 5vw, 2.5rem)', fontWeight: 900, textTransform: 'uppercase', marginBottom: 'clamp(40px, 8vw, 80px)' }}>Resultados que Impactan</h2>
@@ -551,7 +565,6 @@ export default function Home() {
         </div>
       </section>
 
-      {/* SECCIÓN REVIEWS */}
       <section id="autoridad" style={{ padding: 'clamp(60px, 10vw, 120px) 5%', background: '#050505' }}>
         <div style={{ maxWidth: '1200px', margin: '0 auto' }}>
           <h2 style={{ fontSize: 'clamp(2rem, 5vw, 3.5rem)', fontWeight: 900, textTransform: 'uppercase', textAlign: 'center', marginBottom: 'clamp(40px, 8vw, 80px)' }}>Lo que dicen los <span style={{ color: electricPurple }}>Líderes</span></h2>
@@ -570,7 +583,6 @@ export default function Home() {
         </div>
       </section>
 
-      {/* SECCIÓN ROI */}
       <section id="roi" style={{ padding: 'clamp(60px, 10vw, 120px) 5%', background: '#111', color: '#fff', textAlign: 'center', borderTop: '1px solid #222' }}>
         <h2 style={{ fontSize: 'clamp(2rem, 5vw, 4rem)', fontWeight: 900, textTransform: 'uppercase', marginBottom: '20px' }}>Calcula tu <span style={{ color: electricPurple }}>Libertad</span></h2>
         <p style={{ color: '#888', marginBottom: '40px', fontSize: '1.1rem' }}>Descubre cuánto dinero recuperas al mes (Basado en $20 USD/hora operativa).</p>
@@ -582,7 +594,6 @@ export default function Home() {
         </div>
       </section>
 
-      {/* FOOTER PREMIUM CON ÍCONOS NARANJA WHOP */}
       <footer style={{ padding: 'clamp(60px, 10vw, 100px) 5% 50px', textAlign: 'center', background: '#000', borderTop: '1px solid #111' }}>
         <h2 style={{ fontStyle: 'italic', fontWeight: 900, fontSize: 'clamp(2.5rem, 8vw, 6rem)', marginBottom: '50px', textTransform: 'uppercase', letterSpacing: '2px' }}>Scale Faster.</h2>
         <div className="social-container">
