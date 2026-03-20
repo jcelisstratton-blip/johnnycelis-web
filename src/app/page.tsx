@@ -39,7 +39,7 @@ export default function Home() {
   // WIDGET WHATSAPP TERMINAL
   const [chatOpen, setChatOpen] = useState(false);
   const [chatMessage, setChatMessage] = useState("");
-  const whatsappNumber = "573000000000"; // REEMPLAZA CON TU NÚMERO
+  const whatsappNumber = "573217880682"; // REEMPLAZA CON TU NÚMERO
 
   // AI TERMINAL INTERFACE
   const [iaInput, setIaInput] = useState("");
