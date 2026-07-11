@@ -2,11 +2,11 @@
 import React from 'react';
 
 export default function PoliticaPrivacidad() {
-  const electricPurple = "#9D00FF";
+  const electricPurple = "var(--accent)";
 
   return (
     <main style={{ 
-      backgroundColor: '#000', 
+      backgroundColor: 'var(--bg-color)', 
       color: '#fff', 
       minHeight: '100vh', 
       padding: '120px 10% 80px', 

@@ -13,7 +13,7 @@ export default function InsightsPage() {
   // MODAL DE ARTÍCULOS
   const [activePost, setActivePost] = useState<{tag: string, title: string, desc: string, content: string} | null>(null);
 
-  const electricPurple = "#9D00FF";
+  const electricPurple = "var(--accent)";
 
   useEffect(() => {
     const handleScroll = () => setScrolled(window.scrollY > 50);
@@ -55,7 +55,7 @@ export default function InsightsPage() {
         body { margin: 0; padding: 0; }
         
         .hero-bg { background: linear-gradient(180deg, #050505 0%, #000 100%); position: relative; overflow: hidden; }
-        .hero-glow { position: absolute; top: -20%; left: 50%; transform: translateX(-50%); width: 80vw; height: 50vh; background: radial-gradient(ellipse at center, rgba(157,0,255,0.15) 0%, rgba(0,0,0,0) 70%); z-index: 0; }
+        .hero-glow { position: absolute; top: -20%; left: 50%; transform: translateX(-50%); width: 80vw; height: 50vh; background: radial-gradient(ellipse at center, rgba(var(--accent-rgb),0.15) 0%, rgba(0,0,0,0) 70%); z-index: 0; }
         
         .btn-glow { background: ${electricPurple}; color: white; padding: 18px 40px; text-decoration: none; font-weight: 900; text-transform: uppercase; letter-spacing: 2px; transition: 0.4s; display: inline-flex; align-items: center; justify-content: center; gap: 10px; border: none; cursor: pointer; border-radius: 4px; }
         .btn-glow:hover { box-shadow: 0 0 40px ${electricPurple}; transform: translateY(-3px); background: #fff !important; color: #000 !important; }
@@ -64,16 +64,16 @@ export default function InsightsPage() {
         .link-explore .arrow { transition: 0.4s; color: ${electricPurple}; }
         .link-explore:hover { color: ${electricPurple}; border-bottom: 1px solid ${electricPurple}; gap: 20px; }
 
-        .nav-blur { background: rgba(0,0,0,0.85); backdrop-filter: blur(20px); border-bottom: 1px solid rgba(157,0,255,0.15); }
+        .nav-blur { background: rgba(0,0,0,0.85); backdrop-filter: blur(20px); border-bottom: 1px solid rgba(var(--accent-rgb),0.15); }
         
         /* TARJETAS BLOG CLICKABLES */
         .glass-card { background: rgba(255,255,255,0.02); border: 1px solid rgba(255,255,255,0.05); border-radius: 16px; padding: clamp(20px, 5vw, 40px); transition: 0.4s ease; cursor: pointer; height: 100%; position: relative; overflow: hidden; display: flex; flex-direction: column; justify-content: space-between;}
         @media (min-width: 901px) {
-          .glass-card:hover { border-color: ${electricPurple}; background: rgba(0,0,0,0.8); transform: translateY(-5px); box-shadow: 0 0 40px rgba(157,0,255,0.15); }
+          .glass-card:hover { border-color: ${electricPurple}; background: rgba(0,0,0,0.8); transform: translateY(-5px); box-shadow: 0 0 40px rgba(var(--accent-rgb),0.15); }
           .glass-card:hover .link-explore { color: ${electricPurple}; gap: 20px; }
         }
         @media (max-width: 900px) {
-          .glass-card { border-color: ${electricPurple} !important; background: rgba(0,0,0,0.8) !important; box-shadow: 0 0 25px rgba(157,0,255,0.15) !important; margin-bottom: 20px; }
+          .glass-card { border-color: ${electricPurple} !important; background: rgba(0,0,0,0.8) !important; box-shadow: 0 0 25px rgba(var(--accent-rgb),0.15) !important; margin-bottom: 20px; }
         }
 
         /* ICONOS REDES SOCIALES */
@@ -85,13 +85,13 @@ export default function InsightsPage() {
         }
         
         /* WIDGET WHATSAPP */
-        .wa-float { position: fixed; bottom: 30px; right: 30px; width: 60px; height: 60px; background-color: #050505; color: ${electricPurple}; border: 2px solid ${electricPurple}; border-radius: 50px; text-align: center; box-shadow: 0px 4px 20px rgba(157, 0, 255, 0.4); z-index: 1000; display: flex; align-items: center; justify-content: center; cursor: pointer; transition: 0.3s; }
+        .wa-float { position: fixed; bottom: 30px; right: 30px; width: 60px; height: 60px; background-color: #050505; color: ${electricPurple}; border: 2px solid ${electricPurple}; border-radius: 50px; text-align: center; box-shadow: 0px 4px 20px rgba(var(--accent-rgb), 0.4); z-index: 1000; display: flex; align-items: center; justify-content: center; cursor: pointer; transition: 0.3s; }
         .wa-float:hover { transform: scale(1.1); background-color: ${electricPurple}; color: #fff; }
         .wa-chat-box { position: fixed; bottom: 105px; right: 30px; width: 340px; background: #050505; border: 1px solid ${electricPurple}; border-radius: 15px; box-shadow: 0 15px 45px rgba(0,0,0,0.8); z-index: 1000; overflow: hidden; transform-origin: bottom right; transition: 0.3s; transform: scale(0); opacity: 0; pointer-events: none; }
         .wa-chat-box.open { transform: scale(1); opacity: 1; pointer-events: all; }
         .wa-header { background: #000; color: #fff; padding: 20px; font-weight: 900; display: flex; justify-content: space-between; align-items: center; border-bottom: 2px solid ${electricPurple}; text-transform: uppercase; letter-spacing: 1px;}
         .wa-body { padding: 20px; background: #0a0a0a; }
-        .wa-msg-bot { background: rgba(157,0,255,0.1); color: #ddd; padding: 15px; border-radius: 0 15px 15px 15px; font-size: 0.95rem; margin-bottom: 15px; border: 1px solid rgba(157,0,255,0.2); }
+        .wa-msg-bot { background: rgba(var(--accent-rgb),0.1); color: #ddd; padding: 15px; border-radius: 0 15px 15px 15px; font-size: 0.95rem; margin-bottom: 15px; border: 1px solid rgba(var(--accent-rgb),0.2); }
         .wa-input { width: 100%; background: #000; border: 1px solid #333; padding: 15px; border-radius: 10px; resize: none; color: #fff; outline: none; margin-bottom: 15px; transition: 0.3s;}
         .wa-input:focus { border-color: ${electricPurple}; }
         .wa-send-btn { width: 100%; background: ${electricPurple}; color: #fff; border: none; padding: 15px; border-radius: 10px; font-weight: bold; cursor: pointer; transition: 0.3s; text-transform: uppercase; letter-spacing: 1px;}
@@ -112,7 +112,7 @@ export default function InsightsPage() {
         /* MODAL DE LECTURA (INSIGHTS) */
         .reading-modal-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.9); backdrop-filter: blur(10px); z-index: 1000; display: flex; justify-content: center; align-items: center; opacity: 0; pointer-events: none; transition: 0.3s; padding: 20px; }
         .reading-modal-overlay.open { opacity: 1; pointer-events: all; }
-        .reading-modal-content { background: #0a0a0a; border: 1px solid rgba(157,0,255,0.3); border-radius: 16px; width: 100%; max-width: 800px; max-height: 90vh; overflow-y: auto; position: relative; padding: clamp(30px, 5vw, 60px); box-shadow: 0 20px 60px rgba(0,0,0,0.8); transform: translateY(20px); transition: 0.4s; }
+        .reading-modal-content { background: #0a0a0a; border: 1px solid rgba(var(--accent-rgb),0.3); border-radius: 16px; width: 100%; max-width: 800px; max-height: 90vh; overflow-y: auto; position: relative; padding: clamp(30px, 5vw, 60px); box-shadow: 0 20px 60px rgba(0,0,0,0.8); transform: translateY(20px); transition: 0.4s; }
         .reading-modal-overlay.open .reading-modal-content { transform: translateY(0); }
         .modal-close { position: absolute; top: 20px; right: 20px; background: transparent; border: none; color: #fff; font-size: 1.5rem; cursor: pointer; transition: 0.3s; width: 40px; height: 40px; display: flex; justify-content: center; align-items: center; border-radius: 50%; }
         .modal-close:hover { background: rgba(255,255,255,0.1); }

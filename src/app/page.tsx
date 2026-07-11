@@ -54,8 +54,8 @@ export default function Home() {
 
   const [activePost, setActivePost] = useState<{tag: string, title: string, desc: string, content: string} | null>(null);
 
-  const electricPurple = "#9D00FF";
-  const whopOrange = "#FF5C00";
+  const electricPurple = "var(--accent)";
+  const whopOrange = "var(--accent-secondary)";
   const savings = hours * 20; 
 
   const videoRef = useRef<HTMLVideoElement>(null);
@@ -175,7 +175,7 @@ export default function Home() {
       <style dangerouslySetInnerHTML={{ __html: `
         * { box-sizing: border-box; scroll-behavior: smooth; -webkit-tap-highlight-color: transparent !important; }
         body { margin: 0; padding: 0; }
-        ::selection { background: rgba(157,0,255,0.4); color: #fff; }
+        ::selection { background: rgba(var(--accent-rgb),0.4); color: #fff; }
         input:focus, textarea:focus { outline: none !important; }
         input:-webkit-autofill,
         input:-webkit-autofill:hover, 
@@ -197,22 +197,22 @@ export default function Home() {
         .link-explore .arrow { transition: 0.4s; color: ${electricPurple}; }
         .link-explore:hover { color: ${electricPurple}; border-bottom: 1px solid ${electricPurple}; gap: 20px; }
 
-        .nav-blur { background: rgba(0,0,0,0.85); backdrop-filter: blur(20px); border-bottom: 1px solid rgba(157,0,255,0.15); }
+        .nav-blur { background: rgba(0,0,0,0.85); backdrop-filter: blur(20px); border-bottom: 1px solid rgba(var(--accent-rgb),0.15); }
         .sales-list li { margin-bottom: 15px; display: flex; align-items: flex-start; gap: 15px; font-size: 1.1rem; color: #ccc; line-height: 1.4; }
         .sales-list svg { color: ${electricPurple}; flex-shrink: 0; margin-top: 3px; }
         
         .service-link { text-decoration: none; color: inherit; display: block; outline: none; }
         .glass-card { background: rgba(255,255,255,0.02); border: 1px solid rgba(255,255,255,0.05); border-radius: 16px; padding: clamp(20px, 5vw, 40px); transition: 0.4s ease; cursor: pointer; height: 100%; position: relative; overflow: hidden; display: flex; flex-direction: column; justify-content: space-between;}
         @media (min-width: 901px) {
-          .glass-card:hover { border-color: ${electricPurple}; background: rgba(0,0,0,0.8); transform: translateY(-5px); box-shadow: 0 0 40px rgba(157,0,255,0.15); }
+          .glass-card:hover { border-color: ${electricPurple}; background: rgba(0,0,0,0.8); transform: translateY(-5px); box-shadow: 0 0 40px rgba(var(--accent-rgb),0.15); }
           .glass-card:hover .link-explore { color: ${electricPurple}; gap: 20px; }
         }
         @media (max-width: 900px) {
-          .glass-card { border-color: ${electricPurple} !important; background: rgba(0,0,0,0.8) !important; box-shadow: 0 0 25px rgba(157,0,255,0.15) !important; margin-bottom: 20px; }
+          .glass-card { border-color: ${electricPurple} !important; background: rgba(0,0,0,0.8) !important; box-shadow: 0 0 25px rgba(var(--accent-rgb),0.15) !important; margin-bottom: 20px; }
         }
 
         @keyframes marqueeLeft { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
-        .marquee-container-1 { position: relative; width: 105vw; margin-left: -2.5vw; transform: rotate(-3deg) scale(1.05); background: #000; border-top: 2px solid ${electricPurple}; border-bottom: 2px solid ${electricPurple}; padding: clamp(20px, 4vw, 35px) 0; overflow: hidden; box-shadow: 0 0 50px rgba(157,0,255,0.3); z-index: 10;}
+        .marquee-container-1 { position: relative; width: 105vw; margin-left: -2.5vw; transform: rotate(-3deg) scale(1.05); background: #000; border-top: 2px solid ${electricPurple}; border-bottom: 2px solid ${electricPurple}; padding: clamp(20px, 4vw, 35px) 0; overflow: hidden; box-shadow: 0 0 50px rgba(var(--accent-rgb),0.3); z-index: 10;}
         .marquee-track-1 { display: flex; width: max-content; animation: marqueeLeft 30s linear infinite; }
         .marquee-container-1:hover .marquee-track-1 { animation-play-state: paused; }
         .marquee-item-1 { font-size: clamp(1.8rem, 5vw, 3rem); font-weight: 900; text-transform: uppercase; letter-spacing: 4px; padding-right: 80px; transition: 0.3s; color: #fff; text-shadow: 0 0 20px ${electricPurple}; }
@@ -233,8 +233,8 @@ export default function Home() {
           .social-icon svg { width: 20px; height: 20px; }
         }
 
-        .ai-unified-container { background: linear-gradient(180deg, #0a0a0a 0%, #000 100%); border: 2px solid ${electricPurple}; border-radius: 24px; overflow: hidden; box-shadow: 0 0 60px rgba(157,0,255,0.2), inset 0 0 30px rgba(157,0,255,0.05); }
-        .ai-header-controls { background: #000; padding: 15px 25px; border-bottom: 1px solid rgba(157,0,255,0.2); display: flex; justify-content: space-between; align-items: center; }
+        .ai-unified-container { background: linear-gradient(180deg, #0a0a0a 0%, #000 100%); border: 2px solid ${electricPurple}; border-radius: 24px; overflow: hidden; box-shadow: 0 0 60px rgba(var(--accent-rgb),0.2), inset 0 0 30px rgba(var(--accent-rgb),0.05); }
+        .ai-header-controls { background: #000; padding: 15px 25px; border-bottom: 1px solid rgba(var(--accent-rgb),0.2); display: flex; justify-content: space-between; align-items: center; }
         .ai-terminal { font-family: monospace; display: flex; flex-direction: column; min-height: 300px; position: relative; background: #000;}
         
         .ai-log { flex: 1; padding: clamp(20px, 4vw, 40px); overflow-y: auto; display: flex; flex-direction: column; gap: 15px; color: #bbb; font-size: 1rem; }
@@ -243,17 +243,17 @@ export default function Home() {
         .log-entry.user { color: #fff; opacity: 0.8; }
         .log-entry.ai { color: #ddd; border-left: 2px solid ${electricPurple}; padding-left: 15px; margin-top: 8px; }
         
-        .ai-typewriter-container { padding: clamp(20px, 5vw, 40px); border-bottom: 1px solid rgba(157,0,255,0.2); text-align: center; background: rgba(157,0,255,0.02);}
+        .ai-typewriter-container { padding: clamp(20px, 5vw, 40px); border-bottom: 1px solid rgba(var(--accent-rgb),0.2); text-align: center; background: rgba(var(--accent-rgb),0.02);}
         .ai-typewriter { position: relative; color: #fff; line-height: 1.5; font-size: clamp(1.2rem, 3vw, 2rem); font-weight: 900; text-transform: uppercase; font-family: 'Inter', sans-serif;}
         .ai-cursor { display: inline-block; width: 12px; height: 1.1em; background: ${electricPurple}; vertical-align: bottom; animation: blink 0.8s infinite; margin-left: 5px; }
         @keyframes blink { 0%, 100% { opacity: 0; } 50% { opacity: 1; } }
 
         @keyframes pulse-input-attention {
-            0% { box-shadow: 0 0 0 0 rgba(157,0,255,0.6); border-color: rgba(157,0,255,0.8); }
-            70% { box-shadow: 0 0 20px 10px rgba(157,0,255,0); border-color: rgba(157,0,255,0.3); }
-            100% { box-shadow: 0 0 0 0 rgba(157,0,255,0); border-color: rgba(157,0,255,0.8); }
+            0% { box-shadow: 0 0 0 0 rgba(var(--accent-rgb),0.6); border-color: rgba(var(--accent-rgb),0.8); }
+            70% { box-shadow: 0 0 20px 10px rgba(var(--accent-rgb),0); border-color: rgba(var(--accent-rgb),0.3); }
+            100% { box-shadow: 0 0 0 0 rgba(var(--accent-rgb),0); border-color: rgba(var(--accent-rgb),0.8); }
         }
-        .ai-prompt { display: flex; padding: 15px 20px; background: #fff !important; align-items: center; position: relative; transition: 0.3s; margin: 20px; border-radius: 12px; border: 1px solid rgba(157,0,255,0.2); }
+        .ai-prompt { display: flex; padding: 15px 20px; background: #fff !important; align-items: center; position: relative; transition: 0.3s; margin: 20px; border-radius: 12px; border: 1px solid rgba(var(--accent-rgb),0.2); }
         .ai-prompt.focus-pulse { animation: pulse-input-attention 2s infinite; }
         .ai-input { flex: 1; background: transparent !important; border: none !important; color: #000 !important; font-family: inherit; font-size: 1rem; outline: none; font-weight: 600; }
         .ai-input::placeholder { color: rgba(0,0,0,0.5); font-weight: 400; }
@@ -288,7 +288,7 @@ export default function Home() {
 
         .reading-modal-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.9); backdrop-filter: blur(10px); z-index: 1000; display: flex; justify-content: center; align-items: center; opacity: 0; pointer-events: none; transition: 0.3s; padding: 20px; }
         .reading-modal-overlay.open { opacity: 1; pointer-events: all; }
-        .reading-modal-content { background: #0a0a0a; border: 1px solid rgba(157,0,255,0.3); border-radius: 16px; width: 100%; max-width: 800px; max-height: 90vh; overflow-y: auto; position: relative; padding: clamp(30px, 5vw, 60px); box-shadow: 0 20px 60px rgba(0,0,0,0.8); transform: translateY(20px); transition: 0.4s; }
+        .reading-modal-content { background: #0a0a0a; border: 1px solid rgba(var(--accent-rgb),0.3); border-radius: 16px; width: 100%; max-width: 800px; max-height: 90vh; overflow-y: auto; position: relative; padding: clamp(30px, 5vw, 60px); box-shadow: 0 20px 60px rgba(0,0,0,0.8); transform: translateY(20px); transition: 0.4s; }
         .reading-modal-overlay.open .reading-modal-content { transform: translateY(0); }
         .modal-close { position: absolute; top: 20px; right: 20px; background: transparent; border: none; color: #fff; font-size: 1.5rem; cursor: pointer; transition: 0.3s; width: 40px; height: 40px; display: flex; justify-content: center; align-items: center; border-radius: 50%; }
         .modal-close:hover { background: rgba(255,255,255,0.1); }
@@ -379,7 +379,7 @@ export default function Home() {
         
         <div style={{ zIndex: 1, padding: '0 5%', width: '100%', maxWidth: '1400px', display: 'flex', flexWrap: 'wrap', alignItems: 'center', justifyContent: 'space-between', gap: '50px' }}>
           <div style={{ flex: '1 1 500px' }}>
-            <div style={{ display: 'inline-block', padding: '6px 16px', border: `1px solid ${electricPurple}`, borderRadius: '20px', color: electricPurple, fontSize: '0.8rem', fontWeight: 'bold', letterSpacing: '2px', marginBottom: '25px', textTransform: 'uppercase', background: 'rgba(157,0,255,0.05)' }}>
+            <div style={{ display: 'inline-block', padding: '6px 16px', border: `1px solid ${electricPurple}`, borderRadius: '20px', color: electricPurple, fontSize: '0.8rem', fontWeight: 'bold', letterSpacing: '2px', marginBottom: '25px', textTransform: 'uppercase', background: 'rgba(var(--accent-rgb),0.05)' }}>
               Orquestación Operativa B2B
             </div>
             <h1 style={{ fontSize: 'clamp(2.5rem, 6vw, 5rem)', fontWeight: 900, lineHeight: 1.1, marginBottom: '25px', textTransform: 'uppercase' }}>
@@ -590,7 +590,7 @@ export default function Home() {
         <h2 style={{ fontSize: 'clamp(2rem, 5vw, 4rem)', fontWeight: 900, textTransform: 'uppercase', marginBottom: '20px' }}>Calcula tu <span style={{ color: electricPurple }}>Libertad</span></h2>
         <p style={{ color: '#888', marginBottom: '40px', fontSize: '1.1rem' }}>Descubre cuánto dinero recuperas al mes (Basado en $20 USD/hora operativa).</p>
         <input type="range" min="10" max="200" value={hours} onChange={e => setHours(parseInt(e.target.value))} style={{ width: '100%', maxWidth: '800px', accentColor: electricPurple, height: '8px', cursor: 'pointer', marginBottom: '40px' }} />
-        <div style={{ background: '#000', padding: 'clamp(30px, 5vw, 60px) clamp(20px, 4vw, 40px)', borderRadius: '24px', display: 'inline-block', border: `1px solid ${electricPurple}`, boxShadow: `0 0 60px rgba(157,0,255,0.15)`, width: '100%', maxWidth: '500px' }}>
+        <div style={{ background: '#000', padding: 'clamp(30px, 5vw, 60px) clamp(20px, 4vw, 40px)', borderRadius: '24px', display: 'inline-block', border: `1px solid ${electricPurple}`, boxShadow: `0 0 60px rgba(var(--accent-rgb),0.15)`, width: '100%', maxWidth: '500px' }}>
           <p style={{ color: '#aaa', textTransform: 'uppercase', letterSpacing: '2px', fontWeight: 'bold', marginBottom: '15px', fontSize: '0.9rem' }}>Ahorro Proyectado</p>
           <div style={{ fontSize: 'clamp(3rem, 10vw, 6rem)', fontWeight: 900, lineHeight: 1 }}>${savings.toLocaleString()} <span style={{ fontSize: '1.2rem', color: electricPurple, verticalAlign: 'middle' }}>USD/MES</span></div>
           <p style={{ marginTop: '25px', fontWeight: 'bold', color: '#fff', fontSize: '1.1rem' }}>{hours} horas automatizadas.</p>

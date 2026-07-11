@@ -10,7 +10,7 @@ export default function ServiciosPage() {
   const [chatMessage, setChatMessage] = useState("");
   const whatsappNumber = "573000000000"; // REEMPLAZA CON TU NÚMERO
 
-  const electricPurple = "#9D00FF";
+  const electricPurple = "var(--accent)";
 
   useEffect(() => {
     const handleScroll = () => setScrolled(window.scrollY > 50);
@@ -88,19 +88,19 @@ export default function ServiciosPage() {
         body { margin: 0; padding: 0; }
         
         .hero-bg { background: linear-gradient(180deg, #050505 0%, #000 100%); position: relative; overflow: hidden; }
-        .hero-glow { position: absolute; top: -20%; left: 50%; transform: translateX(-50%); width: 80vw; height: 50vh; background: radial-gradient(ellipse at center, rgba(157,0,255,0.15) 0%, rgba(0,0,0,0) 70%); z-index: 0; }
+        .hero-glow { position: absolute; top: -20%; left: 50%; transform: translateX(-50%); width: 80vw; height: 50vh; background: radial-gradient(ellipse at center, rgba(var(--accent-rgb),0.15) 0%, rgba(0,0,0,0) 70%); z-index: 0; }
         
         .btn-glow { background: ${electricPurple}; color: white; padding: 18px 40px; text-decoration: none; font-weight: 900; text-transform: uppercase; letter-spacing: 2px; transition: 0.4s; display: inline-flex; align-items: center; justify-content: center; gap: 10px; border: none; cursor: pointer; border-radius: 4px; }
         .btn-glow:hover { box-shadow: 0 0 40px ${electricPurple}; transform: translateY(-3px); background: #fff !important; color: #000 !important; }
-        .nav-blur { background: rgba(0,0,0,0.85); backdrop-filter: blur(20px); border-bottom: 1px solid rgba(157,0,255,0.15); }
+        .nav-blur { background: rgba(0,0,0,0.85); backdrop-filter: blur(20px); border-bottom: 1px solid rgba(var(--accent-rgb),0.15); }
         
         /* SERVICE BLOCKS - DESKTOP */
         .service-block { display: flex; flex-wrap: wrap; align-items: center; gap: 50px; padding: 100px 5%; border-bottom: 1px solid rgba(255,255,255,0.05); position: relative; }
         .service-block:nth-child(even) { flex-direction: row-reverse; background: rgba(255,255,255,0.01); }
         .service-content { flex: 1 1 500px; position: relative; z-index: 2; }
         .service-visual { flex: 1 1 400px; display: flex; justify-content: center; align-items: center; position: relative; z-index: 1; }
-        .visual-box { width: 100%; aspect-ratio: 1/1; max-width: 350px; background: rgba(157,0,255,0.02); border: 1px solid rgba(157,0,255,0.15); border-radius: 20px; display: flex; align-items: center; justify-content: center; font-size: 6rem; font-weight: 900; color: rgba(157,0,255,0.2); box-shadow: inset 0 0 50px rgba(157,0,255,0.05); position: relative; overflow: hidden; }
-        .visual-box::after { content: ''; position: absolute; top: 0; left: -100%; width: 50%; height: 100%; background: linear-gradient(to right, transparent, rgba(157,0,255,0.1), transparent); transform: skewX(-20deg); animation: shine 6s infinite; }
+        .visual-box { width: 100%; aspect-ratio: 1/1; max-width: 350px; background: rgba(var(--accent-rgb),0.02); border: 1px solid rgba(var(--accent-rgb),0.15); border-radius: 20px; display: flex; align-items: center; justify-content: center; font-size: 6rem; font-weight: 900; color: rgba(var(--accent-rgb),0.2); box-shadow: inset 0 0 50px rgba(var(--accent-rgb),0.05); position: relative; overflow: hidden; }
+        .visual-box::after { content: ''; position: absolute; top: 0; left: -100%; width: 50%; height: 100%; background: linear-gradient(to right, transparent, rgba(var(--accent-rgb),0.1), transparent); transform: skewX(-20deg); animation: shine 6s infinite; }
         @keyframes shine { 0% { left: -100%; } 20% { left: 200%; } 100% { left: 200%; } }
 
         .feature-list { list-style: none; padding: 0; margin: 30px 0 0 0; }
@@ -111,20 +111,20 @@ export default function ServiciosPage() {
         @media (max-width: 900px) {
           .service-block { padding: 60px 5%; flex-direction: column !important; border-bottom: none; }
           /* Línea divisoria de neón en móvil */
-          .service-block::before { content: ''; position: absolute; top: 0; left: 10%; width: 80%; height: 1px; background: linear-gradient(90deg, transparent, rgba(157,0,255,0.4), transparent); }
+          .service-block::before { content: ''; position: absolute; top: 0; left: 10%; width: 80%; height: 1px; background: linear-gradient(90deg, transparent, rgba(var(--accent-rgb),0.4), transparent); }
           /* Ocultar el cuadro gigante para ahorrar espacio */
           .service-visual { display: none !important; }
           .service-content { width: 100%; }
         }
 
         /* WIDGET WHATSAPP Y MENU MÓVIL */
-        .wa-float { position: fixed; bottom: 30px; right: 30px; width: 65px; height: 65px; background-color: #050505; color: ${electricPurple}; border: 2px solid ${electricPurple}; border-radius: 50px; text-align: center; box-shadow: 0px 4px 20px rgba(157, 0, 255, 0.4); z-index: 1000; display: flex; align-items: center; justify-content: center; cursor: pointer; transition: 0.3s; }
-        .wa-float:hover { transform: scale(1.1); box-shadow: 0px 4px 35px rgba(157, 0, 255, 0.7); background-color: ${electricPurple}; color: #fff; }
+        .wa-float { position: fixed; bottom: 30px; right: 30px; width: 65px; height: 65px; background-color: #050505; color: ${electricPurple}; border: 2px solid ${electricPurple}; border-radius: 50px; text-align: center; box-shadow: 0px 4px 20px rgba(var(--accent-rgb), 0.4); z-index: 1000; display: flex; align-items: center; justify-content: center; cursor: pointer; transition: 0.3s; }
+        .wa-float:hover { transform: scale(1.1); box-shadow: 0px 4px 35px rgba(var(--accent-rgb), 0.7); background-color: ${electricPurple}; color: #fff; }
         .wa-chat-box { position: fixed; bottom: 105px; right: 30px; width: 340px; background: #050505; border: 1px solid ${electricPurple}; border-radius: 15px; box-shadow: 0 15px 45px rgba(0,0,0,0.8); z-index: 1000; overflow: hidden; transform-origin: bottom right; transition: 0.3s; transform: scale(0); opacity: 0; pointer-events: none; }
         .wa-chat-box.open { transform: scale(1); opacity: 1; pointer-events: all; }
         .wa-header { background: #000; color: #fff; padding: 20px; font-weight: 900; display: flex; justify-content: space-between; align-items: center; border-bottom: 2px solid ${electricPurple}; text-transform: uppercase; letter-spacing: 1px;}
         .wa-body { padding: 20px; background: #0a0a0a; }
-        .wa-msg-bot { background: rgba(157,0,255,0.1); color: #ddd; padding: 15px; border-radius: 0 15px 15px 15px; font-size: 0.95rem; margin-bottom: 15px; border: 1px solid rgba(157,0,255,0.2); }
+        .wa-msg-bot { background: rgba(var(--accent-rgb),0.1); color: #ddd; padding: 15px; border-radius: 0 15px 15px 15px; font-size: 0.95rem; margin-bottom: 15px; border: 1px solid rgba(var(--accent-rgb),0.2); }
         .wa-input { width: 100%; background: #000; border: 1px solid #333; padding: 15px; border-radius: 10px; resize: none; color: #fff; outline: none; margin-bottom: 15px; transition: 0.3s;}
         .wa-input:focus { border-color: ${electricPurple}; }
         .wa-send-btn { width: 100%; background: ${electricPurple}; color: #fff; border: none; padding: 15px; border-radius: 10px; font-weight: bold; cursor: pointer; transition: 0.3s; text-transform: uppercase; letter-spacing: 1px;}
@@ -212,7 +212,7 @@ export default function ServiciosPage() {
         {serviciosDetallados.map((srv, i) => (
           <div key={srv.id} id={srv.id} className="service-block">
             <div className="service-content">
-              <span style={{ display: 'inline-block', color: electricPurple, fontWeight: 'bold', letterSpacing: '2px', fontSize: '0.8rem', textTransform: 'uppercase', padding: '5px 15px', background: 'rgba(157,0,255,0.1)', borderRadius: '20px', marginBottom: '15px' }}>
+              <span style={{ display: 'inline-block', color: electricPurple, fontWeight: 'bold', letterSpacing: '2px', fontSize: '0.8rem', textTransform: 'uppercase', padding: '5px 15px', background: 'rgba(var(--accent-rgb),0.1)', borderRadius: '20px', marginBottom: '15px' }}>
                 Servicio 0{i+1}
               </span>
               <h2 style={{ fontSize: 'clamp(2rem, 4vw, 3rem)', fontWeight: 900, textTransform: 'uppercase', margin: '10px 0 20px', lineHeight: 1.1 }}>{srv.title}</h2>

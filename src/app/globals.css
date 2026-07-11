@@ -3,13 +3,22 @@
 @tailwind utilities;
 
 :root {
-  --accent: #9D00FF;
+  --accent: #00F5D4;
+  --accent-rgb: 0, 245, 212;
+  --accent-secondary: #00B4D8;
+  --accent-secondary-rgb: 0, 180, 216;
+  --bg-color: #030712;
+}
+
+@theme {
+  --color-accent: var(--accent);
+  --color-accent-secondary: var(--accent-secondary);
 }
 
 body {
   margin: 0;
   padding: 0;
-  background-color: #000 !important;
+  background-color: var(--bg-color) !important;
   color: #fff;
   overflow-x: hidden;
   -webkit-font-smoothing: antialiased;
