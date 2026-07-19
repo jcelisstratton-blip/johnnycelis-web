@@ -1,3 +1,4 @@
+// @ts-nocheck
 "use client";
 
 import { useState, useEffect, useRef } from "react";
@@ -59,229 +60,343 @@ const SRC = {
 // ACCIONES · why (por qué), how (cómo), pil (a qué apunta), xp, h, res
 // ------------------------------------------------------------
 const GROUPS = [
-  { id: "identidad", name: "Identidad de marca", tasks: [
-    { id: "id-1", date: "2026-07-22", xp: 25, h: 3, pil: ["pos"], title: "Adoptar el brand kit ENCENDIDO en todas las piezas",
-      why: "El kit ya existe y es la fuente de verdad: carbón, rojo señal (≤5%), Archivo Black, radius 2 px. Sin código visual fijo, cada pieza compite contra las demás; la repetición disciplinada construye reconocimiento.",
-      how: ["Instalar tokens y SVG oficiales en las plantillas de cápsula, carrusel y miniatura", "Auditar toda pieza contra el checklist del manual (rojo ≤5%, texto sobre rojo en carbón, cero emojis)", "Congelar: ninguna pieza sale fuera del sistema"],
-      res: "Todas las plantillas de contenido sobre el brand kit oficial", sources: [], integrations: ["Brand kit"] },
-    { id: "id-2", date: "2026-07-23", xp: 30, h: 4, pil: ["pos"], title: "Redactar el manifiesto de una página (voz de marca)",
-      why: "El manifiesto es el filtro editorial: directo, técnico, con filo, frases cortas. Si una pieza no defiende una de las 3 verdades, no se publica.",
-      how: ["Escribir 1 página en la voz del manual: imperativo, sin jerga corporativa, sin disculpas", "Validarlo leyéndolo a cámara: si suena a consultora de diapositivas, reescribir", "Fijarlo como publicación ancla en LinkedIn"],
-      res: "Manifiesto publicado que fija la voz", sources: [], integrations: [] },
-    { id: "id-3", date: "2026-07-25", xp: 30, h: 4, pil: ["pos"], title: "Firma visual: sistema corriendo como sello de cada pieza",
-      why: "El sistema real en pantalla (flujo, dashboard, terminal) es el activo visual imposible de copiar: nadie puede firmar con producción que no tiene.",
-      how: ["Plantilla con línea de estado roja + captura del sistema sobre carbón", "Exportar 3 muestras y verificar legibilidad en móvil", "Regla: toda pieza técnica incluye el sistema corriendo, tratado con el kit"],
-      res: "Sello visual: te reconocen antes de leer el nombre", sources: [SRC.n8nDocs], integrations: ["n8n", "Brand kit"] },
-    { id: "id-4", date: "2026-07-27", xp: 20, h: 3, pil: ["pos"], title: "Set de grabación: alto contraste, texturas industriales",
-      why: "El manual manda: sombras duras, metal, pantallas, cero stock de oficina. El set comunica dominio antes de la primera palabra.",
-      how: ["Montar fondo carbón + corte de luz duro (acento rojo puntual, nunca dominante)", "Grabar test de 2 min con encuadre pantalla + cámara", "Iterar hasta montaje repetible en menos de 15 min"],
-      res: "Set validado y replicable", sources: [], integrations: [] },
-  ]},
-  { id: "bot", name: "Bot de captación (el embudo propio)", tasks: [
-    { id: "bot-1", date: "2026-07-24", xp: 40, h: 4, pil: ["aut", "solo"], title: "Desplegar Evolution API en Coolify (número dedicado)",
-      why: "El bot convierte audiencia en base propia; sin él, todo el contenido drena hacia algoritmos ajenos. Número separado = riesgo de baneo aislado del operativo de Stratt-On.",
-      how: ["Crear servicio en Coolify con la imagen oficial de Evolution API", "Vincular número nuevo exclusivo de marketing (QR)", "Configurar webhook global hacia n8n y probar ida y vuelta"],
-      res: "Instancia estable con webhook activo", sources: [SRC.evo, SRC.coolify], integrations: ["Evolution API", "Coolify"] },
-    { id: "bot-2", date: "2026-07-25", xp: 35, h: 3, pil: ["aut", "solo"], title: "Esquema Supabase: tabla de leads con scoring",
-      why: "Un lead sin estructura es un chat perdido. El score decide quién recibe oferta empresarial, quién entra a lista de mentoría y quién a nutrición.",
-      how: ["Crear tabla leads: origen, palabra clave, rol, tamaño, dolor, score, canal", "Activar RLS con escritura solo vía service role", "Vista de leads calientes (score sobre umbral)"],
-      res: "CRM propio con calificación automática", sources: [SRC.supa, SRC.supaRLS], integrations: ["Supabase"] },
-    { id: "bot-3", date: "2026-07-26", xp: 60, h: 6, pil: ["aut", "pos"], title: "Flujo n8n v1: palabra clave → Blueprint → calificación → registro",
-      why: "El corazón del giro meta: el primer sistema que tu audiencia experimenta es tu propio embudo funcionando. La captación es simultáneamente la demo del servicio.",
-      how: ["Webhook → detección de palabra clave → envío del Blueprint #1", "3 preguntas de calificación con espera de respuesta", "Insert en Supabase con score calculado", "Grabar pantalla de todo: material de la cápsula 01"],
-      res: "Bot en producción + material de la solución 01", sources: [SRC.n8nDocs, SRC.evo], integrations: ["n8n", "Evolution API", "Supabase"] },
-    { id: "bot-4", date: "2026-07-30", xp: 25, h: 2, pil: ["solo"], title: "Captura de email como paso final del bot",
-      why: "WhatsApp es rentado a Meta. El email es el seguro de la base: si cambian las reglas, la relación sigue siendo tuya.",
-      how: ["Paso final: «para enviarte la versión extendida»", "Validar formato y guardar en Supabase", "Etiquetar el lead como doble canal"],
-      res: "Cada lead con respaldo fuera de Meta", sources: [SRC.supa], integrations: ["n8n", "Supabase"] },
-    { id: "bot-5", date: "2026-08-20", xp: 45, h: 6, pil: ["aut", "mon"], title: "Secuencia de nutrición de 5 correos en n8n",
-      why: "La nutrición convierte curiosos en compradores de mentoría sin consumir tus horas. Hacerla en n8n elimina el SaaS de email y alimenta la tesis.",
-      how: ["Redactar los 5 correos: recurso, dolor, caso con métricas, prueba, segmentación", "Orquestar con Wait/Schedule + SMTP propio o Resend", "Registrar aperturas y clics en Supabase"],
-      res: "Nutrición automática sin SaaS de email", sources: [SRC.n8nDocs], integrations: ["n8n", "SMTP"] },
-    { id: "bot-6", date: "2026-08-27", xp: 35, h: 4, pil: ["pos", "mon"], title: "Canal de difusión de WhatsApp (opt-in explícito)",
-      why: "El altavoz unidireccional que complementa a la comunidad: anuncios semanales con apertura muy superior al email en LATAM.",
-      how: ["Crear canal y flujo de opt-in desde el bot", "Aprobar plantillas WABA para reenganche fuera de la ventana de 24 h", "Cadencia fija: 1 envío semanal de valor puro"],
-      res: "Canal de difusión activo y creciendo con permiso", sources: [SRC.waba, SRC.wabaTpl], integrations: ["WhatsApp API"] },
-    { id: "bot-7", date: "2026-09-04", xp: 50, h: 6, pil: ["pos", "solo"], title: "Dashboard público de métricas del embudo",
-      why: "Mostrar métricas reales cada mes es el argumento que ningún competidor imita: transparencia radical como diferenciación.",
-      how: ["Vistas SQL en Supabase: leads/semana, conversión, costo del stack", "Panel simple leyendo esas vistas", "Ritual mensual: mostrarlo en pantalla en una cápsula"],
-      res: "Métricas en vivo convertidas en contenido", sources: [SRC.supa], integrations: ["Supabase", "n8n"] },
-  ]},
-  { id: "difusion", name: "Distribución multicanal + Comunidad", tasks: [
-    { id: "df-1", date: "2026-07-31", xp: 25, h: 3, pil: ["pos"], title: "Matriz de formatos por plataforma (YT · IG · FB · TT · LI)",
-      why: "Cada red premia un formato distinto; republicar lo mismo en las cinco es ser invisible en todas. La matriz decide una vez para no decidir cada semana.",
-      how: ["Definir pieza, formato, duración y gancho por red", "Documentar specs: proporciones, duraciones, subtítulos, primer renglón del caption", "Fijar la matriz en el manual de contenido"],
-      res: "Matriz de distribución fija que alimenta al publicador", sources: [], integrations: ["Brand kit"] },
-    { id: "df-2", date: "2026-08-06", xp: 35, h: 3, pil: ["pos", "mon"], title: "Crear la comunidad de WhatsApp de la marca",
-      why: "La comunidad es la plaza central: la base recibe primero cada publicación sin depender del alcance orgánico. También es el semillero de la mentoría a escala.",
-      how: ["Crear comunidad sobre el número de marketing (grupos: anuncios, builders, general)", "Reglas de convivencia y bienvenida automatizada vía Evolution API", "Opt-in desde el bot: todo lead calificado recibe invitación"],
-      res: "Comunidad activa con onboarding automático", sources: [SRC.evo, SRC.waba], integrations: ["Evolution API", "n8n"] },
-    { id: "df-3", date: "2026-08-07", xp: 40, h: 4, pil: ["aut", "pos"], title: "Flujo n8n: dispersión automática de publicaciones",
-      why: "Cada publicación debe llegar a la base sin anunciarla a mano. La dispersión propia es el multiplicador que no depende de algoritmos.",
-      how: ["Trigger: fila «publicado» en la cola de Supabase", "Componer mensaje con gancho + enlace según la pieza", "Enviar a comunidad y canal vía Evolution API (máx. 1 aviso/día)"],
-      res: "Toda publicación anunciada a la base en minutos", sources: [SRC.evo], integrations: ["n8n", "Evolution API", "Supabase"] },
-    { id: "df-4", date: "2026-08-22", xp: 45, h: 6, pil: ["aut"], title: "Credenciales y APIs: YouTube Data, Meta Graph (IG + FB), LinkedIn",
-      why: "Publicar a mano en 5 redes mata la cadencia de una empresa de 1 persona. Las credenciales son el peaje que se paga una sola vez.",
-      how: ["Crear apps y tokens: YouTube Data v3, Meta Graph (IG + Pages), LinkedIn", "Scopes mínimos y renovación de tokens", "Guardar credenciales en n8n y publicar prueba por red"],
-      res: "4 redes publicables por API desde n8n", sources: [SRC.ytApi, SRC.metaGraph, SRC.igApi, SRC.liApi], integrations: ["n8n", "YouTube", "Meta Graph", "LinkedIn"] },
-    { id: "df-5", date: "2026-08-25", xp: 30, h: 4, pil: ["aut"], title: "TikTok: Content Posting API o cola semiautomática",
-      why: "La API de TikTok exige aprobación y la cadencia no puede esperar burocracia. Plan A (API) y plan B (cola con notificación) desde el día uno.",
-      how: ["Solicitar acceso a la Content Posting API", "Mientras: flujo n8n que deja video + caption listos y notifica para publicar en 2 taps", "Migrar a publicación directa al aprobarse"],
-      res: "TikTok dentro de la cadencia sin fricción", sources: [SRC.tiktok], integrations: ["n8n", "TikTok"] },
-    { id: "df-6", date: "2026-09-02", xp: 70, h: 10, pil: ["aut", "solo"], title: "Publicador multicanal en n8n (extensión del pipeline)",
-      why: "El cierre del sistema: una pieza madre entra y seis destinos se llenan solos. La distribución self-hosted es ventaja operativa y caso de estudio a la vez.",
-      how: ["Cola aprobada en Supabase → adaptación por red con Gemini (caption, hashtags, gancho)", "Publicar vía APIs: YouTube, IG, FB, LinkedIn (+ TikTok según plan)", "Registrar IDs/URLs en Supabase y disparar dispersión a la comunidad", "Grabar el sistema funcionando: es una solución de la semana"],
-      res: "1 sesión semanal → 6 destinos publicados y avisados", sources: [SRC.gemini, SRC.n8nDocs], integrations: ["n8n", "Gemini API", "Supabase", "Evolution API"] },
-    { id: "df-7", date: "2026-09-09", xp: 35, h: 4, pil: ["solo", "mon"], title: "Atribución por red: palabras clave y UTMs",
-      why: "Sin atribución no sabes qué red trae compradores y cuál solo vistas. La palabra clave de origen convierte al bot en tu analítica.",
-      how: ["Palabra clave distinta por red (BLUEPRINT-YT, -TT, -IG, -LI, -FB)", "UTMs en todo enlace saliente", "Columna «origen» en Supabase + vista de conversión por plataforma"],
-      res: "Cada lead con red de origen medible", sources: [SRC.supa], integrations: ["n8n", "Supabase"] },
-    { id: "df-8", date: "2026-10-03", xp: 30, h: 3, pil: ["solo"], title: "Optimización por datos: matriz de rendimiento por red",
-      why: "Una persona no sostiene 5 redes con el mismo esfuerzo. Los datos deciden dónde se duplica la apuesta y dónde se publica en piloto automático.",
-      how: ["Vista en Supabase: leads, conversión y esfuerzo por red", "Clasificar: apostar / mantener / automatizar sin mirar", "Ajustar la matriz de formatos con el veredicto"],
-      res: "Esfuerzo redistribuido según conversión real", sources: [], integrations: ["Supabase"] },
-  ]},
-  { id: "t1", name: "Temporada 1 · «Construyendo la máquina»", tasks: [
-    { id: "t1-1", date: "2026-07-29", xp: 60, h: 8, pil: ["pos"], title: "Grabar soluciones 01 y 02 en lote",
-      why: "Grabar por lotes protege la cadencia contra tus dos roles ejecutivos. Las dos primeras cápsulas fijan el estándar de toda la serie.",
-      how: ["Guion con payoff en pantalla en los primeros 3 segundos", "Sesión única para ambas soluciones (cápsula + video soporte)", "Editar con plantillas del kit y dejar programadas"],
-      res: "Soluciones 01 y 02 en cola de publicación", sources: [SRC.ytStudio], integrations: ["YouTube"] },
-    { id: "t1-3", date: "2026-08-08", xp: 40, h: 4, pil: ["pos"], title: "Publicar la tabla de costos: stack propio vs SaaS en USD",
-      why: "Una cifra concreta viaja más lejos que cualquier opinión. Es la tesis de soberanía convertida en número citable.",
-      how: ["Calcular costo real mensual del stack (VPS + Coolify)", "Cotizar el equivalente SaaS en USD", "Publicar comparativa como carrusel + bitácora"],
-      res: "La pieza de autoridad citable de la temporada", sources: [], integrations: [] },
-    { id: "t1-4", date: "2026-08-30", xp: 70, h: 10, pil: ["aut", "solo"], title: "Pipeline editorial automatizado en n8n",
-      why: "La prueba viviente de la empresa de 1 persona: la semana completa de contenido con ~2 horas humanas. Sin esto, la cadencia muere en octubre.",
-      how: ["Transcribir cada video soporte vía API", "Generar borradores de derivados con Gemini", "Cola de revisión humana en Supabase + entrega al publicador"],
-      res: "Cascada semanal en ~2 h humanas", sources: [SRC.gemini, SRC.n8nDocs], integrations: ["n8n", "Gemini API", "Supabase"] },
-    { id: "t1-7", date: "2026-09-25", xp: 45, h: 6, pil: ["pos", "mon"], title: "Vitrina de casos empresariales: 3 sistemas de clientes corriendo",
-      why: "La escalada de mentorías y el ticket empresarial se venden sobre una sola prueba: que ejecutas soluciones empresariales que de verdad funcionan. Entregado, documentado y corriendo — no promesas.",
-      how: ["Seleccionar 3 sistemas entregados con autorización (cláusula de caso)", "Documentar cada uno: problema → sistema → métricas de operación real (horas ahorradas, plata, uptime)", "Publicarlos como página + cápsulas y usarlos en toda oferta comercial"],
-      res: "3 casos empresariales verificables publicados", sources: [SRC.supa], integrations: ["Supabase", "Brand kit"] },
-    { id: "t1-6", date: "2026-09-16", xp: 15, h: 1, pil: ["solo"], title: "Checkpoint de cadencia (regla dura)",
-      why: "Las series mueren por inconsistencia, no por frecuencia baja. Esta regla decide con datos y sin culpa.",
-      how: ["Revisar cadencia real de las primeras 8 semanas", "Decidir: sostener semanal o pasar a quincenal", "Documentar la decisión en la bitácora del panel"],
-      res: "Decisión de cadencia tomada con datos", sources: [], integrations: [] },
-    { id: "t1-5", date: "2026-10-10", xp: 50, h: 6, pil: ["pos", "mon"], title: "Cierre T1: la máquina completa, sus costos y sus fallos",
-      why: "Cerrar el arco con métricas y fallos reales convierte la temporada en credencial comercial. La audiencia vio nacer el sistema donde está registrada.",
-      how: ["Compilar métricas del dashboard", "Guion de retrospectiva: qué funcionó, qué falló, cuánto costó", "Publicar con CTA a Power Hour y lista de mentoría"],
-      res: "Cierre de arco = prueba social estructural", sources: [], integrations: ["YouTube"] },
-  ]},
-  { id: "t2", name: "Temporada 2 · «Anatomía de Wabid»", tasks: [
-    { id: "t2-1", date: "2026-10-17", xp: 35, h: 5, pil: ["pos"], title: "Guion del arco T2: de proyecto a producto",
-      why: "Sin arco narrativo, T2 sería un demo largo. El guion convierte a Wabid en historia de producto con tensión real: ¿se licencia o no?",
-      how: ["Mapear las 11 soluciones: pujas, catálogo, bidireccionalidad, carga", "Definir el cliffhanger de cada semana", "Calendarizar grabación por lotes quincenal"],
-      res: "11 soluciones guionadas con tensión narrativa", sources: [], integrations: [] },
-    { id: "t2-2", date: "2026-10-24", xp: 55, h: 6, pil: ["pos", "mon"], title: "Solución 12: WhatsApp operando una plataforma de subastas",
-      why: "La pieza ancla instala la credencial empresarial definitiva: una interfaz familiar moviendo software complejo real, en producción.",
-      how: ["Preparar demo con datos reales de Wabid", "Grabar el flujo completo: puja → sistema → confirmación", "Cerrar con la pregunta comercial: ¿qué sector lo necesita?"],
-      res: "Wabid como credencial pública", sources: [SRC.evo], integrations: ["Evolution API", "Supabase", "n8n"] },
-    { id: "t2-3", date: "2026-11-21", xp: 60, h: 8, pil: ["pos"], title: "Prueba de fuego: Wabid bajo carga",
-      why: "El contenido técnico profundo es incopiable para quien no tiene el producto, y a la vez es QA real antes de licenciar.",
-      how: ["Simular concurrencia de pujas y medir", "Documentar colas, integridad y decisiones de arquitectura", "Publicar hallazgos, incluidos los fallos"],
-      res: "Autoridad incopiable + hallazgos de producto", sources: [SRC.supa], integrations: ["Supabase"] },
-    { id: "t2-4", date: "2026-12-19", xp: 45, h: 4, pil: ["mon"], title: "Documentar primeras conversaciones de licenciamiento",
-      why: "Mostrar la negociación (anonimizada) crea urgencia de mercado y valida el precio de la licencia en público.",
-      how: ["Prospectar: remates ganaderos, casas de subastas, liquidadores", "Registrar objeciones y aprendizajes", "Publicar el estado del pipeline como contenido"],
-      res: "3 o más conversaciones de licencia activas y visibles", sources: [], integrations: [] },
-    { id: "t2-5", date: "2027-01-02", xp: 40, h: 5, pil: ["pos"], title: "Pieza especial: planeación pública 2027",
-      why: "El accountability público es el gancho de retención hacia el próximo año: la audiencia vuelve a ver si cumpliste.",
-      how: ["Compilar resultados del semestre", "Declarar compromisos medibles de H1-2027 (incluida la meta de 500 mentoreados)", "Publicar y fijar como pieza ancla"],
-      res: "Compromisos 2027 publicados", sources: [], integrations: ["YouTube"] },
-  ]},
-  { id: "money", name: "Monetización · Mentoría a escala + Empresarial", tasks: [
-    { id: "mo-1", date: "2026-09-23", xp: 50, h: 5, pil: ["mon"], title: "Lanzar Power Hour (diagnóstico pago)",
-      why: "El primer peaje del embudo: valida que la audiencia paga por tu criterio antes de escalar. Filtra curiosos de compradores.",
-      how: ["Oferta: 60 min de diagnóstico de operación + informe", "Cobro vía Wompi, agenda vía Cal.com", "Ofrecer solo a leads con score alto"],
-      res: "3 o más diagnósticos vendidos: primer ingreso del embudo", sources: [SRC.wompi], integrations: ["Supabase", "Wompi"] },
-    { id: "mo-2", date: "2026-09-30", xp: 45, h: 4, pil: ["mon"], title: "Oferta empresarial Stratt-On: sistema entregado y corriendo",
-      why: "El decisor precalentado por la serie y la vitrina de casos cierra en una llamada. La promesa es la del manual: entregado, documentado y corriendo. Siguiente.",
-      how: ["Definir paquete: diagnóstico → implementación → retainer, con casos verificables como respaldo", "El bot enruta perfil «decisor con presupuesto» a la agenda", "Guion de llamada de cierre (no de venta)"],
-      res: "6 o más diagnósticos/mes agendados desde el bot", sources: [SRC.calcom], integrations: ["Cal.com", "n8n"] },
-    { id: "mo-3", date: "2026-10-21", xp: 80, h: 15, pil: ["mon", "pos"], title: "MENTORÍA ON · Cohorte Fundadora (10 plazas)",
-      why: "El primer eslabón de la escalada masiva: valida el programa, fabrica testimonios y define el material que luego se entregará a 50+ sin tus horas. Tu credencial pedagógica universitaria es la ventaja que el nicho no tiene.",
-      how: ["Diseñar 6 semanas: del estado manual al estado encendido (despliegue, operación, costos, escalado)", "Lanzamiento semilla a comunidad y base con precio fundador", "Documentar TODO el programa: cada sesión es material de la versión a escala"],
-      res: "10/10 plazas: programa validado y grabado", sources: [SRC.n8nHost, SRC.coolify], integrations: ["Coolify", "n8n"] },
-    { id: "mo-7", date: "2026-12-02", xp: 85, h: 16, pil: ["mon", "solo"], title: "MENTORÍA ON · Cohorte 2 a escala (50+ plazas)",
-      why: "La escalada masiva exige que la entrega no dependa de tus horas: contenido grabado, comunidad, sesiones grupales y seguimiento automatizado convierten la mentoría en producto escalable.",
-      how: ["Empaquetar la Fundadora: grabaciones, guías y blueprints por módulo", "Entrega automatizada: acceso, onboarding, tareas y seguimiento vía bot + Supabase", "Lanzar 50+ plazas a lista de espera, comunidad y las 5 redes con testimonios"],
-      res: "50+ mentoreados con entrega mayormente automatizada", sources: [SRC.supa], integrations: ["n8n", "Supabase", "Evolution API"] },
-    { id: "mo-4", date: "2026-11-25", xp: 70, h: 12, pil: ["mon", "solo"], title: "Abrir La Bóveda en evergreen",
-      why: "Ingreso que no consume tus horas y material de apoyo de la mentoría. La empresa de 1 persona necesita ingresos sin agenda.",
-      how: ["Curar catálogo con los blueprints más pedidos + feedback de la Fundadora", "Acceso y cobro sobre Supabase + Wompi", "Regla: solo abre porque la demanda gratuita la validó"],
-      res: "Primer MRR documentado", sources: [SRC.wompi, SRC.supa], integrations: ["Supabase", "Wompi"] },
-    { id: "mo-5", date: "2026-12-09", xp: 30, h: 3, pil: ["mon", "pos"], title: "Testimonios en video de la Fundadora",
-      why: "Sin prueba social, la Cohorte 2 y la Bóveda son landings frías. Los testimonios son el combustible de la escalada.",
-      how: ["Grabar 5 o más testimonios mostrando el sistema de cada mentoreado corriendo", "Editar en formato corto con el kit", "Integrarlos en landing, las 5 redes y la comunidad"],
-      res: "5 o más testimonios editados en la landing", sources: [], integrations: ["Brand kit"] },
-    { id: "mo-8", date: "2026-12-23", xp: 60, h: 8, pil: ["mon", "aut"], title: "Mentoría evergreen 2027: lista de espera y admisión automatizada",
-      why: "El objetivo no es una cohorte llena: es un sistema de admisión permanente. La lista de espera convierte cada cápsula en demanda futura medible.",
-      how: ["Flujo de lista de espera en el bot: palabra clave MENTORIA por red", "Admisión automatizada: calificación, cupo, cobro (Wompi) y onboarding sin intervención", "Meta pública 2027: 500 mentoreados, declarada en el informe de cierre"],
-      res: "Lista de espera creciendo sola + admisión lista para 2027", sources: [SRC.wompi], integrations: ["n8n", "Supabase", "Wompi"] },
-    { id: "mo-6", date: "2026-12-25", xp: 35, h: 4, pil: ["mon"], title: "Pauta en Meta solo sobre las 3 cápsulas ganadoras",
-      why: "Pautar sobre ganadores orgánicos compra alcance con riesgo mínimo. Destino: la lista de espera de mentoría, no el feed.",
-      how: ["Identificar las 3 cápsulas con mejor conversión al bot (atribución por palabra clave)", "Campaña acotada de remarketing a la base + lookalike", "Medir CAC contra la línea base orgánica"],
-      res: "CAC medido con datos, no con fe", sources: [SRC.metaAds], integrations: ["Meta Ads"] },
-  ]},
-  { id: "infra", name: "Infraestructura y soberanía", tasks: [
-    { id: "in-1", date: "2026-08-04", xp: 25, h: 2, pil: ["solo"], title: "Cláusula «caso de estudio» en contratos nuevos",
-      why: "Sin permiso contractual no hay vitrina de casos empresariales. Se firma antes de necesitarlo.",
-      how: ["Redactar cláusula de uso anonimizado con revisión del cliente", "Incluirla en toda propuesta desde julio", "Registro de qué cliente autorizó qué"],
-      res: "Riesgo de confidencialidad cubierto", sources: [], integrations: [] },
-    { id: "in-2", date: "2026-09-20", xp: 40, h: 5, pil: ["aut", "solo"], title: "Desplegar Cal.com self-hosted",
-      why: "Cada pieza de SaaS rentado que reemplazas es margen, contenido y coherencia. La agenda es la puerta del ticket empresarial: debe ser tuya.",
-      how: ["Desplegar Cal.com en Coolify", "Conectar a n8n: confirmaciones, recordatorios y scoring", "Migrar todos los enlaces de agenda"],
-      res: "Agenda soberana integrada al CRM", sources: [SRC.calcom, SRC.coolify], integrations: ["Cal.com", "Coolify", "n8n"] },
-    { id: "in-3", date: "2026-09-27", xp: 40, h: 5, pil: ["mon", "solo"], title: "Integrar Wompi/Bold para cobros en pesos",
-      why: "Cobrar en COP sobre pasarela local cierra el argumento de soberanía en la caja: facturas y cobras en pesos.",
-      how: ["Crear cuenta y llaves de Wompi/Bold", "Flujo n8n: pago confirmado → acceso/agenda + registro en Supabase", "Probar el ciclo completo con un cobro real"],
-      res: "Caja en COP de punta a punta", sources: [SRC.wompi], integrations: ["Wompi", "n8n"] },
-    { id: "in-4", date: "2026-10-30", xp: 35, h: 4, pil: ["aut", "solo"], title: "Chatwoot como bandeja de leads calientes",
-      why: "El bot escala; tu atención no. Chatwoot decide qué conversación merece a un humano.",
-      how: ["Conectar Evolution API a Chatwoot", "Regla en n8n: score sobre umbral → bandeja humana", "SLA personal: leads calientes en menos de 4 h"],
-      res: "Cero leads calientes perdidos", sources: [SRC.chatwoot], integrations: ["Chatwoot", "Evolution API", "n8n"] },
-    { id: "in-5", date: "2026-12-30", xp: 30, h: 4, pil: ["solo", "pos"], title: "Auditoría semestral del stack",
-      why: "Convierte la tesis self-hosted en cifra contable publicable. El argumento de soberanía cierra con tu propia contabilidad.",
-      how: ["Inventariar consumos, licencias y costos reales", "Comparar contra el equivalente SaaS en USD", "Publicar la cifra en el informe de cierre"],
-      res: "Cifra pública: costo real vs equivalente SaaS", sources: [], integrations: [] },
-  ]},
-  { id: "kpi", name: "Control mensual (KPIs)", tasks: [
-    { id: "kp-1", date: "2026-08-15", xp: 20, h: 2, pil: ["solo"], title: "Revisión julio: bot + comunidad operando, soluciones 1–3 al aire",
-      why: "La revisión mensual es el sistema operativo del fundador solitario: decide con datos. Julio fija la línea base del semestre.",
-      how: ["Extraer métricas del dashboard y registrar el feedback de julio en el panel", "Registrar retención de video soporte (meta sobre 45%) y primeros leads", "Ajustar agosto con lo aprendido"],
-      res: "Línea base documentada + feedback registrado", sources: [], integrations: [] },
-    { id: "kp-2", date: "2026-09-15", xp: 20, h: 2, pil: ["solo"], title: "Revisión agosto: publicador multicanal + pipeline",
-      why: "Agosto valida las automatizaciones críticas: si el publicador no ahorra horas y los blueprints no se importan, se corrige aquí.",
-      how: ["Medir tasa de importación de blueprints (meta sobre 30%)", "Verificar publicación automática en 5 redes y dispersión a la comunidad", "Calcular costo del stack vs SaaS y publicarlo"],
-      res: "Distribución verificada + primer informe de costos", sources: [], integrations: [] },
-    { id: "kp-3", date: "2026-10-15", xp: 25, h: 2, pil: ["solo"], title: "Revisión septiembre: flujo comercial + vitrina",
-      why: "Septiembre es donde la atención se convierte en caja. Sin diagnósticos y sin vitrina de casos, octubre no puede lanzar la Fundadora.",
-      how: ["Verificar 250+ leads/mes y 6+ diagnósticos agendados", "Confirmar vitrina de 3 casos empresariales publicada", "Go/no-go de la Cohorte Fundadora"],
-      res: "Embudo comercial medido de punta a punta", sources: [], integrations: [] },
-    { id: "kp-4", date: "2026-11-15", xp: 25, h: 2, pil: ["solo"], title: "Revisión octubre: Fundadora 10/10",
-      why: "Si la Fundadora no llena, la señal es de oferta o de audiencia. Diagnosticar con datos antes de intentar la escala de 50+.",
-      how: ["Verificar plazas vendidas y asistencia real", "Registrar objeciones de quienes no compraron", "Veredicto documentado: ¿la Cohorte 2 va con 50+?"],
-      res: "Veredicto del programa con datos", sources: [], integrations: [] },
-    { id: "kp-5", date: "2026-12-15", xp: 25, h: 2, pil: ["solo"], title: "Revisión noviembre: Cohorte 2 + Bóveda",
-      why: "Noviembre mide si la escalada nació sana: entrega automatizada funcionando y MRR inicial de la Bóveda.",
-      how: ["Medir plazas de la Cohorte 2 y carga real de tus horas por mentoreado", "Documentar MRR inicial y conversión de landing (sobre 2.5%)", "Ajustar oferta o entrega con esos datos"],
-      res: "Escalada medida: horas/mentoreado y MRR", sources: [], integrations: [] },
-    { id: "kp-6", date: "2027-01-04", xp: 40, h: 4, pil: ["solo", "pos"], title: "Cierre H2: informe público de resultados",
-      why: "La marca rinde cuentas en público: el acto final de transparencia radical y el contenido de mayor confianza del año.",
-      how: ["Compilar todos los KPIs y el feedback acción por acción", "Informe honesto: cumplido, fallado, aprendido — y la meta de 500 mentoreados 2027", "Publicarlo en las 5 redes y la comunidad"],
-      res: "Informe H2 publicado", sources: [], integrations: [] },
-  ]},
+  {
+    id: "identidad", name: "Identidad de marca", tasks: [
+      {
+        id: "id-1", date: "2026-07-22", xp: 25, h: 3, pil: ["pos"], title: "Adoptar el brand kit ENCENDIDO en todas las piezas",
+        why: "El kit ya existe y es la fuente de verdad: carbón, rojo señal (≤5%), Archivo Black, radius 2 px. Sin código visual fijo, cada pieza compite contra las demás; la repetición disciplinada construye reconocimiento.",
+        how: ["Instalar tokens y SVG oficiales en las plantillas de cápsula, carrusel y miniatura", "Auditar toda pieza contra el checklist del manual (rojo ≤5%, texto sobre rojo en carbón, cero emojis)", "Congelar: ninguna pieza sale fuera del sistema"],
+        res: "Todas las plantillas de contenido sobre el brand kit oficial", sources: [], integrations: ["Brand kit"]
+      },
+      {
+        id: "id-2", date: "2026-07-23", xp: 30, h: 4, pil: ["pos"], title: "Redactar el manifiesto de una página (voz de marca)",
+        why: "El manifiesto es el filtro editorial: directo, técnico, con filo, frases cortas. Si una pieza no defiende una de las 3 verdades, no se publica.",
+        how: ["Escribir 1 página en la voz del manual: imperativo, sin jerga corporativa, sin disculpas", "Validarlo leyéndolo a cámara: si suena a consultora de diapositivas, reescribir", "Fijarlo como publicación ancla en LinkedIn"],
+        res: "Manifiesto publicado que fija la voz", sources: [], integrations: []
+      },
+      {
+        id: "id-3", date: "2026-07-25", xp: 30, h: 4, pil: ["pos"], title: "Firma visual: sistema corriendo como sello de cada pieza",
+        why: "El sistema real en pantalla (flujo, dashboard, terminal) es el activo visual imposible de copiar: nadie puede firmar con producción que no tiene.",
+        how: ["Plantilla con línea de estado roja + captura del sistema sobre carbón", "Exportar 3 muestras y verificar legibilidad en móvil", "Regla: toda pieza técnica incluye el sistema corriendo, tratado con el kit"],
+        res: "Sello visual: te reconocen antes de leer el nombre", sources: [SRC.n8nDocs], integrations: ["n8n", "Brand kit"]
+      },
+      {
+        id: "id-4", date: "2026-07-27", xp: 20, h: 3, pil: ["pos"], title: "Set de grabación: alto contraste, texturas industriales",
+        why: "El manual manda: sombras duras, metal, pantallas, cero stock de oficina. El set comunica dominio antes de la primera palabra.",
+        how: ["Montar fondo carbón + corte de luz duro (acento rojo puntual, nunca dominante)", "Grabar test de 2 min con encuadre pantalla + cámara", "Iterar hasta montaje repetible en menos de 15 min"],
+        res: "Set validado y replicable", sources: [], integrations: []
+      },
+    ]
+  },
+  {
+    id: "bot", name: "Bot de captación (el embudo propio)", tasks: [
+      {
+        id: "bot-1", date: "2026-07-24", xp: 40, h: 4, pil: ["aut", "solo"], title: "Desplegar Evolution API en Coolify (número dedicado)",
+        why: "El bot convierte audiencia en base propia; sin él, todo el contenido drena hacia algoritmos ajenos. Número separado = riesgo de baneo aislado del operativo de Stratt-On.",
+        how: ["Crear servicio en Coolify con la imagen oficial de Evolution API", "Vincular número nuevo exclusivo de marketing (QR)", "Configurar webhook global hacia n8n y probar ida y vuelta"],
+        res: "Instancia estable con webhook activo", sources: [SRC.evo, SRC.coolify], integrations: ["Evolution API", "Coolify"]
+      },
+      {
+        id: "bot-2", date: "2026-07-25", xp: 35, h: 3, pil: ["aut", "solo"], title: "Esquema Supabase: tabla de leads con scoring",
+        why: "Un lead sin estructura es un chat perdido. El score decide quién recibe oferta empresarial, quién entra a lista de mentoría y quién a nutrición.",
+        how: ["Crear tabla leads: origen, palabra clave, rol, tamaño, dolor, score, canal", "Activar RLS con escritura solo vía service role", "Vista de leads calientes (score sobre umbral)"],
+        res: "CRM propio con calificación automática", sources: [SRC.supa, SRC.supaRLS], integrations: ["Supabase"]
+      },
+      {
+        id: "bot-3", date: "2026-07-26", xp: 60, h: 6, pil: ["aut", "pos"], title: "Flujo n8n v1: palabra clave → Blueprint → calificación → registro",
+        why: "El corazón del giro meta: el primer sistema que tu audiencia experimenta es tu propio embudo funcionando. La captación es simultáneamente la demo del servicio.",
+        how: ["Webhook → detección de palabra clave → envío del Blueprint #1", "3 preguntas de calificación con espera de respuesta", "Insert en Supabase con score calculado", "Grabar pantalla de todo: material de la cápsula 01"],
+        res: "Bot en producción + material de la solución 01", sources: [SRC.n8nDocs, SRC.evo], integrations: ["n8n", "Evolution API", "Supabase"]
+      },
+      {
+        id: "bot-4", date: "2026-07-30", xp: 25, h: 2, pil: ["solo"], title: "Captura de email como paso final del bot",
+        why: "WhatsApp es rentado a Meta. El email es el seguro de la base: si cambian las reglas, la relación sigue siendo tuya.",
+        how: ["Paso final: «para enviarte la versión extendida»", "Validar formato y guardar en Supabase", "Etiquetar el lead como doble canal"],
+        res: "Cada lead con respaldo fuera de Meta", sources: [SRC.supa], integrations: ["n8n", "Supabase"]
+      },
+      {
+        id: "bot-5", date: "2026-08-20", xp: 45, h: 6, pil: ["aut", "mon"], title: "Secuencia de nutrición de 5 correos en n8n",
+        why: "La nutrición convierte curiosos en compradores de mentoría sin consumir tus horas. Hacerla en n8n elimina el SaaS de email y alimenta la tesis.",
+        how: ["Redactar los 5 correos: recurso, dolor, caso con métricas, prueba, segmentación", "Orquestar con Wait/Schedule + SMTP propio o Resend", "Registrar aperturas y clics en Supabase"],
+        res: "Nutrición automática sin SaaS de email", sources: [SRC.n8nDocs], integrations: ["n8n", "SMTP"]
+      },
+      {
+        id: "bot-6", date: "2026-08-27", xp: 35, h: 4, pil: ["pos", "mon"], title: "Canal de difusión de WhatsApp (opt-in explícito)",
+        why: "El altavoz unidireccional que complementa a la comunidad: anuncios semanales con apertura muy superior al email en LATAM.",
+        how: ["Crear canal y flujo de opt-in desde el bot", "Aprobar plantillas WABA para reenganche fuera de la ventana de 24 h", "Cadencia fija: 1 envío semanal de valor puro"],
+        res: "Canal de difusión activo y creciendo con permiso", sources: [SRC.waba, SRC.wabaTpl], integrations: ["WhatsApp API"]
+      },
+      {
+        id: "bot-7", date: "2026-09-04", xp: 50, h: 6, pil: ["pos", "solo"], title: "Dashboard público de métricas del embudo",
+        why: "Mostrar métricas reales cada mes es el argumento que ningún competidor imita: transparencia radical como diferenciación.",
+        how: ["Vistas SQL en Supabase: leads/semana, conversión, costo del stack", "Panel simple leyendo esas vistas", "Ritual mensual: mostrarlo en pantalla en una cápsula"],
+        res: "Métricas en vivo convertidas en contenido", sources: [SRC.supa], integrations: ["Supabase", "n8n"]
+      },
+    ]
+  },
+  {
+    id: "difusion", name: "Distribución multicanal + Comunidad", tasks: [
+      {
+        id: "df-1", date: "2026-07-31", xp: 25, h: 3, pil: ["pos"], title: "Matriz de formatos por plataforma (YT · IG · FB · TT · LI)",
+        why: "Cada red premia un formato distinto; republicar lo mismo en las cinco es ser invisible en todas. La matriz decide una vez para no decidir cada semana.",
+        how: ["Definir pieza, formato, duración y gancho por red", "Documentar specs: proporciones, duraciones, subtítulos, primer renglón del caption", "Fijar la matriz en el manual de contenido"],
+        res: "Matriz de distribución fija que alimenta al publicador", sources: [], integrations: ["Brand kit"]
+      },
+      {
+        id: "df-2", date: "2026-08-06", xp: 35, h: 3, pil: ["pos", "mon"], title: "Crear la comunidad de WhatsApp de la marca",
+        why: "La comunidad es la plaza central: la base recibe primero cada publicación sin depender del alcance orgánico. También es el semillero de la mentoría a escala.",
+        how: ["Crear comunidad sobre el número de marketing (grupos: anuncios, builders, general)", "Reglas de convivencia y bienvenida automatizada vía Evolution API", "Opt-in desde el bot: todo lead calificado recibe invitación"],
+        res: "Comunidad activa con onboarding automático", sources: [SRC.evo, SRC.waba], integrations: ["Evolution API", "n8n"]
+      },
+      {
+        id: "df-3", date: "2026-08-07", xp: 40, h: 4, pil: ["aut", "pos"], title: "Flujo n8n: dispersión automática de publicaciones",
+        why: "Cada publicación debe llegar a la base sin anunciarla a mano. La dispersión propia es el multiplicador que no depende de algoritmos.",
+        how: ["Trigger: fila «publicado» en la cola de Supabase", "Componer mensaje con gancho + enlace según la pieza", "Enviar a comunidad y canal vía Evolution API (máx. 1 aviso/día)"],
+        res: "Toda publicación anunciada a la base en minutos", sources: [SRC.evo], integrations: ["n8n", "Evolution API", "Supabase"]
+      },
+      {
+        id: "df-4", date: "2026-08-22", xp: 45, h: 6, pil: ["aut"], title: "Credenciales y APIs: YouTube Data, Meta Graph (IG + FB), LinkedIn",
+        why: "Publicar a mano en 5 redes mata la cadencia de una empresa de 1 persona. Las credenciales son el peaje que se paga una sola vez.",
+        how: ["Crear apps y tokens: YouTube Data v3, Meta Graph (IG + Pages), LinkedIn", "Scopes mínimos y renovación de tokens", "Guardar credenciales en n8n y publicar prueba por red"],
+        res: "4 redes publicables por API desde n8n", sources: [SRC.ytApi, SRC.metaGraph, SRC.igApi, SRC.liApi], integrations: ["n8n", "YouTube", "Meta Graph", "LinkedIn"]
+      },
+      {
+        id: "df-5", date: "2026-08-25", xp: 30, h: 4, pil: ["aut"], title: "TikTok: Content Posting API o cola semiautomática",
+        why: "La API de TikTok exige aprobación y la cadencia no puede esperar burocracia. Plan A (API) y plan B (cola con notificación) desde el día uno.",
+        how: ["Solicitar acceso a la Content Posting API", "Mientras: flujo n8n que deja video + caption listos y notifica para publicar en 2 taps", "Migrar a publicación directa al aprobarse"],
+        res: "TikTok dentro de la cadencia sin fricción", sources: [SRC.tiktok], integrations: ["n8n", "TikTok"]
+      },
+      {
+        id: "df-6", date: "2026-09-02", xp: 70, h: 10, pil: ["aut", "solo"], title: "Publicador multicanal en n8n (extensión del pipeline)",
+        why: "El cierre del sistema: una pieza madre entra y seis destinos se llenan solos. La distribución self-hosted es ventaja operativa y caso de estudio a la vez.",
+        how: ["Cola aprobada en Supabase → adaptación por red con Gemini (caption, hashtags, gancho)", "Publicar vía APIs: YouTube, IG, FB, LinkedIn (+ TikTok según plan)", "Registrar IDs/URLs en Supabase y disparar dispersión a la comunidad", "Grabar el sistema funcionando: es una solución de la semana"],
+        res: "1 sesión semanal → 6 destinos publicados y avisados", sources: [SRC.gemini, SRC.n8nDocs], integrations: ["n8n", "Gemini API", "Supabase", "Evolution API"]
+      },
+      {
+        id: "df-7", date: "2026-09-09", xp: 35, h: 4, pil: ["solo", "mon"], title: "Atribución por red: palabras clave y UTMs",
+        why: "Sin atribución no sabes qué red trae compradores y cuál solo vistas. La palabra clave de origen convierte al bot en tu analítica.",
+        how: ["Palabra clave distinta por red (BLUEPRINT-YT, -TT, -IG, -LI, -FB)", "UTMs en todo enlace saliente", "Columna «origen» en Supabase + vista de conversión por plataforma"],
+        res: "Cada lead con red de origen medible", sources: [SRC.supa], integrations: ["n8n", "Supabase"]
+      },
+      {
+        id: "df-8", date: "2026-10-03", xp: 30, h: 3, pil: ["solo"], title: "Optimización por datos: matriz de rendimiento por red",
+        why: "Una persona no sostiene 5 redes con el mismo esfuerzo. Los datos deciden dónde se duplica la apuesta y dónde se publica en piloto automático.",
+        how: ["Vista en Supabase: leads, conversión y esfuerzo por red", "Clasificar: apostar / mantener / automatizar sin mirar", "Ajustar la matriz de formatos con el veredicto"],
+        res: "Esfuerzo redistribuido según conversión real", sources: [], integrations: ["Supabase"]
+      },
+    ]
+  },
+  {
+    id: "t1", name: "Temporada 1 · «Construyendo la máquina»", tasks: [
+      {
+        id: "t1-1", date: "2026-07-29", xp: 60, h: 8, pil: ["pos"], title: "Grabar soluciones 01 y 02 en lote",
+        why: "Grabar por lotes protege la cadencia contra tus dos roles ejecutivos. Las dos primeras cápsulas fijan el estándar de toda la serie.",
+        how: ["Guion con payoff en pantalla en los primeros 3 segundos", "Sesión única para ambas soluciones (cápsula + video soporte)", "Editar con plantillas del kit y dejar programadas"],
+        res: "Soluciones 01 y 02 en cola de publicación", sources: [SRC.ytStudio], integrations: ["YouTube"]
+      },
+      {
+        id: "t1-3", date: "2026-08-08", xp: 40, h: 4, pil: ["pos"], title: "Publicar la tabla de costos: stack propio vs SaaS en USD",
+        why: "Una cifra concreta viaja más lejos que cualquier opinión. Es la tesis de soberanía convertida en número citable.",
+        how: ["Calcular costo real mensual del stack (VPS + Coolify)", "Cotizar el equivalente SaaS en USD", "Publicar comparativa como carrusel + bitácora"],
+        res: "La pieza de autoridad citable de la temporada", sources: [], integrations: []
+      },
+      {
+        id: "t1-4", date: "2026-08-30", xp: 70, h: 10, pil: ["aut", "solo"], title: "Pipeline editorial automatizado en n8n",
+        why: "La prueba viviente de la empresa de 1 persona: la semana completa de contenido con ~2 horas humanas. Sin esto, la cadencia muere en octubre.",
+        how: ["Transcribir cada video soporte vía API", "Generar borradores de derivados con Gemini", "Cola de revisión humana en Supabase + entrega al publicador"],
+        res: "Cascada semanal en ~2 h humanas", sources: [SRC.gemini, SRC.n8nDocs], integrations: ["n8n", "Gemini API", "Supabase"]
+      },
+      {
+        id: "t1-7", date: "2026-09-25", xp: 45, h: 6, pil: ["pos", "mon"], title: "Vitrina de casos empresariales: 3 sistemas de clientes corriendo",
+        why: "La escalada de mentorías y el ticket empresarial se venden sobre una sola prueba: que ejecutas soluciones empresariales que de verdad funcionan. Entregado, documentado y corriendo — no promesas.",
+        how: ["Seleccionar 3 sistemas entregados con autorización (cláusula de caso)", "Documentar cada uno: problema → sistema → métricas de operación real (horas ahorradas, plata, uptime)", "Publicarlos como página + cápsulas y usarlos en toda oferta comercial"],
+        res: "3 casos empresariales verificables publicados", sources: [SRC.supa], integrations: ["Supabase", "Brand kit"]
+      },
+      {
+        id: "t1-6", date: "2026-09-16", xp: 15, h: 1, pil: ["solo"], title: "Checkpoint de cadencia (regla dura)",
+        why: "Las series mueren por inconsistencia, no por frecuencia baja. Esta regla decide con datos y sin culpa.",
+        how: ["Revisar cadencia real de las primeras 8 semanas", "Decidir: sostener semanal o pasar a quincenal", "Documentar la decisión en la bitácora del panel"],
+        res: "Decisión de cadencia tomada con datos", sources: [], integrations: []
+      },
+      {
+        id: "t1-5", date: "2026-10-10", xp: 50, h: 6, pil: ["pos", "mon"], title: "Cierre T1: la máquina completa, sus costos y sus fallos",
+        why: "Cerrar el arco con métricas y fallos reales convierte la temporada en credencial comercial. La audiencia vio nacer el sistema donde está registrada.",
+        how: ["Compilar métricas del dashboard", "Guion de retrospectiva: qué funcionó, qué falló, cuánto costó", "Publicar con CTA a Power Hour y lista de mentoría"],
+        res: "Cierre de arco = prueba social estructural", sources: [], integrations: ["YouTube"]
+      },
+    ]
+  },
+  {
+    id: "t2", name: "Temporada 2 · «Anatomía de Wabid»", tasks: [
+      {
+        id: "t2-1", date: "2026-10-17", xp: 35, h: 5, pil: ["pos"], title: "Guion del arco T2: de proyecto a producto",
+        why: "Sin arco narrativo, T2 sería un demo largo. El guion convierte a Wabid en historia de producto con tensión real: ¿se licencia o no?",
+        how: ["Mapear las 11 soluciones: pujas, catálogo, bidireccionalidad, carga", "Definir el cliffhanger de cada semana", "Calendarizar grabación por lotes quincenal"],
+        res: "11 soluciones guionadas con tensión narrativa", sources: [], integrations: []
+      },
+      {
+        id: "t2-2", date: "2026-10-24", xp: 55, h: 6, pil: ["pos", "mon"], title: "Solución 12: WhatsApp operando una plataforma de subastas",
+        why: "La pieza ancla instala la credencial empresarial definitiva: una interfaz familiar moviendo software complejo real, en producción.",
+        how: ["Preparar demo con datos reales de Wabid", "Grabar el flujo completo: puja → sistema → confirmación", "Cerrar con la pregunta comercial: ¿qué sector lo necesita?"],
+        res: "Wabid como credencial pública", sources: [SRC.evo], integrations: ["Evolution API", "Supabase", "n8n"]
+      },
+      {
+        id: "t2-3", date: "2026-11-21", xp: 60, h: 8, pil: ["pos"], title: "Prueba de fuego: Wabid bajo carga",
+        why: "El contenido técnico profundo es incopiable para quien no tiene el producto, y a la vez es QA real antes de licenciar.",
+        how: ["Simular concurrencia de pujas y medir", "Documentar colas, integridad y decisiones de arquitectura", "Publicar hallazgos, incluidos los fallos"],
+        res: "Autoridad incopiable + hallazgos de producto", sources: [SRC.supa], integrations: ["Supabase"]
+      },
+      {
+        id: "t2-4", date: "2026-12-19", xp: 45, h: 4, pil: ["mon"], title: "Documentar primeras conversaciones de licenciamiento",
+        why: "Mostrar la negociación (anonimizada) crea urgencia de mercado y valida el precio de la licencia en público.",
+        how: ["Prospectar: remates ganaderos, casas de subastas, liquidadores", "Registrar objeciones y aprendizajes", "Publicar el estado del pipeline como contenido"],
+        res: "3 o más conversaciones de licencia activas y visibles", sources: [], integrations: []
+      },
+      {
+        id: "t2-5", date: "2027-01-02", xp: 40, h: 5, pil: ["pos"], title: "Pieza especial: planeación pública 2027",
+        why: "El accountability público es el gancho de retención hacia el próximo año: la audiencia vuelve a ver si cumpliste.",
+        how: ["Compilar resultados del semestre", "Declarar compromisos medibles de H1-2027 (incluida la meta de 500 mentoreados)", "Publicar y fijar como pieza ancla"],
+        res: "Compromisos 2027 publicados", sources: [], integrations: ["YouTube"]
+      },
+    ]
+  },
+  {
+    id: "money", name: "Monetización · Mentoría a escala + Empresarial", tasks: [
+      {
+        id: "mo-1", date: "2026-09-23", xp: 50, h: 5, pil: ["mon"], title: "Lanzar Power Hour (diagnóstico pago)",
+        why: "El primer peaje del embudo: valida que la audiencia paga por tu criterio antes de escalar. Filtra curiosos de compradores.",
+        how: ["Oferta: 60 min de diagnóstico de operación + informe", "Cobro vía Wompi, agenda vía Cal.com", "Ofrecer solo a leads con score alto"],
+        res: "3 o más diagnósticos vendidos: primer ingreso del embudo", sources: [SRC.wompi], integrations: ["Supabase", "Wompi"]
+      },
+      {
+        id: "mo-2", date: "2026-09-30", xp: 45, h: 4, pil: ["mon"], title: "Oferta empresarial Stratt-On: sistema entregado y corriendo",
+        why: "El decisor precalentado por la serie y la vitrina de casos cierra en una llamada. La promesa es la del manual: entregado, documentado y corriendo. Siguiente.",
+        how: ["Definir paquete: diagnóstico → implementación → retainer, con casos verificables como respaldo", "El bot enruta perfil «decisor con presupuesto» a la agenda", "Guion de llamada de cierre (no de venta)"],
+        res: "6 o más diagnósticos/mes agendados desde el bot", sources: [SRC.calcom], integrations: ["Cal.com", "n8n"]
+      },
+      {
+        id: "mo-3", date: "2026-10-21", xp: 80, h: 15, pil: ["mon", "pos"], title: "MENTORÍA ON · Cohorte Fundadora (10 plazas)",
+        why: "El primer eslabón de la escalada masiva: valida el programa, fabrica testimonios y define el material que luego se entregará a 50+ sin tus horas. Tu credencial pedagógica universitaria es la ventaja que el nicho no tiene.",
+        how: ["Diseñar 6 semanas: del estado manual al estado encendido (despliegue, operación, costos, escalado)", "Lanzamiento semilla a comunidad y base con precio fundador", "Documentar TODO el programa: cada sesión es material de la versión a escala"],
+        res: "10/10 plazas: programa validado y grabado", sources: [SRC.n8nHost, SRC.coolify], integrations: ["Coolify", "n8n"]
+      },
+      {
+        id: "mo-7", date: "2026-12-02", xp: 85, h: 16, pil: ["mon", "solo"], title: "MENTORÍA ON · Cohorte 2 a escala (50+ plazas)",
+        why: "La escalada masiva exige que la entrega no dependa de tus horas: contenido grabado, comunidad, sesiones grupales y seguimiento automatizado convierten la mentoría en producto escalable.",
+        how: ["Empaquetar la Fundadora: grabaciones, guías y blueprints por módulo", "Entrega automatizada: acceso, onboarding, tareas y seguimiento vía bot + Supabase", "Lanzar 50+ plazas a lista de espera, comunidad y las 5 redes con testimonios"],
+        res: "50+ mentoreados con entrega mayormente automatizada", sources: [SRC.supa], integrations: ["n8n", "Supabase", "Evolution API"]
+      },
+      {
+        id: "mo-4", date: "2026-11-25", xp: 70, h: 12, pil: ["mon", "solo"], title: "Abrir La Bóveda en evergreen",
+        why: "Ingreso que no consume tus horas y material de apoyo de la mentoría. La empresa de 1 persona necesita ingresos sin agenda.",
+        how: ["Curar catálogo con los blueprints más pedidos + feedback de la Fundadora", "Acceso y cobro sobre Supabase + Wompi", "Regla: solo abre porque la demanda gratuita la validó"],
+        res: "Primer MRR documentado", sources: [SRC.wompi, SRC.supa], integrations: ["Supabase", "Wompi"]
+      },
+      {
+        id: "mo-5", date: "2026-12-09", xp: 30, h: 3, pil: ["mon", "pos"], title: "Testimonios en video de la Fundadora",
+        why: "Sin prueba social, la Cohorte 2 y la Bóveda son landings frías. Los testimonios son el combustible de la escalada.",
+        how: ["Grabar 5 o más testimonios mostrando el sistema de cada mentoreado corriendo", "Editar en formato corto con el kit", "Integrarlos en landing, las 5 redes y la comunidad"],
+        res: "5 o más testimonios editados en la landing", sources: [], integrations: ["Brand kit"]
+      },
+      {
+        id: "mo-8", date: "2026-12-23", xp: 60, h: 8, pil: ["mon", "aut"], title: "Mentoría evergreen 2027: lista de espera y admisión automatizada",
+        why: "El objetivo no es una cohorte llena: es un sistema de admisión permanente. La lista de espera convierte cada cápsula en demanda futura medible.",
+        how: ["Flujo de lista de espera en el bot: palabra clave MENTORIA por red", "Admisión automatizada: calificación, cupo, cobro (Wompi) y onboarding sin intervención", "Meta pública 2027: 500 mentoreados, declarada en el informe de cierre"],
+        res: "Lista de espera creciendo sola + admisión lista para 2027", sources: [SRC.wompi], integrations: ["n8n", "Supabase", "Wompi"]
+      },
+      {
+        id: "mo-6", date: "2026-12-25", xp: 35, h: 4, pil: ["mon"], title: "Pauta en Meta solo sobre las 3 cápsulas ganadoras",
+        why: "Pautar sobre ganadores orgánicos compra alcance con riesgo mínimo. Destino: la lista de espera de mentoría, no el feed.",
+        how: ["Identificar las 3 cápsulas con mejor conversión al bot (atribución por palabra clave)", "Campaña acotada de remarketing a la base + lookalike", "Medir CAC contra la línea base orgánica"],
+        res: "CAC medido con datos, no con fe", sources: [SRC.metaAds], integrations: ["Meta Ads"]
+      },
+    ]
+  },
+  {
+    id: "infra", name: "Infraestructura y soberanía", tasks: [
+      {
+        id: "in-1", date: "2026-08-04", xp: 25, h: 2, pil: ["solo"], title: "Cláusula «caso de estudio» en contratos nuevos",
+        why: "Sin permiso contractual no hay vitrina de casos empresariales. Se firma antes de necesitarlo.",
+        how: ["Redactar cláusula de uso anonimizado con revisión del cliente", "Incluirla en toda propuesta desde julio", "Registro de qué cliente autorizó qué"],
+        res: "Riesgo de confidencialidad cubierto", sources: [], integrations: []
+      },
+      {
+        id: "in-2", date: "2026-09-20", xp: 40, h: 5, pil: ["aut", "solo"], title: "Desplegar Cal.com self-hosted",
+        why: "Cada pieza de SaaS rentado que reemplazas es margen, contenido y coherencia. La agenda es la puerta del ticket empresarial: debe ser tuya.",
+        how: ["Desplegar Cal.com en Coolify", "Conectar a n8n: confirmaciones, recordatorios y scoring", "Migrar todos los enlaces de agenda"],
+        res: "Agenda soberana integrada al CRM", sources: [SRC.calcom, SRC.coolify], integrations: ["Cal.com", "Coolify", "n8n"]
+      },
+      {
+        id: "in-3", date: "2026-09-27", xp: 40, h: 5, pil: ["mon", "solo"], title: "Integrar Wompi/Bold para cobros en pesos",
+        why: "Cobrar en COP sobre pasarela local cierra el argumento de soberanía en la caja: facturas y cobras en pesos.",
+        how: ["Crear cuenta y llaves de Wompi/Bold", "Flujo n8n: pago confirmado → acceso/agenda + registro en Supabase", "Probar el ciclo completo con un cobro real"],
+        res: "Caja en COP de punta a punta", sources: [SRC.wompi], integrations: ["Wompi", "n8n"]
+      },
+      {
+        id: "in-4", date: "2026-10-30", xp: 35, h: 4, pil: ["aut", "solo"], title: "Chatwoot como bandeja de leads calientes",
+        why: "El bot escala; tu atención no. Chatwoot decide qué conversación merece a un humano.",
+        how: ["Conectar Evolution API a Chatwoot", "Regla en n8n: score sobre umbral → bandeja humana", "SLA personal: leads calientes en menos de 4 h"],
+        res: "Cero leads calientes perdidos", sources: [SRC.chatwoot], integrations: ["Chatwoot", "Evolution API", "n8n"]
+      },
+      {
+        id: "in-5", date: "2026-12-30", xp: 30, h: 4, pil: ["solo", "pos"], title: "Auditoría semestral del stack",
+        why: "Convierte la tesis self-hosted en cifra contable publicable. El argumento de soberanía cierra con tu propia contabilidad.",
+        how: ["Inventariar consumos, licencias y costos reales", "Comparar contra el equivalente SaaS en USD", "Publicar la cifra en el informe de cierre"],
+        res: "Cifra pública: costo real vs equivalente SaaS", sources: [], integrations: []
+      },
+    ]
+  },
+  {
+    id: "kpi", name: "Control mensual (KPIs)", tasks: [
+      {
+        id: "kp-1", date: "2026-08-15", xp: 20, h: 2, pil: ["solo"], title: "Revisión julio: bot + comunidad operando, soluciones 1–3 al aire",
+        why: "La revisión mensual es el sistema operativo del fundador solitario: decide con datos. Julio fija la línea base del semestre.",
+        how: ["Extraer métricas del dashboard y registrar el feedback de julio en el panel", "Registrar retención de video soporte (meta sobre 45%) y primeros leads", "Ajustar agosto con lo aprendido"],
+        res: "Línea base documentada + feedback registrado", sources: [], integrations: []
+      },
+      {
+        id: "kp-2", date: "2026-09-15", xp: 20, h: 2, pil: ["solo"], title: "Revisión agosto: publicador multicanal + pipeline",
+        why: "Agosto valida las automatizaciones críticas: si el publicador no ahorra horas y los blueprints no se importan, se corrige aquí.",
+        how: ["Medir tasa de importación de blueprints (meta sobre 30%)", "Verificar publicación automática en 5 redes y dispersión a la comunidad", "Calcular costo del stack vs SaaS y publicarlo"],
+        res: "Distribución verificada + primer informe de costos", sources: [], integrations: []
+      },
+      {
+        id: "kp-3", date: "2026-10-15", xp: 25, h: 2, pil: ["solo"], title: "Revisión septiembre: flujo comercial + vitrina",
+        why: "Septiembre es donde la atención se convierte en caja. Sin diagnósticos y sin vitrina de casos, octubre no puede lanzar la Fundadora.",
+        how: ["Verificar 250+ leads/mes y 6+ diagnósticos agendados", "Confirmar vitrina de 3 casos empresariales publicada", "Go/no-go de la Cohorte Fundadora"],
+        res: "Embudo comercial medido de punta a punta", sources: [], integrations: []
+      },
+      {
+        id: "kp-4", date: "2026-11-15", xp: 25, h: 2, pil: ["solo"], title: "Revisión octubre: Fundadora 10/10",
+        why: "Si la Fundadora no llena, la señal es de oferta o de audiencia. Diagnosticar con datos antes de intentar la escala de 50+.",
+        how: ["Verificar plazas vendidas y asistencia real", "Registrar objeciones de quienes no compraron", "Veredicto documentado: ¿la Cohorte 2 va con 50+?"],
+        res: "Veredicto del programa con datos", sources: [], integrations: []
+      },
+      {
+        id: "kp-5", date: "2026-12-15", xp: 25, h: 2, pil: ["solo"], title: "Revisión noviembre: Cohorte 2 + Bóveda",
+        why: "Noviembre mide si la escalada nació sana: entrega automatizada funcionando y MRR inicial de la Bóveda.",
+        how: ["Medir plazas de la Cohorte 2 y carga real de tus horas por mentoreado", "Documentar MRR inicial y conversión de landing (sobre 2.5%)", "Ajustar oferta o entrega con esos datos"],
+        res: "Escalada medida: horas/mentoreado y MRR", sources: [], integrations: []
+      },
+      {
+        id: "kp-6", date: "2027-01-04", xp: 40, h: 4, pil: ["solo", "pos"], title: "Cierre H2: informe público de resultados",
+        why: "La marca rinde cuentas en público: el acto final de transparencia radical y el contenido de mayor confianza del año.",
+        how: ["Compilar todos los KPIs y el feedback acción por acción", "Informe honesto: cumplido, fallado, aprendido — y la meta de 500 mentoreados 2027", "Publicarlo en las 5 redes y la comunidad"],
+        res: "Informe H2 publicado", sources: [], integrations: []
+      },
+    ]
+  },
 ];
 
 const ALL_TASKS = GROUPS.flatMap((g) => g.tasks.map((t) => ({ ...t, groupId: g.id, groupName: g.name })));
 
-function fridaysBetween(a, b) {
+function fridaysBetween(a: string, b: string) {
   const out = []; const d = new Date(a + "T12:00:00"); const end = new Date(b + "T12:00:00");
   while (d <= end) { if (d.getDay() === 5) out.push(d.toISOString().slice(0, 10)); d.setDate(d.getDate() + 1); }
   return out;
 }
-const EPISODES = []; let epN = 1;
-const epTpl = (n, date, season) => ({
+const EPISODES: any[] = []; let epN = 1;
+const epTpl = (n: number, date: string, season: number) => ({
   id: `ep-${String(n).padStart(2, "0")}`, date, xp: 40, h: 5, pil: ["pos"], kind: "cadencia",
   groupId: season === 1 ? "t1" : "t2", groupName: season === 1 ? "Temporada 1" : "Temporada 2",
   title: `EP-${String(n).padStart(2, "0")} · Solución de la semana (${season === 1 ? "T1: soluciones micro de negocio" : "T2: procesos y negocio completo"})`,
@@ -423,36 +538,46 @@ const ANGULOS = [
 ];
 
 const PLATFORM_DIF = [
-  { red: "TikTok",
+  {
+    red: "TikTok",
     funciona: "Payoff primero y cortes cada 0.5–1.5 s en los primeros 5 s; texto en pantalla que refuerza el gancho; funciona como buscador: decir la palabra clave en voz alta al inicio; crudo y nativo gana a lo sobreproducido.",
     aborda: "Soluciones micro con dolor universal: responder tarde, perder pedidos, cobrar cartera. Demostraciones en vivo y respuestas en video a comentarios reales.",
     materiales: "Screen records reales · toma de doble teléfono · cifras del dashboard · subtítulos grandes (plantilla del kit) · audios en tendencia como contenedor. Fuentes: TikTok Creative Center y los comentarios propios como banco de temas.",
     cta: "«Comenta SOLUCIÓN y te escribe el sistema» o «Escribe BLUEPRINT-TT al WhatsApp del perfil». Secundario: seguir para la serie. Nunca link externo en caption.",
-    dif: "Demo de doble teléfono EN VIVO con cifras en pesos. El nicho muestra plantillas; tú muestras sistemas empresariales facturando con la hora en pantalla." },
-  { red: "Instagram",
+    dif: "Demo de doble teléfono EN VIVO con cifras en pesos. El nicho muestra plantillas; tú muestras sistemas empresariales facturando con la hora en pantalla."
+  },
+  {
+    red: "Instagram",
     funciona: "Reels con estética más limpia que TikTok, portada cuidada para el grid; las series numeradas construyen más que un viral suelto; guardados y envíos pesan más que likes.",
     aborda: "La serie «Solución N.º X» completa, antes/después de negocios reales, autopsias en carrusel y detrás de escena en historias.",
     materiales: "La misma cápsula con overlays limpios + portada del kit · carrusel desde la plantilla de firma · historias crudas del set. Fuentes: casos reales anonimizados (cláusula in-1) y métricas del dashboard.",
     cta: "«Guárdalo y envíaselo a tu socio» · sticker de enlace en historias al bot · «Comenta X» con DM automatizado vía Graph API · palabra clave BLUEPRINT-IG.",
-    dif: "Serie fija «Solución N.º X» con el sello visual del kit + cierre que pide guardar o enviárselo a un socio." },
-  { red: "LinkedIn",
+    dif: "Serie fija «Solución N.º X» con el sello visual del kit + cierre que pide guardar o enviárselo a un socio."
+  },
+  {
+    red: "LinkedIn",
     funciona: "Video vertical nativo con impulso de distribución; subtítulos obligatorios; el perfil personal recibe ~65% del feed frente a ~5% de páginas; responder comentarios en los primeros 15 min amplifica; cara real = confianza.",
     aborda: "El caso como decisión de negocio: costo, retorno, riesgo evitado. La vitrina empresarial, cifras del dashboard, la tesis self-hosted y la bitácora de los lunes.",
     materiales: "Cápsula reusada con caption cuyo primer renglón es el gancho · autopsia como documento PDF nativo · texto de bitácora. Fuentes: feedback del panel, Supabase y objeciones reales de llamadas.",
     cta: "«Agenda el diagnóstico — enlace en el primer comentario» · «Sígueme para la serie» · DM directo para decisores. Palabra clave BLUEPRINT-LI.",
-    dif: "El mismo caso contado como decisión de negocio con retorno en cifras y casos verificables. Publicar SIEMPRE desde tu perfil personal." },
-  { red: "Facebook",
+    dif: "El mismo caso contado como decisión de negocio con retorno en cifras y casos verificables. Publicar SIEMPRE desde tu perfil personal."
+  },
+  {
+    red: "Facebook",
     funciona: "Reels heredan el alcance de Meta; fuerte en audiencias regionales y grupos locales; comentarios y compartidos en grupos de comercio mueven más que el feed.",
     aborda: "Los casos locales en lenguaje llano: el remate, la tienda, el edificio La Cumbre. El ángulo regional que las cuentas globales no pueden tocar.",
     materiales: "La misma cápsula de IG (crossposting Meta) + publicación de texto nativa para grupos de comerciantes. Fuentes: casos regionales y cifras en pesos.",
     cta: "«Escribe BLUEPRINT-FB al WhatsApp» + compartir en el grupo. En grupos: ofrecer el caso completo por palabra clave, nunca vender directo.",
-    dif: "Sembrar las cápsulas en grupos de comerciantes de Antioquia/LATAM; el caso local rinde más que el consejo genérico." },
-  { red: "YouTube",
+    dif: "Sembrar las cápsulas en grupos de comerciantes de Antioquia/LATAM; el caso local rinde más que el consejo genérico."
+  },
+  {
+    red: "YouTube",
     funciona: "El espectador de Shorts salta al canal a ver el contenido largo: el puente de intención más fuerte; título y descripción optimizados para búsqueda.",
     aborda: "El «cómo se hizo» completo de cada solución, con capítulos; casos extendidos; Shorts = la cápsula reusada con título buscable.",
     materiales: "Grabación completa de la sesión (pantalla + cámara) · guion · miniatura con el kit · capítulos. Fuentes: la construcción real + docs oficiales para rigor.",
     cta: "Descripción y comentario fijado con BLUEPRINT-YT · suscripción para la serie · tarjeta final al siguiente episodio. En piezas de mentoría: palabra clave MENTORIA.",
-    dif: "Aquí —y solo aquí— vive el «cómo se hizo». La cápsula promete; el soporte cumple y captura al futuro mentoreado." },
+    dif: "Aquí —y solo aquí— vive el «cómo se hizo». La cápsula promete; el soporte cumple y captura al futuro mentoreado."
+  },
 ];
 
 const REUSE_MAP = [
@@ -1011,8 +1136,8 @@ export default function PanelComandoH2() {
 
             <Sec title="LAS TRES VERDADES INCÓMODAS">
               {[["Si no es self-hosted, no es tuyo", "En un país que paga SaaS en dólares y factura en pesos, poseer el stack es margen operativo, no preferencia técnica."],
-                ["La demo miente; la producción confiesa", "Todo se muestra corriendo con datos, costos y errores reales. Sistema entregado, documentado y corriendo. Siguiente."],
-                ["WhatsApp es el sistema operativo del negocio latinoamericano", "La interfaz conversacional como frontend de software complejo. Por eso el hub es el bot y la plaza es la comunidad, no una newsletter."]].map(([t, d], i) => (
+              ["La demo miente; la producción confiesa", "Todo se muestra corriendo con datos, costos y errores reales. Sistema entregado, documentado y corriendo. Siguiente."],
+              ["WhatsApp es el sistema operativo del negocio latinoamericano", "La interfaz conversacional como frontend de software complejo. Por eso el hub es el bot y la plaza es la comunidad, no una newsletter."]].map(([t, d], i) => (
                 <div key={i} style={S.verdad}>
                   <span style={{ ...S.mono, color: C.rojo, fontSize: 12 }}>{String(i + 1).padStart(2, "0")}</span>
                   <div><div style={{ fontWeight: 800, fontSize: 15, marginBottom: 4, color: C.blanco }}>{t}</div><div style={S.blockP}>{d}</div></div>
@@ -1022,10 +1147,10 @@ export default function PanelComandoH2() {
 
             <Sec title="ESCALERA DE MONETIZACIÓN · LA MENTORÍA COMO MOTOR DE ESCALA">
               {[["0", "BLUEPRINT SEMANAL · GRATIS", "JSON de n8n importable entregado por el bot. Software funcional que califica leads solo."],
-                ["1", "LA BÓVEDA · BAJO TICKET", "Catálogo de blueprints de producción sobre hosting y pasarela propios. Material de apoyo de la mentoría."],
-                ["2", "MENTORÍA ON · ESCALA MASIVA", "El motor de crecimiento: Cohorte Fundadora (10, valida y graba) → Cohorte 2 (50+, entrega automatizada) → evergreen 2027 con admisión automática y meta pública de 500. Tus horas no escalan; el sistema sí."],
-                ["3", "STRATT-ON EMPRESARIAL · ALTO TICKET", "Soluciones de empresa que de verdad funcionan: diagnóstico → implementación → retainer, respaldado por la vitrina de casos verificables corriendo."],
-                ["4", "WABID · LICENCIA", "White-label para subastas, remates ganaderos y comercio por chat. La T2 es su campaña encubierta."]].map(([n, t, d]) => (
+              ["1", "LA BÓVEDA · BAJO TICKET", "Catálogo de blueprints de producción sobre hosting y pasarela propios. Material de apoyo de la mentoría."],
+              ["2", "MENTORÍA ON · ESCALA MASIVA", "El motor de crecimiento: Cohorte Fundadora (10, valida y graba) → Cohorte 2 (50+, entrega automatizada) → evergreen 2027 con admisión automática y meta pública de 500. Tus horas no escalan; el sistema sí."],
+              ["3", "STRATT-ON EMPRESARIAL · ALTO TICKET", "Soluciones de empresa que de verdad funcionan: diagnóstico → implementación → retainer, respaldado por la vitrina de casos verificables corriendo."],
+              ["4", "WABID · LICENCIA", "White-label para subastas, remates ganaderos y comercio por chat. La T2 es su campaña encubierta."]].map(([n, t, d]) => (
                 <div key={n} style={S.escalon}>
                   <span style={S.escalonN}>{n}</span>
                   <div><div style={{ fontWeight: 800, fontSize: 14, color: C.blanco }}>{t}</div><div style={{ ...S.blockP, marginTop: 4 }}>{d}</div></div>
@@ -1041,11 +1166,11 @@ export default function PanelComandoH2() {
                 "Producción por lotes quincenal; si la cadencia no se sostiene en 8 semanas, se baja a quincenal antes que degradar calidad.",
                 "La escala de mentoría nunca sacrifica la entrega: horas/mentoreado se mide cada mes; si sube, se automatiza más antes de vender más.",
                 "Toda acción ejecutada registra su feedback en el panel: sin resultado real documentado, la revisión mensual no cierra."].map((r, i) => (
-                <div key={i} style={{ display: "flex", gap: 12, padding: "9px 0", borderBottom: `1px solid ${C.hair}` }}>
-                  <span style={{ ...S.mono, color: C.rojo, fontSize: 11, paddingTop: 2 }}>R{i + 1}</span>
-                  <span style={{ fontSize: 13.5, color: C.blanco, opacity: 0.9, lineHeight: 1.55 }}>{r}</span>
-                </div>
-              ))}
+                  <div key={i} style={{ display: "flex", gap: 12, padding: "9px 0", borderBottom: `1px solid ${C.hair}` }}>
+                    <span style={{ ...S.mono, color: C.rojo, fontSize: 11, paddingTop: 2 }}>R{i + 1}</span>
+                    <span style={{ fontSize: 13.5, color: C.blanco, opacity: 0.9, lineHeight: 1.55 }}>{r}</span>
+                  </div>
+                ))}
             </Sec>
             <div style={{ height: 20 }} />
           </div>
@@ -1069,10 +1194,10 @@ export default function PanelComandoH2() {
 
             <div style={S.statGrid}>
               {[["ACCIONES EJECUTADAS", `${doneItems.length}/${TOTAL_ITEMS}`],
-                ["HORAS INVERTIDAS", `${hInv}h / ${TOTAL_H}h est.`],
-                ["SOLUCIONES AL AIRE", `${TIMELINE.filter((t) => t.kind === "cadencia" && done[t.id]).length}/${EPISODES.length}`],
-                ["FEEDBACK REGISTRADO", `${fbCount} acciones`],
-                ["LOGROS", `${achUnlocked.length}/${ACHIEVEMENTS.length}`]].map(([k, v]) => (
+              ["HORAS INVERTIDAS", `${hInv}h / ${TOTAL_H}h est.`],
+              ["SOLUCIONES AL AIRE", `${TIMELINE.filter((t) => t.kind === "cadencia" && done[t.id]).length}/${EPISODES.length}`],
+              ["FEEDBACK REGISTRADO", `${fbCount} acciones`],
+              ["LOGROS", `${achUnlocked.length}/${ACHIEVEMENTS.length}`]].map(([k, v]) => (
                 <div key={k} style={S.statCell}><span style={S.metaK}>{k}</span><span style={S.statV}>{v}</span></div>
               ))}
             </div>
