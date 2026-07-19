@@ -5,7 +5,10 @@ export const metadata = {
   title: 'Stratt-On Agency | Expertos en Agentes de IA',
   description: 'Optimizamos tu empresa con agentes de voz e IA.',
   icons: {
-    icon: '/brand/stratton-favicon.svg',
+    icon: [
+      { url: '/brand/stratton-favicon.svg', type: 'image/svg+xml' },
+      { url: '/favicon.ico', sizes: 'any' },
+    ],
   },
 }
 

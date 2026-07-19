@@ -199,7 +199,7 @@ export default function Home() {
 
           <div className="flex flex-wrap gap-6 md:gap-8 justify-center">
             {[
-              { val: "- 80%", label: "Carga Operativa" },
+              { val: "-80%", label: "Carga Operativa" },
               { val: "300%", label: "Aumento en Ventas" },
               { val: "60%", label: "Reducción Errores" },
               { val: "7s", label: "Tiempo Respuesta" }
@@ -208,7 +208,7 @@ export default function Home() {
                 key={i}
                 className="flex-1 min-w-[250px] p-8 md:p-14 border border-white/5 rounded bg-carbon"
               >
-                <div className="text-5xl md:text-7xl lg:text-8xl font-display text-accent leading-none mb-4">
+                <div className="text-5xl md:text-7xl lg:text-8xl font-display text-accent leading-none mb-4 whitespace-nowrap">
                   <Counter end={stat.val} />
                 </div>
                 <p className="st-label text-humo text-[11px] md:text-xs">
