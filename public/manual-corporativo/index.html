@@ -1,0 +1,656 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Stratt-On — Manual de Marca v1.0</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Archivo:wght@400;600;800&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --carbon:#0E0F11; --grafito:#1C1E22; --humo:#9BA1A6;
+    --blanco:#F5F6F4; --rojo:#FF3B2F; --rojo-prof:#C21F17;
+    --hairline:rgba(245,246,244,.1);
+    --display:'Archivo Black',sans-serif;
+    --body:'Archivo',sans-serif;
+    --mono:'JetBrains Mono',monospace;
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{background:var(--carbon);color:var(--blanco);font-family:var(--body);-webkit-font-smoothing:antialiased}
+  .wrap{max-width:1080px;margin:0 auto;padding:0 28px}
+  a{color:inherit}
+  a:focus-visible,button:focus-visible{outline:2px solid var(--blanco);outline-offset:3px}
+
+  /* status line: elemento grafico de la marca */
+  .status-line{height:3px;background:var(--rojo);width:56px;border-radius:2px}
+
+  /* ---------- Nav ---------- */
+  nav.top{
+    position:sticky;top:0;z-index:40;background:rgba(14,15,17,.92);
+    backdrop-filter:blur(8px);border-bottom:1px solid var(--hairline);
+  }
+  nav.top .wrap{display:flex;align-items:center;gap:6px;overflow-x:auto;padding:14px 28px}
+  nav.top .brand{display:flex;align-items:center;margin-right:auto;flex-shrink:0}
+  nav.top .brand svg{height:22px;width:auto}
+  nav.top a.item{
+    font-family:var(--mono);font-size:11px;letter-spacing:.08em;color:var(--humo);
+    text-decoration:none;padding:7px 11px;border-radius:2px;white-space:nowrap;
+  }
+  nav.top a.item:hover{color:var(--blanco);background:var(--grafito)}
+
+  /* ---------- Hero ---------- */
+  .hero{padding:110px 0 90px;border-bottom:1px solid var(--hairline)}
+  .hero .logo-hero svg{width:min(640px,88%);height:auto;display:block}
+  .hero .kicker{
+    font-family:var(--mono);font-size:12px;letter-spacing:.24em;text-transform:uppercase;
+    color:var(--humo);margin-bottom:34px;display:flex;align-items:center;gap:14px;
+  }
+  .hero p.sub{margin-top:38px;color:var(--humo);font-size:16px;line-height:1.65;max-width:560px}
+  .hero .version{
+    margin-top:44px;font-family:var(--mono);font-size:11px;color:var(--humo);
+    display:flex;gap:26px;flex-wrap:wrap;letter-spacing:.06em;
+  }
+  .hero .version b{color:var(--rojo);font-weight:400}
+
+  /* ---------- Secciones ---------- */
+  section{padding:88px 0;border-bottom:1px solid var(--hairline)}
+  .sec-head{display:flex;align-items:center;gap:18px;margin-bottom:14px}
+  .sec-num{font-family:var(--mono);font-size:13px;color:var(--rojo);letter-spacing:.1em}
+  h2{font-family:var(--display);font-size:clamp(28px,4vw,44px);text-transform:uppercase;letter-spacing:-.01em;line-height:1}
+  .sec-intro{color:var(--humo);font-size:15.5px;line-height:1.65;max-width:640px;margin:22px 0 48px}
+  h3{
+    font-family:var(--mono);font-size:12px;letter-spacing:.2em;text-transform:uppercase;
+    color:var(--humo);margin:52px 0 20px;display:flex;align-items:center;gap:12px;
+  }
+  h3::before{content:"";width:18px;height:3px;background:var(--rojo);border-radius:2px;flex-shrink:0}
+  p{line-height:1.65;font-size:15px}
+  .grid-2{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:24px}
+  .grid-3{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:18px}
+
+  .card{background:var(--grafito);border:1px solid var(--hairline);border-radius:4px;padding:26px}
+  .card h4{font-family:var(--body);font-weight:800;font-size:15px;margin-bottom:10px;text-transform:uppercase;letter-spacing:.04em}
+  .card p{color:var(--humo);font-size:14px}
+  .card .mono{font-family:var(--mono);font-size:12px;color:var(--rojo);margin-bottom:12px;letter-spacing:.06em}
+
+  /* Voz: si / no */
+  .voice-table{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--hairline);border:1px solid var(--hairline);border-radius:4px;overflow:hidden}
+  .voice-cell{background:var(--carbon);padding:20px 22px}
+  .voice-cell.head{background:var(--grafito);font-family:var(--mono);font-size:11px;letter-spacing:.18em;text-transform:uppercase}
+  .voice-cell.si.head{color:var(--blanco)}
+  .voice-cell.no.head{color:var(--humo)}
+  .voice-cell p{font-size:14px;line-height:1.55}
+  .voice-cell.si p{color:var(--blanco)}
+  .voice-cell.no p{color:var(--humo);text-decoration:line-through;text-decoration-color:rgba(255,59,47,.6);text-decoration-thickness:1.5px}
+  @media (max-width:640px){.voice-table{grid-template-columns:1fr}}
+
+  /* Logos */
+  .logo-plate{
+    border:1px solid var(--hairline);border-radius:4px;padding:44px 28px;
+    display:flex;align-items:center;justify-content:center;min-height:180px;position:relative;
+  }
+  .logo-plate svg{width:100%;max-width:420px;height:auto}
+  .logo-plate.small svg{max-width:88px}
+  .logo-plate .tag{
+    position:absolute;top:12px;left:14px;font-family:var(--mono);font-size:10.5px;
+    letter-spacing:.1em;color:var(--humo);
+  }
+  .bg-carbon{background:var(--carbon)}
+  .bg-blanco{background:var(--blanco)}
+  .bg-blanco .tag{color:#6b6d70}
+  .bg-rojo{background:var(--rojo)}
+  .bg-rojo .tag{color:rgba(14,15,17,.65)}
+  .bg-grafito{background:var(--grafito)}
+
+  /* Area de respeto */
+  .clearspace{
+    border:1px solid var(--hairline);border-radius:4px;background:var(--grafito);
+    padding:64px;display:flex;justify-content:center;
+  }
+  .clearspace .frame{border:1.5px dashed rgba(255,59,47,.55);padding:52px;position:relative;max-width:560px;width:100%}
+  .clearspace .frame svg{width:100%;height:auto;display:block}
+  .clearspace .x-label{
+    position:absolute;font-family:var(--mono);font-size:11px;color:var(--rojo);letter-spacing:.05em;
+  }
+  @media (max-width:640px){.clearspace{padding:28px}.clearspace .frame{padding:26px}}
+
+  /* Usos incorrectos */
+  .dont-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:16px}
+  .dont{
+    border:1px solid var(--hairline);border-radius:4px;background:var(--grafito);
+    padding:30px 18px 16px;text-align:center;position:relative;overflow:hidden;
+  }
+  .dont .stage{height:74px;display:flex;align-items:center;justify-content:center;margin-bottom:16px}
+  .dont .stage svg{width:150px;height:auto}
+  .dont figcaption{font-family:var(--mono);font-size:11px;color:var(--humo);letter-spacing:.05em}
+  .dont::after{
+    content:"✕";position:absolute;top:8px;right:12px;color:var(--rojo);
+    font-size:15px;font-family:var(--body);font-weight:800;
+  }
+
+  /* Color */
+  .color-row{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:12px}
+  .color-card{border-radius:4px;overflow:hidden;border:1px solid var(--hairline);cursor:pointer;background:transparent;text-align:left;padding:0;width:100%}
+  .color-card .field{height:110px}
+  .color-card .data{background:var(--grafito);padding:14px 15px;font-family:var(--mono);font-size:11px;line-height:1.8;color:var(--humo)}
+  .color-card .data b{color:var(--blanco);display:block;font-weight:700;font-size:12px;letter-spacing:.04em}
+  .prop-bar{display:flex;height:52px;border-radius:4px;overflow:hidden;border:1px solid var(--hairline);margin-top:14px}
+  .prop-bar div{display:flex;align-items:center;justify-content:center;font-family:var(--mono);font-size:10.5px;letter-spacing:.06em}
+  .combo-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:12px}
+  .combo{border-radius:4px;border:1px solid var(--hairline);padding:22px 18px;font-family:var(--body)}
+  .combo .big{font-family:var(--display);font-size:22px;text-transform:uppercase;letter-spacing:-.01em}
+  .combo .note{font-family:var(--mono);font-size:10.5px;margin-top:12px;letter-spacing:.05em;opacity:.75}
+
+  /* Tipografia */
+  .type-block{border:1px solid var(--hairline);border-radius:4px;padding:30px;background:var(--grafito);margin-bottom:16px}
+  .type-block .role{font-family:var(--mono);font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:var(--rojo);margin-bottom:16px}
+  .type-block .sample-display{font-family:var(--display);font-size:clamp(28px,4.5vw,46px);text-transform:uppercase;letter-spacing:-.015em;line-height:1.02}
+  .type-block .sample-body{font-size:16px;line-height:1.6;max-width:600px}
+  .type-block .sample-mono{font-family:var(--mono);font-size:13px;line-height:1.8;color:var(--rojo)}
+  .type-block .spec{font-family:var(--mono);font-size:11px;color:var(--humo);margin-top:18px;letter-spacing:.05em;line-height:1.9}
+  .scale-table{width:100%;border-collapse:collapse;font-family:var(--mono);font-size:12px}
+  .scale-table td{border-top:1px solid var(--hairline);padding:13px 10px;color:var(--humo);vertical-align:baseline}
+  .scale-table td:first-child{color:var(--blanco);white-space:nowrap}
+  .scale-table .demo{font-family:var(--body);color:var(--blanco)}
+
+  /* Sistema visual */
+  .motif-demo{border:1px solid var(--hairline);border-radius:4px;background:var(--grafito);padding:30px}
+  .statusline-demo{display:flex;flex-direction:column;gap:18px}
+  .statusline-demo .row{display:flex;align-items:center;gap:14px;font-family:var(--mono);font-size:12.5px;color:var(--humo)}
+  .led{width:9px;height:9px;border-radius:50%;background:var(--rojo);box-shadow:0 0 8px rgba(255,59,47,.8);flex-shrink:0}
+  .icon-demo{display:flex;gap:22px;flex-wrap:wrap;align-items:center}
+  .icon-demo svg{width:34px;height:34px;stroke:var(--blanco);stroke-width:2;fill:none;stroke-linecap:round;stroke-linejoin:round}
+  .icon-demo svg.accent{stroke:var(--rojo)}
+
+  /* Aplicaciones */
+  .app-mocks{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:18px}
+  .mock{border:1px solid var(--hairline);border-radius:4px;overflow:hidden;background:var(--grafito)}
+  .mock .label{font-family:var(--mono);font-size:10.5px;letter-spacing:.12em;color:var(--humo);padding:12px 16px;border-bottom:1px solid var(--hairline);text-transform:uppercase}
+  .mock .body{padding:22px}
+  .sig{background:var(--carbon);border-radius:3px;padding:20px;display:flex;gap:16px;align-items:center}
+  .sig svg{width:44px;height:44px;flex-shrink:0}
+  .sig .txt{font-size:12.5px;line-height:1.6}
+  .sig .txt b{font-weight:800;font-size:13.5px;display:block}
+  .sig .txt .mono{font-family:var(--mono);font-size:11px;color:var(--rojo)}
+  .sig .txt .dim{color:var(--humo);font-size:11.5px}
+  .avatar-row{display:flex;gap:16px;align-items:flex-end}
+  .avatar-row .av{border-radius:50%;overflow:hidden;border:1px solid var(--hairline);flex-shrink:0}
+  .avatar-row .av svg{display:block}
+  .banner{background:var(--carbon);border-radius:3px;padding:26px;position:relative;overflow:hidden}
+  .banner .b-line{position:absolute;left:0;top:0;bottom:0;width:4px;background:var(--rojo)}
+  .banner .b-word{font-family:var(--display);font-size:20px;text-transform:uppercase;letter-spacing:-.01em}
+  .banner .b-tag{font-family:var(--mono);font-size:10.5px;color:var(--humo);margin-top:8px;letter-spacing:.08em}
+
+  /* Tokens */
+  .code-block{position:relative;background:var(--grafito);border:1px solid var(--hairline);border-radius:4px;margin-bottom:18px}
+  .code-block pre{padding:22px;overflow-x:auto;font-family:var(--mono);font-size:12px;line-height:1.75;color:#C9CDCE}
+  .code-block .copy{
+    position:absolute;top:10px;right:10px;font-family:var(--mono);font-size:11px;
+    background:var(--carbon);color:var(--blanco);border:1px solid var(--hairline);
+    border-radius:2px;padding:6px 12px;cursor:pointer;letter-spacing:.05em;
+  }
+  .code-block .copy:hover{border-color:var(--rojo);color:var(--rojo)}
+  .code-block .c-label{font-family:var(--mono);font-size:10.5px;letter-spacing:.14em;color:var(--humo);padding:12px 22px 0;text-transform:uppercase}
+  .kw{color:var(--rojo)}
+
+  footer{padding:64px 0 90px;color:var(--humo);font-size:13px}
+  footer .wrap{display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap;align-items:center}
+  footer .f-logo svg{height:20px;width:auto;opacity:.9}
+  footer .mono{font-family:var(--mono);font-size:11px;letter-spacing:.08em}
+
+  .toast{
+    position:fixed;bottom:24px;left:50%;transform:translateX(-50%) translateY(80px);
+    background:var(--blanco);color:var(--carbon);font-family:var(--mono);font-size:12px;
+    padding:10px 18px;border-radius:3px;transition:transform .25s ease;pointer-events:none;z-index:60;
+  }
+  .toast.show{transform:translateX(-50%) translateY(0)}
+  @media (prefers-reduced-motion: reduce){html{scroll-behavior:auto}.toast{transition:none}}
+</style>
+</head>
+<body>
+
+<nav class="top" aria-label="Secciones del manual">
+  <div class="wrap">
+    <span class="brand" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 644.6 98.5" role="img" aria-label="Stratt-On"><path d="M74.7 41.72575999999999V42.92575999999999H54.0V42.52575999999999Q54.0 39.52575999999999 51.8 37.52575999999999Q49.6 35.52575999999999 45.1 35.52575999999999Q40.7 35.52575999999999 38.35 36.82575999999999Q36.0 38.125759999999985 36.0 40.02575999999999Q36.0 42.72575999999999 39.2 44.02575999999999Q42.4 45.32575999999999 49.5 46.72575999999999Q57.800000000000004 48.42575999999999 63.150000000000006 50.27575999999999Q68.5 52.125759999999985 72.5 56.32575999999999Q76.5 60.52575999999999 76.60000000000001 67.72576Q76.60000000000001 79.92576 68.35000000000001 85.82576Q60.1 91.72576 46.300000000000004 91.72576Q30.200000000000003 91.72576 21.25 86.32576Q12.3 80.92576 12.3 67.22576H33.2Q33.2 72.42576 35.900000000000006 74.17576Q38.6 75.92576 44.300000000000004 75.92576Q48.5 75.92576 51.25 75.02575999999999Q54.0 74.12575999999999 54.0 71.32575999999999Q54.0 68.82575999999999 50.95 67.57575999999999Q47.900000000000006 66.32575999999999 41.0 64.92576Q32.6 63.125759999999985 27.1 61.17575999999999Q21.6 59.225759999999994 17.5 54.725759999999994Q13.4 50.22575999999999 13.4 42.52575999999999Q13.4 31.225759999999987 22.150000000000002 25.87575999999999Q30.900000000000002 20.52575999999999 44.300000000000004 20.52575999999999Q57.5 20.52575999999999 66.0 25.87575999999999Q74.5 31.225759999999987 74.7 41.72575999999999ZM125.2 39.32575999999999V90.52575999999999H103.10000000000001V39.32575999999999H80.5V21.725759999999994H147.7V39.32575999999999ZM207.8 61.725759999999994 223.10000000000002 90.52575999999999H198.3L186.10000000000002 65.42576H177.9V90.52575999999999H155.8V21.725759999999994H197.9Q205.3 21.725759999999994 210.55 24.575759999999992Q215.8 27.42575999999999 218.45000000000002 32.27575999999999Q221.10000000000002 37.125759999999985 221.10000000000002 42.82575999999999Q221.10000000000002 49.125759999999985 217.70000000000002 54.22575999999999Q214.3 59.32575999999999 207.8 61.725759999999994ZM192.4 37.42575999999999H177.9V50.125759999999985H192.4Q195.0 50.125759999999985 196.8 48.27575999999999Q198.60000000000002 46.42575999999999 198.60000000000002 43.72575999999999Q198.60000000000002 41.02575999999999 196.8 39.225759999999994Q195.0 37.42575999999999 192.4 37.42575999999999ZM277.7 90.52575999999999 274.8 80.82575999999999H250.7L247.79999999999998 90.52575999999999H225.2L250.29999999999998 21.725759999999994H276.0L301.1 90.52575999999999ZM255.29999999999998 65.42576H270.2L263.0 40.92575999999999H262.6ZM347.0 39.32575999999999V90.52575999999999H324.9V39.32575999999999H302.3V21.725759999999994H369.5V39.32575999999999ZM417.2 39.32575999999999V90.52575999999999H395.09999999999997V39.32575999999999H372.5V21.725759999999994H439.7V39.32575999999999ZM444.29999999999995 70.92576V55.12575999999999H469.79999999999995V70.92576Z" fill="#F5F6F4"/><path d="M 528.11 31.91 A 28.55 28.55 0 1 1 497.85 31.91" fill="none" stroke="#FF3B2F" stroke-width="14.45" stroke-linecap="round"/><line x1="512.98" y1="16.72" x2="512.98" y2="52.70" stroke="#FF3B2F" stroke-width="14.45" stroke-linecap="round"/><path d="M609.852 90.52575999999999 580.952 57.12575999999999V90.52575999999999H560.6519999999999V21.725759999999994H579.952L608.852 55.62575999999999V21.725759999999994H629.1519999999999V90.52575999999999Z" fill="#FF3B2F"/></svg></span>
+    <a class="item" href="#fundamentos">01 Fundamentos</a>
+    <a class="item" href="#logotipo">02 Logotipo</a>
+    <a class="item" href="#color">03 Color</a>
+    <a class="item" href="#tipografia">04 Tipografía</a>
+    <a class="item" href="#sistema">05 Sistema</a>
+    <a class="item" href="#aplicaciones">06 Aplicaciones</a>
+    <a class="item" href="#tokens">07 Tokens</a>
+  </div>
+</nav>
+
+<header class="hero">
+  <div class="wrap">
+    <div class="kicker"><span class="status-line"></span> Manual de identidad de marca</div>
+    <div class="logo-hero"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 644.6 98.5" role="img" aria-label="Stratt-On"><path d="M74.7 41.72575999999999V42.92575999999999H54.0V42.52575999999999Q54.0 39.52575999999999 51.8 37.52575999999999Q49.6 35.52575999999999 45.1 35.52575999999999Q40.7 35.52575999999999 38.35 36.82575999999999Q36.0 38.125759999999985 36.0 40.02575999999999Q36.0 42.72575999999999 39.2 44.02575999999999Q42.4 45.32575999999999 49.5 46.72575999999999Q57.800000000000004 48.42575999999999 63.150000000000006 50.27575999999999Q68.5 52.125759999999985 72.5 56.32575999999999Q76.5 60.52575999999999 76.60000000000001 67.72576Q76.60000000000001 79.92576 68.35000000000001 85.82576Q60.1 91.72576 46.300000000000004 91.72576Q30.200000000000003 91.72576 21.25 86.32576Q12.3 80.92576 12.3 67.22576H33.2Q33.2 72.42576 35.900000000000006 74.17576Q38.6 75.92576 44.300000000000004 75.92576Q48.5 75.92576 51.25 75.02575999999999Q54.0 74.12575999999999 54.0 71.32575999999999Q54.0 68.82575999999999 50.95 67.57575999999999Q47.900000000000006 66.32575999999999 41.0 64.92576Q32.6 63.125759999999985 27.1 61.17575999999999Q21.6 59.225759999999994 17.5 54.725759999999994Q13.4 50.22575999999999 13.4 42.52575999999999Q13.4 31.225759999999987 22.150000000000002 25.87575999999999Q30.900000000000002 20.52575999999999 44.300000000000004 20.52575999999999Q57.5 20.52575999999999 66.0 25.87575999999999Q74.5 31.225759999999987 74.7 41.72575999999999ZM125.2 39.32575999999999V90.52575999999999H103.10000000000001V39.32575999999999H80.5V21.725759999999994H147.7V39.32575999999999ZM207.8 61.725759999999994 223.10000000000002 90.52575999999999H198.3L186.10000000000002 65.42576H177.9V90.52575999999999H155.8V21.725759999999994H197.9Q205.3 21.725759999999994 210.55 24.575759999999992Q215.8 27.42575999999999 218.45000000000002 32.27575999999999Q221.10000000000002 37.125759999999985 221.10000000000002 42.82575999999999Q221.10000000000002 49.125759999999985 217.70000000000002 54.22575999999999Q214.3 59.32575999999999 207.8 61.725759999999994ZM192.4 37.42575999999999H177.9V50.125759999999985H192.4Q195.0 50.125759999999985 196.8 48.27575999999999Q198.60000000000002 46.42575999999999 198.60000000000002 43.72575999999999Q198.60000000000002 41.02575999999999 196.8 39.225759999999994Q195.0 37.42575999999999 192.4 37.42575999999999ZM277.7 90.52575999999999 274.8 80.82575999999999H250.7L247.79999999999998 90.52575999999999H225.2L250.29999999999998 21.725759999999994H276.0L301.1 90.52575999999999ZM255.29999999999998 65.42576H270.2L263.0 40.92575999999999H262.6ZM347.0 39.32575999999999V90.52575999999999H324.9V39.32575999999999H302.3V21.725759999999994H369.5V39.32575999999999ZM417.2 39.32575999999999V90.52575999999999H395.09999999999997V39.32575999999999H372.5V21.725759999999994H439.7V39.32575999999999ZM444.29999999999995 70.92576V55.12575999999999H469.79999999999995V70.92576Z" fill="#F5F6F4"/><path d="M 528.11 31.91 A 28.55 28.55 0 1 1 497.85 31.91" fill="none" stroke="#FF3B2F" stroke-width="14.45" stroke-linecap="round"/><line x1="512.98" y1="16.72" x2="512.98" y2="52.70" stroke="#FF3B2F" stroke-width="14.45" stroke-linecap="round"/><path d="M609.852 90.52575999999999 580.952 57.12575999999999V90.52575999999999H560.6519999999999V21.725759999999994H579.952L608.852 55.62575999999999V21.725759999999994H629.1519999999999V90.52575999999999Z" fill="#FF3B2F"/></svg></div>
+    <p class="sub">Este documento define cómo se ve, cómo habla y cómo se comporta Stratt-On.
+    No es una sugerencia estética: es el sistema operativo de la marca. Todo lo que salga
+    al mundo con este nombre se rige por estas reglas.</p>
+    <div class="version">
+      <span>VERSIÓN <b>1.0</b></span>
+      <span>CONCEPTO <b>ENCENDIDO</b></span>
+      <span>ESTADO <b>ACTIVO</b></span>
+      <span>2026</span>
+    </div>
+  </div>
+</header>
+
+<!-- ==================== 01 FUNDAMENTOS ==================== -->
+<section id="fundamentos">
+  <div class="wrap">
+    <div class="sec-head"><span class="sec-num">01</span><h2>Fundamentos</h2></div>
+    <p class="sec-intro">Antes del logo está la idea. Stratt-On existe porque la mayoría de los
+    negocios operan apagados: procesos manuales, información dispersa, gente haciendo trabajo
+    de máquinas. Nuestra función es cambiar ese estado.</p>
+
+    <h3>La idea central</h3>
+    <div class="card" style="padding:38px">
+      <p style="font-family:var(--display);font-size:clamp(20px,3vw,30px);text-transform:uppercase;line-height:1.15;letter-spacing:-.01em;color:var(--blanco)">
+        Llevamos negocios del estado manual al estado <span style="color:var(--rojo)">encendido</span>.
+      </p>
+      <p style="margin-top:18px;color:var(--humo)">Diseñamos y operamos la infraestructura de automatización
+      —datos, lógica, comunicación— que hace que un negocio trabaje solo. La O de nuestro nombre
+      es un interruptor. Nuestro trabajo es accionarlo.</p>
+    </div>
+
+    <h3>Posicionamiento</h3>
+    <div class="grid-3">
+      <div class="card"><div class="mono">QUÉ SOMOS</div><p>Una agencia de arquitectura de automatización. Construimos sistemas de producción, no demos.</p></div>
+      <div class="card"><div class="mono">PARA QUIÉN</div><p>Negocios que ya superaron el modo manual y necesitan operar como una máquina: precisos, medibles, sin fricción.</p></div>
+      <div class="card"><div class="mono">CONTRA QUÉ</div><p>El software genérico, las consultoras de diapositivas y la promesa vacía de "transformación digital".</p></div>
+    </div>
+
+    <h3>Arquetipo</h3>
+    <div class="grid-2">
+      <div class="card">
+        <div class="mono">PRIMARIO — EL FORAJIDO</div>
+        <h4>Rompe el status quo</h4>
+        <p>Stratt-On no pide permiso ni suaviza el mensaje. Cuestiona la forma en que las empresas
+        trabajan y propone algo radicalmente más eficiente. Habla con la seguridad de quien ya
+        construyó lo que otros apenas prometen.</p>
+      </div>
+      <div class="card">
+        <div class="mono">SECUNDARIO — EL INGENIERO</div>
+        <h4>Sustenta con precisión</h4>
+        <p>La actitud sin rigor es ruido. Cada afirmación de la marca se respalda con arquitectura,
+        métricas y sistemas funcionando. La rebeldía está en el mensaje; la disciplina, en la ejecución.</p>
+      </div>
+    </div>
+
+    <h3>Tono de voz</h3>
+    <p style="color:var(--humo);max-width:640px;margin-bottom:24px">Directo, técnico, con filo.
+    Frases cortas. Verbos en imperativo cuando se llama a la acción. Cero jerga corporativa,
+    cero diminutivos, cero disculpas.</p>
+    <div class="voice-table">
+      <div class="voice-cell si head">✓ Así hablamos</div>
+      <div class="voice-cell no head">✕ Así no</div>
+      <div class="voice-cell si"><p>Tu operación pierde 30 horas semanales en tareas repetibles. Las recuperamos.</p></div>
+      <div class="voice-cell no"><p>¡Nos encantaría ayudarte a explorar sinergias de eficiencia operativa!</p></div>
+      <div class="voice-cell si"><p>Sistema entregado, documentado y corriendo. Siguiente.</p></div>
+      <div class="voice-cell no"><p>Esperamos que la solución cumpla con sus expectativas.</p></div>
+      <div class="voice-cell si"><p>Automatiza o quédate atrás.</p></div>
+      <div class="voice-cell no"><p>Soluciones innovadoras de transformación digital 360°.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- ==================== 02 LOGOTIPO ==================== -->
+<section id="logotipo">
+  <div class="wrap">
+    <div class="sec-head"><span class="sec-num">02</span><h2>Logotipo</h2></div>
+    <p class="sec-intro">La O de "ON" es el símbolo universal de encendido: la marca se enciende
+    al leerse. El guion se conserva; el interruptor está en la letra. El wordmark está trazado en Archivo Black y convertido a
+    curvas — usa siempre los archivos SVG oficiales, nunca lo reconstruyas con texto.</p>
+
+    <h3>Versión principal — horizontal</h3>
+    <div class="grid-2">
+      <div class="logo-plate bg-carbon"><span class="tag">SOBRE CARBÓN</span><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 644.6 98.5" role="img" aria-label="Stratt-On"><path d="M74.7 41.72575999999999V42.92575999999999H54.0V42.52575999999999Q54.0 39.52575999999999 51.8 37.52575999999999Q49.6 35.52575999999999 45.1 35.52575999999999Q40.7 35.52575999999999 38.35 36.82575999999999Q36.0 38.125759999999985 36.0 40.02575999999999Q36.0 42.72575999999999 39.2 44.02575999999999Q42.4 45.32575999999999 49.5 46.72575999999999Q57.800000000000004 48.42575999999999 63.150000000000006 50.27575999999999Q68.5 52.125759999999985 72.5 56.32575999999999Q76.5 60.52575999999999 76.60000000000001 67.72576Q76.60000000000001 79.92576 68.35000000000001 85.82576Q60.1 91.72576 46.300000000000004 91.72576Q30.200000000000003 91.72576 21.25 86.32576Q12.3 80.92576 12.3 67.22576H33.2Q33.2 72.42576 35.900000000000006 74.17576Q38.6 75.92576 44.300000000000004 75.92576Q48.5 75.92576 51.25 75.02575999999999Q54.0 74.12575999999999 54.0 71.32575999999999Q54.0 68.82575999999999 50.95 67.57575999999999Q47.900000000000006 66.32575999999999 41.0 64.92576Q32.6 63.125759999999985 27.1 61.17575999999999Q21.6 59.225759999999994 17.5 54.725759999999994Q13.4 50.22575999999999 13.4 42.52575999999999Q13.4 31.225759999999987 22.150000000000002 25.87575999999999Q30.900000000000002 20.52575999999999 44.300000000000004 20.52575999999999Q57.5 20.52575999999999 66.0 25.87575999999999Q74.5 31.225759999999987 74.7 41.72575999999999ZM125.2 39.32575999999999V90.52575999999999H103.10000000000001V39.32575999999999H80.5V21.725759999999994H147.7V39.32575999999999ZM207.8 61.725759999999994 223.10000000000002 90.52575999999999H198.3L186.10000000000002 65.42576H177.9V90.52575999999999H155.8V21.725759999999994H197.9Q205.3 21.725759999999994 210.55 24.575759999999992Q215.8 27.42575999999999 218.45000000000002 32.27575999999999Q221.10000000000002 37.125759999999985 221.10000000000002 42.82575999999999Q221.10000000000002 49.125759999999985 217.70000000000002 54.22575999999999Q214.3 59.32575999999999 207.8 61.725759999999994ZM192.4 37.42575999999999H177.9V50.125759999999985H192.4Q195.0 50.125759999999985 196.8 48.27575999999999Q198.60000000000002 46.42575999999999 198.60000000000002 43.72575999999999Q198.60000000000002 41.02575999999999 196.8 39.225759999999994Q195.0 37.42575999999999 192.4 37.42575999999999ZM277.7 90.52575999999999 274.8 80.82575999999999H250.7L247.79999999999998 90.52575999999999H225.2L250.29999999999998 21.725759999999994H276.0L301.1 90.52575999999999ZM255.29999999999998 65.42576H270.2L263.0 40.92575999999999H262.6ZM347.0 39.32575999999999V90.52575999999999H324.9V39.32575999999999H302.3V21.725759999999994H369.5V39.32575999999999ZM417.2 39.32575999999999V90.52575999999999H395.09999999999997V39.32575999999999H372.5V21.725759999999994H439.7V39.32575999999999ZM444.29999999999995 70.92576V55.12575999999999H469.79999999999995V70.92576Z" fill="#F5F6F4"/><path d="M 528.11 31.91 A 28.55 28.55 0 1 1 497.85 31.91" fill="none" stroke="#FF3B2F" stroke-width="14.45" stroke-linecap="round"/><line x1="512.98" y1="16.72" x2="512.98" y2="52.70" stroke="#FF3B2F" stroke-width="14.45" stroke-linecap="round"/><path d="M609.852 90.52575999999999 580.952 57.12575999999999V90.52575999999999H560.6519999999999V21.725759999999994H579.952L608.852 55.62575999999999V21.725759999999994H629.1519999999999V90.52575999999999Z" fill="#FF3B2F"/></svg></div>
+      <div class="logo-plate bg-blanco"><span class="tag">SOBRE BLANCO</span><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 644.6 98.5" role="img" aria-label="Stratt-On"><path d="M74.7 41.72575999999999V42.92575999999999H54.0V42.52575999999999Q54.0 39.52575999999999 51.8 37.52575999999999Q49.6 35.52575999999999 45.1 35.52575999999999Q40.7 35.52575999999999 38.35 36.82575999999999Q36.0 38.125759999999985 36.0 40.02575999999999Q36.0 42.72575999999999 39.2 44.02575999999999Q42.4 45.32575999999999 49.5 46.72575999999999Q57.800000000000004 48.42575999999999 63.150000000000006 50.27575999999999Q68.5 52.125759999999985 72.5 56.32575999999999Q76.5 60.52575999999999 76.60000000000001 67.72576Q76.60000000000001 79.92576 68.35000000000001 85.82576Q60.1 91.72576 46.300000000000004 91.72576Q30.200000000000003 91.72576 21.25 86.32576Q12.3 80.92576 12.3 67.22576H33.2Q33.2 72.42576 35.900000000000006 74.17576Q38.6 75.92576 44.300000000000004 75.92576Q48.5 75.92576 51.25 75.02575999999999Q54.0 74.12575999999999 54.0 71.32575999999999Q54.0 68.82575999999999 50.95 67.57575999999999Q47.900000000000006 66.32575999999999 41.0 64.92576Q32.6 63.125759999999985 27.1 61.17575999999999Q21.6 59.225759999999994 17.5 54.725759999999994Q13.4 50.22575999999999 13.4 42.52575999999999Q13.4 31.225759999999987 22.150000000000002 25.87575999999999Q30.900000000000002 20.52575999999999 44.300000000000004 20.52575999999999Q57.5 20.52575999999999 66.0 25.87575999999999Q74.5 31.225759999999987 74.7 41.72575999999999ZM125.2 39.32575999999999V90.52575999999999H103.10000000000001V39.32575999999999H80.5V21.725759999999994H147.7V39.32575999999999ZM207.8 61.725759999999994 223.10000000000002 90.52575999999999H198.3L186.10000000000002 65.42576H177.9V90.52575999999999H155.8V21.725759999999994H197.9Q205.3 21.725759999999994 210.55 24.575759999999992Q215.8 27.42575999999999 218.45000000000002 32.27575999999999Q221.10000000000002 37.125759999999985 221.10000000000002 42.82575999999999Q221.10000000000002 49.125759999999985 217.70000000000002 54.22575999999999Q214.3 59.32575999999999 207.8 61.725759999999994ZM192.4 37.42575999999999H177.9V50.125759999999985H192.4Q195.0 50.125759999999985 196.8 48.27575999999999Q198.60000000000002 46.42575999999999 198.60000000000002 43.72575999999999Q198.60000000000002 41.02575999999999 196.8 39.225759999999994Q195.0 37.42575999999999 192.4 37.42575999999999ZM277.7 90.52575999999999 274.8 80.82575999999999H250.7L247.79999999999998 90.52575999999999H225.2L250.29999999999998 21.725759999999994H276.0L301.1 90.52575999999999ZM255.29999999999998 65.42576H270.2L263.0 40.92575999999999H262.6ZM347.0 39.32575999999999V90.52575999999999H324.9V39.32575999999999H302.3V21.725759999999994H369.5V39.32575999999999ZM417.2 39.32575999999999V90.52575999999999H395.09999999999997V39.32575999999999H372.5V21.725759999999994H439.7V39.32575999999999ZM444.29999999999995 70.92576V55.12575999999999H469.79999999999995V70.92576Z" fill="#0E0F11"/><path d="M 528.11 31.91 A 28.55 28.55 0 1 1 497.85 31.91" fill="none" stroke="#FF3B2F" stroke-width="14.45" stroke-linecap="round"/><line x1="512.98" y1="16.72" x2="512.98" y2="52.70" stroke="#FF3B2F" stroke-width="14.45" stroke-linecap="round"/><path d="M609.852 90.52575999999999 580.952 57.12575999999999V90.52575999999999H560.6519999999999V21.725759999999994H579.952L608.852 55.62575999999999V21.725759999999994H629.1519999999999V90.52575999999999Z" fill="#FF3B2F"/></svg></div>
+    </div>
+
+    <h3>Versión vertical</h3>
+    <div class="grid-2">
+      <div class="logo-plate bg-carbon" style="min-height:260px"><span class="tag">SOBRE CARBÓN</span><div style="max-width:200px;width:100%"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 402.7 237.8" role="img" aria-label="Stratt-On"><path d="M 234.91 46.10 A 63.30 63.30 0 1 1 167.82 46.10" fill="none" stroke="#FF3B2F" stroke-width="21.52" stroke-linecap="round"/><line x1="201.37" y1="12.43" x2="201.37" y2="92.18" stroke="#FF3B2F" stroke-width="21.52" stroke-linecap="round"/><g transform="translate(8.00 225.00) scale(0.6)"><g transform="translate(-8.00 -90.53)"><path d="M74.7 41.72575999999999V42.92575999999999H54.0V42.52575999999999Q54.0 39.52575999999999 51.8 37.52575999999999Q49.6 35.52575999999999 45.1 35.52575999999999Q40.7 35.52575999999999 38.35 36.82575999999999Q36.0 38.125759999999985 36.0 40.02575999999999Q36.0 42.72575999999999 39.2 44.02575999999999Q42.4 45.32575999999999 49.5 46.72575999999999Q57.800000000000004 48.42575999999999 63.150000000000006 50.27575999999999Q68.5 52.125759999999985 72.5 56.32575999999999Q76.5 60.52575999999999 76.60000000000001 67.72576Q76.60000000000001 79.92576 68.35000000000001 85.82576Q60.1 91.72576 46.300000000000004 91.72576Q30.200000000000003 91.72576 21.25 86.32576Q12.3 80.92576 12.3 67.22576H33.2Q33.2 72.42576 35.900000000000006 74.17576Q38.6 75.92576 44.300000000000004 75.92576Q48.5 75.92576 51.25 75.02575999999999Q54.0 74.12575999999999 54.0 71.32575999999999Q54.0 68.82575999999999 50.95 67.57575999999999Q47.900000000000006 66.32575999999999 41.0 64.92576Q32.6 63.125759999999985 27.1 61.17575999999999Q21.6 59.225759999999994 17.5 54.725759999999994Q13.4 50.22575999999999 13.4 42.52575999999999Q13.4 31.225759999999987 22.150000000000002 25.87575999999999Q30.900000000000002 20.52575999999999 44.300000000000004 20.52575999999999Q57.5 20.52575999999999 66.0 25.87575999999999Q74.5 31.225759999999987 74.7 41.72575999999999ZM125.2 39.32575999999999V90.52575999999999H103.10000000000001V39.32575999999999H80.5V21.725759999999994H147.7V39.32575999999999ZM207.8 61.725759999999994 223.10000000000002 90.52575999999999H198.3L186.10000000000002 65.42576H177.9V90.52575999999999H155.8V21.725759999999994H197.9Q205.3 21.725759999999994 210.55 24.575759999999992Q215.8 27.42575999999999 218.45000000000002 32.27575999999999Q221.10000000000002 37.125759999999985 221.10000000000002 42.82575999999999Q221.10000000000002 49.125759999999985 217.70000000000002 54.22575999999999Q214.3 59.32575999999999 207.8 61.725759999999994ZM192.4 37.42575999999999H177.9V50.125759999999985H192.4Q195.0 50.125759999999985 196.8 48.27575999999999Q198.60000000000002 46.42575999999999 198.60000000000002 43.72575999999999Q198.60000000000002 41.02575999999999 196.8 39.225759999999994Q195.0 37.42575999999999 192.4 37.42575999999999ZM277.7 90.52575999999999 274.8 80.82575999999999H250.7L247.79999999999998 90.52575999999999H225.2L250.29999999999998 21.725759999999994H276.0L301.1 90.52575999999999ZM255.29999999999998 65.42576H270.2L263.0 40.92575999999999H262.6ZM347.0 39.32575999999999V90.52575999999999H324.9V39.32575999999999H302.3V21.725759999999994H369.5V39.32575999999999ZM417.2 39.32575999999999V90.52575999999999H395.09999999999997V39.32575999999999H372.5V21.725759999999994H439.7V39.32575999999999ZM444.29999999999995 70.92576V55.12575999999999H469.79999999999995V70.92576Z" fill="#F5F6F4"/><path d="M 528.11 31.91 A 28.55 28.55 0 1 1 497.85 31.91" fill="none" stroke="#FF3B2F" stroke-width="14.45" stroke-linecap="round"/><line x1="512.98" y1="16.72" x2="512.98" y2="52.70" stroke="#FF3B2F" stroke-width="14.45" stroke-linecap="round"/><path d="M609.852 90.52575999999999 580.952 57.12575999999999V90.52575999999999H560.6519999999999V21.725759999999994H579.952L608.852 55.62575999999999V21.725759999999994H629.1519999999999V90.52575999999999Z" fill="#FF3B2F"/></g></g></svg></div></div>
+      <div class="logo-plate bg-blanco" style="min-height:260px"><span class="tag">SOBRE BLANCO</span><div style="max-width:200px;width:100%"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 402.7 237.8" role="img" aria-label="Stratt-On"><path d="M 234.91 46.10 A 63.30 63.30 0 1 1 167.82 46.10" fill="none" stroke="#FF3B2F" stroke-width="21.52" stroke-linecap="round"/><line x1="201.37" y1="12.43" x2="201.37" y2="92.18" stroke="#FF3B2F" stroke-width="21.52" stroke-linecap="round"/><g transform="translate(8.00 225.00) scale(0.6)"><g transform="translate(-8.00 -90.53)"><path d="M74.7 41.72575999999999V42.92575999999999H54.0V42.52575999999999Q54.0 39.52575999999999 51.8 37.52575999999999Q49.6 35.52575999999999 45.1 35.52575999999999Q40.7 35.52575999999999 38.35 36.82575999999999Q36.0 38.125759999999985 36.0 40.02575999999999Q36.0 42.72575999999999 39.2 44.02575999999999Q42.4 45.32575999999999 49.5 46.72575999999999Q57.800000000000004 48.42575999999999 63.150000000000006 50.27575999999999Q68.5 52.125759999999985 72.5 56.32575999999999Q76.5 60.52575999999999 76.60000000000001 67.72576Q76.60000000000001 79.92576 68.35000000000001 85.82576Q60.1 91.72576 46.300000000000004 91.72576Q30.200000000000003 91.72576 21.25 86.32576Q12.3 80.92576 12.3 67.22576H33.2Q33.2 72.42576 35.900000000000006 74.17576Q38.6 75.92576 44.300000000000004 75.92576Q48.5 75.92576 51.25 75.02575999999999Q54.0 74.12575999999999 54.0 71.32575999999999Q54.0 68.82575999999999 50.95 67.57575999999999Q47.900000000000006 66.32575999999999 41.0 64.92576Q32.6 63.125759999999985 27.1 61.17575999999999Q21.6 59.225759999999994 17.5 54.725759999999994Q13.4 50.22575999999999 13.4 42.52575999999999Q13.4 31.225759999999987 22.150000000000002 25.87575999999999Q30.900000000000002 20.52575999999999 44.300000000000004 20.52575999999999Q57.5 20.52575999999999 66.0 25.87575999999999Q74.5 31.225759999999987 74.7 41.72575999999999ZM125.2 39.32575999999999V90.52575999999999H103.10000000000001V39.32575999999999H80.5V21.725759999999994H147.7V39.32575999999999ZM207.8 61.725759999999994 223.10000000000002 90.52575999999999H198.3L186.10000000000002 65.42576H177.9V90.52575999999999H155.8V21.725759999999994H197.9Q205.3 21.725759999999994 210.55 24.575759999999992Q215.8 27.42575999999999 218.45000000000002 32.27575999999999Q221.10000000000002 37.125759999999985 221.10000000000002 42.82575999999999Q221.10000000000002 49.125759999999985 217.70000000000002 54.22575999999999Q214.3 59.32575999999999 207.8 61.725759999999994ZM192.4 37.42575999999999H177.9V50.125759999999985H192.4Q195.0 50.125759999999985 196.8 48.27575999999999Q198.60000000000002 46.42575999999999 198.60000000000002 43.72575999999999Q198.60000000000002 41.02575999999999 196.8 39.225759999999994Q195.0 37.42575999999999 192.4 37.42575999999999ZM277.7 90.52575999999999 274.8 80.82575999999999H250.7L247.79999999999998 90.52575999999999H225.2L250.29999999999998 21.725759999999994H276.0L301.1 90.52575999999999ZM255.29999999999998 65.42576H270.2L263.0 40.92575999999999H262.6ZM347.0 39.32575999999999V90.52575999999999H324.9V39.32575999999999H302.3V21.725759999999994H369.5V39.32575999999999ZM417.2 39.32575999999999V90.52575999999999H395.09999999999997V39.32575999999999H372.5V21.725759999999994H439.7V39.32575999999999ZM444.29999999999995 70.92576V55.12575999999999H469.79999999999995V70.92576Z" fill="#0E0F11"/><path d="M 528.11 31.91 A 28.55 28.55 0 1 1 497.85 31.91" fill="none" stroke="#FF3B2F" stroke-width="14.45" stroke-linecap="round"/><line x1="512.98" y1="16.72" x2="512.98" y2="52.70" stroke="#FF3B2F" stroke-width="14.45" stroke-linecap="round"/><path d="M609.852 90.52575999999999 580.952 57.12575999999999V90.52575999999999H560.6519999999999V21.725759999999994H579.952L608.852 55.62575999999999V21.725759999999994H629.1519999999999V90.52575999999999Z" fill="#FF3B2F"/></g></g></svg></div></div>
+    </div>
+
+    <h3>Isotipo y monocromos</h3>
+    <div class="grid-3">
+      <div class="logo-plate small bg-carbon"><span class="tag">ISOTIPO</span><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120.0 120.0" role="img" aria-label="Stratt-On isotipo"><path d="M 77.49 37.29 A 33.00 33.00 0 1 1 42.51 37.29" fill="none" stroke="#FF3B2F" stroke-width="13.20" stroke-linecap="round"/><line x1="60.00" y1="19.74" x2="60.00" y2="61.32" stroke="#FF3B2F" stroke-width="13.20" stroke-linecap="round"/></svg></div>
+      <div class="logo-plate bg-grafito"><span class="tag">MONO BLANCO</span><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 644.6 98.5" role="img" aria-label="Stratt-On"><path d="M74.7 41.72575999999999V42.92575999999999H54.0V42.52575999999999Q54.0 39.52575999999999 51.8 37.52575999999999Q49.6 35.52575999999999 45.1 35.52575999999999Q40.7 35.52575999999999 38.35 36.82575999999999Q36.0 38.125759999999985 36.0 40.02575999999999Q36.0 42.72575999999999 39.2 44.02575999999999Q42.4 45.32575999999999 49.5 46.72575999999999Q57.800000000000004 48.42575999999999 63.150000000000006 50.27575999999999Q68.5 52.125759999999985 72.5 56.32575999999999Q76.5 60.52575999999999 76.60000000000001 67.72576Q76.60000000000001 79.92576 68.35000000000001 85.82576Q60.1 91.72576 46.300000000000004 91.72576Q30.200000000000003 91.72576 21.25 86.32576Q12.3 80.92576 12.3 67.22576H33.2Q33.2 72.42576 35.900000000000006 74.17576Q38.6 75.92576 44.300000000000004 75.92576Q48.5 75.92576 51.25 75.02575999999999Q54.0 74.12575999999999 54.0 71.32575999999999Q54.0 68.82575999999999 50.95 67.57575999999999Q47.900000000000006 66.32575999999999 41.0 64.92576Q32.6 63.125759999999985 27.1 61.17575999999999Q21.6 59.225759999999994 17.5 54.725759999999994Q13.4 50.22575999999999 13.4 42.52575999999999Q13.4 31.225759999999987 22.150000000000002 25.87575999999999Q30.900000000000002 20.52575999999999 44.300000000000004 20.52575999999999Q57.5 20.52575999999999 66.0 25.87575999999999Q74.5 31.225759999999987 74.7 41.72575999999999ZM125.2 39.32575999999999V90.52575999999999H103.10000000000001V39.32575999999999H80.5V21.725759999999994H147.7V39.32575999999999ZM207.8 61.725759999999994 223.10000000000002 90.52575999999999H198.3L186.10000000000002 65.42576H177.9V90.52575999999999H155.8V21.725759999999994H197.9Q205.3 21.725759999999994 210.55 24.575759999999992Q215.8 27.42575999999999 218.45000000000002 32.27575999999999Q221.10000000000002 37.125759999999985 221.10000000000002 42.82575999999999Q221.10000000000002 49.125759999999985 217.70000000000002 54.22575999999999Q214.3 59.32575999999999 207.8 61.725759999999994ZM192.4 37.42575999999999H177.9V50.125759999999985H192.4Q195.0 50.125759999999985 196.8 48.27575999999999Q198.60000000000002 46.42575999999999 198.60000000000002 43.72575999999999Q198.60000000000002 41.02575999999999 196.8 39.225759999999994Q195.0 37.42575999999999 192.4 37.42575999999999ZM277.7 90.52575999999999 274.8 80.82575999999999H250.7L247.79999999999998 90.52575999999999H225.2L250.29999999999998 21.725759999999994H276.0L301.1 90.52575999999999ZM255.29999999999998 65.42576H270.2L263.0 40.92575999999999H262.6ZM347.0 39.32575999999999V90.52575999999999H324.9V39.32575999999999H302.3V21.725759999999994H369.5V39.32575999999999ZM417.2 39.32575999999999V90.52575999999999H395.09999999999997V39.32575999999999H372.5V21.725759999999994H439.7V39.32575999999999ZM444.29999999999995 70.92576V55.12575999999999H469.79999999999995V70.92576Z" fill="#F5F6F4"/><path d="M 528.11 31.91 A 28.55 28.55 0 1 1 497.85 31.91" fill="none" stroke="#F5F6F4" stroke-width="14.45" stroke-linecap="round"/><line x1="512.98" y1="16.72" x2="512.98" y2="52.70" stroke="#F5F6F4" stroke-width="14.45" stroke-linecap="round"/><path d="M609.852 90.52575999999999 580.952 57.12575999999999V90.52575999999999H560.6519999999999V21.725759999999994H579.952L608.852 55.62575999999999V21.725759999999994H629.1519999999999V90.52575999999999Z" fill="#F5F6F4"/></svg></div>
+      <div class="logo-plate bg-rojo"><span class="tag">MONO CARBÓN / FONDO ROJO</span><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 644.6 98.5" role="img" aria-label="Stratt-On"><path d="M74.7 41.72575999999999V42.92575999999999H54.0V42.52575999999999Q54.0 39.52575999999999 51.8 37.52575999999999Q49.6 35.52575999999999 45.1 35.52575999999999Q40.7 35.52575999999999 38.35 36.82575999999999Q36.0 38.125759999999985 36.0 40.02575999999999Q36.0 42.72575999999999 39.2 44.02575999999999Q42.4 45.32575999999999 49.5 46.72575999999999Q57.800000000000004 48.42575999999999 63.150000000000006 50.27575999999999Q68.5 52.125759999999985 72.5 56.32575999999999Q76.5 60.52575999999999 76.60000000000001 67.72576Q76.60000000000001 79.92576 68.35000000000001 85.82576Q60.1 91.72576 46.300000000000004 91.72576Q30.200000000000003 91.72576 21.25 86.32576Q12.3 80.92576 12.3 67.22576H33.2Q33.2 72.42576 35.900000000000006 74.17576Q38.6 75.92576 44.300000000000004 75.92576Q48.5 75.92576 51.25 75.02575999999999Q54.0 74.12575999999999 54.0 71.32575999999999Q54.0 68.82575999999999 50.95 67.57575999999999Q47.900000000000006 66.32575999999999 41.0 64.92576Q32.6 63.125759999999985 27.1 61.17575999999999Q21.6 59.225759999999994 17.5 54.725759999999994Q13.4 50.22575999999999 13.4 42.52575999999999Q13.4 31.225759999999987 22.150000000000002 25.87575999999999Q30.900000000000002 20.52575999999999 44.300000000000004 20.52575999999999Q57.5 20.52575999999999 66.0 25.87575999999999Q74.5 31.225759999999987 74.7 41.72575999999999ZM125.2 39.32575999999999V90.52575999999999H103.10000000000001V39.32575999999999H80.5V21.725759999999994H147.7V39.32575999999999ZM207.8 61.725759999999994 223.10000000000002 90.52575999999999H198.3L186.10000000000002 65.42576H177.9V90.52575999999999H155.8V21.725759999999994H197.9Q205.3 21.725759999999994 210.55 24.575759999999992Q215.8 27.42575999999999 218.45000000000002 32.27575999999999Q221.10000000000002 37.125759999999985 221.10000000000002 42.82575999999999Q221.10000000000002 49.125759999999985 217.70000000000002 54.22575999999999Q214.3 59.32575999999999 207.8 61.725759999999994ZM192.4 37.42575999999999H177.9V50.125759999999985H192.4Q195.0 50.125759999999985 196.8 48.27575999999999Q198.60000000000002 46.42575999999999 198.60000000000002 43.72575999999999Q198.60000000000002 41.02575999999999 196.8 39.225759999999994Q195.0 37.42575999999999 192.4 37.42575999999999ZM277.7 90.52575999999999 274.8 80.82575999999999H250.7L247.79999999999998 90.52575999999999H225.2L250.29999999999998 21.725759999999994H276.0L301.1 90.52575999999999ZM255.29999999999998 65.42576H270.2L263.0 40.92575999999999H262.6ZM347.0 39.32575999999999V90.52575999999999H324.9V39.32575999999999H302.3V21.725759999999994H369.5V39.32575999999999ZM417.2 39.32575999999999V90.52575999999999H395.09999999999997V39.32575999999999H372.5V21.725759999999994H439.7V39.32575999999999ZM444.29999999999995 70.92576V55.12575999999999H469.79999999999995V70.92576Z" fill="#0E0F11"/><path d="M 528.11 31.91 A 28.55 28.55 0 1 1 497.85 31.91" fill="none" stroke="#0E0F11" stroke-width="14.45" stroke-linecap="round"/><line x1="512.98" y1="16.72" x2="512.98" y2="52.70" stroke="#0E0F11" stroke-width="14.45" stroke-linecap="round"/><path d="M609.852 90.52575999999999 580.952 57.12575999999999V90.52575999999999H560.6519999999999V21.725759999999994H579.952L608.852 55.62575999999999V21.725759999999994H629.1519999999999V90.52575999999999Z" fill="#0E0F11"/></svg></div>
+    </div>
+    <p style="color:var(--humo);font-size:13.5px;margin-top:16px;max-width:640px">
+      El isotipo (símbolo solo) se usa cuando la marca ya está establecida en el contexto:
+      favicon, avatar, marca de agua, app. El monocromo se reserva para soportes de una tinta
+      o fondos donde el rojo no funciona.</p>
+
+    <h3>Área de respeto</h3>
+    <div class="clearspace">
+      <div class="frame">
+        <span class="x-label" style="top:-24px;left:50%;transform:translateX(-50%)">1× — altura del símbolo</span>
+        <span class="x-label" style="left:-20px;top:50%;transform:rotate(-90deg) translateX(30%)">1×</span>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 644.6 98.5" role="img" aria-label="Stratt-On"><path d="M74.7 41.72575999999999V42.92575999999999H54.0V42.52575999999999Q54.0 39.52575999999999 51.8 37.52575999999999Q49.6 35.52575999999999 45.1 35.52575999999999Q40.7 35.52575999999999 38.35 36.82575999999999Q36.0 38.125759999999985 36.0 40.02575999999999Q36.0 42.72575999999999 39.2 44.02575999999999Q42.4 45.32575999999999 49.5 46.72575999999999Q57.800000000000004 48.42575999999999 63.150000000000006 50.27575999999999Q68.5 52.125759999999985 72.5 56.32575999999999Q76.5 60.52575999999999 76.60000000000001 67.72576Q76.60000000000001 79.92576 68.35000000000001 85.82576Q60.1 91.72576 46.300000000000004 91.72576Q30.200000000000003 91.72576 21.25 86.32576Q12.3 80.92576 12.3 67.22576H33.2Q33.2 72.42576 35.900000000000006 74.17576Q38.6 75.92576 44.300000000000004 75.92576Q48.5 75.92576 51.25 75.02575999999999Q54.0 74.12575999999999 54.0 71.32575999999999Q54.0 68.82575999999999 50.95 67.57575999999999Q47.900000000000006 66.32575999999999 41.0 64.92576Q32.6 63.125759999999985 27.1 61.17575999999999Q21.6 59.225759999999994 17.5 54.725759999999994Q13.4 50.22575999999999 13.4 42.52575999999999Q13.4 31.225759999999987 22.150000000000002 25.87575999999999Q30.900000000000002 20.52575999999999 44.300000000000004 20.52575999999999Q57.5 20.52575999999999 66.0 25.87575999999999Q74.5 31.225759999999987 74.7 41.72575999999999ZM125.2 39.32575999999999V90.52575999999999H103.10000000000001V39.32575999999999H80.5V21.725759999999994H147.7V39.32575999999999ZM207.8 61.725759999999994 223.10000000000002 90.52575999999999H198.3L186.10000000000002 65.42576H177.9V90.52575999999999H155.8V21.725759999999994H197.9Q205.3 21.725759999999994 210.55 24.575759999999992Q215.8 27.42575999999999 218.45000000000002 32.27575999999999Q221.10000000000002 37.125759999999985 221.10000000000002 42.82575999999999Q221.10000000000002 49.125759999999985 217.70000000000002 54.22575999999999Q214.3 59.32575999999999 207.8 61.725759999999994ZM192.4 37.42575999999999H177.9V50.125759999999985H192.4Q195.0 50.125759999999985 196.8 48.27575999999999Q198.60000000000002 46.42575999999999 198.60000000000002 43.72575999999999Q198.60000000000002 41.02575999999999 196.8 39.225759999999994Q195.0 37.42575999999999 192.4 37.42575999999999ZM277.7 90.52575999999999 274.8 80.82575999999999H250.7L247.79999999999998 90.52575999999999H225.2L250.29999999999998 21.725759999999994H276.0L301.1 90.52575999999999ZM255.29999999999998 65.42576H270.2L263.0 40.92575999999999H262.6ZM347.0 39.32575999999999V90.52575999999999H324.9V39.32575999999999H302.3V21.725759999999994H369.5V39.32575999999999ZM417.2 39.32575999999999V90.52575999999999H395.09999999999997V39.32575999999999H372.5V21.725759999999994H439.7V39.32575999999999ZM444.29999999999995 70.92576V55.12575999999999H469.79999999999995V70.92576Z" fill="#F5F6F4"/><path d="M 528.11 31.91 A 28.55 28.55 0 1 1 497.85 31.91" fill="none" stroke="#FF3B2F" stroke-width="14.45" stroke-linecap="round"/><line x1="512.98" y1="16.72" x2="512.98" y2="52.70" stroke="#FF3B2F" stroke-width="14.45" stroke-linecap="round"/><path d="M609.852 90.52575999999999 580.952 57.12575999999999V90.52575999999999H560.6519999999999V21.725759999999994H579.952L608.852 55.62575999999999V21.725759999999994H629.1519999999999V90.52575999999999Z" fill="#FF3B2F"/></svg>
+      </div>
+    </div>
+    <p style="color:var(--humo);font-size:13.5px;margin-top:16px;max-width:640px">
+      Nada invade el perímetro del logo a una distancia menor que la altura del símbolo de
+      encendido (1×). Sin excepciones: ni texto, ni bordes, ni otros logos.</p>
+
+    <h3>Tamaños mínimos</h3>
+    <div class="grid-3">
+      <div class="card"><div class="mono">HORIZONTAL</div><p>Digital: 120 px de ancho<br>Impreso: 30 mm</p></div>
+      <div class="card"><div class="mono">VERTICAL</div><p>Digital: 80 px de ancho<br>Impreso: 20 mm</p></div>
+      <div class="card"><div class="mono">ISOTIPO</div><p>Digital: 24 px<br>Impreso: 8 mm</p></div>
+    </div>
+
+    <h3>Usos incorrectos</h3>
+    <div class="dont-grid">
+      <figure class="dont"><div class="stage" style="transform:scaleX(1.45)"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 644.6 98.5" role="img" aria-label="Stratt-On"><path d="M74.7 41.72575999999999V42.92575999999999H54.0V42.52575999999999Q54.0 39.52575999999999 51.8 37.52575999999999Q49.6 35.52575999999999 45.1 35.52575999999999Q40.7 35.52575999999999 38.35 36.82575999999999Q36.0 38.125759999999985 36.0 40.02575999999999Q36.0 42.72575999999999 39.2 44.02575999999999Q42.4 45.32575999999999 49.5 46.72575999999999Q57.800000000000004 48.42575999999999 63.150000000000006 50.27575999999999Q68.5 52.125759999999985 72.5 56.32575999999999Q76.5 60.52575999999999 76.60000000000001 67.72576Q76.60000000000001 79.92576 68.35000000000001 85.82576Q60.1 91.72576 46.300000000000004 91.72576Q30.200000000000003 91.72576 21.25 86.32576Q12.3 80.92576 12.3 67.22576H33.2Q33.2 72.42576 35.900000000000006 74.17576Q38.6 75.92576 44.300000000000004 75.92576Q48.5 75.92576 51.25 75.02575999999999Q54.0 74.12575999999999 54.0 71.32575999999999Q54.0 68.82575999999999 50.95 67.57575999999999Q47.900000000000006 66.32575999999999 41.0 64.92576Q32.6 63.125759999999985 27.1 61.17575999999999Q21.6 59.225759999999994 17.5 54.725759999999994Q13.4 50.22575999999999 13.4 42.52575999999999Q13.4 31.225759999999987 22.150000000000002 25.87575999999999Q30.900000000000002 20.52575999999999 44.300000000000004 20.52575999999999Q57.5 20.52575999999999 66.0 25.87575999999999Q74.5 31.225759999999987 74.7 41.72575999999999ZM125.2 39.32575999999999V90.52575999999999H103.10000000000001V39.32575999999999H80.5V21.725759999999994H147.7V39.32575999999999ZM207.8 61.725759999999994 223.10000000000002 90.52575999999999H198.3L186.10000000000002 65.42576H177.9V90.52575999999999H155.8V21.725759999999994H197.9Q205.3 21.725759999999994 210.55 24.575759999999992Q215.8 27.42575999999999 218.45000000000002 32.27575999999999Q221.10000000000002 37.125759999999985 221.10000000000002 42.82575999999999Q221.10000000000002 49.125759999999985 217.70000000000002 54.22575999999999Q214.3 59.32575999999999 207.8 61.725759999999994ZM192.4 37.42575999999999H177.9V50.125759999999985H192.4Q195.0 50.125759999999985 196.8 48.27575999999999Q198.60000000000002 46.42575999999999 198.60000000000002 43.72575999999999Q198.60000000000002 41.02575999999999 196.8 39.225759999999994Q195.0 37.42575999999999 192.4 37.42575999999999ZM277.7 90.52575999999999 274.8 80.82575999999999H250.7L247.79999999999998 90.52575999999999H225.2L250.29999999999998 21.725759999999994H276.0L301.1 90.52575999999999ZM255.29999999999998 65.42576H270.2L263.0 40.92575999999999H262.6ZM347.0 39.32575999999999V90.52575999999999H324.9V39.32575999999999H302.3V21.725759999999994H369.5V39.32575999999999ZM417.2 39.32575999999999V90.52575999999999H395.09999999999997V39.32575999999999H372.5V21.725759999999994H439.7V39.32575999999999ZM444.29999999999995 70.92576V55.12575999999999H469.79999999999995V70.92576Z" fill="#F5F6F4"/><path d="M 528.11 31.91 A 28.55 28.55 0 1 1 497.85 31.91" fill="none" stroke="#FF3B2F" stroke-width="14.45" stroke-linecap="round"/><line x1="512.98" y1="16.72" x2="512.98" y2="52.70" stroke="#FF3B2F" stroke-width="14.45" stroke-linecap="round"/><path d="M609.852 90.52575999999999 580.952 57.12575999999999V90.52575999999999H560.6519999999999V21.725759999999994H579.952L608.852 55.62575999999999V21.725759999999994H629.1519999999999V90.52575999999999Z" fill="#FF3B2F"/></svg></div><figcaption>No deformar</figcaption></figure>
+      <figure class="dont"><div class="stage" style="transform:rotate(-9deg)"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 644.6 98.5" role="img" aria-label="Stratt-On"><path d="M74.7 41.72575999999999V42.92575999999999H54.0V42.52575999999999Q54.0 39.52575999999999 51.8 37.52575999999999Q49.6 35.52575999999999 45.1 35.52575999999999Q40.7 35.52575999999999 38.35 36.82575999999999Q36.0 38.125759999999985 36.0 40.02575999999999Q36.0 42.72575999999999 39.2 44.02575999999999Q42.4 45.32575999999999 49.5 46.72575999999999Q57.800000000000004 48.42575999999999 63.150000000000006 50.27575999999999Q68.5 52.125759999999985 72.5 56.32575999999999Q76.5 60.52575999999999 76.60000000000001 67.72576Q76.60000000000001 79.92576 68.35000000000001 85.82576Q60.1 91.72576 46.300000000000004 91.72576Q30.200000000000003 91.72576 21.25 86.32576Q12.3 80.92576 12.3 67.22576H33.2Q33.2 72.42576 35.900000000000006 74.17576Q38.6 75.92576 44.300000000000004 75.92576Q48.5 75.92576 51.25 75.02575999999999Q54.0 74.12575999999999 54.0 71.32575999999999Q54.0 68.82575999999999 50.95 67.57575999999999Q47.900000000000006 66.32575999999999 41.0 64.92576Q32.6 63.125759999999985 27.1 61.17575999999999Q21.6 59.225759999999994 17.5 54.725759999999994Q13.4 50.22575999999999 13.4 42.52575999999999Q13.4 31.225759999999987 22.150000000000002 25.87575999999999Q30.900000000000002 20.52575999999999 44.300000000000004 20.52575999999999Q57.5 20.52575999999999 66.0 25.87575999999999Q74.5 31.225759999999987 74.7 41.72575999999999ZM125.2 39.32575999999999V90.52575999999999H103.10000000000001V39.32575999999999H80.5V21.725759999999994H147.7V39.32575999999999ZM207.8 61.725759999999994 223.10000000000002 90.52575999999999H198.3L186.10000000000002 65.42576H177.9V90.52575999999999H155.8V21.725759999999994H197.9Q205.3 21.725759999999994 210.55 24.575759999999992Q215.8 27.42575999999999 218.45000000000002 32.27575999999999Q221.10000000000002 37.125759999999985 221.10000000000002 42.82575999999999Q221.10000000000002 49.125759999999985 217.70000000000002 54.22575999999999Q214.3 59.32575999999999 207.8 61.725759999999994ZM192.4 37.42575999999999H177.9V50.125759999999985H192.4Q195.0 50.125759999999985 196.8 48.27575999999999Q198.60000000000002 46.42575999999999 198.60000000000002 43.72575999999999Q198.60000000000002 41.02575999999999 196.8 39.225759999999994Q195.0 37.42575999999999 192.4 37.42575999999999ZM277.7 90.52575999999999 274.8 80.82575999999999H250.7L247.79999999999998 90.52575999999999H225.2L250.29999999999998 21.725759999999994H276.0L301.1 90.52575999999999ZM255.29999999999998 65.42576H270.2L263.0 40.92575999999999H262.6ZM347.0 39.32575999999999V90.52575999999999H324.9V39.32575999999999H302.3V21.725759999999994H369.5V39.32575999999999ZM417.2 39.32575999999999V90.52575999999999H395.09999999999997V39.32575999999999H372.5V21.725759999999994H439.7V39.32575999999999ZM444.29999999999995 70.92576V55.12575999999999H469.79999999999995V70.92576Z" fill="#F5F6F4"/><path d="M 528.11 31.91 A 28.55 28.55 0 1 1 497.85 31.91" fill="none" stroke="#FF3B2F" stroke-width="14.45" stroke-linecap="round"/><line x1="512.98" y1="16.72" x2="512.98" y2="52.70" stroke="#FF3B2F" stroke-width="14.45" stroke-linecap="round"/><path d="M609.852 90.52575999999999 580.952 57.12575999999999V90.52575999999999H560.6519999999999V21.725759999999994H579.952L608.852 55.62575999999999V21.725759999999994H629.1519999999999V90.52575999999999Z" fill="#FF3B2F"/></svg></div><figcaption>No rotar</figcaption></figure>
+      <figure class="dont"><div class="stage" style="filter:hue-rotate(140deg)"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 644.6 98.5" role="img" aria-label="Stratt-On"><path d="M74.7 41.72575999999999V42.92575999999999H54.0V42.52575999999999Q54.0 39.52575999999999 51.8 37.52575999999999Q49.6 35.52575999999999 45.1 35.52575999999999Q40.7 35.52575999999999 38.35 36.82575999999999Q36.0 38.125759999999985 36.0 40.02575999999999Q36.0 42.72575999999999 39.2 44.02575999999999Q42.4 45.32575999999999 49.5 46.72575999999999Q57.800000000000004 48.42575999999999 63.150000000000006 50.27575999999999Q68.5 52.125759999999985 72.5 56.32575999999999Q76.5 60.52575999999999 76.60000000000001 67.72576Q76.60000000000001 79.92576 68.35000000000001 85.82576Q60.1 91.72576 46.300000000000004 91.72576Q30.200000000000003 91.72576 21.25 86.32576Q12.3 80.92576 12.3 67.22576H33.2Q33.2 72.42576 35.900000000000006 74.17576Q38.6 75.92576 44.300000000000004 75.92576Q48.5 75.92576 51.25 75.02575999999999Q54.0 74.12575999999999 54.0 71.32575999999999Q54.0 68.82575999999999 50.95 67.57575999999999Q47.900000000000006 66.32575999999999 41.0 64.92576Q32.6 63.125759999999985 27.1 61.17575999999999Q21.6 59.225759999999994 17.5 54.725759999999994Q13.4 50.22575999999999 13.4 42.52575999999999Q13.4 31.225759999999987 22.150000000000002 25.87575999999999Q30.900000000000002 20.52575999999999 44.300000000000004 20.52575999999999Q57.5 20.52575999999999 66.0 25.87575999999999Q74.5 31.225759999999987 74.7 41.72575999999999ZM125.2 39.32575999999999V90.52575999999999H103.10000000000001V39.32575999999999H80.5V21.725759999999994H147.7V39.32575999999999ZM207.8 61.725759999999994 223.10000000000002 90.52575999999999H198.3L186.10000000000002 65.42576H177.9V90.52575999999999H155.8V21.725759999999994H197.9Q205.3 21.725759999999994 210.55 24.575759999999992Q215.8 27.42575999999999 218.45000000000002 32.27575999999999Q221.10000000000002 37.125759999999985 221.10000000000002 42.82575999999999Q221.10000000000002 49.125759999999985 217.70000000000002 54.22575999999999Q214.3 59.32575999999999 207.8 61.725759999999994ZM192.4 37.42575999999999H177.9V50.125759999999985H192.4Q195.0 50.125759999999985 196.8 48.27575999999999Q198.60000000000002 46.42575999999999 198.60000000000002 43.72575999999999Q198.60000000000002 41.02575999999999 196.8 39.225759999999994Q195.0 37.42575999999999 192.4 37.42575999999999ZM277.7 90.52575999999999 274.8 80.82575999999999H250.7L247.79999999999998 90.52575999999999H225.2L250.29999999999998 21.725759999999994H276.0L301.1 90.52575999999999ZM255.29999999999998 65.42576H270.2L263.0 40.92575999999999H262.6ZM347.0 39.32575999999999V90.52575999999999H324.9V39.32575999999999H302.3V21.725759999999994H369.5V39.32575999999999ZM417.2 39.32575999999999V90.52575999999999H395.09999999999997V39.32575999999999H372.5V21.725759999999994H439.7V39.32575999999999ZM444.29999999999995 70.92576V55.12575999999999H469.79999999999995V70.92576Z" fill="#F5F6F4"/><path d="M 528.11 31.91 A 28.55 28.55 0 1 1 497.85 31.91" fill="none" stroke="#FF3B2F" stroke-width="14.45" stroke-linecap="round"/><line x1="512.98" y1="16.72" x2="512.98" y2="52.70" stroke="#FF3B2F" stroke-width="14.45" stroke-linecap="round"/><path d="M609.852 90.52575999999999 580.952 57.12575999999999V90.52575999999999H560.6519999999999V21.725759999999994H579.952L608.852 55.62575999999999V21.725759999999994H629.1519999999999V90.52575999999999Z" fill="#FF3B2F"/></svg></div><figcaption>No cambiar el color</figcaption></figure>
+      <figure class="dont"><div class="stage" style="filter:drop-shadow(0 6px 8px rgba(255,59,47,.9))"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 644.6 98.5" role="img" aria-label="Stratt-On"><path d="M74.7 41.72575999999999V42.92575999999999H54.0V42.52575999999999Q54.0 39.52575999999999 51.8 37.52575999999999Q49.6 35.52575999999999 45.1 35.52575999999999Q40.7 35.52575999999999 38.35 36.82575999999999Q36.0 38.125759999999985 36.0 40.02575999999999Q36.0 42.72575999999999 39.2 44.02575999999999Q42.4 45.32575999999999 49.5 46.72575999999999Q57.800000000000004 48.42575999999999 63.150000000000006 50.27575999999999Q68.5 52.125759999999985 72.5 56.32575999999999Q76.5 60.52575999999999 76.60000000000001 67.72576Q76.60000000000001 79.92576 68.35000000000001 85.82576Q60.1 91.72576 46.300000000000004 91.72576Q30.200000000000003 91.72576 21.25 86.32576Q12.3 80.92576 12.3 67.22576H33.2Q33.2 72.42576 35.900000000000006 74.17576Q38.6 75.92576 44.300000000000004 75.92576Q48.5 75.92576 51.25 75.02575999999999Q54.0 74.12575999999999 54.0 71.32575999999999Q54.0 68.82575999999999 50.95 67.57575999999999Q47.900000000000006 66.32575999999999 41.0 64.92576Q32.6 63.125759999999985 27.1 61.17575999999999Q21.6 59.225759999999994 17.5 54.725759999999994Q13.4 50.22575999999999 13.4 42.52575999999999Q13.4 31.225759999999987 22.150000000000002 25.87575999999999Q30.900000000000002 20.52575999999999 44.300000000000004 20.52575999999999Q57.5 20.52575999999999 66.0 25.87575999999999Q74.5 31.225759999999987 74.7 41.72575999999999ZM125.2 39.32575999999999V90.52575999999999H103.10000000000001V39.32575999999999H80.5V21.725759999999994H147.7V39.32575999999999ZM207.8 61.725759999999994 223.10000000000002 90.52575999999999H198.3L186.10000000000002 65.42576H177.9V90.52575999999999H155.8V21.725759999999994H197.9Q205.3 21.725759999999994 210.55 24.575759999999992Q215.8 27.42575999999999 218.45000000000002 32.27575999999999Q221.10000000000002 37.125759999999985 221.10000000000002 42.82575999999999Q221.10000000000002 49.125759999999985 217.70000000000002 54.22575999999999Q214.3 59.32575999999999 207.8 61.725759999999994ZM192.4 37.42575999999999H177.9V50.125759999999985H192.4Q195.0 50.125759999999985 196.8 48.27575999999999Q198.60000000000002 46.42575999999999 198.60000000000002 43.72575999999999Q198.60000000000002 41.02575999999999 196.8 39.225759999999994Q195.0 37.42575999999999 192.4 37.42575999999999ZM277.7 90.52575999999999 274.8 80.82575999999999H250.7L247.79999999999998 90.52575999999999H225.2L250.29999999999998 21.725759999999994H276.0L301.1 90.52575999999999ZM255.29999999999998 65.42576H270.2L263.0 40.92575999999999H262.6ZM347.0 39.32575999999999V90.52575999999999H324.9V39.32575999999999H302.3V21.725759999999994H369.5V39.32575999999999ZM417.2 39.32575999999999V90.52575999999999H395.09999999999997V39.32575999999999H372.5V21.725759999999994H439.7V39.32575999999999ZM444.29999999999995 70.92576V55.12575999999999H469.79999999999995V70.92576Z" fill="#F5F6F4"/><path d="M 528.11 31.91 A 28.55 28.55 0 1 1 497.85 31.91" fill="none" stroke="#FF3B2F" stroke-width="14.45" stroke-linecap="round"/><line x1="512.98" y1="16.72" x2="512.98" y2="52.70" stroke="#FF3B2F" stroke-width="14.45" stroke-linecap="round"/><path d="M609.852 90.52575999999999 580.952 57.12575999999999V90.52575999999999H560.6519999999999V21.725759999999994H579.952L608.852 55.62575999999999V21.725759999999994H629.1519999999999V90.52575999999999Z" fill="#FF3B2F"/></svg></div><figcaption>No aplicar sombras ni brillos</figcaption></figure>
+      <figure class="dont"><div class="stage" style="background:#7a2622;padding:10px;border-radius:3px"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 644.6 98.5" role="img" aria-label="Stratt-On"><path d="M74.7 41.72575999999999V42.92575999999999H54.0V42.52575999999999Q54.0 39.52575999999999 51.8 37.52575999999999Q49.6 35.52575999999999 45.1 35.52575999999999Q40.7 35.52575999999999 38.35 36.82575999999999Q36.0 38.125759999999985 36.0 40.02575999999999Q36.0 42.72575999999999 39.2 44.02575999999999Q42.4 45.32575999999999 49.5 46.72575999999999Q57.800000000000004 48.42575999999999 63.150000000000006 50.27575999999999Q68.5 52.125759999999985 72.5 56.32575999999999Q76.5 60.52575999999999 76.60000000000001 67.72576Q76.60000000000001 79.92576 68.35000000000001 85.82576Q60.1 91.72576 46.300000000000004 91.72576Q30.200000000000003 91.72576 21.25 86.32576Q12.3 80.92576 12.3 67.22576H33.2Q33.2 72.42576 35.900000000000006 74.17576Q38.6 75.92576 44.300000000000004 75.92576Q48.5 75.92576 51.25 75.02575999999999Q54.0 74.12575999999999 54.0 71.32575999999999Q54.0 68.82575999999999 50.95 67.57575999999999Q47.900000000000006 66.32575999999999 41.0 64.92576Q32.6 63.125759999999985 27.1 61.17575999999999Q21.6 59.225759999999994 17.5 54.725759999999994Q13.4 50.22575999999999 13.4 42.52575999999999Q13.4 31.225759999999987 22.150000000000002 25.87575999999999Q30.900000000000002 20.52575999999999 44.300000000000004 20.52575999999999Q57.5 20.52575999999999 66.0 25.87575999999999Q74.5 31.225759999999987 74.7 41.72575999999999ZM125.2 39.32575999999999V90.52575999999999H103.10000000000001V39.32575999999999H80.5V21.725759999999994H147.7V39.32575999999999ZM207.8 61.725759999999994 223.10000000000002 90.52575999999999H198.3L186.10000000000002 65.42576H177.9V90.52575999999999H155.8V21.725759999999994H197.9Q205.3 21.725759999999994 210.55 24.575759999999992Q215.8 27.42575999999999 218.45000000000002 32.27575999999999Q221.10000000000002 37.125759999999985 221.10000000000002 42.82575999999999Q221.10000000000002 49.125759999999985 217.70000000000002 54.22575999999999Q214.3 59.32575999999999 207.8 61.725759999999994ZM192.4 37.42575999999999H177.9V50.125759999999985H192.4Q195.0 50.125759999999985 196.8 48.27575999999999Q198.60000000000002 46.42575999999999 198.60000000000002 43.72575999999999Q198.60000000000002 41.02575999999999 196.8 39.225759999999994Q195.0 37.42575999999999 192.4 37.42575999999999ZM277.7 90.52575999999999 274.8 80.82575999999999H250.7L247.79999999999998 90.52575999999999H225.2L250.29999999999998 21.725759999999994H276.0L301.1 90.52575999999999ZM255.29999999999998 65.42576H270.2L263.0 40.92575999999999H262.6ZM347.0 39.32575999999999V90.52575999999999H324.9V39.32575999999999H302.3V21.725759999999994H369.5V39.32575999999999ZM417.2 39.32575999999999V90.52575999999999H395.09999999999997V39.32575999999999H372.5V21.725759999999994H439.7V39.32575999999999ZM444.29999999999995 70.92576V55.12575999999999H469.79999999999995V70.92576Z" fill="#F5F6F4"/><path d="M 528.11 31.91 A 28.55 28.55 0 1 1 497.85 31.91" fill="none" stroke="#FF3B2F" stroke-width="14.45" stroke-linecap="round"/><line x1="512.98" y1="16.72" x2="512.98" y2="52.70" stroke="#FF3B2F" stroke-width="14.45" stroke-linecap="round"/><path d="M609.852 90.52575999999999 580.952 57.12575999999999V90.52575999999999H560.6519999999999V21.725759999999994H579.952L608.852 55.62575999999999V21.725759999999994H629.1519999999999V90.52575999999999Z" fill="#FF3B2F"/></svg></div><figcaption>No usar fondos de bajo contraste</figcaption></figure>
+      <figure class="dont"><div class="stage" style="font-family:var(--display);color:var(--blanco);font-size:26px;letter-spacing:-.01em">STRATT-ON</div><figcaption>No reconstruir con texto ni usar una O tipográfica</figcaption></figure>
+    </div>
+  </div>
+</section>
+
+<!-- ==================== 03 COLOR ==================== -->
+<section id="color">
+  <div class="wrap">
+    <div class="sec-head"><span class="sec-num">03</span><h2>Color</h2></div>
+    <p class="sec-intro">Estética de panel de control industrial: carbón profundo como base,
+    blanco óptico para la información y un solo acento — rojo señal — reservado para lo que
+    importa. El rojo nunca decora: señala. Toca cualquier ficha para copiar el HEX.</p>
+
+    <h3>Paleta</h3>
+    <div class="color-row">
+      <button class="color-card" data-hex="#0E0F11"><div class="field" style="background:#0E0F11;border-bottom:1px solid var(--hairline)"></div><div class="data"><b>Carbón</b>HEX #0E0F11<br>RGB 14·15·17<br>CMYK 18·12·0·93</div></button>
+      <button class="color-card" data-hex="#1C1E22"><div class="field" style="background:#1C1E22"></div><div class="data"><b>Grafito</b>HEX #1C1E22<br>RGB 28·30·34<br>CMYK 18·12·0·87</div></button>
+      <button class="color-card" data-hex="#9BA1A6"><div class="field" style="background:#9BA1A6"></div><div class="data"><b>Humo</b>HEX #9BA1A6<br>RGB 155·161·166<br>CMYK 7·3·0·35</div></button>
+      <button class="color-card" data-hex="#F5F6F4"><div class="field" style="background:#F5F6F4"></div><div class="data"><b>Blanco óptico</b>HEX #F5F6F4<br>RGB 245·246·244<br>CMYK 0·0·1·4</div></button>
+      <button class="color-card" data-hex="#FF3B2F"><div class="field" style="background:#FF3B2F"></div><div class="data"><b>Rojo señal</b>HEX #FF3B2F<br>RGB 255·59·47<br>CMYK 0·77·82·0</div></button>
+      <button class="color-card" data-hex="#C21F17"><div class="field" style="background:#C21F17"></div><div class="data"><b>Rojo profundo</b>HEX #C21F17<br>RGB 194·31·23<br>CMYK 0·84·88·24</div></button>
+    </div>
+
+    <h3>Proporción de uso</h3>
+    <div class="prop-bar" role="img" aria-label="Proporción: carbón 60%, grafito 20%, blanco 15%, rojo 5%">
+      <div style="width:60%;background:#0E0F11;color:#9BA1A6;border-right:1px solid var(--hairline)">CARBÓN 60</div>
+      <div style="width:20%;background:#1C1E22;color:#9BA1A6">GRAFITO 20</div>
+      <div style="width:15%;background:#F5F6F4;color:#0E0F11">BLANCO 15</div>
+      <div style="width:5%;background:#FF3B2F;color:#0E0F11">5</div>
+    </div>
+    <p style="color:var(--humo);font-size:13.5px;margin-top:14px;max-width:640px">
+      El rojo funciona porque es escaso. Si una pieza tiene más de un 10% de rojo, está gritando —
+      rediseñala. El rojo profundo es la variante para estados hover/pressed y grandes áreas impresas.</p>
+
+    <h3>Combinaciones y accesibilidad</h3>
+    <div class="combo-grid">
+      <div class="combo" style="background:#0E0F11;border-color:var(--hairline)"><div class="big" style="color:#F5F6F4">Aa</div><div class="note" style="color:#9BA1A6">BLANCO / CARBÓN · 17.9:1 · AAA</div></div>
+      <div class="combo" style="background:#0E0F11"><div class="big" style="color:#FF3B2F">Aa</div><div class="note" style="color:#9BA1A6">ROJO / CARBÓN · 5.4:1 · AA</div></div>
+      <div class="combo" style="background:#F5F6F4"><div class="big" style="color:#0E0F11">Aa</div><div class="note" style="color:#6b6d70">CARBÓN / BLANCO · 17.9:1 · AAA</div></div>
+      <div class="combo" style="background:#FF3B2F"><div class="big" style="color:#0E0F11">Aa</div><div class="note" style="color:rgba(14,15,17,.7)">CARBÓN / ROJO · 5.4:1 · AA</div></div>
+    </div>
+    <p style="color:var(--humo);font-size:13.5px;margin-top:14px;max-width:640px">
+      Regla dura: sobre rojo, el texto siempre va en carbón — nunca en blanco (3.3:1, insuficiente
+      para cuerpo de texto). El gris humo se usa solo para texto secundario sobre carbón o grafito.</p>
+  </div>
+</section>
+
+<!-- ==================== 04 TIPOGRAFÍA ==================== -->
+<section id="tipografia">
+  <div class="wrap">
+    <div class="sec-head"><span class="sec-num">04</span><h2>Tipografía</h2></div>
+    <p class="sec-intro">Tres voces, tres funciones. Todas open source (Google Fonts), disponibles
+    en cualquier entorno sin licencias que gestionar.</p>
+
+    <div class="type-block">
+      <div class="role">Display — Archivo Black</div>
+      <div class="sample-display">Automatiza o quédate atrás.</div>
+      <div class="spec">Titulares, afirmaciones, wordmark · Siempre MAYÚSCULAS · letter-spacing −1% a −2% · line-height 0.98–1.05 · Nunca en cuerpos menores a 20 px</div>
+    </div>
+    <div class="type-block">
+      <div class="role">Texto — Archivo</div>
+      <div class="sample-body">Diseñamos las capas invisibles que sostienen tu operación: datos, lógica y comunicación
+      trabajando como una sola máquina. Sistemas que se entregan documentados, medibles y corriendo en producción.</div>
+      <div class="spec">Cuerpo, interfaces, propuestas · Pesos 400 / 600 / 800 · line-height 1.5–1.65 · Mínimo 14 px digital</div>
+    </div>
+    <div class="type-block">
+      <div class="role">Datos y código — JetBrains Mono</div>
+      <div class="sample-mono">status: running · uptime 99.98% · workflows_activos: 47 · region: sa-east-1</div>
+      <div class="spec">Métricas, código, etiquetas, eyebrows, navegación técnica · Pesos 400 / 700 · letter-spacing +5% a +20% en etiquetas MAYÚSCULAS</div>
+    </div>
+
+    <h3>Escala tipográfica</h3>
+    <table class="scale-table">
+      <tr><td>display-xl</td><td class="demo" style="font-family:var(--display);font-size:44px;text-transform:uppercase">Titular</td><td>44–64 px · Archivo Black</td></tr>
+      <tr><td>display</td><td class="demo" style="font-family:var(--display);font-size:30px;text-transform:uppercase">Sección</td><td>28–36 px · Archivo Black</td></tr>
+      <tr><td>heading</td><td class="demo" style="font-weight:800;font-size:19px">Subtítulo de bloque</td><td>18–22 px · Archivo 800</td></tr>
+      <tr><td>body</td><td class="demo" style="font-size:15px">Texto de lectura y de interfaz.</td><td>14–16 px · Archivo 400/600</td></tr>
+      <tr><td>label</td><td class="demo" style="font-family:var(--mono);font-size:11px;letter-spacing:.18em">ETIQUETA TÉCNICA</td><td>11–12 px · JetBrains Mono</td></tr>
+    </table>
+  </div>
+</section>
+
+<!-- ==================== 05 SISTEMA VISUAL ==================== -->
+<section id="sistema">
+  <div class="wrap">
+    <div class="sec-head"><span class="sec-num">05</span><h2>Sistema visual</h2></div>
+    <p class="sec-intro">Los elementos que hacen reconocible una pieza de Stratt-On aunque el logo
+    no esté presente.</p>
+
+    <h3>La línea de estado</h3>
+    <div class="motif-demo statusline-demo">
+      <div class="row"><span class="status-line"></span><span>Divisor y firma visual: 3 px de alto, esquinas 2 px, siempre en rojo señal.</span></div>
+      <div class="row"><span class="led"></span><span>LED de estado: acompaña métricas y estados de sistema en vivo.</span></div>
+      <div class="row" style="font-family:var(--mono);color:var(--blanco)"><span class="led"></span>SISTEMA ACTIVO · 47 WORKFLOWS · 99.98% UPTIME</div>
+    </div>
+    <p style="color:var(--humo);font-size:13.5px;margin-top:16px;max-width:640px">
+      Es el elemento distintivo de la marca: una línea roja corta que "enciende" cada pieza.
+      Abre secciones, subraya datos clave y reemplaza a la viñeta decorativa. Una por bloque — no es un adorno repetible.</p>
+
+    <h3>Iconografía</h3>
+    <div class="motif-demo">
+      <div class="icon-demo" aria-hidden="true">
+        <svg viewBox="0 0 24 24"><path d="M13 2 L6 13 h5 l-1 9 7-11 h-5 z"/></svg>
+        <svg viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/><path d="M10 6.5 h7 M6.5 10 v7"/></svg>
+        <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7 v5 l3.5 2"/></svg>
+        <svg viewBox="0 0 24 24" class="accent"><path d="M8.2 4.6 a8.5 8.5 0 1 0 7.6 0"/><path d="M12 2.5 v8"/></svg>
+        <svg viewBox="0 0 24 24"><path d="M4 17 l5-5 4 3 7-8"/><path d="M15 7 h5 v5"/></svg>
+      </div>
+      <p style="color:var(--humo);font-size:13.5px;margin-top:20px">Trazo de 2 px, terminales redondeadas,
+      geometría simple, un solo peso. Un icono por pieza puede ir en rojo — el resto en blanco o humo.
+      Nunca emojis como iconos, nunca iconos rellenos mezclados con lineales.</p>
+    </div>
+
+    <h3>Estética de imagen</h3>
+    <div class="grid-3">
+      <div class="card"><div class="mono">FOTOGRAFÍA</div><p>Alto contraste, sombras duras, texturas industriales: metal, concreto, cableado, pantallas. Nada de bancos de imágenes con gente sonriendo señalando laptops.</p></div>
+      <div class="card"><div class="mono">CAPTURAS Y DIAGRAMAS</div><p>Siempre sobre carbón o grafito, con la línea de estado como marco. Los diagramas de flujo usan la iconografía lineal de marca.</p></div>
+      <div class="card"><div class="mono">MOVIMIENTO</div><p>Transiciones de 150–300 ms, easing seco. El único gesto animado permitido de firma: elementos que "encienden" (opacity 0→1 con el LED).</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- ==================== 06 APLICACIONES ==================== -->
+<section id="aplicaciones">
+  <div class="wrap">
+    <div class="sec-head"><span class="sec-num">06</span><h2>Aplicaciones</h2></div>
+    <p class="sec-intro">La marca en sus puntos de contacto principales. Cada aplicación respeta
+    proporciones, área de respeto y jerarquía tipográfica.</p>
+
+    <div class="app-mocks">
+      <div class="mock">
+        <div class="label">Firma de correo</div>
+        <div class="body">
+          <div class="sig">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120.0 120.0" role="img" aria-label="Stratt-On isotipo"><rect width="120.0" height="120.0" rx="24.0" fill="#0E0F11"/><path d="M 77.49 37.29 A 33.00 33.00 0 1 1 42.51 37.29" fill="none" stroke="#FF3B2F" stroke-width="13.20" stroke-linecap="round"/><line x1="60.00" y1="19.74" x2="60.00" y2="61.32" stroke="#FF3B2F" stroke-width="13.20" stroke-linecap="round"/></svg>
+            <div class="txt">
+              <b>Johnny Celis</b>
+              <span class="mono">CEO · STRATT-ON AGENCY</span><br>
+              <span class="dim">strattonagency.cloud · Medellín, CO</span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="mock">
+        <div class="label">Avatar redes / favicon</div>
+        <div class="body">
+          <div class="avatar-row">
+            <span class="av" style="width:84px;height:84px"><svg width="84" height="84" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120.0 120.0" role="img" aria-label="Stratt-On isotipo"><rect width="120.0" height="120.0" rx="0.0" fill="#0E0F11"/><path d="M 77.49 37.29 A 33.00 33.00 0 1 1 42.51 37.29" fill="none" stroke="#FF3B2F" stroke-width="13.20" stroke-linecap="round"/><line x1="60.00" y1="19.74" x2="60.00" y2="61.32" stroke="#FF3B2F" stroke-width="13.20" stroke-linecap="round"/></svg></span>
+            <span class="av" style="width:48px;height:48px"><svg width="48" height="48" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120.0 120.0" role="img" aria-label="Stratt-On isotipo"><rect width="120.0" height="120.0" rx="0.0" fill="#0E0F11"/><path d="M 77.49 37.29 A 33.00 33.00 0 1 1 42.51 37.29" fill="none" stroke="#FF3B2F" stroke-width="13.20" stroke-linecap="round"/><line x1="60.00" y1="19.74" x2="60.00" y2="61.32" stroke="#FF3B2F" stroke-width="13.20" stroke-linecap="round"/></svg></span>
+            <span class="av" style="width:28px;height:28px"><svg width="28" height="28" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120.0 120.0" role="img" aria-label="Stratt-On isotipo"><rect width="120.0" height="120.0" rx="0.0" fill="#0E0F11"/><path d="M 77.49 37.29 A 33.00 33.00 0 1 1 42.51 37.29" fill="none" stroke="#FF3B2F" stroke-width="13.20" stroke-linecap="round"/><line x1="60.00" y1="19.74" x2="60.00" y2="61.32" stroke="#FF3B2F" stroke-width="13.20" stroke-linecap="round"/></svg></span>
+          </div>
+          <p style="color:var(--humo);font-size:12.5px;margin-top:16px">Isotipo sobre carbón. El símbolo se mantiene legible hasta 24 px.</p>
+        </div>
+      </div>
+      <div class="mock">
+        <div class="label">Encabezado de propuesta</div>
+        <div class="body">
+          <div class="banner">
+            <span class="b-line"></span>
+            <div style="margin-left:14px">
+              <div class="b-word">Propuesta técnica</div>
+              <div class="b-tag">STRATT-ON · REF 2026-014 · CONFIDENCIAL</div>
+            </div>
+          </div>
+          <p style="color:var(--humo);font-size:12.5px;margin-top:16px">Documentos: portada carbón con logo horizontal, interiores blancos con carbón y acentos rojos solo en datos clave.</p>
+        </div>
+      </div>
+      <div class="mock">
+        <div class="label">Botones e interfaz</div>
+        <div class="body" style="display:flex;gap:12px;flex-wrap:wrap;align-items:center">
+          <span style="background:var(--rojo);color:var(--carbon);font-weight:800;font-size:13.5px;padding:12px 22px;border-radius:2px;text-transform:uppercase;letter-spacing:.04em">Encender sistema</span>
+          <span style="border:1px solid var(--blanco);color:var(--blanco);font-weight:600;font-size:13.5px;padding:11px 22px;border-radius:2px">Ver arquitectura</span>
+          <p style="color:var(--humo);font-size:12.5px;flex-basis:100%;margin-top:6px">Acción primaria: rojo con texto carbón. Secundaria: contorno blanco. Radio de 2 px en todo el sistema — esquinas duras, nada de píldoras.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ==================== 07 TOKENS ==================== -->
+<section id="tokens">
+  <div class="wrap">
+    <div class="sec-head"><span class="sec-num">07</span><h2>Tokens</h2></div>
+    <p class="sec-intro">La marca lista para producción. Variables CSS y configuración Tailwind
+    para tus proyectos React/Vite — copia y pega.</p>
+
+    <div class="code-block">
+      <div class="c-label">CSS · variables</div>
+      <button class="copy" data-target="code-css">COPIAR</button>
+      <pre id="code-css">:root {
+  /* Color */
+  --st-carbon: #0E0F11;
+  --st-grafito: #1C1E22;
+  --st-humo: #9BA1A6;
+  --st-blanco: #F5F6F4;
+  --st-rojo: #FF3B2F;
+  --st-rojo-profundo: #C21F17;
+  --st-hairline: rgba(245, 246, 244, 0.10);
+
+  /* Tipografía */
+  --st-font-display: 'Archivo Black', sans-serif;
+  --st-font-body: 'Archivo', sans-serif;
+  --st-font-mono: 'JetBrains Mono', monospace;
+
+  /* Forma y ritmo */
+  --st-radius: 2px;
+  --st-space-1: 4px;  --st-space-2: 8px;  --st-space-3: 16px;
+  --st-space-4: 24px; --st-space-5: 40px; --st-space-6: 64px;
+  --st-transition: 200ms cubic-bezier(0.4, 0, 0.2, 1);
+}</pre>
+    </div>
+
+    <div class="code-block">
+      <div class="c-label">Tailwind v4 · @theme</div>
+      <button class="copy" data-target="code-tw4">COPIAR</button>
+      <pre id="code-tw4">@theme {
+  --color-carbon: #0E0F11;
+  --color-grafito: #1C1E22;
+  --color-humo: #9BA1A6;
+  --color-blanco: #F5F6F4;
+  --color-rojo: #FF3B2F;
+  --color-rojo-profundo: #C21F17;
+  --font-display: 'Archivo Black', sans-serif;
+  --font-body: 'Archivo', sans-serif;
+  --font-mono: 'JetBrains Mono', monospace;
+  --radius-st: 2px;
+}</pre>
+    </div>
+
+    <div class="code-block">
+      <div class="c-label">Tailwind v3 · tailwind.config.js</div>
+      <button class="copy" data-target="code-tw3">COPIAR</button>
+      <pre id="code-tw3">export default {
+  theme: {
+    extend: {
+      colors: {
+        carbon: '#0E0F11',
+        grafito: '#1C1E22',
+        humo: '#9BA1A6',
+        blanco: '#F5F6F4',
+        rojo: { DEFAULT: '#FF3B2F', profundo: '#C21F17' },
+      },
+      fontFamily: {
+        display: ['"Archivo Black"', 'sans-serif'],
+        body: ['Archivo', 'sans-serif'],
+        mono: ['"JetBrains Mono"', 'monospace'],
+      },
+      borderRadius: { st: '2px' },
+    },
+  },
+}</pre>
+    </div>
+
+    <div class="code-block">
+      <div class="c-label">HTML · carga de fuentes</div>
+      <button class="copy" data-target="code-fonts">COPIAR</button>
+      <pre id="code-fonts">&lt;link rel="preconnect" href="https://fonts.googleapis.com"&gt;
+&lt;link rel="preconnect" href="https://fonts.gstatic.com" crossorigin&gt;
+&lt;link href="https://fonts.googleapis.com/css2?family=Archivo+Black&amp;family=Archivo:wght@400;600;800&amp;family=JetBrains+Mono:wght@400;700&amp;display=swap" rel="stylesheet"&gt;</pre>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <span class="f-logo"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 644.6 98.5" role="img" aria-label="Stratt-On"><path d="M74.7 41.72575999999999V42.92575999999999H54.0V42.52575999999999Q54.0 39.52575999999999 51.8 37.52575999999999Q49.6 35.52575999999999 45.1 35.52575999999999Q40.7 35.52575999999999 38.35 36.82575999999999Q36.0 38.125759999999985 36.0 40.02575999999999Q36.0 42.72575999999999 39.2 44.02575999999999Q42.4 45.32575999999999 49.5 46.72575999999999Q57.800000000000004 48.42575999999999 63.150000000000006 50.27575999999999Q68.5 52.125759999999985 72.5 56.32575999999999Q76.5 60.52575999999999 76.60000000000001 67.72576Q76.60000000000001 79.92576 68.35000000000001 85.82576Q60.1 91.72576 46.300000000000004 91.72576Q30.200000000000003 91.72576 21.25 86.32576Q12.3 80.92576 12.3 67.22576H33.2Q33.2 72.42576 35.900000000000006 74.17576Q38.6 75.92576 44.300000000000004 75.92576Q48.5 75.92576 51.25 75.02575999999999Q54.0 74.12575999999999 54.0 71.32575999999999Q54.0 68.82575999999999 50.95 67.57575999999999Q47.900000000000006 66.32575999999999 41.0 64.92576Q32.6 63.125759999999985 27.1 61.17575999999999Q21.6 59.225759999999994 17.5 54.725759999999994Q13.4 50.22575999999999 13.4 42.52575999999999Q13.4 31.225759999999987 22.150000000000002 25.87575999999999Q30.900000000000002 20.52575999999999 44.300000000000004 20.52575999999999Q57.5 20.52575999999999 66.0 25.87575999999999Q74.5 31.225759999999987 74.7 41.72575999999999ZM125.2 39.32575999999999V90.52575999999999H103.10000000000001V39.32575999999999H80.5V21.725759999999994H147.7V39.32575999999999ZM207.8 61.725759999999994 223.10000000000002 90.52575999999999H198.3L186.10000000000002 65.42576H177.9V90.52575999999999H155.8V21.725759999999994H197.9Q205.3 21.725759999999994 210.55 24.575759999999992Q215.8 27.42575999999999 218.45000000000002 32.27575999999999Q221.10000000000002 37.125759999999985 221.10000000000002 42.82575999999999Q221.10000000000002 49.125759999999985 217.70000000000002 54.22575999999999Q214.3 59.32575999999999 207.8 61.725759999999994ZM192.4 37.42575999999999H177.9V50.125759999999985H192.4Q195.0 50.125759999999985 196.8 48.27575999999999Q198.60000000000002 46.42575999999999 198.60000000000002 43.72575999999999Q198.60000000000002 41.02575999999999 196.8 39.225759999999994Q195.0 37.42575999999999 192.4 37.42575999999999ZM277.7 90.52575999999999 274.8 80.82575999999999H250.7L247.79999999999998 90.52575999999999H225.2L250.29999999999998 21.725759999999994H276.0L301.1 90.52575999999999ZM255.29999999999998 65.42576H270.2L263.0 40.92575999999999H262.6ZM347.0 39.32575999999999V90.52575999999999H324.9V39.32575999999999H302.3V21.725759999999994H369.5V39.32575999999999ZM417.2 39.32575999999999V90.52575999999999H395.09999999999997V39.32575999999999H372.5V21.725759999999994H439.7V39.32575999999999ZM444.29999999999995 70.92576V55.12575999999999H469.79999999999995V70.92576Z" fill="#F5F6F4"/><path d="M 528.11 31.91 A 28.55 28.55 0 1 1 497.85 31.91" fill="none" stroke="#FF3B2F" stroke-width="14.45" stroke-linecap="round"/><line x1="512.98" y1="16.72" x2="512.98" y2="52.70" stroke="#FF3B2F" stroke-width="14.45" stroke-linecap="round"/><path d="M609.852 90.52575999999999 580.952 57.12575999999999V90.52575999999999H560.6519999999999V21.725759999999994H579.952L608.852 55.62575999999999V21.725759999999994H629.1519999999999V90.52575999999999Z" fill="#FF3B2F"/></svg></span>
+    <span class="mono">MANUAL DE MARCA v1.0 · 2026 · USO INTERNO Y DE PARTNERS</span>
+  </div>
+</footer>
+
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+<script>
+  const toast = document.getElementById('toast');
+  let timer;
+  function showToast(msg){
+    toast.textContent = msg;
+    toast.classList.add('show');
+    clearTimeout(timer);
+    timer = setTimeout(() => toast.classList.remove('show'), 1600);
+  }
+  document.querySelectorAll('.color-card').forEach(el => {
+    el.setAttribute('aria-label', 'Copiar color ' + el.dataset.hex);
+    el.addEventListener('click', async () => {
+      try { await navigator.clipboard.writeText(el.dataset.hex); showToast(el.dataset.hex + ' copiado'); }
+      catch(e){ showToast(el.dataset.hex); }
+    });
+  });
+  document.querySelectorAll('.copy').forEach(btn => {
+    btn.addEventListener('click', async () => {
+      const txt = document.getElementById(btn.dataset.target).innerText;
+      try { await navigator.clipboard.writeText(txt); showToast('Copiado al portapapeles'); }
+      catch(e){ showToast('Selecciona y copia manualmente'); }
+    });
+  });
+</script>
+
+</body>
+</html>

@@ -1,0 +1,395 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Stratt-On — Kit de Redes Sociales y Academia</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Archivo:wght@400;600;800&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --carbon:#0E0F11; --grafito:#1C1E22; --humo:#9BA1A6; --blanco:#F5F6F4;
+    --rojo:#FF3B2F; --rojo-prof:#C21F17; --hairline:rgba(245,246,244,.1);
+    --display:'Archivo Black',sans-serif; --body:'Archivo',sans-serif; --mono:'JetBrains Mono',monospace;
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{background:var(--carbon);color:var(--blanco);font-family:var(--body);-webkit-font-smoothing:antialiased}
+  .wrap{max-width:1080px;margin:0 auto;padding:0 28px}
+  a{color:inherit}
+  a:focus-visible,button:focus-visible{outline:2px solid var(--blanco);outline-offset:3px}
+  .status-line{height:3px;background:var(--rojo);width:56px;border-radius:2px}
+
+  nav.top{position:sticky;top:0;z-index:40;background:rgba(14,15,17,.92);backdrop-filter:blur(8px);border-bottom:1px solid var(--hairline)}
+  nav.top .wrap{display:flex;gap:6px;overflow-x:auto;padding:14px 28px;align-items:center}
+  nav.top a{font-family:var(--mono);font-size:11px;letter-spacing:.08em;color:var(--humo);text-decoration:none;padding:7px 11px;border-radius:2px;white-space:nowrap}
+  nav.top a:hover{color:var(--blanco);background:var(--grafito)}
+
+  header{padding:96px 0 72px;border-bottom:1px solid var(--hairline)}
+  .kicker{font-family:var(--mono);font-size:12px;letter-spacing:.24em;text-transform:uppercase;color:var(--humo);margin-bottom:26px;display:flex;align-items:center;gap:14px}
+  h1{font-family:var(--display);font-size:clamp(34px,5.4vw,58px);line-height:1;text-transform:uppercase;letter-spacing:-.015em}
+  h1 .r{color:var(--rojo)}
+  header p{margin-top:26px;color:var(--humo);max-width:620px;line-height:1.65;font-size:15.5px}
+
+  section{padding:80px 0;border-bottom:1px solid var(--hairline)}
+  .sec-head{display:flex;align-items:center;gap:18px;margin-bottom:14px}
+  .sec-num{font-family:var(--mono);font-size:13px;color:var(--rojo);letter-spacing:.1em}
+  h2{font-family:var(--display);font-size:clamp(26px,3.6vw,40px);text-transform:uppercase;letter-spacing:-.01em}
+  .sec-intro{color:var(--humo);font-size:15px;line-height:1.65;max-width:640px;margin:20px 0 44px}
+  h3{font-family:var(--mono);font-size:12px;letter-spacing:.2em;text-transform:uppercase;color:var(--humo);margin:48px 0 18px;display:flex;align-items:center;gap:12px}
+  h3::before{content:"";width:18px;height:3px;background:var(--rojo);border-radius:2px;flex-shrink:0}
+  p{line-height:1.6;font-size:14.5px}
+
+  .grid-2{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:18px}
+  .grid-3{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:16px}
+  .grid-4{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:14px}
+  .card{background:var(--grafito);border:1px solid var(--hairline);border-radius:4px;padding:24px}
+  .card h4{font-weight:800;font-size:15px;margin-bottom:8px;text-transform:uppercase;letter-spacing:.04em}
+  .card .mono{font-family:var(--mono);font-size:11.5px;color:var(--rojo);margin-bottom:12px;letter-spacing:.08em}
+  .card p{color:var(--humo);font-size:13.5px}
+  .card p b{color:var(--blanco);font-weight:700}
+
+  table{width:100%;border-collapse:collapse;font-size:13.5px}
+  th{font-family:var(--mono);font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--humo);text-align:left;padding:12px 12px;border-bottom:1px solid var(--hairline)}
+  td{padding:13px 12px;border-bottom:1px solid var(--hairline);color:var(--blanco);vertical-align:top;line-height:1.5}
+  td.dim{color:var(--humo)}
+  td .m{font-family:var(--mono);font-size:12px;color:var(--rojo)}
+
+  .copy-box{position:relative;background:var(--grafito);border:1px solid var(--hairline);border-radius:4px;margin:14px 0}
+  .copy-box pre{padding:20px 22px;font-family:var(--mono);font-size:12.5px;line-height:1.8;color:#C9CDCE;white-space:pre-wrap}
+  .copy-box .copy{position:absolute;top:10px;right:10px;font-family:var(--mono);font-size:11px;background:var(--carbon);color:var(--blanco);border:1px solid var(--hairline);border-radius:2px;padding:6px 12px;cursor:pointer;letter-spacing:.05em}
+  .copy-box .copy:hover{border-color:var(--rojo);color:var(--rojo)}
+  .copy-box .c-label{font-family:var(--mono);font-size:10.5px;letter-spacing:.14em;color:var(--humo);padding:12px 22px 0;text-transform:uppercase}
+
+  /* Previews de plantillas */
+  .tpl-row{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:16px;margin-top:8px}
+  .tpl{border:1px solid var(--hairline);border-radius:4px;overflow:hidden;background:var(--grafito)}
+  .tpl .canvas{background:var(--carbon);position:relative;overflow:hidden}
+  .tpl .canvas.r45{aspect-ratio:4/5}
+  .tpl .canvas.r916{aspect-ratio:9/16}
+  .tpl .canvas.r169{aspect-ratio:16/9}
+  .tpl .file{font-family:var(--mono);font-size:10.5px;color:var(--humo);padding:10px 13px;letter-spacing:.04em;border-top:1px solid var(--hairline)}
+  .tp{position:absolute;left:8%}
+  .tp .sl{height:3px;width:34px;background:var(--rojo);border-radius:2px;margin-bottom:8px}
+  .tp .eb{font-family:var(--mono);font-size:8px;letter-spacing:.14em;color:var(--humo)}
+  .tp .eb.r{color:var(--rojo)}
+  .tp .d{font-family:var(--display);text-transform:uppercase;line-height:1.05;letter-spacing:-.01em}
+  .tp .d .r{color:var(--rojo)}
+  .tp .b{font-size:9px;color:var(--humo);margin-top:8px}
+  .tp .foot{font-family:var(--mono);font-size:7.5px;letter-spacing:.1em;color:var(--humo)}
+
+  .do-dont{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--hairline);border:1px solid var(--hairline);border-radius:4px;overflow:hidden}
+  .dd-cell{background:var(--carbon);padding:18px 20px;font-size:13.5px;line-height:1.55}
+  .dd-cell.h{background:var(--grafito);font-family:var(--mono);font-size:11px;letter-spacing:.16em;text-transform:uppercase}
+  .dd-cell.no{color:var(--humo)}
+  @media (max-width:640px){.do-dont{grid-template-columns:1fr}}
+
+  footer{padding:60px 0 90px;color:var(--humo)}
+  footer .mono{font-family:var(--mono);font-size:11px;letter-spacing:.08em}
+  .toast{position:fixed;bottom:24px;left:50%;transform:translateX(-50%) translateY(80px);background:var(--blanco);color:var(--carbon);font-family:var(--mono);font-size:12px;padding:10px 18px;border-radius:3px;transition:transform .25s ease;pointer-events:none;z-index:60}
+  .toast.show{transform:translateX(-50%) translateY(0)}
+  @media (prefers-reduced-motion: reduce){html{scroll-behavior:auto}.toast{transition:none}}
+</style>
+</head>
+<body>
+
+<nav class="top" aria-label="Secciones">
+  <div class="wrap">
+    <a href="#estrategia">01 Estrategia</a>
+    <a href="#instagram">02 Instagram</a>
+    <a href="#tiktok">03 TikTok</a>
+    <a href="#linkedin">04 LinkedIn</a>
+    <a href="#whop">05 Whop · Academia</a>
+    <a href="#produccion">06 Producción</a>
+  </div>
+</nav>
+
+<header>
+  <div class="wrap">
+    <div class="kicker"><span class="status-line"></span> Kit de redes sociales · v1</div>
+    <h1>La marca,<br>en modo <span class="r">público.</span></h1>
+    <p>Directrices, plantillas y sistemas de contenido para Instagram, TikTok, LinkedIn y la academia
+    en Whop. Todo hereda del manual de marca: mismas reglas de color, tipografía y voz. Las plantillas
+    PNG listas para publicar están en <span style="font-family:var(--mono);font-size:13px">stratton-social-kit.zip</span>,
+    junto con sus fuentes SVG editables.</p>
+  </div>
+</header>
+
+<!-- ============ 01 ESTRATEGIA ============ -->
+<section id="estrategia">
+  <div class="wrap">
+    <div class="sec-head"><span class="sec-num">01</span><h2>Estrategia</h2></div>
+    <p class="sec-intro">Una marca memorable no publica "contenido": publica un sistema. Cuatro pilares,
+    tres series con nombre propio, y una regla — cada pieza debe poder reconocerse como Stratt-On
+    con el logo tapado.</p>
+
+    <h3>Los 4 pilares de contenido</h3>
+    <div class="grid-4">
+      <div class="card"><div class="mono">P1 · LOGS DE PRODUCCIÓN</div><h4>Casos y métricas</h4><p>Resultados reales con números duros: horas recuperadas, errores eliminados, uptime. <b>El pilar que vende.</b></p></div>
+      <div class="card"><div class="mono">P2 · EDUCACIÓN</div><h4>Enseña el oficio</h4><p>n8n, Supabase, IA aplicada. Tutoriales y desgloses que alimentan el embudo hacia la academia. <b>El pilar que construye autoridad.</b></p></div>
+      <div class="card"><div class="mono">P3 · OPINIÓN</div><h4>Postura con filo</h4><p>Contra el trabajo manual, la jerga corporativa y el software genérico. <b>El pilar que hace memorable.</b></p></div>
+      <div class="card"><div class="mono">P4 · DETRÁS DEL SISTEMA</div><h4>Build in public</h4><p>Pantallas de n8n, arquitecturas, decisiones técnicas en vivo. <b>El pilar que genera confianza.</b></p></div>
+    </div>
+
+    <h3>Series con nombre propio</h3>
+    <table>
+      <tr><th>Serie</th><th>Formato</th><th>Pilar</th><th>Qué es</th></tr>
+      <tr><td><span class="m">ENCENDIDO EN 60S</span></td><td class="dim">TikTok / Reels</td><td class="dim">P2</td><td class="dim">Un problema de negocio resuelto con automatización en un minuto. Numerada por episodios (EP.01, EP.02…).</td></tr>
+      <tr><td><span class="m">LOGS DE PRODUCCIÓN</span></td><td class="dim">Carrusel IG / Post LinkedIn</td><td class="dim">P1</td><td class="dim">Casos reales con métrica en portada. Numerados como CASO Nº 001, 002…</td></tr>
+      <tr><td><span class="m">APAGADO vs ENCENDIDO</span></td><td class="dim">Carrusel / Video</td><td class="dim">P3</td><td class="dim">Antes/después de un proceso: el caos manual vs el sistema corriendo.</td></tr>
+    </table>
+
+    <h3>Cadencia semanal mínima</h3>
+    <table>
+      <tr><th>Día</th><th>Pieza</th><th>Plataformas</th></tr>
+      <tr><td>Lunes</td><td>Opinión (P3)</td><td class="dim">IG post + LinkedIn</td></tr>
+      <tr><td>Miércoles</td><td>ENCENDIDO EN 60S (P2)</td><td class="dim">TikTok + Reels + Shorts</td></tr>
+      <tr><td>Viernes</td><td>LOGS DE PRODUCCIÓN (P1)</td><td class="dim">Carrusel IG + LinkedIn</td></tr>
+      <tr><td>Continuo</td><td>Detrás del sistema (P4)</td><td class="dim">Stories cuando ocurra — sin forzar</td></tr>
+    </table>
+
+    <h3>Reglas de oro (todas las plataformas)</h3>
+    <div class="do-dont">
+      <div class="dd-cell h">✓ Siempre</div>
+      <div class="dd-cell h no">✕ Nunca</div>
+      <div class="dd-cell">Fondo carbón, un dato o una idea por pieza, rojo solo en la palabra que importa.</div>
+      <div class="dd-cell no">Fondos claros, degradados, más de un acento rojo compitiendo por atención.</div>
+      <div class="dd-cell">Titulares en Archivo Black MAYÚSCULAS; etiquetas y números en JetBrains Mono.</div>
+      <div class="dd-cell no">Fuentes del editor de turno (CapCut, Canva) que rompen el sistema.</div>
+      <div class="dd-cell">Terminar con una acción concreta: guarda, comenta "SISTEMA", link en bio.</div>
+      <div class="dd-cell no">Emojis como iconos, exclamaciones dobles, jerga corporativa.</div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 02 INSTAGRAM ============ -->
+<section id="instagram">
+  <div class="wrap">
+    <div class="sec-head"><span class="sec-num">02</span><h2>Instagram</h2></div>
+    <p class="sec-intro">El escaparate visual. El feed debe verse como un panel de control:
+    oscuro, ordenado, con destellos rojos donde hay información crítica.</p>
+
+    <h3>Bio (copiar y pegar)</h3>
+    <div class="copy-box">
+      <button class="copy" data-t="bio-ig">COPIAR</button>
+      <pre id="bio-ig">⏻ Llevamos negocios del modo manual al modo encendido
+Arquitectura de automatización · n8n · IA
+Casos reales, sin humo ↓</pre>
+    </div>
+
+    <h3>Formatos y plantillas del kit</h3>
+    <table>
+      <tr><th>Uso</th><th>Medida</th><th>Archivo del kit</th></tr>
+      <tr><td>Post de dato / métrica</td><td class="dim">1080×1350 (4:5)</td><td><span class="m">ig-post-dato-1080x1350</span></td></tr>
+      <tr><td>Post de opinión</td><td class="dim">1080×1350</td><td><span class="m">ig-post-opinion-1080x1350</span></td></tr>
+      <tr><td>Portada de carrusel</td><td class="dim">1080×1350</td><td><span class="m">ig-carrusel-portada-1080x1350</span></td></tr>
+      <tr><td>Story / Reel cover</td><td class="dim">1080×1920 (9:16)</td><td><span class="m">story-plantilla-1080x1920</span></td></tr>
+      <tr><td>Avatar</td><td class="dim">800×800</td><td><span class="m">avatar-800x800</span></td></tr>
+    </table>
+
+    <div class="tpl-row">
+      <div class="tpl"><div class="canvas r45">
+        <div class="tp" style="top:9%"><div class="sl"></div><div class="eb">LOGS DE PRODUCCIÓN · CASO Nº 014</div></div>
+        <div class="tp" style="top:26%"><div class="d" style="font-size:24px"><span class="r">−30 HORAS</span><br>MANUALES<br>POR SEMANA.</div><div class="b">Eliminadas con un solo pipeline de n8n.</div></div>
+        <div class="tp" style="bottom:7%"><div class="foot">⏻ @STRATTONAGENCY</div></div>
+      </div><div class="file">ig-post-dato-1080x1350.png</div></div>
+      <div class="tpl"><div class="canvas r45">
+        <div class="tp" style="top:9%"><div class="sl"></div><div class="eb r">OPINIÓN // SIN FILTRO</div></div>
+        <div class="tp" style="top:25%"><div class="d" style="font-size:22px">EL TRABAJO<br>MANUAL ES<br><span class="r">DEUDA<br>TÉCNICA.</span></div></div>
+        <div class="tp" style="bottom:7%"><div class="foot">⏻ @STRATTONAGENCY</div></div>
+      </div><div class="file">ig-post-opinion-1080x1350.png</div></div>
+      <div class="tpl"><div class="canvas r45">
+        <div class="tp" style="top:9%"><div class="sl"></div><div class="eb">SISTEMA Nº 014 · GUÍA</div></div>
+        <div class="tp" style="top:26%"><div class="d" style="font-size:19px">5 FLUJOS QUE<br>TU NEGOCIO<br>NECESITABA<br><span class="r">AYER.</span></div></div>
+        <div class="tp" style="bottom:7%"><div class="eb" style="color:var(--rojo)">DESLIZA →</div></div>
+      </div><div class="file">ig-carrusel-portada-1080x1350.png</div></div>
+    </div>
+
+    <h3>Sistema de feed y captions</h3>
+    <div class="grid-2">
+      <div class="card"><div class="mono">RITMO DEL FEED</div><p>Alterna plantillas para crear textura: dato → opinión → carrusel → dato. Nunca dos opiniones seguidas. Cada 9 posts, uno puede ser captura real de n8n sobre carbón (P4) para humanizar el panel.</p></div>
+      <div class="card"><div class="mono">FÓRMULA DE CAPTION</div><p><b>Línea 1:</b> repite o extiende el gancho de la imagen (es lo único visible sin abrir). <b>Cuerpo:</b> 3–5 frases cortas, una idea por línea. <b>Cierre:</b> CTA única. <b>Hashtags:</b> máximo 5, al final.</p></div>
+    </div>
+    <div class="copy-box">
+      <div class="c-label">Set de hashtags</div>
+      <button class="copy" data-t="hash-ig">COPIAR</button>
+      <pre id="hash-ig">#automatizacion #n8n #inteligenciaartificial #negociosdigitales #productividad</pre>
+    </div>
+    <p style="color:var(--humo);font-size:13px">Highlights: portadas con el isotipo en rojo sobre carbón y título en Mono MAYÚSCULAS (CASOS · SISTEMAS · ACADEMIA · OPINIÓN).</p>
+  </div>
+</section>
+
+<!-- ============ 03 TIKTOK ============ -->
+<section id="tiktok">
+  <div class="wrap">
+    <div class="sec-head"><span class="sec-num">03</span><h2>TikTok</h2></div>
+    <p class="sec-intro">La máquina de alcance. Aquí la marca habla más rápido y más de frente,
+    pero con el mismo sistema visual: si alguien pausa el video, debe ver una pieza Stratt-On.</p>
+
+    <h3>Bio (copiar y pegar)</h3>
+    <div class="copy-box">
+      <button class="copy" data-t="bio-tt">COPIAR</button>
+      <pre id="bio-tt">⏻ Automatización real para negocios reales
+Sistemas con n8n + IA que trabajan mientras duermes
+Academia y casos ↓</pre>
+    </div>
+
+    <h3>Estructura de video · ENCENDIDO EN 60S</h3>
+    <div class="grid-3">
+      <div class="card"><div class="mono">0–3 SEGUNDOS · GANCHO</div><p>Problema en pantalla, sin intro ni saludo. Texto grande Archivo Black sobre el video. Banco de ganchos en el MD del kit.</p></div>
+      <div class="card"><div class="mono">3–45 · SISTEMA</div><p>Pantalla de n8n/Supabase con zoom a lo importante. Narración directa: qué entra, qué se transforma, qué sale. Subtítulos siempre.</p></div>
+      <div class="card"><div class="mono">45–60 · CIERRE</div><p>El resultado en un número + CTA única: "Comenta SISTEMA y te mando el flujo" o "Academia en el perfil".</p></div>
+    </div>
+
+    <h3>Reglas visuales del video</h3>
+    <table>
+      <tr><th>Elemento</th><th>Regla</th></tr>
+      <tr><td>Portada</td><td class="dim">Plantilla <span class="m">tiktok-portada-1080x1920</span>: gancho gigante + tag de serie. Todas las portadas iguales = perfil que se ve como catálogo.</td></tr>
+      <tr><td>Subtítulos</td><td class="dim">Blanco óptico, palabra clave en rojo señal. Posición centro-baja, dentro de márgenes seguros (evitar 15% derecho y 20% inferior que tapa la UI).</td></tr>
+      <tr><td>Lower third</td><td class="dim">Etiqueta Mono sobre rectángulo grafito con borde rojo 2px: "EP.07 · CRM AUTOMÁTICO".</td></tr>
+      <tr><td>Duración</td><td class="dim">45–70 segundos. Si no cabe, son dos episodios — no un video de 3 minutos.</td></tr>
+    </table>
+  </div>
+</section>
+
+<!-- ============ 04 LINKEDIN ============ -->
+<section id="linkedin">
+  <div class="wrap">
+    <div class="sec-head"><span class="sec-num">04</span><h2>LinkedIn</h2></div>
+    <p class="sec-intro">Donde están los que firman. Doble presencia: tu perfil personal (la voz,
+    el que opina y muestra) y la página de empresa (el respaldo institucional). El 80% del
+    alcance saldrá del personal.</p>
+
+    <h3>Titular de perfil personal (copiar y pegar)</h3>
+    <div class="copy-box">
+      <button class="copy" data-t="head-li">COPIAR</button>
+      <pre id="head-li">CEO @ Stratt-On · Llevo negocios del modo manual al modo encendido — arquitectura de automatización con n8n, Supabase e IA</pre>
+    </div>
+
+    <h3>Assets del kit</h3>
+    <table>
+      <tr><th>Uso</th><th>Medida</th><th>Archivo</th></tr>
+      <tr><td>Banner perfil personal</td><td class="dim">1584×396</td><td><span class="m">linkedin-banner-personal-1584x396</span> <span class="dim">(zona izquierda libre: ahí cae tu foto)</span></td></tr>
+      <tr><td>Banner página de empresa</td><td class="dim">1128×191</td><td><span class="m">linkedin-banner-empresa-1128x191</span></td></tr>
+      <tr><td>Imagen de post / artículo</td><td class="dim">1080×1350 o 1200×630</td><td><span class="m">ig-post-*</span> (reutilizables) · <span class="m">og-image-1200x630</span></td></tr>
+      <tr><td>Avatar empresa</td><td class="dim">800×800</td><td><span class="m">avatar-800x800</span></td></tr>
+    </table>
+
+    <h3>Estructura de post que funciona</h3>
+    <div class="grid-2">
+      <div class="card"><div class="mono">FORMATO</div><p><b>Gancho</b> (1 línea, antes del "ver más") → <b>contexto</b> (2–3 líneas del problema) → <b>sistema</b> (qué se construyó, en viñetas cortas) → <b>número</b> (el resultado) → <b>cierre con postura</b>. Sin hashtags o máximo 3.</p></div>
+      <div class="card"><div class="mono">QUÉ PUBLICAR</div><p>Lunes opinión (P3) en texto puro — LinkedIn premia el texto nativo. Viernes LOGS DE PRODUCCIÓN (P1) con carrusel PDF o imagen del kit. Los carruseles de IG se re-exportan como PDF y funcionan directo.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 05 WHOP ============ -->
+<section id="whop">
+  <div class="wrap">
+    <div class="sec-head"><span class="sec-num">05</span><h2>Whop · Academia</h2></div>
+    <p class="sec-intro">El destino del embudo: <b style="color:var(--blanco)">STRATT-ON // ACADEMIA</b>.
+    Todo el contenido gratuito (P2) apunta aquí. La página debe sentirse como entrar a la sala de
+    máquinas: seria, técnica, sin promesas de "hazte rico".</p>
+
+    <h3>Identidad de la academia</h3>
+    <div class="grid-3">
+      <div class="card"><div class="mono">NOMBRE</div><h4>STRATT-ON // ACADEMIA</h4><p>El doble slash es el separador oficial de sub-marcas (estética de ruta/protocolo). Nunca "Academy" en inglés ni diminutivos.</p></div>
+      <div class="card"><div class="mono">MÓDULOS</div><h4>M01 · M02 · M03…</h4><p>Nomenclatura de sistema: <b>M01 FUNDAMENTOS DE N8N</b>, <b>M02 PIPELINES CON IA</b>, <b>M03 PRODUCCIÓN</b>. El número en rojo, gigante, es el héroe visual de cada portada.</p></div>
+      <div class="card"><div class="mono">PROMESA</div><h4>Habilidad, no humo</h4><p>Se vende una capacidad verificable: "sales con un sistema corriendo en producción". Cero lenguaje de gurú, cero contadores de urgencia falsos.</p></div>
+    </div>
+
+    <h3>Copy de la página (copiar y pegar)</h3>
+    <div class="copy-box">
+      <div class="c-label">Headline + descripción corta</div>
+      <button class="copy" data-t="whop-copy">COPIAR</button>
+      <pre id="whop-copy">APRENDE A ENCENDER SISTEMAS.
+
+Automatización real con n8n, Supabase e IA — de cero a producción.
+Sin teoría de relleno: cada módulo termina con un sistema tuyo, corriendo.
+
+M01 — FUNDAMENTOS DE N8N: de cero a tu primer flujo en producción
+M02 — PIPELINES CON IA: agentes, LLMs y automatización real
+M03 — PRODUCCIÓN: monitoreo, errores y sistemas que no se caen
+
+Acceso a la comunidad, revisiones de tus flujos y casos reales documentados.</pre>
+    </div>
+
+    <h3>Assets del kit</h3>
+    <table>
+      <tr><th>Uso</th><th>Formato</th><th>Archivo</th></tr>
+      <tr><td>Avatar de la tienda</td><td class="dim">Cuadrado 1:1 (800×800)</td><td><span class="m">avatar-800x800</span></td></tr>
+      <tr><td>Banner / imagen principal</td><td class="dim">16:9 (1920×1080)</td><td><span class="m">whop-banner-academia-1920x1080</span></td></tr>
+      <tr><td>Portadas de curso/módulo</td><td class="dim">16:9 (1280×720)</td><td><span class="m">whop-curso-m01</span> · <span class="m">whop-curso-m02</span> <span class="dim">(duplica el SVG para nuevos módulos)</span></td></tr>
+    </table>
+    <p style="color:var(--humo);font-size:13px;margin-top:12px">Whop no publica medidas oficiales en píxeles: usa estos formatos seguros (1:1 y 16:9 en alta resolución) y verifica el recorte en la vista previa del dashboard al subirlos.</p>
+
+    <div class="tpl-row" style="margin-top:24px">
+      <div class="tpl"><div class="canvas r169">
+        <div class="tp" style="top:10%"><div class="sl"></div><div class="eb r">STRATT-ON // ACADEMIA</div></div>
+        <div class="tp" style="top:34%"><div class="d" style="font-size:20px">APRENDE A<br>ENCENDER<br><span class="r">SISTEMAS.</span></div></div>
+        <div class="tp" style="bottom:8%"><div class="eb">M01 FUNDAMENTOS · M02 PIPELINES IA · M03 PRODUCCIÓN</div></div>
+      </div><div class="file">whop-banner-academia-1920x1080.png</div></div>
+      <div class="tpl"><div class="canvas r169">
+        <div class="tp" style="top:8%"><div class="d" style="font-size:34px;color:var(--rojo)">M01</div><div class="sl" style="margin-top:6px"></div></div>
+        <div class="tp" style="top:52%"><div class="d" style="font-size:15px">FUNDAMENTOS DE N8N</div><div class="eb" style="margin-top:6px">DE CERO A TU PRIMER FLUJO EN PRODUCCIÓN</div></div>
+        <div class="tp" style="bottom:8%"><div class="eb r">STRATT-ON // ACADEMIA</div></div>
+      </div><div class="file">whop-curso-m01-1280x720.png</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 06 PRODUCCIÓN ============ -->
+<section id="produccion">
+  <div class="wrap">
+    <div class="sec-head"><span class="sec-num">06</span><h2>Producción</h2></div>
+    <p class="sec-intro">Cómo operar el kit sin romper el sistema — a mano o desde tu content
+    factory en n8n.</p>
+
+    <h3>Nomenclatura de archivos</h3>
+    <div class="copy-box">
+      <button class="copy" data-t="naming">COPIAR</button>
+      <pre id="naming">stratton-{plataforma}-{tipo}-{serieNº o fecha}.png
+Ej: stratton-ig-dato-caso014.png · stratton-tiktok-portada-ep07.png</pre>
+    </div>
+
+    <h3>Flujo de trabajo</h3>
+    <div class="grid-3">
+      <div class="card"><div class="mono">MANUAL</div><p>Edita el <b>.svg</b> de la plantilla (texto plano, cualquier editor), cambia titular/dato, exporta a PNG. Nunca edites el PNG directamente.</p></div>
+      <div class="card"><div class="mono">CONTENT FACTORY (N8N)</div><p>Las plantillas SVG son inyectables: reemplaza los textos vía código en un nodo Function y renderiza a PNG en el pipeline. El MD del kit documenta los campos variables.</p></div>
+      <div class="card"><div class="mono">CON IA</div><p>Pásale <b>STRATTON-SOCIAL.md</b> a Claude/Antigravity junto al brief de la pieza: genera caption, hooks y variantes dentro del sistema sin desviarse.</p></div>
+    </div>
+
+    <h3>Checklist antes de publicar</h3>
+    <div class="do-dont">
+      <div class="dd-cell h">✓ Verificar</div>
+      <div class="dd-cell h no">✕ Señal de alarma</div>
+      <div class="dd-cell">Fondo carbón, rojo ≤5%, una sola idea, CTA única, tipografías del sistema.</div>
+      <div class="dd-cell no">Más de un rojo compitiendo, dos CTAs, texto que toca los bordes.</div>
+      <div class="dd-cell">Tono: directo, técnico, verificable. El dato es real y defendible.</div>
+      <div class="dd-cell no">Promesas infladas, jerga de gurú, "transformación digital 360°".</div>
+      <div class="dd-cell">La pieza se reconoce como Stratt-On con el logo tapado.</div>
+      <div class="dd-cell no">Podría ser de cualquier otra agencia — rediseñar.</div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap"><span class="mono">STRATT-ON · KIT DE REDES v1.0 · HEREDA DEL MANUAL DE MARCA v1.0</span></div>
+</footer>
+
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+<script>
+  const toast = document.getElementById('toast'); let timer;
+  document.querySelectorAll('.copy').forEach(btn => {
+    btn.addEventListener('click', async () => {
+      const txt = document.getElementById(btn.dataset.t).innerText;
+      try { await navigator.clipboard.writeText(txt); toast.textContent = 'Copiado'; }
+      catch(e){ toast.textContent = 'Selecciona y copia manualmente'; }
+      toast.classList.add('show'); clearTimeout(timer);
+      timer = setTimeout(() => toast.classList.remove('show'), 1500);
+    });
+  });
+</script>
+</body>
+</html>

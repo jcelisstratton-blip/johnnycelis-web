@@ -22,5 +22,5 @@ export function proxy(request: NextRequest) {
 }
 
 export const config = {
-  matcher: "/panelcentral/:path*",
+  matcher: ["/panelcentral/:path*", "/accesos/:path*"],
 };
