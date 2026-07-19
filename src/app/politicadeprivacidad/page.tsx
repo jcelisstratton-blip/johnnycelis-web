@@ -8,17 +8,18 @@ export const metadata = {
 
 export default function PoliticaPrivacidad() {
   return (
-    <main className="bg-black text-white min-h-screen px-[10%] py-24 md:py-32 font-sans selection:bg-accent/40 selection:text-white">
+    <main className="bg-carbon text-white min-h-screen px-[10%] py-24 md:py-32 font-sans selection:bg-accent/40 selection:text-white">
       {/* Botón de Regreso Estilizado */}
-      <Link 
-        href="/" 
-        className="text-accent no-underline font-bold text-[11px] uppercase tracking-widest border border-accent px-5 py-2.5 inline-block mb-16 hover:bg-accent hover:text-black transition-all duration-400"
+      <Link
+        href="/"
+        className="st-label text-accent no-underline font-bold text-[11px] border border-accent px-5 py-2.5 inline-block mb-16 hover:bg-accent hover:text-carbon transition-all duration-400"
       >
         ← Volver a Stratt-On
       </Link>
-      
+
       <header className="mb-16">
-        <h1 className="text-4xl md:text-7xl font-black italic uppercase leading-none mb-5 text-white">
+        <span className="st-status-line mb-8" />
+        <h1 className="text-4xl md:text-7xl uppercase leading-none mb-5 text-white">
           Política de <br />
           <span className="text-accent">Privacidad</span>
         </h1>
@@ -32,7 +33,7 @@ export default function PoliticaPrivacidad() {
 
         <div className="space-y-10">
           <div>
-            <h3 className="text-white border-l-4 border-accent pl-5 my-6 font-bold text-lg md:text-xl uppercase">
+            <h3 className="text-white border-l-4 border-accent pl-5 my-6 text-lg md:text-xl uppercase">
               1. Responsable del Tratamiento de Datos
             </h3>
             <p>
@@ -41,7 +42,7 @@ export default function PoliticaPrivacidad() {
           </div>
 
           <div>
-            <h3 className="text-white border-l-4 border-accent pl-5 my-6 font-bold text-lg md:text-xl uppercase">
+            <h3 className="text-white border-l-4 border-accent pl-5 my-6 text-lg md:text-xl uppercase">
               2. Información que Recopilamos
             </h3>
             <ul className="list-disc pl-5 space-y-3">
@@ -55,7 +56,7 @@ export default function PoliticaPrivacidad() {
           </div>
 
           <div>
-            <h3 className="text-white border-l-4 border-accent pl-5 my-6 font-bold text-lg md:text-xl uppercase">
+            <h3 className="text-white border-l-4 border-accent pl-5 my-6 text-lg md:text-xl uppercase">
               3. Finalidad del Tratamiento
             </h3>
             <p>
@@ -64,7 +65,7 @@ export default function PoliticaPrivacidad() {
           </div>
 
           <div>
-            <h3 className="text-white border-l-4 border-accent pl-5 my-6 font-bold text-lg md:text-xl uppercase">
+            <h3 className="text-white border-l-4 border-accent pl-5 my-6 text-lg md:text-xl uppercase">
               4. Uso de Herramientas de Automatización
             </h3>
             <p>
@@ -73,7 +74,7 @@ export default function PoliticaPrivacidad() {
           </div>
 
           <div>
-            <h3 className="text-white border-l-4 border-accent pl-5 my-6 font-bold text-lg md:text-xl uppercase">
+            <h3 className="text-white border-l-4 border-accent pl-5 my-6 text-lg md:text-xl uppercase">
               5. Conservación de Datos
             </h3>
             <p>
@@ -82,7 +83,7 @@ export default function PoliticaPrivacidad() {
           </div>
 
           <div>
-            <h3 className="text-white border-l-4 border-accent pl-5 my-6 font-bold text-lg md:text-xl uppercase">
+            <h3 className="text-white border-l-4 border-accent pl-5 my-6 text-lg md:text-xl uppercase">
               6. Derechos del Usuario (ARCO)
             </h3>
             <p>
@@ -91,7 +92,7 @@ export default function PoliticaPrivacidad() {
           </div>
 
           <div>
-            <h3 className="text-white border-l-4 border-accent pl-5 my-6 font-bold text-lg md:text-xl uppercase">
+            <h3 className="text-white border-l-4 border-accent pl-5 my-6 text-lg md:text-xl uppercase">
               7. Seguridad
             </h3>
             <p>
@@ -101,7 +102,7 @@ export default function PoliticaPrivacidad() {
         </div>
       </section>
 
-      <footer className="mt-24 pt-10 border-t border-white/10 opacity-20 text-[10px] tracking-[2px] uppercase">
+      <footer className="st-label mt-24 pt-10 border-t border-white/10 opacity-20 text-[10px]">
         STRATT-ON AGENCY // ANTIOQUIA, COLOMBIA // {new Date().getFullYear()}
       </footer>
     </main>

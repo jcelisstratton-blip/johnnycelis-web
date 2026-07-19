@@ -4,8 +4,9 @@ import { siteConfig } from '../config/site';
 
 export default function Footer() {
   return (
-    <footer className="py-24 px-[5%] text-center bg-black border-t border-white/5">
-      <h2 className="font-black italic text-5xl md:text-8xl mb-12 uppercase tracking-wider text-white">
+    <footer className="py-24 px-[5%] text-center bg-carbon border-t border-white/5">
+      <span className="st-status-line mb-8 block mx-auto" />
+      <h2 className="text-5xl md:text-8xl mb-12 uppercase text-white">
         Scale Faster.
       </h2>
       
@@ -42,22 +43,22 @@ export default function Footer() {
       </div>
 
       <div className="flex flex-col gap-8 items-center">
-        <div className="flex gap-[30px] opacity-60 text-[11px] tracking-[3px] font-bold">
-          <a 
-            href="/politicadeprivacidad" 
+        <div className="st-label flex gap-[30px] opacity-60 text-[11px] font-bold">
+          <a
+            href="/politicadeprivacidad"
             className="text-white no-underline hover:text-accent transition-colors"
           >
             PRIVACIDAD
           </a>
           <span className="text-white/20">|</span>
-          <a 
-            href="/terminosycondiciones" 
+          <a
+            href="/terminosycondiciones"
             className="text-white no-underline hover:text-accent transition-colors"
           >
             TÉRMINOS
           </a>
         </div>
-        <p className="opacity-20 text-[10px] tracking-[6px] md:tracking-[8px] uppercase mt-5 text-white">
+        <p className="st-label opacity-20 text-[10px] tracking-[6px] md:tracking-[8px] mt-5 text-white">
           STRATT-ON AGENCY // ANTIOQUIA, COLOMBIA // {new Date().getFullYear()}
         </p>
       </div>

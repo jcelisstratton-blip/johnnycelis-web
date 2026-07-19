@@ -11,7 +11,7 @@ export default function AnalyticalEngine() {
     { role: "system", text: "SISTEMA INICIADO. Motor Analítico Stratt-On en línea." },
   ]);
 
-  const fullTypewriterText = "Indica el proceso operativo a mejorar para generar tu diagnóstico en línea.";
+  const fullTypewriterText = "Describe el proceso que quieres optimizar. Generamos tu diagnóstico en línea.";
   const containerRef = useRef<HTMLDivElement>(null);
 
   function startTypewriter() {
@@ -66,7 +66,7 @@ export default function AnalyticalEngine() {
       }
 
       const data = await response.json();
-      setIaLog(prev => [...prev, { role: "ai", text: data.respuesta || "Solicitud procesada con éxito por el ecosistema." }]);
+      setIaLog(prev => [...prev, { role: "ai", text: data.respuesta || "Solicitud procesada. Ecosistema en ejecución." }]);
     } catch (error) {
       console.error("Falla en la orquestación:", error);
       setIaLog(prev => [
@@ -82,32 +82,31 @@ export default function AnalyticalEngine() {
   };
 
   return (
-    <div ref={containerRef} className="w-full max-w-[900px] mx-auto bg-gradient-to-b from-[#0a0a0a] to-black border-2 border-accent rounded-3xl overflow-hidden shadow-[0_0_60px_rgba(0,245,212,0.2)]">
+    <div ref={containerRef} className="w-full max-w-[900px] mx-auto bg-gradient-to-b from-grafito to-carbon border-2 border-accent rounded overflow-hidden shadow-[0_0_60px_rgba(255,59,47,0.2)]">
       {/* Terminal Header */}
-      <div className="bg-black px-6 py-4 border-b border-accent/20 flex justify-between items-center">
+      <div className="bg-carbon px-6 py-4 border-b border-accent/20 flex justify-between items-center">
         <div className="flex gap-2">
           <div className="w-3 h-3 rounded-full bg-[#FF5F56]" />
           <div className="w-3 h-3 rounded-full bg-[#FFBD2E]" />
           <div className="w-3 h-3 rounded-full bg-[#27C93F]" />
         </div>
-        <div className="text-[11px] md:text-xs tracking-[2px] font-black text-white">MOTOR_ANALÍTICO_V2.0</div>
-        <div className="flex items-center gap-2 text-xs text-green-400 font-bold">
-          <span className="w-2.5 h-2.5 bg-green-400 rounded-full animate-ping absolute" />
-          <span className="w-2.5 h-2.5 bg-green-400 rounded-full relative" />
+        <div className="st-label text-[11px] md:text-xs text-white">MOTOR_ANALÍTICO_V2.0</div>
+        <div className="st-label flex items-center gap-2 text-xs text-white font-bold">
+          <span className="st-led animate-pulse" />
           ONLINE
         </div>
       </div>
 
       {/* Typewriter Banner */}
       <div className="p-6 md:p-10 border-b border-accent/20 text-center bg-accent/2">
-        <div className="relative text-white font-black text-base md:text-2xl uppercase tracking-wider leading-relaxed">
+        <div className="relative text-white text-base md:text-2xl uppercase tracking-wider leading-relaxed">
           {typedText}
           <span className="inline-block w-2.5 h-[1.1em] bg-accent align-bottom animate-pulse ml-1.5" />
         </div>
       </div>
 
       {/* Terminal Console */}
-      <div className="font-mono flex flex-col min-h-[300px] bg-black">
+      <div className="font-mono flex flex-col min-h-[300px] bg-carbon">
         <div className="flex-1 p-6 md:p-10 overflow-y-auto flex flex-col gap-4 text-white/70 text-sm">
           {iaLog.map((msg, idx) => (
             <div 
@@ -129,26 +128,26 @@ export default function AnalyticalEngine() {
         </div>
 
         {/* Input prompt */}
-        <form 
-          onSubmit={handleRunAiPrompt} 
-          className={`flex items-center p-4 bg-white border border-accent/20 rounded-xl mx-5 mb-5 transition-all duration-300 focus-within:ring-2 focus-within:ring-accent ${
-            isTypingFinished ? 'opacity-100 pointer-events-auto shadow-[0_0_20px_rgba(0,245,212,0.3)]' : 'opacity-0 pointer-events-none'
+        <form
+          onSubmit={handleRunAiPrompt}
+          className={`flex items-center p-4 bg-blanco border border-accent/20 rounded-st mx-5 mb-5 transition-all duration-300 focus-within:ring-2 focus-within:ring-accent ${
+            isTypingFinished ? 'opacity-100 pointer-events-auto shadow-[0_0_20px_rgba(255,59,47,0.3)]' : 'opacity-0 pointer-events-none'
           }`}
         >
           <span className="text-accent mr-3.5 font-bold text-lg">$</span>
           <div className="flex-1 flex items-center relative">
-            <input 
-              type="text" 
-              className="flex-1 bg-transparent border-none text-black text-sm md:text-base outline-none w-full font-semibold placeholder:text-black/40"
-              placeholder="Ej: Mi equipo pierde horas copiando datos de correos a un Excel..." 
-              value={iaInput} 
+            <input
+              type="text"
+              className="flex-1 bg-transparent border-none text-carbon text-sm md:text-base outline-none w-full font-semibold placeholder:text-carbon/40"
+              placeholder="Ej: Mi equipo pierde horas copiando datos de correos a un Excel..."
+              value={iaInput}
               onChange={(e) => setIaInput(e.target.value)}
               disabled={isProcessing}
             />
           </div>
-          <button 
-            type="submit" 
-            className="bg-transparent border-none text-accent font-black cursor-pointer text-xs md:text-sm hover:opacity-75 transition-opacity"
+          <button
+            type="submit"
+            className="st-label bg-transparent border-none text-accent cursor-pointer text-xs md:text-sm hover:opacity-75 transition-opacity"
             disabled={isProcessing}
           >
             EJECUTAR_

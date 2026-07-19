@@ -1,0 +1,22 @@
+/* STRATT-ON — Design tokens v1.0 · Concepto: Encendido */
+:root {
+  /* Color */
+  --st-carbon: #0E0F11;
+  --st-grafito: #1C1E22;
+  --st-humo: #9BA1A6;
+  --st-blanco: #F5F6F4;
+  --st-rojo: #FF3B2F;
+  --st-rojo-profundo: #C21F17;
+  --st-hairline: rgba(245, 246, 244, 0.10);
+
+  /* Tipografia */
+  --st-font-display: 'Archivo Black', sans-serif;
+  --st-font-body: 'Archivo', sans-serif;
+  --st-font-mono: 'JetBrains Mono', monospace;
+
+  /* Forma y ritmo */
+  --st-radius: 2px;
+  --st-space-1: 4px;  --st-space-2: 8px;  --st-space-3: 16px;
+  --st-space-4: 24px; --st-space-5: 40px; --st-space-6: 64px;
+  --st-transition: 200ms cubic-bezier(0.4, 0, 0.2, 1);
+}

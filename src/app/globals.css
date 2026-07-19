@@ -1,25 +1,82 @@
 @import "tailwindcss";
 
 :root {
-  --accent: #00F5D4;
-  --accent-rgb: 0, 245, 212;
-  --accent-secondary: #00B4D8;
-  --accent-secondary-rgb: 0, 180, 216;
-  --bg-color: #030712;
+  --color-carbon: #0E0F11;
+  --color-grafito: #1C1E22;
+  --color-humo: #9BA1A6;
+  --color-blanco: #F5F6F4;
+  --color-rojo: #FF3B2F;
+  --color-rojo-profundo: #C21F17;
+
+  --accent: var(--color-rojo);
+  --accent-rgb: 255, 59, 47;
+  --accent-secondary: var(--color-rojo-profundo);
+  --accent-secondary-rgb: 194, 31, 23;
+  --bg-color: var(--color-carbon);
 }
 
 @theme {
   --color-accent: var(--accent);
   --color-accent-secondary: var(--accent-secondary);
+  --color-carbon: #0E0F11;
+  --color-grafito: #1C1E22;
+  --color-humo: #9BA1A6;
+  --color-blanco: #F5F6F4;
+  --color-rojo: #FF3B2F;
+  --color-rojo-profundo: #C21F17;
+
+  --font-display: 'Archivo Black', sans-serif;
+  --font-body: 'Archivo', sans-serif;
+  --font-mono: 'JetBrains Mono', monospace;
+
+  --radius-st: 2px;
 }
 
 body {
   margin: 0;
   padding: 0;
   background-color: var(--bg-color) !important;
-  color: #fff;
+  color: var(--color-blanco);
   overflow-x: hidden;
   -webkit-font-smoothing: antialiased;
+  font-family: var(--font-body);
+}
+
+h1, h2 {
+  font-family: var(--font-display);
+  letter-spacing: -0.02em;
+  line-height: 1.02;
+}
+
+h3, h4 {
+  font-family: var(--font-body);
+  font-weight: 800;
+}
+
+/* Eyebrows, etiquetas y datos: JetBrains Mono, mayúsculas, tracking amplio */
+.st-label {
+  font-family: var(--font-mono);
+  text-transform: uppercase;
+  letter-spacing: 0.18em;
+}
+
+/* Elemento de firma: barra de estado */
+.st-status-line {
+  display: inline-block;
+  width: 56px;
+  height: 3px;
+  border-radius: var(--radius-st);
+  background-color: var(--color-rojo);
+}
+
+/* LED de estado */
+.st-led {
+  display: inline-block;
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  background-color: var(--color-rojo);
+  box-shadow: 0 0 8px rgba(255, 59, 47, 0.8);
 }
 
 @keyframes marquee {
@@ -35,4 +92,10 @@ body {
 
 html {
   scroll-behavior: smooth;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .animate-marquee {
+    animation: none;
+  }
 }

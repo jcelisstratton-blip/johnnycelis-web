@@ -8,10 +8,10 @@ export const siteConfig = {
   whopUrl: "https://whop.com/joined/biz_fNslGhWeZdy2WR/?tab=home",
   
   socialLinks: [
-    { 
-      name: "Email", 
-      link: "mailto:jcelis.stratton@gmail.com", 
-      color: "#FF5C00", 
+    {
+      name: "Email",
+      link: "mailto:jcelis.stratton@gmail.com",
+      color: "#FF3B2F",
       fill: "none", 
       stroke: "currentColor", 
       strokeWidth: "2", 
@@ -36,18 +36,18 @@ export const siteConfig = {
       svg: "<path d='M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z'></path>" 
     },
     { 
-      name: "TikTok", 
-      link: "https://www.tiktok.com/@stratt_on", 
-      color: "#00F5D4", 
+      name: "TikTok",
+      link: "https://www.tiktok.com/@stratt_on",
+      color: "#25F4EE",
       fill: "currentColor", 
       stroke: "none", 
       strokeWidth: "0", 
       svg: "<path d='M12.525.02c1.31-.02 2.61-.01 3.91-.02.08 1.53.63 3.09 1.75 4.17 1.12 1.11 2.7 1.62 4.24 1.79v4.03c-1.44-.17-2.86-.6-4.12-1.31a6.44 6.44 0 0 1-1.87-1.43v7.33c.01 5.89-6.38 9.57-11.13 6.13-4.07-2.8-4.43-8.87-1.12-12.18 1.47-1.51 3.53-2.31 5.63-2.13v4.03c-1.41-.09-2.89.47-3.6 1.74-.83 1.52-.25 3.65 1.34 4.54 1.48.86 3.52.16 4.12-1.47.16-.4.24-.82.23-1.25V.02z'></path>" 
     },
     { 
-      name: "Whop", 
-      link: "https://whop.com/joined/biz_fNslGhWeZdy2WR/?tab=home", 
-      color: "#FF5C00", 
+      name: "Whop",
+      link: "https://whop.com/joined/biz_fNslGhWeZdy2WR/?tab=home",
+      color: "#FF3B2F",
       fill: "none", 
       stroke: "currentColor", 
       strokeWidth: "2", 
@@ -72,7 +72,7 @@ export const siteConfig = {
       id: "outbound",
       title: "Growth Outbound AI",
       subtitle: "Maquinaria Autónoma de Prospección B2B",
-      desc: "Escalamos tu adquisición de clientes corporativos de forma inteligente. Utilizamos agentes de IA para extraer bases de datos, enriquecer prospectos y redactar secuencias de Cold Email e interacciones en LinkedIn altamente personalizadas y dinámicas.",
+      desc: "Escalamos tu adquisición de clientes corporativos. Utilizamos agentes de IA para extraer bases de datos, enriquecer prospectos y redactar secuencias de Cold Email e interacciones en LinkedIn altamente personalizadas y dinámicas.",
       bullets: [
         "Extracción automática y enriquecimiento de leads de alta calidad",
         "Calentamiento (Warm-up) de múltiples dominios corporativos",

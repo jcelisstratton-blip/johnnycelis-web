@@ -1,6 +1,7 @@
 "use client";
 import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
+import Image from 'next/image';
 import { siteConfig } from '../config/site';
 
 export default function Navbar() {
@@ -22,48 +23,68 @@ export default function Navbar() {
           scrolled ? 'bg-black/85 backdrop-blur-md border-b border-accent/15' : 'bg-transparent'
         }`}
       >
-        <Link 
-          href="/" 
-          className="font-black italic text-2xl tracking-wider text-white no-underline relative z-101"
+        <Link
+          href="/"
+          className="relative z-101 flex items-center"
         >
-          STRATT-ON
+          <Image
+            src="/brand/stratton-logo-principal-fondo-oscuro.svg"
+            alt="Stratt-On"
+            width={161}
+            height={25}
+            className="h-6 md:h-7 w-auto"
+            priority
+          />
         </Link>
-        
+
         <div className="hidden md:flex gap-[30px] items-center">
-          <Link 
-            href="/#soluciones" 
-            className="text-white no-underline text-[11px] font-bold tracking-widest uppercase hover:text-accent transition-colors"
+          <Link
+            href="/#soluciones"
+            className="st-label text-white no-underline text-[11px] font-bold hover:text-accent transition-colors"
           >
             Soluciones
           </Link>
-          <Link 
-            href="/servicios" 
-            className="text-white no-underline text-[11px] font-bold tracking-widest uppercase hover:text-accent transition-colors"
+          <Link
+            href="/servicios"
+            className="st-label text-white no-underline text-[11px] font-bold hover:text-accent transition-colors"
           >
             Servicios
           </Link>
-          <Link 
-            href="/insights" 
-            className="text-white no-underline text-[11px] font-bold tracking-widest uppercase hover:text-accent transition-colors"
+          <Link
+            href="/insights"
+            className="st-label text-white no-underline text-[11px] font-bold hover:text-accent transition-colors"
           >
             Insights
           </Link>
-          <a 
-            href={siteConfig.calendarUrl} 
-            target="_blank" 
-            rel="noopener noreferrer" 
-            className="bg-accent text-black font-black text-[11px] uppercase tracking-widest px-6 py-3 rounded-[4px] hover:shadow-[0_0_40px_var(--accent)] hover:-translate-y-0.5 hover:bg-white hover:text-black transition-all duration-400 flex items-center justify-center gap-2"
+          <a
+            href={siteConfig.calendarUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="st-label bg-accent text-carbon font-black text-[11px] px-6 py-3 rounded-st hover:-translate-y-0.5 hover:bg-white hover:text-carbon transition-all duration-400 flex items-center justify-center gap-2"
           >
             AUDITORÍA IA
           </a>
         </div>
 
-        <button 
-          className="md:hidden bg-transparent border-none text-white text-3xl cursor-pointer z-101 relative focus:outline-none"
+        <button
+          className="md:hidden bg-transparent border-none text-white cursor-pointer z-101 relative focus:outline-none p-1"
           onClick={() => setMenuOpen(!menuOpen)}
           aria-label={menuOpen ? "Cerrar menú" : "Abrir menú"}
         >
-          {menuOpen ? '✕' : '☰'}
+          <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round">
+            {menuOpen ? (
+              <>
+                <line x1="6" y1="6" x2="18" y2="18" />
+                <line x1="18" y1="6" x2="6" y2="18" />
+              </>
+            ) : (
+              <>
+                <line x1="3" y1="6" x2="21" y2="6" />
+                <line x1="3" y1="12" x2="21" y2="12" />
+                <line x1="3" y1="18" x2="21" y2="18" />
+              </>
+            )}
+          </svg>
         </button>
       </nav>
 
@@ -73,32 +94,32 @@ export default function Navbar() {
           menuOpen ? 'translate-y-0' : '-translate-y-full'
         }`}
       >
-        <Link 
-          href="/#soluciones" 
-          className="text-white no-underline text-2xl font-black uppercase tracking-widest hover:text-accent transition-colors"
+        <Link
+          href="/#soluciones"
+          className="font-display text-white no-underline text-2xl uppercase tracking-[-0.02em] hover:text-accent transition-colors"
           onClick={() => setMenuOpen(false)}
         >
           Soluciones
         </Link>
-        <Link 
-          href="/servicios" 
-          className="text-white no-underline text-2xl font-black uppercase tracking-widest hover:text-accent transition-colors"
+        <Link
+          href="/servicios"
+          className="font-display text-white no-underline text-2xl uppercase tracking-[-0.02em] hover:text-accent transition-colors"
           onClick={() => setMenuOpen(false)}
         >
           Servicios
         </Link>
-        <Link 
-          href="/insights" 
-          className="text-white no-underline text-2xl font-black uppercase tracking-widest hover:text-accent transition-colors"
+        <Link
+          href="/insights"
+          className="font-display text-white no-underline text-2xl uppercase tracking-[-0.02em] hover:text-accent transition-colors"
           onClick={() => setMenuOpen(false)}
         >
           Insights
         </Link>
-        <a 
-          href={siteConfig.calendarUrl} 
-          target="_blank" 
-          rel="noopener noreferrer" 
-          className="bg-accent text-black font-black uppercase tracking-widest px-8 py-4 rounded-[4px] hover:shadow-[0_0_40px_var(--accent)] hover:bg-white hover:text-black transition-all duration-400 mt-5"
+        <a
+          href={siteConfig.calendarUrl}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="st-label bg-accent text-carbon px-8 py-4 rounded-st font-black hover:bg-white hover:text-carbon transition-all duration-400 mt-5"
           onClick={() => setMenuOpen(false)}
         >
           Auditoría IA
