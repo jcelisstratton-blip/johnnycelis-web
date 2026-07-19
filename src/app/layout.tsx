@@ -1,6 +1,6 @@
 import './globals.css'
 import WhatsAppWidget from '@/components/WhatsAppWidget'
-
+import EasterEgg from '@/components/EasterEgg'
 const title = 'Stratt-On Agency | Ecosistemas Autónomos de IA B2B'
 const description = 'Optimizamos la operación de tu empresa con agentes de voz e IA, orquestación con n8n y self-hosting en Coolify.'
 
@@ -45,6 +45,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       <body suppressHydrationWarning style={{ margin: 0, background: 'var(--bg-color)' }}>
         {children}
         <WhatsAppWidget />
+        <EasterEgg />
       </body>
     </html>
   )
