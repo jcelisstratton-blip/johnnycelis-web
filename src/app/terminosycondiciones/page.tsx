@@ -1,74 +1,53 @@
-export default function TerminosCondiciones() {
-  const electricPurple = "var(--accent)";
+import React from 'react';
+import Link from 'next/link';
 
+export const metadata = {
+  title: 'Términos y Condiciones | Stratt-On Agency',
+  description: 'Términos y condiciones de uso de las herramientas de automatización de TikTok y redes sociales de Stratt-On Agency.',
+};
+
+export default function TerminosCondiciones() {
   return (
-    <main style={{ 
-      backgroundColor: 'var(--bg-color)', 
-      color: '#fff', 
-      minHeight: '100vh', 
-      padding: '120px 10% 80px', 
-      fontFamily: 'Inter, system-ui, sans-serif' 
-    }}>
-      
+    <main className="bg-black text-white min-h-screen px-[10%] py-24 md:py-32 font-sans selection:bg-accent/40 selection:text-white">
       {/* Botón de Regreso */}
-      <a href="/" style={{ 
-        color: electricPurple, 
-        textDecoration: 'none', 
-        fontWeight: 'bold', 
-        fontSize: '12px', 
-        textTransform: 'uppercase', 
-        letterSpacing: '2px',
-        border: `1px solid ${electricPurple}`,
-        padding: '10px 20px',
-        display: 'inline-block',
-        marginBottom: '60px'
-      }}>
+      <Link 
+        href="/" 
+        className="text-accent no-underline font-bold text-[11px] uppercase tracking-widest border border-accent px-5 py-2.5 inline-block mb-16 hover:bg-accent hover:text-black transition-all duration-400"
+      >
         ← Volver a Stratt-On
-      </a>
+      </Link>
       
-      <header style={{ marginBottom: '60px' }}>
-        <h1 style={{ 
-          fontSize: 'clamp(2.5rem, 5vw, 4rem)', 
-          fontWeight: 900, 
-          fontStyle: 'italic', 
-          textTransform: 'uppercase',
-          lineHeight: 1,
-          margin: '0 0 20px 0'
-        }}>
+      <header className="mb-16">
+        <h1 className="text-4xl md:text-7xl font-black italic uppercase leading-none mb-5 text-white">
           Términos y <br />
-          <span style={{ color: electricPurple }}>Condiciones</span>
+          <span className="text-accent">Condiciones</span>
         </h1>
-        <p style={{ color: '#666', fontWeight: 'bold' }}>Última actualización: 16 de marzo de 2026</p>
+        <p className="text-white/40 text-xs md:text-sm font-bold">Última actualización: 16 de marzo de 2026</p>
       </header>
       
-      <section style={{ 
-        lineHeight: '1.8', 
-        color: '#ccc', 
-        maxWidth: '900px', 
-        fontSize: '1.1rem',
-        textAlign: 'justify'
-      }}>
-        <div style={{ 
-          background: 'rgba(255,255,255,0.03)', 
-          padding: '40px', 
-          borderLeft: `2px solid ${electricPurple}`,
-          marginBottom: '40px'
-        }}>
+      <section className="leading-loose text-white/70 max-w-[900px] text-base text-justify space-y-10">
+        <div className="bg-white/3 p-8 md:p-10 border-l-2 border-accent mb-10">
           <p>Al utilizar nuestra aplicación de automatización de <strong>TikTok</strong>, el usuario acepta que <strong>Stratt-On Agency</strong> gestione el contenido multimedia exclusivamente para fines de publicación autorizada.</p>
         </div>
 
-        <h3 style={{ color: '#fff', margin: '40px 0 20px' }}>Seguridad y Acceso</h3>
-        <p>No recopilamos credenciales de acceso directo; el acceso se realiza mediante el protocolo <strong>OAuth2 de TikTok</strong>, garantizando que su contraseña nunca pase por nuestros servidores.</p>
+        <div>
+          <h3 className="text-white font-bold text-lg md:text-xl uppercase mb-4">Seguridad y Acceso</h3>
+          <p>No recopilamos credenciales de acceso directo; el acceso se realiza mediante el protocolo <strong>OAuth2 de TikTok</strong>, garantizando que su contraseña nunca pase por nuestros servidores.</p>
+        </div>
 
-        <h3 style={{ color: '#fff', margin: '40px 0 20px' }}>Control del Usuario</h3>
-        <p>Usted mantiene el control total sobre su cuenta. El usuario puede revocar este acceso en cualquier momento desde su panel de configuración de <strong>TikTok</strong>.</p>
+        <div>
+          <h3 className="text-white font-bold text-lg md:text-xl uppercase mb-4">Control del Usuario</h3>
+          <p>Usted mantiene el control total sobre su cuenta. El usuario puede revocar este acceso en cualquier momento desde su panel de configuración de <strong>TikTok</strong>.</p>
+        </div>
 
-        <h3 style={{ color: '#fff', margin: '40px 0 20px' }}>Uso de Contenido</h3>
-        <p>Stratt-On Agency se compromete a utilizar los permisos otorgados únicamente para las tareas de automatización y publicación explícitamente configuradas por el usuario dentro de nuestro ecosistema de sistemas de IA.</p>
+        <div>
+          <h3 className="text-white font-bold text-lg md:text-xl uppercase mb-4">Uso de Contenido</h3>
+          <p>Stratt-On Agency se compromete a utilizar los permisos otorgados únicamente para las tareas de automatización y publicación explícitamente configuradas por el usuario dentro de nuestro ecosistema de sistemas de IA.</p>
+        </div>
       </section>
 
-      <footer style={{ marginTop: '100px', paddingTop: '40px', borderTop: '1px solid #222', opacity: 0.4, fontSize: '11px', letterSpacing: '2px' }}>
-        STRATT-ON AGENCY // AUTOMATION PROTOCOLS // 2026
+      <footer className="mt-24 pt-10 border-t border-white/10 opacity-20 text-[10px] tracking-[2px] uppercase">
+        STRATT-ON AGENCY // AUTOMATION PROTOCOLS // {new Date().getFullYear()}
       </footer>
     </main>
   );

@@ -1,4 +1,5 @@
 import './globals.css'
+import WhatsAppWidget from '@/components/WhatsAppWidget'
 
 export const metadata = {
   title: 'Stratt-On Agency | Expertos en Agentes de IA',
@@ -10,6 +11,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     <html lang="es" suppressHydrationWarning>
       <body suppressHydrationWarning style={{ margin: 0, background: 'var(--bg-color)' }}>
         {children}
+        <WhatsAppWidget />
       </body>
     </html>
   )
