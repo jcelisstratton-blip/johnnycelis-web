@@ -23,12 +23,12 @@ export default function PoliticaPrivacidad() {
           Política de <br />
           <span className="text-accent">Privacidad</span>
         </h1>
-        <p className="text-white/40 text-xs md:text-sm font-bold">Última actualización: 16 de marzo de 2026</p>
+        <p className="text-white/40 text-xs md:text-sm font-bold">Última actualización: 21 de julio de 2026</p>
       </header>
       
       <section className="leading-loose text-white/70 max-w-[900px] text-base text-justify space-y-10">
         <p>
-          En <strong>Johnny Celis y Stratt-On Agency</strong>, la privacidad de nuestros usuarios es una prioridad. Esta Política de Privacidad describe cómo recopilamos, utilizamos y protegemos la información cuando interactúas con nuestro sitio web <span className="text-white">www.johnnycelis.online</span> y nuestras aplicaciones conectadas a servicios de terceros como LinkedIn.
+          En <strong>Johnny Celis y Stratt-On Agency</strong>, la privacidad de nuestros usuarios es una prioridad. Esta Política de Privacidad describe cómo recopilamos, utilizamos y protegemos la información cuando interactúas con nuestro sitio web <span className="text-white">www.stratt-on.com</span> y nuestras aplicaciones conectadas a servicios de terceros como LinkedIn y TikTok.
         </p>
 
         <div className="space-y-10">
@@ -37,7 +37,7 @@ export default function PoliticaPrivacidad() {
               1. Responsable del Tratamiento de Datos
             </h3>
             <p>
-              El responsable del tratamiento de los datos recolectados es <strong>Johnny Celis</strong>, con domicilio de contacto en Antioquia, Colombia, y correo electrónico de soporte: <a href="mailto:jcelis@johnnycelis.online" className="text-accent hover:underline">jcelis@johnnycelis.online</a>.
+              El responsable del tratamiento de los datos recolectados es <strong>Johnny Celis</strong>, con domicilio de contacto en Antioquia, Colombia, y correo electrónico de soporte: <a href="mailto:johnnycelis@stratt-on.com" className="text-accent hover:underline">johnnycelis@stratt-on.com</a>.
             </p>
           </div>
 
@@ -57,7 +57,36 @@ export default function PoliticaPrivacidad() {
 
           <div>
             <h3 className="text-white border-l-4 border-accent pl-5 my-6 text-lg md:text-xl uppercase">
-              3. Finalidad del Tratamiento
+              3. Datos de TikTok (TikTok API for Developers)
+            </h3>
+            <p className="mb-4">
+              Al conectar tu cuenta de TikTok a nuestra herramienta de publicación alojada en <span className="text-white">post.stratt-on.com</span>, accedemos únicamente a la siguiente información, previa autorización explícita otorgada por ti en la pantalla de consentimiento de TikTok:
+            </p>
+            <ul className="list-disc pl-5 space-y-3 mb-4">
+              <li>
+                <strong>Información básica de perfil (user.info.basic):</strong> nombre para mostrar, nombre de usuario, foto de perfil e identificador de usuario. La usamos para confirmarte visualmente en qué cuenta se publicará el contenido.
+              </li>
+              <li>
+                <strong>Publicación de contenido (video.publish):</strong> permite subir y publicar videos directamente en tu perfil, con la configuración de privacidad, comentarios, dúos y montajes que tú selecciones antes de publicar.
+              </li>
+              <li>
+                <strong>Envío a borradores (video.upload):</strong> permite enviar videos a tu bandeja de entrada de TikTok para que los edites y publiques desde la aplicación.
+              </li>
+            </ul>
+            <p className="mb-4">
+              <strong>Qué almacenamos:</strong> tokens de acceso y actualización cifrados en tránsito, tu identificador de TikTok, y el registro de las publicaciones realizadas (identificador de publicación, estado y fecha). Los archivos de video se almacenan de forma temporal y se eliminan una vez completada la publicación.
+            </p>
+            <p className="mb-4">
+              <strong>Qué no hacemos:</strong> no leemos tus videos existentes, no accedemos a tus mensajes, seguidores ni estadísticas, no compartimos ni vendemos datos de TikTok a terceros, y no utilizamos esta información para entrenar modelos de inteligencia artificial.
+            </p>
+            <p>
+              <strong>Revocación:</strong> puedes retirar el acceso en cualquier momento desde TikTok, en Perfil → Configuración y privacidad → Seguridad y permisos → Autorizar administración. Al revocarlo, eliminamos los tokens asociados a tu cuenta.
+            </p>
+          </div>
+
+          <div>
+            <h3 className="text-white border-l-4 border-accent pl-5 my-6 text-lg md:text-xl uppercase">
+              4. Finalidad del Tratamiento
             </h3>
             <p>
               Los datos se utilizan exclusivamente para gestionar publicaciones en redes sociales, optimizar procesos de marketing, enviar comunicaciones del servicio y mejorar la experiencia de usuario.
@@ -66,7 +95,7 @@ export default function PoliticaPrivacidad() {
 
           <div>
             <h3 className="text-white border-l-4 border-accent pl-5 my-6 text-lg md:text-xl uppercase">
-              4. Uso de Herramientas de Automatización
+              5. Uso de Herramientas de Automatización
             </h3>
             <p>
               Utilizamos la plataforma <strong>n8n</strong>. Los datos se gestionan de forma técnica y segura, sin venta o cesión a terceros para fines comerciales ajenos a Stratt-On Agency.
@@ -75,7 +104,7 @@ export default function PoliticaPrivacidad() {
 
           <div>
             <h3 className="text-white border-l-4 border-accent pl-5 my-6 text-lg md:text-xl uppercase">
-              5. Conservación de Datos
+              6. Conservación de Datos
             </h3>
             <p>
               Mantendremos tus datos personales solo el tiempo necesario. Puedes revocar el acceso de LinkedIn en cualquier momento desde la configuración de tu cuenta en dicha red social.
@@ -84,16 +113,16 @@ export default function PoliticaPrivacidad() {
 
           <div>
             <h3 className="text-white border-l-4 border-accent pl-5 my-6 text-lg md:text-xl uppercase">
-              6. Derechos del Usuario (ARCO)
+              7. Derechos del Usuario (ARCO)
             </h3>
             <p>
-              Tienes derecho a acceder, rectificar, cancelar u oponerte al tratamiento de tus datos. Para ejercerlos, escribe a: <a href="mailto:jcelis@johnnycelis.online" className="text-accent hover:underline">jcelis@johnnycelis.online</a>.
+              Tienes derecho a acceder, rectificar, cancelar u oponerte al tratamiento de tus datos. Para ejercerlos, escribe a: <a href="mailto:johnnycelis@stratt-on.com" className="text-accent hover:underline">johnnycelis@stratt-on.com</a>.
             </p>
           </div>
 
           <div>
             <h3 className="text-white border-l-4 border-accent pl-5 my-6 text-lg md:text-xl uppercase">
-              7. Seguridad
+              8. Seguridad
             </h3>
             <p>
               Implementamos medidas técnicas como protocolos HTTPS para proteger tu información contra acceso no autorizado o divulgación.
