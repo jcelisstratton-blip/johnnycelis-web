@@ -40,3 +40,6 @@ yarn-error.log*
 *.tsbuildinfo
 next-env.d.ts
 !public/hero-video.mp4
+
+.vercel
+.env*

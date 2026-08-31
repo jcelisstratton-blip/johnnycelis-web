@@ -1,10 +1,16 @@
 "use client";
 import React, { useState } from 'react';
+import { usePathname } from 'next/navigation';
 import { siteConfig } from '../config/site';
 
 export default function WhatsAppWidget() {
+  const pathname = usePathname();
   const [chatOpen, setChatOpen] = useState(false);
   const [chatMessage, setChatMessage] = useState("");
+
+  if (pathname === '/redes' || pathname?.startsWith('/redes')) {
+    return null;
+  }
 
   const handleSendWhatsapp = (e: React.FormEvent) => {
     e.preventDefault();
