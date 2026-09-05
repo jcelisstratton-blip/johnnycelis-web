@@ -132,10 +132,10 @@ function Icon({ name, className }: { name: IconName; className?: string }) {
 type LinkItem = { label: string; sub: string; href: string; icon: IconName };
 
 const strattonLinks: LinkItem[] = [
+  { label: "TikTok", sub: "@stratt_on", href: "https://www.tiktok.com/@stratt_on", icon: "tiktok" },
+  { label: "Instagram", sub: "@stratton_ai", href: "https://www.instagram.com/stratton_ai", icon: "instagram" },
   { label: "Sitio web", sub: "stratt-on.com", href: "https://www.stratt-on.com/", icon: "globe" },
   { label: "LinkedIn", sub: "Empresa", href: "https://www.linkedin.com/company/105200333/", icon: "linkedin" },
-  { label: "Instagram", sub: "@stratton_ai", href: "https://www.instagram.com/stratton_ai", icon: "instagram" },
-  { label: "TikTok", sub: "@stratt_on", href: "https://www.tiktok.com/@stratt_on", icon: "tiktok" },
   { label: "YouTube", sub: "@Stratt-On", href: "https://www.youtube.com/@Stratt-On", icon: "youtube" },
   { label: "Whop", sub: "Comunidad", href: siteConfig.whopUrl, icon: "whop" },
   { label: "Comunidad", sub: "Grupo WhatsApp", href: "https://chat.whatsapp.com/KpNW2ppdBzVASNeWeLuA9x", icon: "community" },
