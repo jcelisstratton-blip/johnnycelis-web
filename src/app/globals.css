@@ -122,7 +122,7 @@ html {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  opacity: 0.55;
+  opacity: 0.9;
 }
 
 .redes-bg__grid {
@@ -140,8 +140,30 @@ html {
   position: absolute;
   inset: 0;
   background:
-    linear-gradient(180deg, rgba(14, 15, 17, 0.55) 0%, rgba(14, 15, 17, 0.88) 55%, var(--color-carbon) 100%),
-    radial-gradient(ellipse at 50% 0%, rgba(14, 15, 17, 0.2) 0%, rgba(14, 15, 17, 0.82) 70%);
+    linear-gradient(180deg, rgba(14, 15, 17, 0.15) 0%, rgba(14, 15, 17, 0.35) 45%, rgba(14, 15, 17, 0.7) 80%, var(--color-carbon) 100%),
+    radial-gradient(ellipse at 50% 0%, rgba(14, 15, 17, 0) 0%, rgba(14, 15, 17, 0.45) 75%);
+}
+
+/* Vidrio esmerilado — paneles sobre el video de fondo */
+.st-glass {
+  background: rgba(28, 30, 34, 0.55);
+  backdrop-filter: blur(22px) saturate(160%);
+  -webkit-backdrop-filter: blur(22px) saturate(160%);
+  border: 1px solid rgba(245, 246, 244, 0.14);
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.35), inset 0 1px 0 rgba(245, 246, 244, 0.1);
+}
+
+.st-glass-hover {
+  transition: background-color 200ms cubic-bezier(0.4, 0, 0.2, 1), border-color 200ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.st-glass-hover:hover {
+  background: rgba(28, 30, 34, 0.72);
+  border-color: rgba(255, 59, 47, 0.45);
+}
+
+.st-text-shadow {
+  text-shadow: 0 2px 16px rgba(0, 0, 0, 0.55);
 }
 
 .redes-bg__glow {

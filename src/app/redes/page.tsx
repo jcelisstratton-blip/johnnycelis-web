@@ -159,7 +159,7 @@ function Tile({ item }: { item: LinkItem }) {
       href={item.href}
       target="_blank"
       rel="noopener noreferrer"
-      className="group aspect-square flex flex-col items-center justify-center gap-2.5 p-3 text-center bg-grafito/90 backdrop-blur-sm border border-white/10 rounded-[4px] no-underline text-blanco transition-all duration-200 hover:-translate-y-1 hover:border-accent/60 hover:shadow-[0_10px_30px_rgba(0,0,0,0.35)]"
+      className="st-glass st-glass-hover group aspect-square flex flex-col items-center justify-center gap-2.5 p-3 text-center rounded-[4px] no-underline text-blanco transition-transform duration-200 hover:-translate-y-1"
     >
       <Icon name={item.icon} className="w-8 h-8 text-blanco transition-colors duration-200 group-hover:text-accent" />
       <div>
@@ -172,7 +172,7 @@ function Tile({ item }: { item: LinkItem }) {
 
 function SectionHead({ name, tag }: { name: string; tag: string }) {
   return (
-    <div className="flex items-center gap-3.5 mb-4">
+    <div className="st-text-shadow flex items-center gap-3.5 mb-4">
       <span className="st-status-line" />
       <h2 className="st-label m-0 text-[12.5px] text-blanco">
         {name} <span className="text-humo normal-case font-normal">— {tag}</span>
@@ -187,7 +187,7 @@ export default function RedesPage() {
       <RedesBackground />
 
       <div className="max-w-3xl md:max-w-4xl lg:max-w-5xl mx-auto">
-        <header className="st-ignite flex items-center justify-between flex-wrap gap-4 pb-5 mb-2 border-b border-white/10">
+        <header className="st-ignite st-glass flex items-center justify-between flex-wrap gap-4 px-5 py-4 mb-7 rounded-[4px]">
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img src="/brand/stratton-logo-principal-fondo-oscuro.svg" alt="Stratt-On" className="w-36 md:w-44" />
           <div className="st-label flex items-center gap-2 text-humo text-[11px]">
@@ -197,7 +197,7 @@ export default function RedesPage() {
         </header>
 
         <p
-          className="st-ignite text-humo text-sm md:text-base max-w-xl mb-7 leading-relaxed"
+          className="st-ignite st-text-shadow text-blanco/85 text-sm md:text-base max-w-xl mb-7 leading-relaxed"
           style={{ animationDelay: "80ms" }}
         >
           Ecosistemas autónomos de IA para negocios B2B. Todos los canales de Stratt-On y Johnny Celis, en un solo lugar.
@@ -208,7 +208,7 @@ export default function RedesPage() {
             href={whatsappHref}
             target="_blank"
             rel="noopener noreferrer"
-            className="flex items-center gap-4 p-4 bg-grafito/90 backdrop-blur-sm border border-white/10 rounded-[4px] no-underline text-blanco transition-all duration-200 hover:-translate-y-0.5 hover:border-white/25"
+            className="st-glass st-glass-hover flex items-center gap-4 p-4 rounded-[4px] no-underline text-blanco transition-transform duration-200 hover:-translate-y-0.5"
           >
             <Icon name="whatsapp" className="w-6 h-6 text-blanco shrink-0" />
             <div>
@@ -224,7 +224,7 @@ export default function RedesPage() {
 
           <a
             href="mailto:johnnycelis@stratt-on.com"
-            className="flex items-center gap-4 p-4 bg-grafito/90 backdrop-blur-sm border border-white/10 rounded-[4px] no-underline text-blanco transition-all duration-200 hover:-translate-y-0.5 hover:border-white/25"
+            className="st-glass st-glass-hover flex items-center gap-4 p-4 rounded-[4px] no-underline text-blanco transition-transform duration-200 hover:-translate-y-0.5"
           >
             <Icon name="mail" className="w-6 h-6 text-blanco shrink-0" />
             <div>
@@ -257,7 +257,7 @@ export default function RedesPage() {
           </div>
         </section>
 
-        <footer className="flex items-center gap-2.5 pt-4 mt-8 border-t border-white/10">
+        <footer className="st-text-shadow flex items-center gap-2.5 pt-4 mt-8 border-t border-white/10">
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img src="/brand/stratton-isotipo-mono-blanco.svg" alt="" className="w-[18px] h-[18px]" />
           <p className="st-label text-[10.5px] text-humo m-0">Stratt-On — sistemas corriendo, no promesas.</p>
