@@ -182,31 +182,37 @@ function SectionHead({ name, tag }: { name: string; tag: string }) {
 
 export default function RedesPage() {
   return (
-    <main className="min-h-screen bg-carbon text-blanco px-[5%] py-14 md:py-16">
-      <div className="max-w-3xl mx-auto">
-        <header className="flex items-center justify-between flex-wrap gap-4 pb-6 mb-10 border-b border-white/10">
+    <main className="min-h-screen bg-carbon text-blanco px-[5%] py-8 md:py-10">
+      <div aria-hidden="true" className="redes-bg">
+        <span className="redes-bg__orb redes-bg__orb--a" />
+        <span className="redes-bg__orb redes-bg__orb--b" />
+        <span className="redes-bg__orb redes-bg__orb--c" />
+      </div>
+
+      <div className="max-w-3xl md:max-w-4xl lg:max-w-5xl mx-auto">
+        <header className="flex items-center justify-between flex-wrap gap-4 pb-4 mb-6 border-b border-white/10">
           {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img src="/brand/stratton-logo-principal-fondo-oscuro.svg" alt="Stratt-On" className="w-40 md:w-48" />
+          <img src="/brand/stratton-logo-principal-fondo-oscuro.svg" alt="Stratt-On" className="w-36 md:w-44" />
           <div className="st-label flex items-center gap-2 text-humo text-[11px]">
             <span className="st-led" />
             Johnny Celis · Antioquia, CO
           </div>
         </header>
 
-        <div className="grid sm:grid-cols-2 gap-3 mb-4">
+        <div className="grid sm:grid-cols-2 gap-2.5 mb-6">
           <a
             href={whatsappHref}
             target="_blank"
             rel="noopener noreferrer"
-            className="flex items-center gap-4 p-5 bg-grafito border border-white/10 rounded-[4px] no-underline text-blanco transition-all duration-200 hover:-translate-y-0.5 hover:border-white/25"
+            className="flex items-center gap-4 p-4 bg-grafito border border-white/10 rounded-[4px] no-underline text-blanco transition-all duration-200 hover:-translate-y-0.5 hover:border-white/25"
           >
-            <Icon name="whatsapp" className="w-7 h-7 text-blanco shrink-0" />
+            <Icon name="whatsapp" className="w-6 h-6 text-blanco shrink-0" />
             <div>
-              <p className="font-extrabold text-[16px] m-0 mb-0.5">Consultoría</p>
-              <p className="st-label text-[10.5px] text-humo m-0 mb-2.5 tracking-normal normal-case font-normal">
+              <p className="font-extrabold text-[15px] m-0 mb-0.5">Consultoría</p>
+              <p className="st-label text-[10px] text-humo m-0 mb-2 tracking-normal normal-case font-normal">
                 WhatsApp · +57 321 788 0682
               </p>
-              <span className="st-label bg-accent text-carbon font-black text-[11px] px-3.5 py-2 rounded-st inline-block hover:bg-white hover:text-carbon transition-all duration-300">
+              <span className="st-label bg-accent text-carbon font-black text-[10.5px] px-3 py-1.5 rounded-st inline-block hover:bg-white hover:text-carbon transition-all duration-300">
                 Agendar →
               </span>
             </div>
@@ -214,40 +220,40 @@ export default function RedesPage() {
 
           <a
             href="mailto:johnnycelis@stratt-on.com"
-            className="flex items-center gap-4 p-5 bg-grafito border border-white/10 rounded-[4px] no-underline text-blanco transition-all duration-200 hover:-translate-y-0.5 hover:border-white/25"
+            className="flex items-center gap-4 p-4 bg-grafito border border-white/10 rounded-[4px] no-underline text-blanco transition-all duration-200 hover:-translate-y-0.5 hover:border-white/25"
           >
-            <Icon name="mail" className="w-7 h-7 text-blanco shrink-0" />
+            <Icon name="mail" className="w-6 h-6 text-blanco shrink-0" />
             <div>
-              <p className="font-extrabold text-[16px] m-0 mb-0.5">Correo</p>
-              <p className="st-label text-[10.5px] text-humo m-0 mb-2.5 tracking-normal normal-case font-normal">
+              <p className="font-extrabold text-[15px] m-0 mb-0.5">Correo</p>
+              <p className="st-label text-[10px] text-humo m-0 mb-2 tracking-normal normal-case font-normal">
                 johnnycelis@stratt-on.com
               </p>
-              <span className="st-label border border-blanco text-blanco text-[11px] font-bold px-3.5 py-2 rounded-st inline-block hover:border-accent hover:text-accent transition-all duration-300">
+              <span className="st-label border border-blanco text-blanco text-[10.5px] font-bold px-3 py-1.5 rounded-st inline-block hover:border-accent hover:text-accent transition-all duration-300">
                 Escribir →
               </span>
             </div>
           </a>
         </div>
 
-        <section className="mt-10">
+        <section>
           <SectionHead name="Stratt-On" tag="agencia" />
-          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-3">
+          <div className="grid grid-cols-3 sm:grid-cols-4 lg:grid-cols-6 gap-2.5">
             {strattonLinks.map((item) => (
               <Tile key={item.label + item.sub} item={item} />
             ))}
           </div>
         </section>
 
-        <section className="mt-10">
+        <section className="mt-6">
           <SectionHead name="Johnny Celis" tag="operador" />
-          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-3">
+          <div className="grid grid-cols-3 sm:grid-cols-4 lg:grid-cols-6 gap-2.5">
             {johnnyLinks.map((item) => (
               <Tile key={item.label + item.sub} item={item} />
             ))}
           </div>
         </section>
 
-        <footer className="flex items-center gap-2.5 pt-6 mt-12 border-t border-white/10">
+        <footer className="flex items-center gap-2.5 pt-4 mt-8 border-t border-white/10">
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img src="/brand/stratton-isotipo-mono-blanco.svg" alt="" className="w-[18px] h-[18px]" />
           <p className="st-label text-[10.5px] text-humo m-0">Stratt-On — sistemas corriendo, no promesas.</p>
