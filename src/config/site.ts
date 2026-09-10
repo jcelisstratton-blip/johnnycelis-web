@@ -160,6 +160,18 @@ export const siteConfig = {
       title: "Los riesgos de depender de Zapier/Make y las ventajas de migrar a Coolify",
       desc: "Análisis técnico de costes y privacidad que justifican por qué las agencias B2B y E-commerce deben alojar su propia infraestructura.",
       content: "Las plataformas en la nube como Zapier cobran por tarea ejecutada, lo que penaliza el crecimiento de las empresas a medida que sus flujos se vuelven más complejos. Al migrar tu stack de automatización (n8n, Evolution API, Chatwoot) a servidores propios administrados con Coolify, pasas de pagar miles de dólares al mes a una tarifa plana de servidor. Además, mantienes el control total sobre los datos sensibles de tus clientes en bases de datos PostgreSQL internas."
+    },
+    {
+      tag: "TikTok Publisher",
+      title: "Contenido comercial en TikTok: cómo declararlo sin arriesgar tu cuenta",
+      desc: "TikTok exige declarar el contenido comercial antes de publicar. Qué significa cada opción y cómo evitar el error que más cuentas frena.",
+      content: "Publicar contenido de marca en TikTok sin declararlo no es un detalle menor: la plataforma lo trata como incumplimiento de sus términos de contenido comercial, con consecuencias que van desde limitar el alcance del video hasta restringir la cuenta completa. TikTok mezcla esa decisión con otras diez configuraciones —privacidad, comentarios, duetos— en una sola pantalla larga, así que bajo presión de publicar rápido se salta. Stratt-On Publisher separa la declaración de contenido comercial (marca propia o marca de terceros) como un paso propio y explícito antes de que el video salga, para que la cuenta nunca quede expuesta por una casilla que nadie marcó."
+    },
+    {
+      tag: "TikTok Publisher",
+      title: "Publicar directo o mandar a borrador: cuándo usar cada uno en TikTok",
+      desc: "No todo video debe salir al instante. Guía corta para decidir entre publicar directo o enviar a borradores en TikTok.",
+      content: "Publicar directo se siente productivo, pero no siempre es lo correcto: conviene cuando el video ya pasó revisión, cuando el momento importa —una tendencia, un evento en vivo— o cuando sos la única persona que aprueba antes de salir. Mandar a borrador tiene sentido cuando alguien más del equipo necesita revisar, cuando estás probando distintas versiones del mismo corte, o cuando publicás en lote y programás la salida de cada video por separado. La diferencia real no es el botón: es el momento en que se toma la decisión de aprobar. Stratt-On Publisher deja esa elección explícita en cada subida, en vez de esconderla en una configuración por defecto que nadie revisa."
     }
   ],
 
