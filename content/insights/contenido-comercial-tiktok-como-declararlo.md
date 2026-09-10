@@ -32,7 +32,7 @@ Bajo presión de publicar rápido, se salta.
 
 Stratt-On Publisher separa la declaración de contenido comercial como un
 paso propio, explícito, antes de que el video salga. No es una casilla
-perdida entre otras diez — es una decisión que tomás a conciencia, cada
+perdida entre otras diez — es una decisión que tomas a conciencia, cada
 vez.
 
 **Reglas prácticas:**
@@ -42,8 +42,8 @@ vez.
 2. Si el video promueve tu propio producto, marca "marca propia" — no
    necesita el disclosure de terceros, pero sigue siendo contenido
    comercial.
-3. Cuando dudes, declaralo. El costo de declarar de más es cero. El costo
+3. Cuando dudes, decláralo. El costo de declarar de más es cero. El costo
    de no declarar es la cuenta.
 
-Publicá con la configuración correcta desde el primer intento — no
+Publica con la configuración correcta desde el primer intento — no
 después de que TikTok te avise.

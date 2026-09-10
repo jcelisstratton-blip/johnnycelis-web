@@ -171,7 +171,7 @@ export const siteConfig = {
       tag: "TikTok Publisher",
       title: "Publicar directo o mandar a borrador: cuándo usar cada uno en TikTok",
       desc: "No todo video debe salir al instante. Guía corta para decidir entre publicar directo o enviar a borradores en TikTok.",
-      content: "Publicar directo se siente productivo, pero no siempre es lo correcto: conviene cuando el video ya pasó revisión, cuando el momento importa —una tendencia, un evento en vivo— o cuando sos la única persona que aprueba antes de salir. Mandar a borrador tiene sentido cuando alguien más del equipo necesita revisar, cuando estás probando distintas versiones del mismo corte, o cuando publicás en lote y programás la salida de cada video por separado. La diferencia real no es el botón: es el momento en que se toma la decisión de aprobar. Stratt-On Publisher deja esa elección explícita en cada subida, en vez de esconderla en una configuración por defecto que nadie revisa."
+      content: "Publicar directo se siente productivo, pero no siempre es lo correcto: conviene cuando el video ya pasó revisión, cuando el momento importa —una tendencia, un evento en vivo— o cuando eres la única persona que aprueba antes de salir. Mandar a borrador tiene sentido cuando alguien más del equipo necesita revisar, cuando estás probando distintas versiones del mismo corte, o cuando publicas en lote y programas la salida de cada video por separado. La diferencia real no es el botón: es el momento en que se toma la decisión de aprobar. Stratt-On Publisher deja esa elección explícita en cada subida, en vez de esconderla en una configuración por defecto que nadie revisa."
     }
   ],
 

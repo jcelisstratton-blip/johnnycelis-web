@@ -7,20 +7,20 @@ date: "2026-09-08"
 
 Publicar directo se siente productivo. No siempre es lo correcto.
 
-## Publicá directo cuando
+## Publica directo cuando
 
 - El video ya pasó por revisión (guion, marca, disclosure de contenido
   comercial) y no depende de nada externo.
 - El momento importa — una tendencia, un evento en vivo, una respuesta a
   algo que está pasando ahora.
-- Sos la única persona que aprueba el contenido antes de salir.
+- Eres la única persona que aprueba el contenido antes de salir.
 
-## Mandá a borrador cuando
+## Manda a borrador cuando
 
 - Alguien más del equipo necesita ver el video antes de que sea público.
 - Estás probando distintas versiones del mismo corte y todavía no
   elegiste cuál sale.
-- Publicás en lote — subís cinco videos juntos y programás la salida
+- Publicas en lote — subes cinco videos juntos y programas la salida
   de cada uno por separado.
 
 ## La diferencia real no es el botón
