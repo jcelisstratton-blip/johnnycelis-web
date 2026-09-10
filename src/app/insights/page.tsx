@@ -7,6 +7,12 @@ import { siteConfig } from '@/config/site';
 export const metadata = {
   title: 'Insights Operativos | Stratt-On Agency',
   description: 'Conocimiento avanzado sobre automatización B2B, ecosistemas autónomos y orquestación operativa. Descubre cómo eliminar el trabajo manual.',
+  alternates: { canonical: '/insights' },
+  openGraph: {
+    title: 'Insights Operativos | Stratt-On Agency',
+    description: 'Conocimiento avanzado sobre automatización B2B, ecosistemas autónomos y orquestación operativa. Descubre cómo eliminar el trabajo manual.',
+    url: '/insights',
+  },
 };
 
 export default function InsightsPage() {

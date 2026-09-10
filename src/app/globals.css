@@ -71,6 +71,66 @@ h4 {
   background-color: var(--color-rojo);
 }
 
+/* Tipografía del cuerpo de un artículo de Insights (HTML de Markdown) */
+.insight-content p,
+.insight-content ul,
+.insight-content ol,
+.insight-content blockquote {
+  margin-bottom: 20px;
+}
+.insight-content h2 {
+  font-family: var(--font-display);
+  font-size: 22px;
+  letter-spacing: -0.01em;
+  line-height: 1.2;
+  text-transform: uppercase;
+  color: var(--color-blanco);
+  margin-top: 40px;
+  margin-bottom: 16px;
+}
+.insight-content h3 {
+  font-family: var(--font-body);
+  font-weight: 800;
+  font-size: 18px;
+  color: var(--color-blanco);
+  margin-top: 32px;
+  margin-bottom: 12px;
+}
+.insight-content a {
+  color: var(--color-rojo);
+  text-decoration: underline;
+  text-decoration-color: rgba(255, 59, 47, 0.4);
+}
+.insight-content a:hover {
+  text-decoration-color: var(--color-rojo);
+}
+.insight-content strong {
+  color: var(--color-blanco);
+  font-weight: 800;
+}
+.insight-content ul,
+.insight-content ol {
+  padding-left: 22px;
+}
+.insight-content ul {
+  list-style-type: disc;
+}
+.insight-content ol {
+  list-style-type: decimal;
+}
+.insight-content li {
+  margin-bottom: 8px;
+}
+.insight-content li::marker {
+  color: var(--color-rojo);
+}
+.insight-content blockquote {
+  border-left: 3px solid var(--color-rojo);
+  padding-left: 18px;
+  color: var(--color-humo);
+  font-style: normal;
+}
+
 /* LED de estado */
 .st-led {
   display: inline-block;
