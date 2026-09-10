@@ -130,51 +130,6 @@ export const siteConfig = {
     }
   ],
 
-  blogPosts: [
-    {
-      tag: "Orquestación n8n",
-      title: "Cómo eliminar 40 horas de trabajo administrativo a la semana con n8n",
-      desc: "Descubre el flujo exacto que implementamos para centralizar la operación B2B, conectar CRMs y automatizar facturas sin costes de licencias caras.",
-      content: "El trabajo repetitivo es el mayor generador de errores operativos en las empresas modernas. En Stratt-On, implementamos flujos centralizados con n8n alojados en nuestra propia infraestructura Coolify. Esto nos permite unificar tareas de facturación, actualización de bases de datos y alertas en tiempo real. En lugar de tener personal copiando datos de correos a Excel, un sistema autónomo procesa todo en milisegundos con cero errores y disponibilidad 24/7."
-    },
-    {
-      tag: "Evolution API",
-      title: "El caso de Wabid: Subastas automatizadas en WhatsApp con Evolution API",
-      desc: "El caso de estudio de cómo rediseñamos la experiencia de pujas y ventas interactivas usando la API de WhatsApp más versátil del mercado.",
-      content: "Las subastas tradicionales por correo o web sufren de fricción y baja retención. Con Wabid, decidimos llevar toda la experiencia a WhatsApp mediante la Evolution API. La plataforma permite a los usuarios registrarse, realizar pujas, recibir notificaciones instantáneas de sobrepujas y procesar el cierre del lote directamente en el chat. La lógica de control está orquestada con n8n, conectando bases de datos en tiempo real y garantizando notificaciones rápidas y seguras."
-    },
-    {
-      tag: "Finanzas con IA",
-      title: "La arquitectura detrás de Nido: Automatizando finanzas con Supabase y Telegram",
-      desc: "Cómo construimos un dashboard autónomo de finanzas personales que ingiere notificaciones bancarias de correos IMAP y Telegram.",
-      content: "El registro manual de gastos suele abandonarse rápido. Nido soluciona esto automatizando la ingesta: cada vez que un banco colombiano envía una alerta de compra por correo, un webhook de n8n lee la notificación mediante Gmail IMAP, extrae el monto, clasifica la categoría de gasto y lo registra en Supabase. Si el usuario realiza un gasto en efectivo, puede enviarlo al instante mediante un mensaje de texto a un bot privado de Telegram. Todo el dashboard es renderizado en Vercel."
-    },
-    {
-      tag: "Content Factory",
-      title: "Fábrica de Contenido: El pipeline de distribución automática en redes sociales",
-      desc: "Cómo usar Telegram como panel de control para descargar, subtitular y publicar videos en múltiples redes de manera automatizada.",
-      content: "Gestionar Reels, TikToks y YouTube Shorts consume horas. Con nuestra 'Content Factory', creamos un flujo automatizado: el creador envía el archivo de video a un canal privado de Telegram. n8n recibe el archivo, utiliza la API de Cobalt para limpiezas y descargas eficientes, genera el copy optimizado por IA y programa la publicación en todas las redes. Además, actualiza automáticamente los estados de WhatsApp de forma periódica con Evolution API."
-    },
-    {
-      tag: "Self-Hosting",
-      title: "Los riesgos de depender de Zapier/Make y las ventajas de migrar a Coolify",
-      desc: "Análisis técnico de costes y privacidad que justifican por qué las agencias B2B y E-commerce deben alojar su propia infraestructura.",
-      content: "Las plataformas en la nube como Zapier cobran por tarea ejecutada, lo que penaliza el crecimiento de las empresas a medida que sus flujos se vuelven más complejos. Al migrar tu stack de automatización (n8n, Evolution API, Chatwoot) a servidores propios administrados con Coolify, pasas de pagar miles de dólares al mes a una tarifa plana de servidor. Además, mantienes el control total sobre los datos sensibles de tus clientes en bases de datos PostgreSQL internas."
-    },
-    {
-      tag: "TikTok Publisher",
-      title: "Contenido comercial en TikTok: cómo declararlo sin arriesgar tu cuenta",
-      desc: "TikTok exige declarar el contenido comercial antes de publicar. Qué significa cada opción y cómo evitar el error que más cuentas frena.",
-      content: "Publicar contenido de marca en TikTok sin declararlo no es un detalle menor: la plataforma lo trata como incumplimiento de sus términos de contenido comercial, con consecuencias que van desde limitar el alcance del video hasta restringir la cuenta completa. TikTok mezcla esa decisión con otras diez configuraciones —privacidad, comentarios, duetos— en una sola pantalla larga, así que bajo presión de publicar rápido se salta. Stratt-On Publisher separa la declaración de contenido comercial (marca propia o marca de terceros) como un paso propio y explícito antes de que el video salga, para que la cuenta nunca quede expuesta por una casilla que nadie marcó."
-    },
-    {
-      tag: "TikTok Publisher",
-      title: "Publicar directo o mandar a borrador: cuándo usar cada uno en TikTok",
-      desc: "No todo video debe salir al instante. Guía corta para decidir entre publicar directo o enviar a borradores en TikTok.",
-      content: "Publicar directo se siente productivo, pero no siempre es lo correcto: conviene cuando el video ya pasó revisión, cuando el momento importa —una tendencia, un evento en vivo— o cuando eres la única persona que aprueba antes de salir. Mandar a borrador tiene sentido cuando alguien más del equipo necesita revisar, cuando estás probando distintas versiones del mismo corte, o cuando publicas en lote y programas la salida de cada video por separado. La diferencia real no es el botón: es el momento en que se toma la decisión de aprobar. Stratt-On Publisher deja esa elección explícita en cada subida, en vez de esconderla en una configuración por defecto que nadie revisa."
-    }
-  ],
-
   reviews: [
     { 
       name: "Carlos M.", 

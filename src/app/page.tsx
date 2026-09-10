@@ -5,6 +5,7 @@ import Counter from '@/components/Counter';
 import AnalyticalEngine from '@/components/AnalyticalEngine';
 import InsightsSection from '@/components/InsightsSection';
 import { siteConfig } from '@/config/site';
+import { getAllInsights } from '@/lib/insights';
 
 export const metadata = {
   title: 'Stratt-On Agency | Ecosistemas Autónomos de IA B2B',
@@ -12,6 +13,8 @@ export const metadata = {
 };
 
 export default function Home() {
+  const insights = getAllInsights();
+
   return (
     <main className="bg-carbon text-white min-h-screen font-sans selection:bg-accent/40 selection:text-white">
       {/* Navegación */}
@@ -176,7 +179,7 @@ export default function Home() {
             </p>
           </div>
 
-          <InsightsSection />
+          <InsightsSection posts={insights} />
 
           <div className="text-center mt-12">
             <a
