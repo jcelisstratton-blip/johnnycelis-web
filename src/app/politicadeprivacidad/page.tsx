@@ -3,7 +3,7 @@ import Link from 'next/link';
 
 export const metadata = {
   title: 'Política de Privacidad | Stratt-On Agency',
-  description: 'Política de privacidad y protección de datos personales de Johnny Celis y Stratt-On Agency.',
+  description: 'Política de privacidad y protección de datos personales de Johnny Celis y Stratt-On Agency, incluyendo el uso de las APIs de LinkedIn, TikTok y Google/YouTube.',
 };
 
 export default function PoliticaPrivacidad() {
@@ -23,12 +23,12 @@ export default function PoliticaPrivacidad() {
           Política de <br />
           <span className="text-accent">Privacidad</span>
         </h1>
-        <p className="text-white/40 text-xs md:text-sm font-bold">Última actualización: 21 de julio de 2026</p>
+        <p className="text-white/40 text-xs md:text-sm font-bold">Última actualización: 10 de septiembre de 2026</p>
       </header>
       
       <section className="leading-loose text-white/70 max-w-[900px] text-base text-justify space-y-10">
         <p>
-          En <strong>Johnny Celis y Stratt-On Agency</strong>, la privacidad de nuestros usuarios es una prioridad. Esta Política de Privacidad describe cómo recopilamos, utilizamos y protegemos la información cuando interactúas con nuestro sitio web <span className="text-white">www.stratt-on.com</span> y nuestras aplicaciones conectadas a servicios de terceros como LinkedIn y TikTok.
+          En <strong>Johnny Celis y Stratt-On Agency</strong>, la privacidad de nuestros usuarios es una prioridad. Esta Política de Privacidad describe cómo recopilamos, utilizamos y protegemos la información cuando interactúas con nuestro sitio web <span className="text-white">www.stratt-on.com</span> y nuestras aplicaciones conectadas a servicios de terceros como LinkedIn, TikTok y Google/YouTube.
         </p>
 
         <div className="space-y-10">
@@ -86,7 +86,44 @@ export default function PoliticaPrivacidad() {
 
           <div>
             <h3 className="text-white border-l-4 border-accent pl-5 my-6 text-lg md:text-xl uppercase">
-              4. Finalidad del Tratamiento
+              4. Datos de Google/YouTube (YouTube Data API v3)
+            </h3>
+            <p className="mb-4">
+              Al conectar tu canal de YouTube a nuestra herramienta de publicación, accedemos únicamente a la siguiente información, previa autorización explícita otorgada por ti en la pantalla de consentimiento de Google:
+            </p>
+            <ul className="list-disc pl-5 space-y-3 mb-4">
+              <li>
+                <strong>Identificadores de canal:</strong> el ID único de tu canal de YouTube, su nombre público y el nombre de usuario asociado, para confirmarte visualmente en qué canal se publicará el contenido.
+              </li>
+              <li>
+                <strong>Tokens de acceso oficiales:</strong> tokens de acceso y de actualización proporcionados por Google mediante OAuth, que nos permiten subir y publicar videos en tu nombre.
+              </li>
+              <li>
+                <strong>Metadatos de video:</strong> archivos de video subidos, títulos, descripciones y configuración de privacidad seleccionada, necesarios para procesar la publicación.
+              </li>
+            </ul>
+            <p className="mb-4">
+              <strong>Qué no hacemos:</strong> no leemos tus videos existentes, comentarios, suscriptores ni estadísticas del canal más allá de lo estrictamente necesario para confirmar que la subida se completó, no compartimos ni vendemos datos de Google/YouTube a terceros, y no utilizamos esta información para entrenar modelos de inteligencia artificial ni para publicidad.
+            </p>
+            <p className="mb-4">
+              <strong>Cumplimiento:</strong> el uso y la transferencia de la información recibida de las APIs de Google por parte de este Servicio se adhieren a la{' '}
+              <a href="https://developers.google.com/terms/api-services-user-data-policy" target="_blank" rel="noopener noreferrer" className="text-accent hover:underline">
+                Política de Datos de Usuario de los Servicios de API de Google
+              </a>
+              , incluyendo los requisitos de Uso Limitado (&quot;Limited Use&quot;).
+            </p>
+            <p>
+              <strong>Revocación:</strong> puedes retirar el acceso en cualquier momento desde la{' '}
+              <a href="https://myaccount.google.com/permissions" target="_blank" rel="noopener noreferrer" className="text-accent hover:underline">
+                configuración de permisos de tu Cuenta de Google
+              </a>
+              , o solicitando la eliminación total de tus datos almacenados escribiendo a <a href="mailto:johnnycelis@stratt-on.com" className="text-accent hover:underline">johnnycelis@stratt-on.com</a>. Al revocarlo, eliminamos los tokens asociados a tu cuenta.
+            </p>
+          </div>
+
+          <div>
+            <h3 className="text-white border-l-4 border-accent pl-5 my-6 text-lg md:text-xl uppercase">
+              5. Finalidad del Tratamiento
             </h3>
             <p>
               Los datos se utilizan exclusivamente para gestionar publicaciones en redes sociales, optimizar procesos de marketing, enviar comunicaciones del servicio y mejorar la experiencia de usuario.
@@ -95,7 +132,7 @@ export default function PoliticaPrivacidad() {
 
           <div>
             <h3 className="text-white border-l-4 border-accent pl-5 my-6 text-lg md:text-xl uppercase">
-              5. Uso de Herramientas de Automatización
+              6. Uso de Herramientas de Automatización
             </h3>
             <p>
               Utilizamos la plataforma <strong>n8n</strong>. Los datos se gestionan de forma técnica y segura, sin venta o cesión a terceros para fines comerciales ajenos a Stratt-On Agency.
@@ -104,7 +141,7 @@ export default function PoliticaPrivacidad() {
 
           <div>
             <h3 className="text-white border-l-4 border-accent pl-5 my-6 text-lg md:text-xl uppercase">
-              6. Conservación de Datos
+              7. Conservación de Datos
             </h3>
             <p>
               Mantendremos tus datos personales solo el tiempo necesario. Puedes revocar el acceso de LinkedIn en cualquier momento desde la configuración de tu cuenta en dicha red social.
@@ -113,7 +150,7 @@ export default function PoliticaPrivacidad() {
 
           <div>
             <h3 className="text-white border-l-4 border-accent pl-5 my-6 text-lg md:text-xl uppercase">
-              7. Derechos del Usuario (ARCO)
+              8. Derechos del Usuario (ARCO)
             </h3>
             <p>
               Tienes derecho a acceder, rectificar, cancelar u oponerte al tratamiento de tus datos. Para ejercerlos, escribe a: <a href="mailto:johnnycelis@stratt-on.com" className="text-accent hover:underline">johnnycelis@stratt-on.com</a>.
@@ -122,7 +159,7 @@ export default function PoliticaPrivacidad() {
 
           <div>
             <h3 className="text-white border-l-4 border-accent pl-5 my-6 text-lg md:text-xl uppercase">
-              8. Seguridad
+              9. Seguridad
             </h3>
             <p>
               Implementamos medidas técnicas como protocolos HTTPS para proteger tu información contra acceso no autorizado o divulgación.

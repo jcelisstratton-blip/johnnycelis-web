@@ -3,7 +3,7 @@ import Link from 'next/link';
 
 export const metadata = {
   title: 'Términos y Condiciones | Stratt-On Agency',
-  description: 'Términos y condiciones de uso de las herramientas de automatización de TikTok y redes sociales de Stratt-On Agency.',
+  description: 'Términos y condiciones de uso de las herramientas de automatización de TikTok, YouTube y redes sociales de Stratt-On Agency.',
 };
 
 export default function TerminosCondiciones() {
@@ -23,22 +23,27 @@ export default function TerminosCondiciones() {
           Términos y <br />
           <span className="text-accent">Condiciones</span>
         </h1>
-        <p className="text-white/40 text-xs md:text-sm font-bold">Última actualización: 16 de marzo de 2026</p>
+        <p className="text-white/40 text-xs md:text-sm font-bold">Última actualización: 10 de septiembre de 2026</p>
       </header>
 
       <section className="leading-loose text-white/70 max-w-[900px] text-base text-justify space-y-10">
         <div className="bg-grafito p-8 md:p-10 border-l-2 border-accent mb-10">
-          <p>Al utilizar nuestra aplicación de automatización de <strong>TikTok</strong>, el usuario acepta que <strong>Stratt-On Agency</strong> gestione el contenido multimedia exclusivamente para fines de publicación autorizada.</p>
+          <p>Al utilizar nuestras aplicaciones de automatización de redes sociales (<strong>TikTok</strong>, <strong>YouTube</strong>, entre otras), el usuario acepta que <strong>Stratt-On Agency</strong> gestione el contenido multimedia exclusivamente para fines de publicación autorizada.</p>
         </div>
 
         <div>
           <h3 className="text-white text-lg md:text-xl uppercase mb-4">Seguridad y Acceso</h3>
-          <p>No recopilamos credenciales de acceso directo; el acceso se realiza mediante el protocolo <strong>OAuth2 de TikTok</strong>, garantizando que su contraseña nunca pase por nuestros servidores.</p>
+          <p>No recopilamos credenciales de acceso directo; el acceso se realiza mediante el protocolo <strong>OAuth2</strong> oficial de cada plataforma (TikTok, Google/YouTube), garantizando que su contraseña nunca pase por nuestros servidores.</p>
         </div>
 
         <div>
           <h3 className="text-white text-lg md:text-xl uppercase mb-4">Control del Usuario</h3>
-          <p>Usted mantiene el control total sobre su cuenta. El usuario puede revocar este acceso en cualquier momento desde su panel de configuración de <strong>TikTok</strong>.</p>
+          <p>Usted mantiene el control total sobre su cuenta. El usuario puede revocar este acceso en cualquier momento desde su panel de configuración de <strong>TikTok</strong> o desde la <a href="https://myaccount.google.com/permissions" target="_blank" rel="noopener noreferrer" className="text-accent hover:underline">configuración de permisos de su Cuenta de Google</a>.</p>
+        </div>
+
+        <div>
+          <h3 className="text-white text-lg md:text-xl uppercase mb-4">Su Canal de YouTube</h3>
+          <p>Al conectar su canal de YouTube, usted autoriza a Stratt-On Agency a subir y publicar videos en su nombre mediante la YouTube Data API v3, únicamente según las instrucciones de publicación que usted configure explícitamente en la interfaz del Servicio. No revisamos, editamos ni modificamos sus videos antes de publicarlos.</p>
         </div>
 
         <div>
