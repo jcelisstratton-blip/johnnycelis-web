@@ -1,4 +1,5 @@
 import './globals.css'
+import Script from 'next/script'
 import WhatsAppWidget from '@/components/WhatsAppWidget'
 import EasterEgg from '@/components/EasterEgg'
 const title = 'Stratt-On Agency | Ecosistemas Autónomos de IA B2B'
@@ -43,6 +44,19 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         />
       </head>
       <body suppressHydrationWarning style={{ margin: 0, background: 'var(--bg-color)' }}>
+        {/* Google tag (gtag.js) */}
+        <Script
+          src="https://www.googletagmanager.com/gtag/js?id=G-3H28N05GXS"
+          strategy="afterInteractive"
+        />
+        <Script id="google-tag" strategy="afterInteractive">
+          {`
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+            gtag('config', 'G-3H28N05GXS');
+          `}
+        </Script>
         {children}
         <WhatsAppWidget />
         <EasterEgg />
