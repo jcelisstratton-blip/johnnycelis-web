@@ -4,7 +4,7 @@ import { getAllInsights } from "@/lib/insights";
 const BASE_URL = "https://www.stratt-on.com";
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  const staticRoutes = ["", "/servicios", "/insights", "/redes", "/politicadeprivacidad", "/terminosycondiciones"].map(
+  const staticRoutes = ["", "/servicios", "/insights", "/redes", "/redes/johnny", "/politicadeprivacidad", "/terminosycondiciones"].map(
     (route) => ({
       url: `${BASE_URL}${route}`,
       lastModified: new Date(),
