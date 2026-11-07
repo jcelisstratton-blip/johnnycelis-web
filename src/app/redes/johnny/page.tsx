@@ -45,9 +45,15 @@ export default function RedesJohnnyPage() {
       <div className="w-full max-w-xl mx-auto">
         <header className="st-ignite st-glass px-5 py-5 mb-5 rounded-[4px]">
           <div className="flex items-center justify-between flex-wrap gap-3">
-            <div className="flex items-center gap-3">
+            <div className="flex items-center gap-3.5">
               {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img src="/brand/stratton-isotipo-mono-blanco.svg" alt="" className="w-7 h-7" />
+              <img
+                src="/johnny/avatar.jpg"
+                alt="Johnny Celis"
+                width={48}
+                height={48}
+                className="w-12 h-12 rounded-st object-cover border border-white/15"
+              />
               <h1 className="font-black text-xl md:text-2xl m-0 leading-none">Johnny Celis</h1>
             </div>
             <div className="st-label flex items-center gap-2 text-humo text-[11px]">
