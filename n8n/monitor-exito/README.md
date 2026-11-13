@@ -15,7 +15,7 @@ Facebook, Instagram, Threads, TikTok, X y LinkedIn, avisa cada publicación nuev
 
 ## Flujo
 
-1. Cada 3 h lee las 3 últimas publicaciones por perfil (ventana de 72 h) con Apify; Threads se
+1. Cada día a las 10:00 (America/Bogota) lee las 3 últimas publicaciones por perfil (ventana de 72 h) con Apify; Threads se
    intenta además por la API oficial (`profile_posts`), que es la única que da un id comentable.
 2. Cada publicación nueva llega a Telegram con «🤖 Sugerir», «⏭ Omitir» y el enlace.
 3. Responder (reply) al aviso con un texto lo publica; «🤖 Sugerir» redacta un borrador que se
@@ -30,6 +30,5 @@ Facebook, Instagram, Threads, TikTok, X y LinkedIn, avisa cada publicación nuev
 ## Puesta en marcha
 
 1. Credencial n8n «Apify» (Header Auth): reemplazar el valor por `Bearer <token de Apify>`.
-2. Ejecutar una vez a mano desde «Cada 3 horas» y revisar el aviso de fuentes caídas: los ids e
-   inputs de los actores en `fuentes.js` no se han verificado contra Apify.
+2. Los seis actores de `fuentes.js` están verificados contra Apify (13-nov-2026).
 3. Activar el workflow (registra el webhook del bot para botones y respuestas).

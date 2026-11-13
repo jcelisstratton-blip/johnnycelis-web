@@ -57,7 +57,7 @@ const mapas = {
     };
   },
   threads: (o) => {
-    const url = pick(o, 'url', 'postUrl', 'permalink', 'threadUrl');
+    const url = pick(o, 'permalink', 'canonical_url', 'url', 'postUrl', 'threadUrl');
     const code = pick(o, 'code', 'shortcode') || (String(url ?? '').match(/\/post\/([^/?#]+)/) || [])[1];
     return {
       post_id: code, url: url || (code ? `https://www.threads.com/@exito/post/${code}` : null),
@@ -91,7 +91,8 @@ for (const o of Array.isArray(oficial?.body?.data) ? oficial.body.data : []) {
 
 fuentes.forEach((fuente, i) => {
   const r = crudos[i] ?? {};
-  const filas = lista(r);
+  // El actor de Threads devuelve el perfil con sus posts dentro de «latestPosts».
+  const filas = lista(r)?.flatMap((o) => (Array.isArray(o?.latestPosts) ? o.latestPosts : [o])) ?? null;
   const ok = filas ? filas.filter((o) => agregar(fuente, o)).length : 0;
   if (ok || (fuente.platform === 'threads' && threadsOficial)) return;
   const motivo = !filas

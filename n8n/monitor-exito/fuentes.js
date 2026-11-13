@@ -9,7 +9,7 @@ return [
   { platform: 'threads',   profile: 'exito',          actor: 'apify~threads-profile-api-scraper',
     input: { usernames: ['exito'], resultsLimit: n } },
   { platform: 'tiktok',    profile: 'almacenesexito', actor: 'clockworks~tiktok-scraper',
-    input: { profiles: ['almacenesexito'], resultsPerPage: n, profileSorting: 'latest' } },
+    input: { profiles: ['almacenesexito'], resultsPerPage: n + 3, profileSorting: 'latest' } }, // +3: los fijados salen primero
   { platform: 'x',         profile: 'almacenesexito', actor: 'apidojo~twitter-scraper-lite',
     input: { twitterHandles: ['almacenesexito'], maxItems: Math.max(n, 5), sort: 'Latest' } },
   { platform: 'linkedin',  profile: 'grupoexito',     actor: 'apimaestro~linkedin-company-posts',
