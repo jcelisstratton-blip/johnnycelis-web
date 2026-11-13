@@ -96,7 +96,7 @@ fuentes.forEach((fuente, i) => {
   const ok = filas ? filas.filter((o) => agregar(fuente, o)).length : 0;
   if (ok || (fuente.platform === 'threads' && threadsOficial)) return;
   const motivo = !filas
-    ? `HTTP ${r.statusCode ?? '—'} ${String(r.error?.message ?? r.body?.error?.message ?? '').slice(0, 140)}`
+    ? `HTTP ${r.statusCode ?? r.error?.httpCode ?? '—'} ${String(r.error?.message ?? r.error?.description ?? r.body?.error?.message ?? '').slice(0, 140)}`
     : filas.length ? 'la salida del actor no trae id/url reconocibles' : '0 resultados';
   fallos.push({ platform: fuente.platform, actor: fuente.actor, motivo });
 });

@@ -2,7 +2,7 @@
 
 Workflow n8n (`A0urwLeGQpjuV97V`, instancia Stratt-On) que vigila los perfiles de Éxito en
 Facebook, Instagram, Threads, TikTok, X y LinkedIn, avisa cada publicación nueva por Telegram
-(bot «Interacción RRSS») y publica el comentario que Johnny apruebe.
+(bot «♠️Stratton Social Bot») y publica el comentario que Johnny apruebe.
 
 | Archivo | Qué es |
 |---|---|

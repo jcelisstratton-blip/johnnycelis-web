@@ -39,8 +39,8 @@
       },
       "credentials": {
         "telegramApi": {
-          "id": "y1hFolD7vFP5jiKJ",
-          "name": "Interacción RRSS"
+          "id": "ZUTdCH5ZREP1UBRJ",
+          "name": "♠️Stratton Social Bot"
         }
       },
       "webhookId": "0b14d9ee-2f2a-5cc2-b930-56d98c09fa96"
@@ -174,13 +174,12 @@
           "batching": {
             "batch": {
               "batchSize": 1,
-              "batchInterval": 1000
+              "batchInterval": 5000
             }
           },
           "response": {
             "response": {
-              "fullResponse": true,
-              "neverError": true
+              "fullResponse": true
             }
           }
         }
@@ -191,7 +190,10 @@
           "name": "Apify"
         }
       },
-      "onError": "continueRegularOutput"
+      "onError": "continueRegularOutput",
+      "retryOnFail": true,
+      "maxTries": 3,
+      "waitBetweenTries": 5000
     },
     {
       "id": "79e7f5ed-a1a3-5e14-8263-91295e09fa45",
@@ -273,7 +275,7 @@
         0
       ],
       "parameters": {
-        "jsCode": "// Unifica la salida de cada scraper a { platform, profile, post_id, url, text, published_at, api_ref }.\n// Los nombres de campo cambian entre actores y versiones: se prueba una lista de candidatos por dato.\nconst cfg = $('Config').first().json;\nconst fuentes = $('Fuentes').all().map((i) => i.json);\nconst crudos = $('Scrape Apify').all().map((i) => i.json);\nconst oficial = $input.first()?.json ?? {};\n\nconst pick = (o, ...rutas) => {\n  for (const r of rutas) {\n    const v = r.split('.').reduce((a, k) => (a == null ? a : a[k]), o);\n    if (v != null && v !== '') return v;\n  }\n  return null;\n};\nconst fecha = (v) => {\n  if (v == null) return null;\n  if (typeof v === 'number' || /^\\d+$/.test(String(v))) {\n    const x = Number(v);\n    return new Date(x < 1e12 ? x * 1000 : x);\n  }\n  const d = new Date(v);\n  return isNaN(d) ? null : d;\n};\nconst lista = (r) => (Array.isArray(r?.body) ? r.body : Array.isArray(r) ? r : null);\n\nconst mapas = {\n  facebook: (o) => ({\n    post_id: pick(o, 'postId', 'post_id', 'id'), url: pick(o, 'url', 'postUrl', 'facebookUrl'),\n    text: pick(o, 'text', 'message', 'postText'), f: pick(o, 'time', 'timestamp', 'date'),\n  }),\n  instagram: (o) => ({\n    post_id: pick(o, 'shortCode', 'shortcode', 'id'), url: pick(o, 'url', 'postUrl'),\n    text: pick(o, 'caption', 'text'), f: pick(o, 'timestamp', 'takenAt', 'date'),\n  }),\n  tiktok: (o) => ({\n    post_id: pick(o, 'id', 'videoId'), url: pick(o, 'webVideoUrl', 'url', 'postUrl'),\n    text: pick(o, 'text', 'desc', 'description'), f: pick(o, 'createTimeISO', 'createTime', 'createdAt'),\n  }),\n  x: (o) => {\n    const id = pick(o, 'id', 'id_str', 'tweetId', 'rest_id');\n    return {\n      post_id: id, url: pick(o, 'url', 'twitterUrl', 'tweetUrl') || (id ? `https://x.com/almacenesexito/status/${id}` : null),\n      text: pick(o, 'text', 'fullText', 'full_text'), f: pick(o, 'createdAt', 'created_at', 'timestamp'),\n      omitir: !!pick(o, 'isRetweet', 'isReply'),\n    };\n  },\n  linkedin: (o) => {\n    const url = pick(o, 'post_url', 'url', 'postUrl', 'link');\n    const urn = [pick(o, 'activity_urn', 'full_urn', 'urn.activity_urn', 'urn', 'activityUrn', 'entityUrn'), url]\n      .map((v) => (typeof v === 'object' ? JSON.stringify(v) : String(v ?? '')))\n      .map((s) => s.match(/(activity|ugcPost|share)[-:](\\d{10,})/))\n      .find(Boolean);\n    return {\n      post_id: urn ? urn[2] : url, url, api_ref: urn ? `urn:li:${urn[1]}:${urn[2]}` : null,\n      text: pick(o, 'text', 'commentary', 'content', 'post_text'),\n      f: pick(o, 'posted_at.timestamp', 'posted_at.date', 'postedAtTimestamp', 'postedAtISO', 'posted_at', 'publishedAt'),\n    };\n  },\n  threads: (o) => {\n    const url = pick(o, 'permalink', 'canonical_url', 'url', 'postUrl', 'threadUrl');\n    const code = pick(o, 'code', 'shortcode') || (String(url ?? '').match(/\\/post\\/([^/?#]+)/) || [])[1];\n    return {\n      post_id: code, url: url || (code ? `https://www.threads.com/@exito/post/${code}` : null),\n      text: pick(o, 'text', 'caption.text', 'caption', 'content'), f: pick(o, 'timestamp', 'taken_at', 'publishedAt', 'createdAt'),\n    };\n  },\n};\n\nconst posts = new Map();\nconst fallos = [];\nconst agregar = (fuente, o, extra = {}) => {\n  const m = { ...mapas[fuente.platform](o), ...extra };\n  if (!m.post_id || !m.url || m.omitir) return false;\n  const k = `${fuente.platform}|${m.post_id}`;\n  const previo = posts.get(k) || {};\n  const d = fecha(m.f);\n  posts.set(k, {\n    platform: fuente.platform, profile: fuente.profile, post_id: String(m.post_id), url: String(m.url),\n    text: String(m.text ?? previo.text ?? '').slice(0, 3000),\n    published_at: d ? d.toISOString() : previo.published_at ?? null,\n    api_ref: m.api_ref ?? previo.api_ref ?? null,\n  });\n  return true;\n};\n\n// Threads por la API oficial (si el token tiene threads_profile_discovery): da el id que permite responder por API.\nlet threadsOficial = 0;\nfor (const o of Array.isArray(oficial?.body?.data) ? oficial.body.data : []) {\n  if (agregar({ platform: 'threads', profile: 'exito' }, o, { api_ref: o.id })) threadsOficial++;\n}\n\nfuentes.forEach((fuente, i) => {\n  const r = crudos[i] ?? {};\n  // El actor de Threads devuelve el perfil con sus posts dentro de «latestPosts».\n  const filas = lista(r)?.flatMap((o) => (Array.isArray(o?.latestPosts) ? o.latestPosts : [o])) ?? null;\n  const ok = filas ? filas.filter((o) => agregar(fuente, o)).length : 0;\n  if (ok || (fuente.platform === 'threads' && threadsOficial)) return;\n  const motivo = !filas\n    ? `HTTP ${r.statusCode ?? '—'} ${String(r.error?.message ?? r.body?.error?.message ?? '').slice(0, 140)}`\n    : filas.length ? 'la salida del actor no trae id/url reconocibles' : '0 resultados';\n  fallos.push({ platform: fuente.platform, actor: fuente.actor, motivo });\n});\n\n// Solo lo reciente y, por perfil, las N últimas.\nconst desde = Date.now() - cfg.ventana_horas * 3600 * 1000;\nconst porPerfil = {};\nfor (const p of posts.values()) {\n  if (p.published_at && new Date(p.published_at).getTime() < desde) continue;\n  (porPerfil[p.platform] ||= []).push(p);\n}\nconst salida = [];\nfor (const grupo of Object.values(porPerfil)) {\n  grupo.sort((a, b) => new Date(b.published_at ?? 0) - new Date(a.published_at ?? 0));\n  for (const p of grupo.slice(0, cfg.max_por_perfil)) salida.push({ json: { tipo: 'post', ...p } });\n}\n\n// Un scraper roto no puede pasar en silencio, pero tampoco avisar en cada corrida: una vez al día por red.\nconst mem = $getWorkflowStaticData('global');\nmem.fallos ||= {};\nconst nuevos = fallos.filter((f) => Date.now() - (mem.fallos[f.platform] ?? 0) > 24 * 3600 * 1000);\nfor (const f of nuevos) mem.fallos[f.platform] = Date.now();\nif (nuevos.length) {\n  salida.push({ json: { tipo: 'fallo', texto: '⚠️ Monitor Éxito: no pude leer\\n' + nuevos.map((f) => `• ${f.platform} (${f.actor}): ${f.motivo}`).join('\\n') } });\n}\nreturn salida;\n"
+        "jsCode": "// Unifica la salida de cada scraper a { platform, profile, post_id, url, text, published_at, api_ref }.\n// Los nombres de campo cambian entre actores y versiones: se prueba una lista de candidatos por dato.\nconst cfg = $('Config').first().json;\nconst fuentes = $('Fuentes').all().map((i) => i.json);\nconst crudos = $('Scrape Apify').all().map((i) => i.json);\nconst oficial = $input.first()?.json ?? {};\n\nconst pick = (o, ...rutas) => {\n  for (const r of rutas) {\n    const v = r.split('.').reduce((a, k) => (a == null ? a : a[k]), o);\n    if (v != null && v !== '') return v;\n  }\n  return null;\n};\nconst fecha = (v) => {\n  if (v == null) return null;\n  if (typeof v === 'number' || /^\\d+$/.test(String(v))) {\n    const x = Number(v);\n    return new Date(x < 1e12 ? x * 1000 : x);\n  }\n  const d = new Date(v);\n  return isNaN(d) ? null : d;\n};\nconst lista = (r) => (Array.isArray(r?.body) ? r.body : Array.isArray(r) ? r : null);\n\nconst mapas = {\n  facebook: (o) => ({\n    post_id: pick(o, 'postId', 'post_id', 'id'), url: pick(o, 'url', 'postUrl', 'facebookUrl'),\n    text: pick(o, 'text', 'message', 'postText'), f: pick(o, 'time', 'timestamp', 'date'),\n  }),\n  instagram: (o) => ({\n    post_id: pick(o, 'shortCode', 'shortcode', 'id'), url: pick(o, 'url', 'postUrl'),\n    text: pick(o, 'caption', 'text'), f: pick(o, 'timestamp', 'takenAt', 'date'),\n  }),\n  tiktok: (o) => ({\n    post_id: pick(o, 'id', 'videoId'), url: pick(o, 'webVideoUrl', 'url', 'postUrl'),\n    text: pick(o, 'text', 'desc', 'description'), f: pick(o, 'createTimeISO', 'createTime', 'createdAt'),\n  }),\n  x: (o) => {\n    const id = pick(o, 'id', 'id_str', 'tweetId', 'rest_id');\n    return {\n      post_id: id, url: pick(o, 'url', 'twitterUrl', 'tweetUrl') || (id ? `https://x.com/almacenesexito/status/${id}` : null),\n      text: pick(o, 'text', 'fullText', 'full_text'), f: pick(o, 'createdAt', 'created_at', 'timestamp'),\n      omitir: !!pick(o, 'isRetweet', 'isReply'),\n    };\n  },\n  linkedin: (o) => {\n    const url = pick(o, 'post_url', 'url', 'postUrl', 'link');\n    const urn = [pick(o, 'activity_urn', 'full_urn', 'urn.activity_urn', 'urn', 'activityUrn', 'entityUrn'), url]\n      .map((v) => (typeof v === 'object' ? JSON.stringify(v) : String(v ?? '')))\n      .map((s) => s.match(/(activity|ugcPost|share)[-:](\\d{10,})/))\n      .find(Boolean);\n    return {\n      post_id: urn ? urn[2] : url, url, api_ref: urn ? `urn:li:${urn[1]}:${urn[2]}` : null,\n      text: pick(o, 'text', 'commentary', 'content', 'post_text'),\n      f: pick(o, 'posted_at.timestamp', 'posted_at.date', 'postedAtTimestamp', 'postedAtISO', 'posted_at', 'publishedAt'),\n    };\n  },\n  threads: (o) => {\n    const url = pick(o, 'permalink', 'canonical_url', 'url', 'postUrl', 'threadUrl');\n    const code = pick(o, 'code', 'shortcode') || (String(url ?? '').match(/\\/post\\/([^/?#]+)/) || [])[1];\n    return {\n      post_id: code, url: url || (code ? `https://www.threads.com/@exito/post/${code}` : null),\n      text: pick(o, 'text', 'caption.text', 'caption', 'content'), f: pick(o, 'timestamp', 'taken_at', 'publishedAt', 'createdAt'),\n    };\n  },\n};\n\nconst posts = new Map();\nconst fallos = [];\nconst agregar = (fuente, o, extra = {}) => {\n  const m = { ...mapas[fuente.platform](o), ...extra };\n  if (!m.post_id || !m.url || m.omitir) return false;\n  const k = `${fuente.platform}|${m.post_id}`;\n  const previo = posts.get(k) || {};\n  const d = fecha(m.f);\n  posts.set(k, {\n    platform: fuente.platform, profile: fuente.profile, post_id: String(m.post_id), url: String(m.url),\n    text: String(m.text ?? previo.text ?? '').slice(0, 3000),\n    published_at: d ? d.toISOString() : previo.published_at ?? null,\n    api_ref: m.api_ref ?? previo.api_ref ?? null,\n  });\n  return true;\n};\n\n// Threads por la API oficial (si el token tiene threads_profile_discovery): da el id que permite responder por API.\nlet threadsOficial = 0;\nfor (const o of Array.isArray(oficial?.body?.data) ? oficial.body.data : []) {\n  if (agregar({ platform: 'threads', profile: 'exito' }, o, { api_ref: o.id })) threadsOficial++;\n}\n\nfuentes.forEach((fuente, i) => {\n  const r = crudos[i] ?? {};\n  // El actor de Threads devuelve el perfil con sus posts dentro de «latestPosts».\n  const filas = lista(r)?.flatMap((o) => (Array.isArray(o?.latestPosts) ? o.latestPosts : [o])) ?? null;\n  const ok = filas ? filas.filter((o) => agregar(fuente, o)).length : 0;\n  if (ok || (fuente.platform === 'threads' && threadsOficial)) return;\n  const motivo = !filas\n    ? `HTTP ${r.statusCode ?? r.error?.httpCode ?? '—'} ${String(r.error?.message ?? r.error?.description ?? r.body?.error?.message ?? '').slice(0, 140)}`\n    : filas.length ? 'la salida del actor no trae id/url reconocibles' : '0 resultados';\n  fallos.push({ platform: fuente.platform, actor: fuente.actor, motivo });\n});\n\n// Solo lo reciente y, por perfil, las N últimas.\nconst desde = Date.now() - cfg.ventana_horas * 3600 * 1000;\nconst porPerfil = {};\nfor (const p of posts.values()) {\n  if (p.published_at && new Date(p.published_at).getTime() < desde) continue;\n  (porPerfil[p.platform] ||= []).push(p);\n}\nconst salida = [];\nfor (const grupo of Object.values(porPerfil)) {\n  grupo.sort((a, b) => new Date(b.published_at ?? 0) - new Date(a.published_at ?? 0));\n  for (const p of grupo.slice(0, cfg.max_por_perfil)) salida.push({ json: { tipo: 'post', ...p } });\n}\n\n// Un scraper roto no puede pasar en silencio, pero tampoco avisar en cada corrida: una vez al día por red.\nconst mem = $getWorkflowStaticData('global');\nmem.fallos ||= {};\nconst nuevos = fallos.filter((f) => Date.now() - (mem.fallos[f.platform] ?? 0) > 24 * 3600 * 1000);\nfor (const f of nuevos) mem.fallos[f.platform] = Date.now();\nif (nuevos.length) {\n  salida.push({ json: { tipo: 'fallo', texto: '⚠️ Monitor Éxito: no pude leer\\n' + nuevos.map((f) => `• ${f.platform} (${f.actor}): ${f.motivo}`).join('\\n') } });\n}\nreturn salida;\n"
       }
     },
     {
@@ -321,15 +323,16 @@
       ],
       "parameters": {
         "chatId": "={{ $('Config').first().json.chat_id }}",
-        "text": "={{ $json.texto }}",
+        "text": "={{ $json.texto.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;') }}",
         "additionalFields": {
-          "appendAttribution": false
+          "appendAttribution": false,
+          "parse_mode": "HTML"
         }
       },
       "credentials": {
         "telegramApi": {
-          "id": "y1hFolD7vFP5jiKJ",
-          "name": "Interacción RRSS"
+          "id": "ZUTdCH5ZREP1UBRJ",
+          "name": "♠️Stratton Social Bot"
         }
       }
     },
@@ -401,9 +404,10 @@
       ],
       "parameters": {
         "chatId": "={{ $('Config').first().json.chat_id }}",
-        "text": "=🆕 {{ $json.platform.toUpperCase() }} · @{{ $json.profile }}{{ $json.fecha ? ' · ' + $json.fecha : '' }}\n\n{{ $json.extracto || '(sin texto)' }}\n\n{{ $json.url }}\n\n↩️ Responde a este mensaje con tu comentario para publicarlo.",
+        "text": "=🆕 {{ $json.platform.toUpperCase() }} · @{{ $json.profile }}{{ $json.fecha ? ' · ' + $json.fecha : '' }}\n\n{{ ($json.extracto || '(sin texto)').replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;') }}\n\n{{ $json.url.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;') }}\n\n↩️ Responde a este mensaje con tu comentario para publicarlo.",
         "additionalFields": {
           "appendAttribution": false,
+          "parse_mode": "HTML",
           "disable_web_page_preview": true
         },
         "replyMarkup": "inlineKeyboard",
@@ -444,8 +448,8 @@
       },
       "credentials": {
         "telegramApi": {
-          "id": "y1hFolD7vFP5jiKJ",
-          "name": "Interacción RRSS"
+          "id": "ZUTdCH5ZREP1UBRJ",
+          "name": "♠️Stratton Social Bot"
         }
       }
     },
@@ -572,8 +576,8 @@
       },
       "credentials": {
         "telegramApi": {
-          "id": "y1hFolD7vFP5jiKJ",
-          "name": "Interacción RRSS"
+          "id": "ZUTdCH5ZREP1UBRJ",
+          "name": "♠️Stratton Social Bot"
         }
       },
       "onError": "continueRegularOutput"
@@ -731,9 +735,10 @@
       ],
       "parameters": {
         "chatId": "={{ $('Config').first().json.chat_id }}",
-        "text": "=🤖 Borrador:\n\n{{ $json.draft_text }}\n\n↩️ Para cambiarlo, responde a este mensaje con tu versión.",
+        "text": "=🤖 Borrador:\n\n{{ $json.draft_text.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;') }}\n\n↩️ Para cambiarlo, responde a este mensaje con tu versión.",
         "additionalFields": {
           "appendAttribution": false,
+          "parse_mode": "HTML",
           "reply_to_message_id": "={{ $json.tg_message_id }}"
         },
         "replyMarkup": "inlineKeyboard",
@@ -768,8 +773,8 @@
       },
       "credentials": {
         "telegramApi": {
-          "id": "y1hFolD7vFP5jiKJ",
-          "name": "Interacción RRSS"
+          "id": "ZUTdCH5ZREP1UBRJ",
+          "name": "♠️Stratton Social Bot"
         }
       }
     },
@@ -831,15 +836,16 @@
       ],
       "parameters": {
         "chatId": "={{ $('Config').first().json.chat_id }}",
-        "text": "={{ $('Decidir').first().json.respuesta }}",
+        "text": "={{ $('Decidir').first().json.respuesta.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;') }}",
         "additionalFields": {
-          "appendAttribution": false
+          "appendAttribution": false,
+          "parse_mode": "HTML"
         }
       },
       "credentials": {
         "telegramApi": {
-          "id": "y1hFolD7vFP5jiKJ",
-          "name": "Interacción RRSS"
+          "id": "ZUTdCH5ZREP1UBRJ",
+          "name": "♠️Stratton Social Bot"
         }
       }
     },
@@ -965,8 +971,8 @@
       },
       "credentials": {
         "telegramApi": {
-          "id": "y1hFolD7vFP5jiKJ",
-          "name": "Interacción RRSS"
+          "id": "ZUTdCH5ZREP1UBRJ",
+          "name": "♠️Stratton Social Bot"
         }
       }
     }
