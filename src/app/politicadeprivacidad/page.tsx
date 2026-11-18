@@ -23,7 +23,7 @@ export default function PoliticaPrivacidad() {
           Política de <br />
           <span className="text-accent">Privacidad</span>
         </h1>
-        <p className="text-white/40 text-xs md:text-sm font-bold">Última actualización: 10 de septiembre de 2026</p>
+        <p className="text-white/40 text-xs md:text-sm font-bold">Última actualización: 18 de noviembre de 2026</p>
       </header>
       
       <section className="leading-loose text-white/70 max-w-[900px] text-base text-justify space-y-10">
@@ -60,7 +60,7 @@ export default function PoliticaPrivacidad() {
               3. Datos de TikTok (TikTok API for Developers)
             </h3>
             <p className="mb-4">
-              Al conectar tu cuenta de TikTok a nuestra herramienta de publicación alojada en <span className="text-white">post.stratt-on.com</span>, accedemos únicamente a la siguiente información, previa autorización explícita otorgada por ti en la pantalla de consentimiento de TikTok:
+              Al conectar tu cuenta de TikTok a nuestra herramienta de publicación alojada en <span className="text-white">social.stratt-on.com</span>, accedemos únicamente a la siguiente información, previa autorización explícita otorgada por ti en la pantalla de consentimiento de TikTok:
             </p>
             <ul className="list-disc pl-5 space-y-3 mb-4">
               <li>
@@ -72,15 +72,24 @@ export default function PoliticaPrivacidad() {
               <li>
                 <strong>Envío a borradores (video.upload):</strong> permite enviar videos a tu bandeja de entrada de TikTok para que los edites y publiques desde la aplicación.
               </li>
+              <li>
+                <strong>Detalles del perfil (user.info.profile):</strong> tu biografía, el enlace a tu perfil y si tu cuenta está verificada. Los mostramos solo a ti, en la tarjeta de tu cuenta conectada.
+              </li>
+              <li>
+                <strong>Estadísticas de la cuenta (user.info.stats):</strong> número de seguidores, seguidos, me gusta y videos. Guardamos una cifra por día para mostrarte cómo crece tu cuenta.
+              </li>
+              <li>
+                <strong>Tus videos públicos (video.list):</strong> la lista de tus videos públicos con sus vistas, me gusta, comentarios y compartidos, para mostrarte tus resultados en la sección Métricas.
+              </li>
             </ul>
             <p className="mb-4">
-              <strong>Qué almacenamos:</strong> tokens de acceso y actualización cifrados en tránsito, tu identificador de TikTok, y el registro de las publicaciones realizadas (identificador de publicación, estado y fecha). Los archivos de video se almacenan de forma temporal y se eliminan una vez completada la publicación.
+              <strong>Qué almacenamos:</strong> tokens de acceso y actualización cifrados en tránsito, tu identificador de TikTok, los datos de perfil mencionados arriba, una cifra diaria de las estadísticas de tu cuenta, las cifras de tus videos públicos (identificador, descripción, fecha, enlace, portada, vistas, me gusta, comentarios y compartidos) y el registro de las publicaciones realizadas (identificador de publicación, estado y fecha). Los archivos de video que subes para publicar se almacenan de forma temporal y se eliminan una vez completada la publicación.
             </p>
             <p className="mb-4">
-              <strong>Qué no hacemos:</strong> no leemos tus videos existentes, no accedemos a tus mensajes, seguidores ni estadísticas, no compartimos ni vendemos datos de TikTok a terceros, y no utilizamos esta información para entrenar modelos de inteligencia artificial.
+              <strong>Qué no hacemos:</strong> de tus videos existentes solo leemos las cifras y los datos públicos descritos arriba; no los modificamos, no los eliminamos y no descargamos tus archivos. No accedemos a tus mensajes ni a tus comentarios, no vemos la lista de tus seguidores, no publicamos ni interactuamos en tu nombre salvo las publicaciones que tú creas con la herramienta, no compartimos ni vendemos datos de TikTok a terceros, y no utilizamos esta información para entrenar modelos de inteligencia artificial. Las cifras y los datos de perfil solo los ve la persona que conectó la cuenta.
             </p>
             <p>
-              <strong>Revocación:</strong> puedes retirar el acceso en cualquier momento desde TikTok, en Perfil → Configuración y privacidad → Seguridad y permisos → Autorizar administración. Al revocarlo, eliminamos los tokens asociados a tu cuenta.
+              <strong>Revocación:</strong> puedes retirar el acceso en cualquier momento desde TikTok, en Perfil → Configuración y privacidad → Seguridad y permisos → Autorizar administración. Al revocarlo o al desconectar la cuenta desde el panel (Configuración, Redes), eliminamos los tokens asociados a tu cuenta y dejamos de leer sus datos. Si además quieres que borremos las cifras y los datos de perfil ya guardados, escríbenos a <a href="mailto:johnnycelis@stratt-on.com" className="text-accent hover:underline">johnnycelis@stratt-on.com</a>.
             </p>
           </div>
 
