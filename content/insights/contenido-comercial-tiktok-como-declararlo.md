@@ -47,3 +47,24 @@ vez.
 
 Publica con la configuración correcta desde el primer intento — no
 después de que TikTok te avise.
+
+## Ejemplos para decidir
+
+- Mencionas tu propio curso o servicio en un video: **marca propia**.
+- Una marca te envió un producto gratis y lo muestras: **marca de terceros**, porque recibiste algo de valor.
+- Una empresa te paga por hacer un video: **marca de terceros**.
+- Opinas sobre un producto que compraste tú, sin ningún acuerdo con la marca: no es contenido comercial.
+- El video promueve algo tuyo y también un producto de un aliado: declara ambas opciones.
+
+## Antes de publicar, revisa
+
+1. ¿Recibí dinero, un producto o cualquier otro beneficio por este video?
+2. ¿El video promueve algo mío?
+3. ¿El texto y las imágenes dejan claro que es una promoción?
+4. ¿Está activado el interruptor correcto en la configuración de publicación?
+
+Si no estás seguro de alguna respuesta, revisa las políticas vigentes de TikTok sobre contenido comercial, porque pueden cambiar.
+
+## Por qué importa más de lo que parece
+
+Declarar bien no solo evita sanciones: también deja trazabilidad. Si trabajas con marcas, un historial de publicaciones correctamente declaradas es una señal de profesionalismo y facilita las conversaciones con anunciantes. Si gestionas varias cuentas, definir una regla común para todo el equipo evita que cada persona decida distinto y que el criterio dependa de quién publica ese día.

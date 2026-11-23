@@ -35,3 +35,17 @@ es donde se publica algo que no debía salir todavía.
 
 Stratt-On Publisher deja esa elección explícita en cada subida, no
 escondida en una configuración por defecto que nadie revisa.
+
+## Una regla simple para decidir
+
+Hazte tres preguntas antes de subir el video: ¿alguien más debería verlo antes que el público?, ¿hay algo en él que requiera una revisión de marca o de contenido comercial?, ¿perdería valor si sale mañana en lugar de hoy? Si las dos primeras respuestas son sí, o la tercera es no, usa borrador. Si el video es urgente, ya está revisado y solo tú lo apruebas, publica directo.
+
+## Errores frecuentes
+
+- Publicar directo porque es el botón que aparece primero.
+- Usar borradores y olvidar el video ahí durante semanas, de modo que el contenido pierde vigencia.
+- Mezclar ambos modos sin criterio, de forma que nadie en el equipo sabe qué salió solo y qué esperaba aprobación.
+
+## Cómo llevarlo a la práctica
+
+Define por escrito qué tipos de video salen directo y cuáles pasan por borrador. Una lista de cinco líneas basta. Revisa los borradores pendientes con una frecuencia fija, por ejemplo al inicio de cada día, para que ninguno se quede esperando. Y cuando un video salga mal, pregunta en qué momento se debió tomar otra decisión, no quién pulsó el botón. Así el proceso mejora sin buscar culpables.
