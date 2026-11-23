@@ -19,7 +19,7 @@ export async function generateMetadata({
   const post = await getInsightBySlug(slug);
   if (!post) return {};
   return {
-    title: `${post.title} | Stratt-On Agency`,
+    title: `${post.title} | Stratt-On`,
     description: post.description,
     alternates: { canonical: `/insights/${slug}` },
     openGraph: {

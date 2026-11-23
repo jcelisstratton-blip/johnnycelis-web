@@ -1,5 +1,5 @@
 ---
-title: "Conectas IA generativa a producción y el costo real aparece cuando ya no puedes medirlo"
+title: "IA generativa en producción: el costo real"
 description: "El error más frecuente al integrar IA generativa en un pipeline: ignorar el costo de tokens e imágenes hasta que la factura llega."
 tag: "Costos de IA"
 date: "2026-11-02"

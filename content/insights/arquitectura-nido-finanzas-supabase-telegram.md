@@ -1,5 +1,5 @@
 ---
-title: "La arquitectura detrás de Nido: Automatizando finanzas con Supabase y Telegram"
+title: "Nido: finanzas con Supabase y Telegram"
 description: "Cómo construimos un dashboard autónomo de finanzas personales que ingiere notificaciones bancarias de correos IMAP y Telegram."
 tag: "Finanzas con IA"
 date: "2026-09-09"

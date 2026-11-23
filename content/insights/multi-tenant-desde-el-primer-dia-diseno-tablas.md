@@ -1,5 +1,5 @@
 ---
-title: "Multi-tenant desde el primer día: diseña las tablas bien o reescribe todo después"
+title: "Multi-tenant desde el día uno en tus tablas"
 description: "Agregar multi-tenancy a una base de datos que no lo contempló desde el inicio es una reescritura. Así se evita."
 tag: "Arquitectura"
 date: "2026-10-26"

@@ -1,5 +1,5 @@
 ---
-title: "Automatizar WhatsApp con Evolution API: lo que funciona y lo que te rompe en producción"
+title: "Evolution API en producción: lo que te rompe"
 description: "Qué puedes hacer realmente con Evolution API en WhatsApp y las trampas no documentadas que solo aparecen cuando el sistema está vivo."
 tag: "Evolution API"
 date: "2026-10-19"

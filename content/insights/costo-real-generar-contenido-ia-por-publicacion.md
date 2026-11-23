@@ -1,5 +1,5 @@
 ---
-title: "Cuánto cuesta generar contenido con IA por publicación"
+title: "Cuánto cuesta generar contenido con IA"
 description: "Desglose real del costo por tipo de contenido generado con IA: texto, imagen y audio. No todos los formatos cuestan igual."
 tag: "Costos de IA"
 date: "2026-11-16"

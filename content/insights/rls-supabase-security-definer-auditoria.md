@@ -1,5 +1,5 @@
 ---
-title: "RLS mal configurado en Supabase: el agujero que nadie ve hasta que es tarde"
+title: "RLS mal configurado en Supabase"
 description: "Una función SECURITY DEFINER mal expuesta puede saltarse todo tu RLS en Supabase. Así se produce, así se audita y así se cierra."
 tag: "Seguridad"
 date: "2026-11-23"

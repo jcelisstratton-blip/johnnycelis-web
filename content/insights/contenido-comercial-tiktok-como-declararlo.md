@@ -1,5 +1,5 @@
 ---
-title: "Contenido comercial en TikTok: cómo declararlo sin arriesgar tu cuenta"
+title: "Contenido comercial en TikTok: cómo declararlo"
 description: "TikTok exige declarar el contenido comercial antes de publicar. Qué significa cada opción y cómo evitar el error que más cuentas frena."
 tag: "TikTok Publisher"
 date: "2026-09-09"

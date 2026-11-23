@@ -1,5 +1,5 @@
 ---
-title: "Publicar directo o mandar a borrador: cuándo usar cada uno en TikTok"
+title: "Publicar directo o borrador en TikTok"
 description: "No todo video debe salir al instante. Guía corta para decidir entre publicar directo o enviar a borradores en TikTok."
 tag: "TikTok Publisher"
 date: "2026-09-08"

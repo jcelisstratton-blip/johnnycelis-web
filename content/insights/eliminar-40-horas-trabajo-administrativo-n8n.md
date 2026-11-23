@@ -1,5 +1,5 @@
 ---
-title: "Cómo eliminar 40 horas de trabajo administrativo a la semana con n8n"
+title: "Elimina 40 horas de trabajo admin con n8n"
 description: "Descubre el flujo exacto que implementamos para centralizar la operación B2B, conectar CRMs y automatizar facturas sin costes de licencias caras."
 tag: "Orquestación n8n"
 date: "2026-09-09"

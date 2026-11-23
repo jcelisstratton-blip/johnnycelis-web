@@ -1,5 +1,5 @@
 ---
-title: "Los riesgos de depender de Zapier/Make y las ventajas de migrar a Coolify"
+title: "Riesgos de Zapier/Make y ventajas de Coolify"
 description: "Análisis técnico de costes y privacidad que justifican por qué las agencias B2B y E-commerce deben alojar su propia infraestructura."
 tag: "Self-Hosting"
 date: "2026-09-09"

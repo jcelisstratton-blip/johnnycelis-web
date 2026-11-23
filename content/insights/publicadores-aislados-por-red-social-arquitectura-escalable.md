@@ -1,5 +1,5 @@
 ---
-title: "Publicadores aislados por red social: la arquitectura que permite escalar volumen real"
+title: "Publicadores aislados por red social"
 description: "Un despachador monolítico para redes sociales no escala. Separar cada red en su propio flujo es la diferencia técnica que lo cambia todo."
 tag: "Arquitectura"
 date: "2026-09-28"

@@ -3,7 +3,7 @@ import Link from 'next/link';
 
 export const metadata = {
   title: 'Política de Privacidad | Stratt-On Agency',
-  description: 'Política de privacidad y protección de datos personales de Johnny Celis y Stratt-On Agency, incluyendo el uso de las APIs de LinkedIn, TikTok y Google/YouTube.',
+  description: 'Política de privacidad de Johnny Celis y Stratt-On Agency: protección de datos y uso de las APIs de LinkedIn, TikTok y Google/YouTube.',
 };
 
 export default function PoliticaPrivacidad() {

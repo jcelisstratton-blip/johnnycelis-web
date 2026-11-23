@@ -1,5 +1,5 @@
 ---
-title: "Self-hosting en serio: control total sobre tu stack, sin depender de los límites de nadie"
+title: "Self-hosting en serio: control total del stack"
 description: "Self-hosting no es solo reducir costos. Es operar sin que un cambio de pricing o un rate limit ajeno frene tu negocio."
 tag: "Self-Hosting"
 date: "2026-10-05"

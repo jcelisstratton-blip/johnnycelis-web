@@ -1,5 +1,5 @@
 ---
-title: "Fábrica de Contenido: El pipeline de distribución automática en redes sociales"
+title: "Fábrica de contenido: pipeline para redes"
 description: "Cómo usar Telegram como panel de control para descargar, subtitular y publicar videos en múltiples redes de manera automatizada."
 tag: "Content Factory"
 date: "2026-09-09"

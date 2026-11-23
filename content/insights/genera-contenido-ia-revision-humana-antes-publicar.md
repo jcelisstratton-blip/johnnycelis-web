@@ -1,6 +1,6 @@
 ---
-title: "Genera contenido con IA, publica con criterio humano"
-description: "Automatizar la generación de contenido es inteligente. Automatizar la publicación sin revisión es un riesgo innecesario. Así se diseña el flujo correcto."
+title: "Genera con IA, publica con criterio humano"
+description: "Automatizar la generación de contenido es inteligente; publicar sin revisión es un riesgo. Así se diseña el flujo correcto."
 tag: "Content Factory"
 date: "2026-11-09"
 ---

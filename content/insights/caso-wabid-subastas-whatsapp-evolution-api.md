@@ -1,5 +1,5 @@
 ---
-title: "El caso de Wabid: Subastas automatizadas en WhatsApp con Evolution API"
+title: "Wabid: subastas en WhatsApp con Evolution API"
 description: "El caso de estudio de cómo rediseñamos la experiencia de pujas y ventas interactivas usando la API de WhatsApp más versátil del mercado."
 tag: "Evolution API"
 date: "2026-09-09"

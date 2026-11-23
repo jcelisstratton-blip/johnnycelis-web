@@ -2,9 +2,9 @@ import React from 'react';
 import Link from 'next/link';
 
 export const metadata = {
-  title: 'Terms of Service | Términos y Condiciones | Stratt-On Agency',
+  title: 'Terms of Service | Stratt-On Agency',
   description:
-    'Terms of Service for Stratt-On Social Manager, the social media management panel by Stratt-On Agency: accounts, connected TikTok and YouTube accounts, acceptable use, content, payments and liability. Términos y condiciones de uso.',
+    'Terms of Service for Stratt-On Social Manager: connected accounts, acceptable use, payments and liability. Términos y condiciones de uso.',
 };
 
 type Seccion = { titulo: string; parrafos: string[]; lista?: string[] };
