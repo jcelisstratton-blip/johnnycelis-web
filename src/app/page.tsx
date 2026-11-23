@@ -8,6 +8,7 @@ import { siteConfig } from '@/config/site';
 import { getAllInsights } from '@/lib/insights';
 
 export const metadata = {
+  alternates: { canonical: '/' },
   title: 'Stratt-On Agency | Ecosistemas Autónomos de IA B2B',
   description: 'Optimizamos la operación de tu empresa con agentes de voz e IA, orquestación con n8n y self-hosting en Coolify.',
 };

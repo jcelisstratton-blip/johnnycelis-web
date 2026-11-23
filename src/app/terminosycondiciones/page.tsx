@@ -2,6 +2,7 @@ import React from 'react';
 import Link from 'next/link';
 
 export const metadata = {
+  alternates: { canonical: '/terminosycondiciones' },
   title: 'Terms of Service | Stratt-On Agency',
   description:
     'Terms of Service for Stratt-On Social Manager: connected accounts, acceptable use, payments and liability. Términos y condiciones de uso.',

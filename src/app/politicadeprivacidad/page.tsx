@@ -2,6 +2,7 @@ import React from 'react';
 import Link from 'next/link';
 
 export const metadata = {
+  alternates: { canonical: '/politicadeprivacidad' },
   title: 'Política de Privacidad | Stratt-On Agency',
   description: 'Política de privacidad de Johnny Celis y Stratt-On Agency: protección de datos y uso de las APIs de LinkedIn, TikTok y Google/YouTube.',
 };

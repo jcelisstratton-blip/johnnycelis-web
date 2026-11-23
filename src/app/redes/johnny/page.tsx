@@ -7,6 +7,7 @@ const title = "Johnny Celis — Redes y contacto";
 const description = "Todos los canales de Johnny Celis en un solo lugar: TikTok, Instagram, LinkedIn, X, Facebook y WhatsApp.";
 
 export const metadata: Metadata = {
+  alternates: { canonical: '/redes/johnny' },
   title,
   description,
   openGraph: {

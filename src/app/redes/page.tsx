@@ -7,6 +7,7 @@ const title = "Redes — Stratt-On & Johnny Celis";
 const description = "Todos los canales de Stratt-On Agency y Johnny Celis en un solo lugar.";
 
 export const metadata: Metadata = {
+  alternates: { canonical: '/redes' },
   title,
   description,
   openGraph: {

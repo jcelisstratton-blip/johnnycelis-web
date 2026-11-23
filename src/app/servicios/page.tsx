@@ -4,6 +4,7 @@ import Footer from '@/components/Footer';
 import { siteConfig } from '@/config/site';
 
 export const metadata = {
+  alternates: { canonical: '/servicios' },
   title: 'Servicios de Automatización e IA | Stratt-On Agency',
   description: 'Infraestructuras y soluciones autónomas: Voicebots Inbound, Growth Outbound, orquestación n8n y self-hosting con Coolify.',
 };
