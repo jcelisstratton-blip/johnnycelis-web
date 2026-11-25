@@ -15,43 +15,40 @@ export default function InsightsPageContent() {
 
   return (
     <>
-      {/* HEADER DE LA PÁGINA BLOG */}
-      <header className="relative bg-gradient-to-b from-grafito to-carbon pt-44 pb-20 text-center px-[5%] overflow-hidden">
-        {/* Glow de fondo */}
-        <div className="absolute -top-1/4 left-1/2 -translate-x-1/2 w-[80vw] h-[50vh] bg-radial-gradient from-accent/15 to-transparent/0 -z-1" />
-
-        <div className="relative z-1 max-w-[1000px] mx-auto">
-          <span className="st-status-line mb-8" />
-          <h1 className="text-4xl md:text-7xl uppercase leading-none mb-6 text-white">
-            Insights <span className="text-accent">Operativos</span>
+      <header className="relative pt-40 md:pt-48 pb-16 md:pb-24 px-[5%] overflow-hidden border-b border-white/10">
+        <div className="st-grid-bg" />
+        <div className="relative max-w-[1280px] mx-auto st-ignite">
+          <span className="st-status-line mb-6" />
+          <div className="st-eyebrow mb-6"><b>[03]</b> Insights</div>
+          <h1 className="text-4xl md:text-7xl uppercase leading-[1.02] mb-8 text-white">
+            Insights <span className="text-accent">operativos</span>
           </h1>
-          <p className="text-lg md:text-xl text-white/60 leading-relaxed max-w-[800px] mx-auto font-medium">
+          <p className="text-base md:text-lg text-humo leading-relaxed max-w-[680px]">
             Conocimiento avanzado sobre automatización B2B, ecosistemas autónomos y orquestación operativa. Descubre cómo las empresas top están eliminando el trabajo manual.
           </p>
         </div>
       </header>
 
-      {/* GRID DE ARTÍCULOS */}
-      <section className="max-w-[1400px] mx-auto px-[5%] pb-32">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+      <section className="max-w-[1280px] mx-auto px-[5%] py-16 md:py-24">
+        <div className="st-cells grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
           {posts.map((post) => (
             <Link
               key={post.slug}
               href={`/insights/${post.slug}`}
-              className="bg-grafito border border-white/5 rounded p-6 md:p-8 transition-all duration-400 cursor-pointer h-full flex flex-col justify-between hover:border-accent hover:-translate-y-1 hover:shadow-[0_0_40px_rgba(255,59,47,0.15)] max-md:border-accent max-md:shadow-[0_0_25px_rgba(255,59,47,0.15)]"
+              className="st-cell-hover group p-7 md:p-9 flex flex-col justify-between no-underline min-h-[300px]"
             >
               <div>
-                <span className="st-label text-[11px] font-bold text-accent">{post.tag}</span>
-                <h3 className="text-lg md:text-xl mt-3 mb-4 text-white leading-snug">{post.title}</h3>
-                <p className="text-white/50 text-sm leading-relaxed mb-8">{post.description}</p>
+                <span className="st-eyebrow"><b>{post.tag}</b></span>
+                <h3 className="text-lg md:text-xl mt-4 mb-4 text-white leading-snug">{post.title}</h3>
+                <p className="text-humo text-sm leading-relaxed mb-8">{post.description}</p>
               </div>
-              <div className="st-label flex items-center gap-2 text-white text-xs hover:text-accent hover:gap-4 transition-all duration-400 self-start mt-auto">
-                <time dateTime={post.date} className="text-white/30 normal-case font-normal">
+              <div>
+                <time dateTime={post.date} className="st-eyebrow block mb-3 text-[10px]">
                   {formatDate(post.date)} · {post.readingTime}
                 </time>
-              </div>
-              <div className="st-label flex items-center gap-2 text-white text-xs mt-2 self-start">
-                Leer artículo <span className="text-accent">→</span>
+                <span className="st-link">
+                  Leer artículo <span className="text-accent">→</span>
+                </span>
               </div>
             </Link>
           ))}

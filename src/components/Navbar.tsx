@@ -4,29 +4,33 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { siteConfig } from '../config/site';
 
+const links = [
+  { href: '/#soluciones', label: 'Soluciones', n: '01' },
+  { href: '/servicios', label: 'Servicios', n: '02' },
+  { href: '/insights', label: 'Insights', n: '03' },
+];
+
 export default function Navbar() {
   const [scrolled, setScrolled] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
 
   useEffect(() => {
-    const handleScroll = () => {
-      setScrolled(window.scrollY > 50);
-    };
-    window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
+    const handleScroll = () => setScrolled(window.scrollY > 24);
+    handleScroll();
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
   return (
     <>
-      <nav 
-        className={`fixed top-0 w-full z-100 px-[5%] py-5 flex justify-between items-center transition-all duration-400 ${
-          scrolled ? 'bg-black/85 backdrop-blur-md border-b border-accent/15' : 'bg-transparent'
+      <nav
+        className={`fixed top-0 w-full z-100 px-[5%] h-[68px] flex justify-between items-center transition-colors duration-200 border-b ${
+          scrolled || menuOpen
+            ? 'bg-carbon/45 backdrop-blur-2xl backdrop-saturate-150 border-white/10 shadow-[inset_0_-1px_0_rgba(245,246,244,0.06)]'
+            : 'bg-transparent border-transparent'
         }`}
       >
-        <Link
-          href="/"
-          className="relative z-101 flex items-center"
-        >
+        <Link href="/" className="relative z-101 flex items-center" aria-label="Stratt-On — inicio">
           <Image
             src="/brand/stratton-logo-principal-fondo-oscuro.svg"
             alt="Stratt-On"
@@ -37,39 +41,31 @@ export default function Navbar() {
           />
         </Link>
 
-        <div className="hidden md:flex gap-[30px] items-center">
-          <Link
-            href="/#soluciones"
-            className="st-label text-white no-underline text-[11px] font-bold hover:text-accent transition-colors"
-          >
-            Soluciones
-          </Link>
-          <Link
-            href="/servicios"
-            className="st-label text-white no-underline text-[11px] font-bold hover:text-accent transition-colors"
-          >
-            Servicios
-          </Link>
-          <Link
-            href="/insights"
-            className="st-label text-white no-underline text-[11px] font-bold hover:text-accent transition-colors"
-          >
-            Insights
-          </Link>
+        <div className="hidden md:flex gap-9 items-center">
+          {links.map((l) => (
+            <Link
+              key={l.href}
+              href={l.href}
+              className="st-eyebrow text-blanco no-underline hover:text-accent transition-colors"
+            >
+              <b>{l.n}</b> {l.label}
+            </Link>
+          ))}
           <a
             href={siteConfig.calendarUrl}
             target="_blank"
             rel="noopener noreferrer"
-            className="st-label bg-accent text-carbon font-black text-[11px] px-6 py-3 rounded-st hover:-translate-y-0.5 hover:bg-white hover:text-carbon transition-all duration-400 flex items-center justify-center gap-2"
+            className="st-btn st-btn-primary !py-[10px] !px-[18px] !text-[12px]"
           >
-            AUDITORÍA IA
+            Auditoría IA
           </a>
         </div>
 
         <button
           className="md:hidden bg-transparent border-none text-white cursor-pointer z-101 relative focus:outline-none p-1"
           onClick={() => setMenuOpen(!menuOpen)}
-          aria-label={menuOpen ? "Cerrar menú" : "Abrir menú"}
+          aria-label={menuOpen ? 'Cerrar menú' : 'Abrir menú'}
+          aria-expanded={menuOpen}
         >
           <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round">
             {menuOpen ? (
@@ -88,41 +84,31 @@ export default function Navbar() {
         </button>
       </nav>
 
-      {/* Menú Móvil */}
-      <div 
-        className={`fixed top-0 left-0 w-full h-screen bg-black/98 backdrop-blur-md z-99 flex flex-col justify-center items-center gap-10 transition-transform duration-400 ease-in-out ${
+      {/* Menú móvil */}
+      <div
+        className={`fixed top-0 left-0 w-full h-screen bg-carbon z-99 flex flex-col justify-center px-[8%] gap-2 transition-transform duration-300 ease-in-out ${
           menuOpen ? 'translate-y-0' : '-translate-y-full'
         }`}
       >
-        <Link
-          href="/#soluciones"
-          className="font-display text-white no-underline text-2xl uppercase tracking-[-0.02em] hover:text-accent transition-colors"
-          onClick={() => setMenuOpen(false)}
-        >
-          Soluciones
-        </Link>
-        <Link
-          href="/servicios"
-          className="font-display text-white no-underline text-2xl uppercase tracking-[-0.02em] hover:text-accent transition-colors"
-          onClick={() => setMenuOpen(false)}
-        >
-          Servicios
-        </Link>
-        <Link
-          href="/insights"
-          className="font-display text-white no-underline text-2xl uppercase tracking-[-0.02em] hover:text-accent transition-colors"
-          onClick={() => setMenuOpen(false)}
-        >
-          Insights
-        </Link>
+        {links.map((l) => (
+          <Link
+            key={l.href}
+            href={l.href}
+            className="flex items-baseline gap-4 py-5 border-b border-white/10 text-white no-underline hover:text-accent transition-colors"
+            onClick={() => setMenuOpen(false)}
+          >
+            <span className="st-eyebrow"><b>{l.n}</b></span>
+            <span className="font-display text-3xl uppercase tracking-[-0.02em]">{l.label}</span>
+          </Link>
+        ))}
         <a
           href={siteConfig.calendarUrl}
           target="_blank"
           rel="noopener noreferrer"
-          className="st-label bg-accent text-carbon px-8 py-4 rounded-st font-black hover:bg-white hover:text-carbon transition-all duration-400 mt-5"
+          className="st-btn st-btn-primary mt-8"
           onClick={() => setMenuOpen(false)}
         >
-          Auditoría IA
+          Auditoría IA <span aria-hidden="true">→</span>
         </a>
       </div>
     </>
