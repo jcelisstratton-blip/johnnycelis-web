@@ -280,3 +280,359 @@ html {
     animation: none;
   }
 }
+/* ==========================================================
+   Sistema "Terminal industrial" — primitivas compartidas
+   (hairlines, rejillas, celdas, botones, eyebrows)
+   ========================================================== */
+:root {
+  --st-hairline: rgba(245, 246, 244, 0.10);
+  --st-hairline-strong: rgba(245, 246, 244, 0.22);
+  --st-ease: cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Rejilla de fondo con máscara radial */
+.st-grid-bg {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background-image:
+    linear-gradient(var(--st-hairline) 1px, transparent 1px),
+    linear-gradient(90deg, var(--st-hairline) 1px, transparent 1px);
+  background-size: 64px 64px;
+  opacity: 0.55;
+  -webkit-mask-image: radial-gradient(ellipse 80% 70% at 50% 30%, black 0%, transparent 100%);
+  mask-image: radial-gradient(ellipse 80% 70% at 50% 30%, black 0%, transparent 100%);
+}
+
+/* Eyebrow: [01] ETIQUETA */
+.st-eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  font-family: var(--font-mono);
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.18em;
+  color: var(--color-humo);
+}
+.st-eyebrow b {
+  color: var(--color-rojo);
+  font-weight: 700;
+}
+
+/* Contenedor de celdas con divisores hairline compartidos */
+.st-cells {
+  display: grid;
+  gap: 1px;
+  background: var(--st-hairline);
+  border: 1px solid var(--st-hairline);
+  border-radius: 4px;
+  overflow: hidden;
+}
+.st-cells > * {
+  background: var(--color-carbon);
+}
+.st-cells--grafito > * {
+  background: var(--color-grafito);
+}
+.st-cell-hover {
+  transition: background-color 200ms var(--st-ease);
+}
+.st-cell-hover:hover {
+  background: var(--color-grafito);
+}
+.st-cells--grafito .st-cell-hover:hover {
+  background: #23262b;
+}
+
+/* Marco con esquinas de registro (firma industrial) */
+.st-frame {
+  position: relative;
+  border: 1px solid var(--st-hairline);
+  border-radius: 4px;
+  background: var(--color-grafito);
+}
+
+/* Botones */
+.st-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  padding: 14px 24px;
+  border-radius: var(--radius-st);
+  font-family: var(--font-body);
+  font-weight: 800;
+  font-size: 13px;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  text-decoration: none;
+  cursor: pointer;
+  transition: background-color 200ms var(--st-ease), color 200ms var(--st-ease), border-color 200ms var(--st-ease);
+}
+.st-btn-primary {
+  background: var(--color-rojo);
+  color: var(--color-carbon);
+  border: 1px solid var(--color-rojo);
+}
+.st-btn-primary:hover {
+  background: var(--color-rojo-profundo);
+  border-color: var(--color-rojo-profundo);
+  color: var(--color-blanco);
+}
+.st-btn-secondary {
+  background: transparent;
+  color: var(--color-blanco);
+  border: 1px solid var(--st-hairline-strong);
+  font-weight: 600;
+}
+.st-btn-secondary:hover {
+  border-color: var(--color-blanco);
+  background: rgba(245, 246, 244, 0.06);
+}
+
+/* Enlace con flecha */
+.st-link {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+  color: var(--color-blanco);
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  transition: color 200ms var(--st-ease), gap 200ms var(--st-ease);
+}
+.st-link:hover {
+  color: var(--color-rojo);
+  gap: 16px;
+}
+
+/* Consola de ejecución (hero) */
+.st-console {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  line-height: 1.7;
+}
+.st-console-row {
+  display: flex;
+  gap: 12px;
+  padding: 7px 0;
+  border-bottom: 1px dashed var(--st-hairline);
+}
+.st-console-row:last-child {
+  border-bottom: none;
+}
+.st-console-row .t {
+  color: var(--color-humo);
+  flex: 0 0 auto;
+}
+.st-console-row .ok {
+  color: var(--color-blanco);
+  margin-left: auto;
+  flex: 0 0 auto;
+}
+
+/* Cinta de ticker recta (reemplaza marquesinas inclinadas) */
+.st-ticker {
+  border-top: 1px solid var(--st-hairline);
+  border-bottom: 1px solid var(--st-hairline);
+  background: var(--color-carbon);
+  overflow: hidden;
+  padding: 18px 0;
+}
+.st-ticker span {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: 0.18em;
+  color: var(--color-humo);
+  padding: 0 28px;
+  white-space: nowrap;
+}
+.st-ticker span::before {
+  content: "";
+  display: inline-block;
+  width: 6px;
+  height: 6px;
+  border-radius: 1px;
+  background: var(--color-rojo);
+  margin-right: 28px;
+  vertical-align: middle;
+}
+
+/* Parpadeo suave del LED */
+@keyframes stBlink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.35; }
+}
+.st-led--live {
+  animation: stBlink 2.4s ease-in-out infinite;
+}
+@media (prefers-reduced-motion: reduce) {
+  .st-led--live { animation: none; }
+}
+
+/* Línea clave corta bajo una métrica */
+.st-line-key {
+  display: block;
+  width: 28px;
+  height: 3px;
+  border-radius: var(--radius-st);
+  background: var(--color-rojo);
+}
+
+/* La línea de estado abre el bloque: el eyebrow siguiente baja a su propia fila */
+.st-status-line + .st-eyebrow {
+  display: flex;
+}
+
+/* ==========================================================
+   VIDRIO — capa "liquid glass" (override de celdas y marcos)
+   ========================================================== */
+
+/* Fondo aurora fijo: da algo que desenfocar detrás del vidrio */
+body::before {
+  content: "";
+  position: fixed;
+  inset: -20%;
+  z-index: -1;
+  pointer-events: none;
+  background:
+    radial-gradient(38% 34% at 18% 22%, rgba(194, 31, 23, 0.30) 0%, transparent 70%),
+    radial-gradient(34% 30% at 82% 38%, rgba(155, 161, 166, 0.16) 0%, transparent 70%),
+    radial-gradient(40% 36% at 55% 85%, rgba(255, 59, 47, 0.14) 0%, transparent 70%);
+  filter: blur(40px);
+  animation: stAurora 28s ease-in-out infinite alternate;
+}
+@keyframes stAurora {
+  from { transform: translate3d(-2%, -1%, 0) scale(1); }
+  to   { transform: translate3d(3%, 2%, 0) scale(1.08); }
+}
+@media (prefers-reduced-motion: reduce) {
+  body::before { animation: none; }
+}
+
+/* Superficie de vidrio reutilizable */
+.st-glass-surface,
+.st-frame,
+.st-cells > *,
+.st-cells--grafito > * {
+  position: relative;
+  background:
+    linear-gradient(135deg, rgba(245, 246, 244, 0.09) 0%, rgba(245, 246, 244, 0.02) 45%, rgba(245, 246, 244, 0.05) 100%);
+  backdrop-filter: blur(24px) saturate(180%);
+  -webkit-backdrop-filter: blur(24px) saturate(180%);
+  border: 1px solid rgba(245, 246, 244, 0.12);
+  border-radius: 6px;
+  box-shadow:
+    inset 0 1px 0 rgba(245, 246, 244, 0.18),
+    inset 0 -1px 0 rgba(0, 0, 0, 0.25),
+    0 18px 50px rgba(0, 0, 0, 0.35);
+}
+
+/* Las celdas pasan de hairline compartido a tarjetas de vidrio separadas */
+.st-cells {
+  gap: 14px;
+  background: none;
+  border: none;
+  border-radius: 0;
+  overflow: visible;
+}
+.st-cells > * {
+  overflow: hidden;
+}
+
+/* Reflejo especular que sigue el cursor (variables --mx / --my vía JS) */
+.st-cells > *::after,
+.st-frame::after,
+.st-glass-surface::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 250ms var(--st-ease);
+  background: radial-gradient(
+    260px circle at var(--mx, 50%) var(--my, 0%),
+    rgba(245, 246, 244, 0.16),
+    transparent 60%
+  );
+}
+.st-cells > *:hover::after,
+.st-frame:hover::after,
+.st-glass-surface:hover::after {
+  opacity: 1;
+}
+
+.st-cell-hover {
+  transition: transform 250ms var(--st-ease), border-color 250ms var(--st-ease);
+}
+.st-cell-hover:hover,
+.st-cells--grafito .st-cell-hover:hover {
+  background:
+    linear-gradient(135deg, rgba(245, 246, 244, 0.13) 0%, rgba(245, 246, 244, 0.03) 45%, rgba(245, 246, 244, 0.07) 100%);
+  border-color: rgba(255, 59, 47, 0.45);
+  transform: translateY(-3px);
+}
+
+/* Navbar y tickers en vidrio */
+.st-ticker {
+  background: rgba(14, 15, 17, 0.45);
+  backdrop-filter: blur(16px) saturate(160%);
+  -webkit-backdrop-filter: blur(16px) saturate(160%);
+}
+
+/* Chips flotantes del hero */
+.st-chip {
+  position: absolute;
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 14px;
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--color-blanco);
+  animation: stFloat 7s ease-in-out infinite;
+}
+.st-chip--b { animation-delay: -3.5s; }
+@keyframes stFloat {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-10px); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .st-chip { animation: none; }
+}
+
+/* Esferas de luz detrás del vidrio (refracción visible) */
+.st-orb {
+  position: absolute;
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 0;
+  filter: blur(8px);
+  animation: stFloat 11s ease-in-out infinite;
+}
+.st-orb--a {
+  width: 220px;
+  height: 220px;
+  top: -40px;
+  right: -50px;
+  background: radial-gradient(circle at 35% 35%, rgba(255, 59, 47, 0.6), rgba(194, 31, 23, 0.2) 60%, transparent 72%);
+}
+.st-orb--b {
+  width: 180px;
+  height: 180px;
+  bottom: 30px;
+  left: -60px;
+  background: radial-gradient(circle at 40% 40%, rgba(245, 246, 244, 0.45), rgba(155, 161, 166, 0.12) 60%, transparent 72%);
+  animation-delay: -5s;
+}
+.st-frame, .st-chip { z-index: 1; }
+@media (prefers-reduced-motion: reduce) {
+  .st-orb { animation: none; }
+}

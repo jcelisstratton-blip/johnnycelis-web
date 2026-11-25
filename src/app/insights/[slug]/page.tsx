@@ -61,7 +61,7 @@ export default async function InsightPostPage({
   };
 
   return (
-    <main className="bg-carbon text-white min-h-screen font-sans">
+    <main className="text-white min-h-screen font-sans">
       <script
         type="application/ld+json"
         // eslint-disable-next-line react/no-danger
@@ -69,38 +69,37 @@ export default async function InsightPostPage({
       />
       <Navbar />
 
-      <article className="max-w-[800px] mx-auto px-[5%] pt-44 pb-24">
-        <Link
-          href="/insights"
-          className="st-label text-white/50 hover:text-accent transition-colors text-xs"
-        >
-          ← Insights
+      <article className="max-w-[820px] mx-auto px-[5%] pt-36 md:pt-44 pb-24">
+        <Link href="/insights" className="st-link text-humo">
+          <span className="text-accent">←</span> Insights
         </Link>
 
-        <span className="st-label block mt-8 text-[11px] font-bold text-accent">{post.tag}</span>
-        <h1 className="text-3xl md:text-5xl uppercase leading-tight mt-3 mb-4 text-white">
+        <span className="st-status-line mt-10 mb-6" />
+        <span className="st-eyebrow block"><b>{post.tag}</b></span>
+        <h1 className="text-3xl md:text-5xl uppercase leading-[1.04] mt-4 mb-6 text-white">
           {post.title}
         </h1>
-        <div className="st-label flex items-center gap-2 text-white/40 text-xs mb-12">
+        <div className="st-eyebrow mb-12">
           <time dateTime={post.date}>{formatDate(post.date)}</time>
-          <span aria-hidden="true">·</span>
+          <span aria-hidden="true">/</span>
           <span>{post.readingTime}</span>
         </div>
 
         <div
-          className="insight-content border-t border-white/10 pt-10 text-white/80 text-base md:text-lg leading-relaxed"
+          className="insight-content border-t border-white/10 pt-10 text-blanco/80 text-base md:text-lg leading-relaxed"
           // eslint-disable-next-line react/no-danger
           dangerouslySetInnerHTML={{ __html: post.html }}
         />
 
-        <div className="mt-16 flex justify-center">
+        <div className="mt-16 st-frame p-8 md:p-10 flex flex-col md:flex-row md:items-center justify-between gap-6">
+          <p className="m-0 text-white font-extrabold uppercase text-lg">¿Esto aplica a tu operación?</p>
           <a
             href={siteConfig.calendarUrl}
             target="_blank"
             rel="noopener noreferrer"
-            className="st-label bg-accent text-carbon text-xs md:text-sm px-8 py-4 rounded-st hover:bg-white hover:text-carbon transition-all duration-400 w-full sm:w-auto text-center"
+            className="st-btn st-btn-primary"
           >
-            Analizar mi caso operativo
+            Analizar mi caso operativo <span aria-hidden="true">→</span>
           </a>
         </div>
       </article>
